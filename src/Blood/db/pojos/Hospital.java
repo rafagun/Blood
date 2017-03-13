@@ -2,10 +2,9 @@ package Blood.db.pojos;
 import java.io.Serializable;
 
 public class Hospital implements Serializable {
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8273180762878531017L;
+
+
+private static final long serialVersionUID = -8273180762878531017L;
 private Integer id;
 private String name;
 private String location;

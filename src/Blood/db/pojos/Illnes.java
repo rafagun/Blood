@@ -1,6 +1,8 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Illnes implements Serializable {
 	
@@ -11,9 +13,11 @@ public class Illnes implements Serializable {
 	private String name;
 	private String type;
 	private Boolean chronic;
+	private List<Symptoms> symptoms;
 	
 	public Illnes() {
 		super();
+		this.symptoms = new ArrayList<>();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -65,5 +69,13 @@ public class Illnes implements Serializable {
 	}
 	public void setChronic(Boolean chronic) {
 		this.chronic = chronic;
+	}
+
+	public List<Symptoms> getSymptoms() {
+		return symptoms;
+	}
+
+	public void setSymptoms(List<Symptoms> symptoms) {
+		this.symptoms = symptoms;
 	}
 }

@@ -1,14 +1,17 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Symptoms implements Serializable {
-/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 6952444966932416547L;
-private Integer id;
-private String type;
+    
+	private Integer id;
+    private String type;
+    private List<Patient> patients;
+    private List<Illnes> illnes;
 
 @Override
 public int hashCode() {
@@ -35,6 +38,8 @@ public boolean equals(Object obj) {
 }
 public Symptoms() {
 	super();
+	this.patients = new ArrayList<>();
+	this.illnes = new ArrayList<>();
 	// TODO Auto-generated constructor stub
 }
 public Integer getId() {
@@ -48,6 +53,18 @@ public String getType() {
 }
 public void setType(String type) {
 	this.type = type;
+}
+public List<Patient> getPatients() {
+	return patients;
+}
+public void setPatients(List<Patient> patients) {
+	this.patients = patients;
+}
+public List<Illnes> getIllnes() {
+	return illnes;
+}
+public void setIllnes(List<Illnes> illnes) {
+	this.illnes = illnes;
 }
 
 

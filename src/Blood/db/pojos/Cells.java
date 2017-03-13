@@ -4,16 +4,12 @@ import java.io.Serializable;
 
 public class Cells implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1755945494914985765L;
 	private String type;
 	private float highL;
 	private float lowL;
 	private Integer id;
 	
-	// HIIIIII
 	
 	public Cells() {
 		super();
