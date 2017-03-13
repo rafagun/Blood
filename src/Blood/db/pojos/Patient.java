@@ -18,7 +18,7 @@ private List<Cells> cells;
 public Patient() {
 	super();
 	// TODO Auto-generated constructor stub
-	List<Cells> cells = new ArrayList<Cells>();
+	this.cells = new ArrayList<Cells>();
 }
 
 @Override

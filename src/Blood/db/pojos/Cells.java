@@ -19,7 +19,7 @@ public class Cells implements Serializable {
 	public Cells() {
 		super();
 		// TODO Auto-generated constructor stub
-		List<Illnes> illnes = new ArrayList<Illnes>();
+		this.illnes = new ArrayList<Illnes>();
 	}
 	public Cells(String type, float highL, float lowL, Integer id) {
 		super();
