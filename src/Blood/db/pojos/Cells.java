@@ -14,12 +14,14 @@ public class Cells implements Serializable {
 	private float lowL;
 	private Integer id;
 	private List<Illnes> illnes;
+	private List<Patient> patients;
 	// HIIIIII
 	
 	public Cells() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.illnes = new ArrayList<Illnes>();
+		this.patients= new ArrayList<Patient>();
 	}
 	public Cells(String type, float highL, float lowL, Integer id) {
 		super();

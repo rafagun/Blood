@@ -1,6 +1,7 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.*;
 
 public class Illnes implements Serializable {
 	
@@ -11,10 +12,12 @@ public class Illnes implements Serializable {
 	private String name;
 	private String type;
 	private Boolean chronic;
+	private List<Cells> cells;
 	
 	public Illnes() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.cells=new ArrayList<Cells>();
 	}
 	
 	@Override
