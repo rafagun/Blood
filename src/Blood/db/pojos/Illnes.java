@@ -14,11 +14,13 @@ public class Illnes implements Serializable {
 	private String type;
 	private Boolean chronic;
 	private List<Symptoms> symptoms;
+	private List<Cells> cells;
 	
 	public Illnes() {
 		super();
 		this.symptoms = new ArrayList<>();
 		// TODO Auto-generated constructor stub
+		this.setCells(new ArrayList<Cells>());
 	}
 	
 	@Override
@@ -77,5 +79,13 @@ public class Illnes implements Serializable {
 
 	public void setSymptoms(List<Symptoms> symptoms) {
 		this.symptoms = symptoms;
+	}
+
+	public List<Cells> getCells() {
+		return cells;
+	}
+
+	public void setCells(List<Cells> cells) {
+		this.cells = cells;
 	}
 }

@@ -1,6 +1,7 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.*;
 
 public class Cells implements Serializable {
 
@@ -9,11 +10,16 @@ public class Cells implements Serializable {
 	private float highL;
 	private float lowL;
 	private Integer id;
+	private List<Illnes> illnes;
+	private List<Patient> patients;
 	
+
 	
 	public Cells() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.setIllnes(new ArrayList<Illnes>());
+		this.setPatients(new ArrayList<Patient>());
 	}
 	public Cells(String type, float highL, float lowL, Integer id) {
 		super();
@@ -80,6 +86,18 @@ public class Cells implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public List<Illnes> getIllnes() {
+		return illnes;
+	}
+	public void setIllnes(List<Illnes> illnes) {
+		this.illnes = illnes;
+	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
 	}
 	
 	

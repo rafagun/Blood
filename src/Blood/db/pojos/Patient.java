@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Patient implements Serializable {
 /**
 	 * 
@@ -16,11 +17,13 @@ private String blood;
 private Boolean smoker;
 private String gender;
 private List<Symptoms> symptoms;
+private List<Cells> cells;
 
 public Patient() {
 	super();
 	this.symptoms = new ArrayList<>();
 	// TODO Auto-generated constructor stub
+	this.setCells(new ArrayList<Cells>());
 }
 
 @Override
@@ -91,6 +94,14 @@ public List<Symptoms> getSymptoms() {
 
 public void setSymptoms(List<Symptoms> symptoms) {
 	this.symptoms = symptoms;
+}
+
+public List<Cells> getCells() {
+	return cells;
+}
+
+public void setCells(List<Cells> cells) {
+	this.cells = cells;
 }
 
 
