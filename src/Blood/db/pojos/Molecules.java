@@ -1,6 +1,8 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Molecules implements Serializable {
 
@@ -11,10 +13,13 @@ public class Molecules implements Serializable {
 	private String type;
 	private Integer lowLevels;
 	private Integer highLevels;
-	
+	private List<Patient> patients;
+	private List<Illnes> illnes;
 	public Molecules() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.setPatients(new ArrayList<Patient>());
+		this.setIllnes(new ArrayList<Illnes>());
 	}
 	
 	@Override
@@ -63,6 +68,22 @@ public class Molecules implements Serializable {
 	}
 	public void setHighLevels(Integer highLevels) {
 		this.highLevels = highLevels;
+	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+	public List<Illnes> getIllnes() {
+		return illnes;
+	}
+
+	public void setIllnes(List<Illnes> illnes) {
+		this.illnes = illnes;
 	}
 	
 	

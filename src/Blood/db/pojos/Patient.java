@@ -18,12 +18,13 @@ private Boolean smoker;
 private String gender;
 private List<Symptoms> symptoms;
 private List<Cells> cells;
-
+private List<Molecules> molecules;
 public Patient() {
 	super();
 	this.symptoms = new ArrayList<>();
 	// TODO Auto-generated constructor stub
 	this.setCells(new ArrayList<Cells>());
+	this.setMolecules(new ArrayList <Molecules>());
 }
 
 @Override
@@ -102,6 +103,14 @@ public List<Cells> getCells() {
 
 public void setCells(List<Cells> cells) {
 	this.cells = cells;
+}
+
+public List<Molecules> getMolecules() {
+	return molecules;
+}
+
+public void setMolecules(List<Molecules> molecules) {
+	this.molecules = molecules;
 }
 
 

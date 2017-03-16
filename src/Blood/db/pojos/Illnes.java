@@ -16,12 +16,15 @@ public class Illnes implements Serializable {
 	private List<Symptoms> symptoms;
 	private List<Cells> cells;
 	private List<Patient> patients;
+	private List<Molecules> molecules;
 	
 	public Illnes() {
 		super();
 		this.symptoms = new ArrayList<>();
 		// TODO Auto-generated constructor stub
 		this.setCells(new ArrayList<Cells>());
+		this.setPatients(new ArrayList<Patient>());
+		this.setMolecules(new ArrayList<Molecules>());
 	}
 	
 	@Override
@@ -88,5 +91,21 @@ public class Illnes implements Serializable {
 
 	public void setCells(List<Cells> cells) {
 		this.cells = cells;
+	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+	public List<Molecules> getMolecules() {
+		return molecules;
+	}
+
+	public void setMolecules(List<Molecules> molecules) {
+		this.molecules = molecules;
 	}
 }
