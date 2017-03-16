@@ -13,7 +13,7 @@ public class Cells implements Serializable {
 	private List<Illnes> illnes;
 	private List<Patient> patients;
 	
-
+//HEllo
 	
 	public Cells() {
 		super();
