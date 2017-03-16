@@ -10,11 +10,17 @@ public class Nurse implements Serializable {
 	private Integer id;
 	private String name;
 	private byte[] photo;
+	private Hospital hospital;
 	
 	
 	public Nurse() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Nurse(String name, byte[] photo) {
+		this.name = name;
+		this.photo = photo;
 	}
 	
 	@Override
@@ -58,15 +64,12 @@ public class Nurse implements Serializable {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	public Hospital getHospital() {
+		return hospital;
+	}
 
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
 }

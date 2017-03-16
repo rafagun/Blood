@@ -15,12 +15,21 @@ public class Molecules implements Serializable {
 	private Integer highLevels;
 	private List<Patient> patients;
 	private List<Illnes> illnes;
+	
 	public Molecules() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.setPatients(new ArrayList<Patient>());
 		this.setIllnes(new ArrayList<Illnes>());
 	}
+	public Molecules(String type,Integer lowLevels, Integer highLevels){
+		this.type = type;
+		this.lowLevels = lowLevels;
+		this.highLevels = highLevels;
+		this.patients = new ArrayList<Patient>();
+		this.illnes = new ArrayList<Illnes>();
+	}
+	
 	
 	@Override
 	public int hashCode() {

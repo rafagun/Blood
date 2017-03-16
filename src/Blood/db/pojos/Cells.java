@@ -11,34 +11,30 @@ public class Cells implements Serializable {
 	private float lowL;
 	private Integer id;
 	private List<Illnes> illnes;
-	private List<Patient> patients;
-	
-//HEllo
-	
+	private List<Patient> patients;	
+
 	public Cells() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.setIllnes(new ArrayList<Illnes>());
 		this.setPatients(new ArrayList<Patient>());
 	}
-	public Cells(String type, float highL, float lowL, Integer id) {
+	
+	public Cells(String type, float highL, float lowL) {
 		super();
 		this.type = type;
 		this.highL = highL;
 		this.lowL = lowL;
-		this.id = id;
+		this.illnes = new ArrayList<Illnes>();
+		this.patients = new ArrayList<Patient>();
+		
 	}
 	public Cells(float highL, float lowL) {
 		super();
 		this.highL = highL;
 		this.lowL = lowL;
 	}
-	public Cells(String type, float highL, float lowL) {
-		super();
-		this.type = type;
-		this.highL = highL;
-		this.lowL = lowL;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

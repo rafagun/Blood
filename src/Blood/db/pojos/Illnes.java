@@ -27,6 +27,16 @@ public class Illnes implements Serializable {
 		this.setMolecules(new ArrayList<Molecules>());
 	}
 	
+	public Illnes(String name, String type, Boolean chronic) {
+		this.name = name;
+		this.type = type;
+		this.chronic = chronic;
+		this.symptoms = new ArrayList<Symptoms>();
+		this.cells = new ArrayList<Cells>();
+		this.patients = new ArrayList<Patient>();
+		this.molecules = new ArrayList<Molecules>();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

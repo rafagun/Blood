@@ -19,6 +19,7 @@ private String gender;
 private List<Symptoms> symptoms;
 private List<Cells> cells;
 private List<Molecules> molecules;
+
 public Patient() {
 	super();
 	this.symptoms = new ArrayList<>();
@@ -26,6 +27,18 @@ public Patient() {
 	this.setCells(new ArrayList<Cells>());
 	this.setMolecules(new ArrayList <Molecules>());
 }
+
+public Patient(String name, Integer age, String blood,Boolean smoker,String gender) {
+	this.name = name;
+	this.age = age;
+	this.blood = blood;
+	this.smoker = smoker;
+	this.gender= gender;
+	this.symptoms = new ArrayList<Symptoms>();
+	this.cells = new ArrayList<Cells>();
+	this.molecules = new ArrayList<Molecules>();
+}
+
 
 @Override
 public int hashCode() {

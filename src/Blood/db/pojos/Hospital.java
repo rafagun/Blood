@@ -1,19 +1,27 @@
 package Blood.db.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospital implements Serializable {
-//hola
 
 private static final long serialVersionUID = -8273180762878531017L;
 private Integer id;
 private String name;
 private String location;
 private Integer range;
-
+private List<Nurse> nurses;
 
 public Hospital() {
 	super();
 	// TODO Auto-generated constructor stub
+}
+
+public Hospital(String name,String location, Integer range) {
+	this.name = name;
+	this.location = location;
+	this.range = range;
+	this.nurses = new ArrayList<Nurse>();
 }
 
 @Override
@@ -64,6 +72,14 @@ public Integer getRange() {
 }
 public void setRange(Integer range) {
 	this.range = range;
+}
+
+public List<Nurse> getNurses() {
+	return nurses;
+}
+
+public void setNurses(List<Nurse> nurses) {
+	this.nurses = nurses;
 }
 
 

@@ -12,6 +12,19 @@ public class Symptoms implements Serializable {
     private String type;
     private List<Patient> patients;
     private List<Illnes> illnes;
+    
+    public Symptoms() {
+    	super();
+    	this.patients = new ArrayList<>();
+    	this.illnes = new ArrayList<>();
+    	// TODO Auto-generated constructor stub
+    }
+    
+    public Symptoms(String type){
+    	this.type = type;
+    	this.patients = new ArrayList<Patient>();
+    	this.illnes = new ArrayList<Illnes>();
+    }
 
 @Override
 public int hashCode() {
@@ -36,12 +49,7 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
-public Symptoms() {
-	super();
-	this.patients = new ArrayList<>();
-	this.illnes = new ArrayList<>();
-	// TODO Auto-generated constructor stub
-}
+
 public Integer getId() {
 	return id;
 }
