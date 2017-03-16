@@ -15,6 +15,7 @@ public class Illnes implements Serializable {
 	private Boolean chronic;
 	private List<Symptoms> symptoms;
 	private List<Cells> cells;
+	private List<Patient> patients;
 	
 	public Illnes() {
 		super();
