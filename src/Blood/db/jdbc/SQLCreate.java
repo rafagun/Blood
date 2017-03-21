@@ -30,11 +30,13 @@ public class SQLCreate {
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE reports "
+			String sql3 = "CREATE TABLE Patient "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
-					   + " content  TEXT  	NOT NULL, "
-					   + " date		DATE)";
+					   + " age      INTEGER, "
+					   + " blood	TEXT     NOT NULL,"
+					   + "smoker     BOOLEAN "
+					   + "gender     STRING NOT NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 			Statement stmt4 = c.createStatement();
