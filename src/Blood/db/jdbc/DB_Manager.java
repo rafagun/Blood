@@ -205,7 +205,7 @@ public class DB_Manager {
 		System.out.println("Gender: ");
 		String gender = reader.readLine();
 		
-
+// que pasa
 		// Insert new record: begin
 		Statement stmt = c.createStatement();
 		String sql = "INSERT INTO hospital (name, address, blood, smoker, gender) "
