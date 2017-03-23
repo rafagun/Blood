@@ -49,6 +49,22 @@ public boolean equals(Object obj) {
 	return true;
 }
 
+public Hospital(Integer id, String name, String location, Integer range, List<Nurse> nurses) {
+	this.id = id;
+	this.name = name;
+	this.location = location;
+	this.range = range;
+	this.nurses = nurses;
+}
+
+public Hospital(Integer id, String name, String location, Integer range) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.location = location;
+	this.range = range;
+}
+
 public Integer getId() {
 	return id;
 }
