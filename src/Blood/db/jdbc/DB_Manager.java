@@ -10,6 +10,10 @@ import java.sql.Statement;
 import Blood.db.pojos.Hospital;
 
 public class DB_Manager {
+	
+	public DB_Manager(){
+		super();
+	}
 
 	public void SQLConnect()  {
 			try {
