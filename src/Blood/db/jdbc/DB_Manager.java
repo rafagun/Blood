@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Blood.db.pojos.Hospital;
+
 
 public class DB_Manager {
 
@@ -102,7 +102,7 @@ public class DB_Manager {
 			stmtSeq.executeUpdate(sqlSeq);
 			stmtSeq.close();
 			
-			// Close database connection
+		
 
 		}
 		catch (Exception e) {
@@ -122,19 +122,19 @@ public class DB_Manager {
 		String sql = "SELECT * FROM Hospital";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			int id = rs.getInt("id");
+			/** int id = rs.getInt("id");
 			String name = rs.getString("name");
 			String location = rs.getString("location");
 			int range= rs.getInt("range");
 			Hospital hospital = new Hospital(id,name,location,range);
 			// no se que clase seria en nuestra database
-			
+			**/
 		}
 		rs.close();
 		stmt.close();
 		System.out.println("Search finished.");
 		
-		// Close database connection
+	
 
 
 		
@@ -185,8 +185,7 @@ public class DB_Manager {
 		stmt7.close();
 		System.out.println("Tables removed.");
 		// Drop tables: end
-		
-		// Close database connection
+	
 
 	} catch (Exception e) {
 		e.printStackTrace();

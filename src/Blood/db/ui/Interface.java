@@ -1,14 +1,14 @@
 package Blood.db.ui;
 import java.io.*;
-import java.sql.Connection;
-import Blood.db.jdbc.*;
+//import java.sql.Connection;
+//import Blood.db.jdbc.*;
 public class Interface {
 	 public static void main(String[] args) 
 	    {
 	       
 	 InputStreamReader inputStreamReader = null;
 	 BufferedReader bufferedReader = null;
-	 Connection c;
+	
 	 try {
 	 inputStreamReader = new InputStreamReader(System.in);
 	 bufferedReader = new BufferedReader(inputStreamReader);
