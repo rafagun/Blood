@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 
 public class DB_Manager {
-	
+	Connection c;
 	public DB_Manager(){
 		super();
 	}
@@ -20,7 +20,7 @@ public class DB_Manager {
 			try {
 				// Open database connection
 				Class.forName("org.sqlite.JDBC");
-				Connection c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
+				c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
 				c.createStatement().execute("PRAGMA foreign_keys=ON");
 				System.out.println("Database connection opened.");
 				
@@ -35,7 +35,7 @@ public class DB_Manager {
 			}
 	
 }
-	public void SQLDisconnect(Connection c)
+	public void SQLDisconnect()
 	{
 		// Close database connection
 		try {

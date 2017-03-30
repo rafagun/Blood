@@ -1,7 +1,6 @@
 package Blood.db.ui;
 import java.io.*;
 //import java.sql.Connection;
-//import Blood.db.jdbc.*;
 import Blood.db.jdbc.*;
 public class Interface {
 	 public static void main(String[] args) 
@@ -9,7 +8,7 @@ public class Interface {
 	       
 	 InputStreamReader inputStreamReader = null;
 	 BufferedReader bufferedReader = null;
-	
+	DB_Manager f = null;
 	 try {
 	 inputStreamReader = new InputStreamReader(System.in);
 	 bufferedReader = new BufferedReader(inputStreamReader);
@@ -25,8 +24,8 @@ int opcion = Integer.parseInt(bufferedReader.readLine());
 switch (opcion){
 
 case 1:
-	DB_Manager f = new DB_Manager();
-	f.SQLCreate();
+f= new DB_Manager();
+	f.SQLConnect();
 	break;
 case 2: 
      
@@ -36,7 +35,7 @@ case 3:
 
     break;
 case 4:	//salir del programa
-
+	f.SQLDisconnect();
 	System.exit(0);
 
 
