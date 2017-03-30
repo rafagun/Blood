@@ -11,6 +11,10 @@ import java.sql.Statement;
 
 
 public class DB_Manager {
+	
+	public DB_Manager(){
+		super();
+	}
 
 	public void SQLConnect()  {
 			try {

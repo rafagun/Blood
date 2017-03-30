@@ -2,6 +2,7 @@ package Blood.db.ui;
 import java.io.*;
 //import java.sql.Connection;
 //import Blood.db.jdbc.*;
+import Blood.db.jdbc.*;
 public class Interface {
 	 public static void main(String[] args) 
 	    {
@@ -24,7 +25,8 @@ int opcion = Integer.parseInt(bufferedReader.readLine());
 switch (opcion){
 
 case 1:
-
+	DB_Manager f = new DB_Manager();
+	f.SQLCreate();
 	break;
 case 2: 
      
