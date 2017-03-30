@@ -1,16 +1,18 @@
 package Blood.db.ui;
 import java.io.*;
+import java.sql.Connection;
+import Blood.db.jdbc.*;
 public class Interface {
 	 public static void main(String[] args) 
 	    {
 	       
 	 InputStreamReader inputStreamReader = null;
 	 BufferedReader bufferedReader = null;
-	 File fichero=null;
+	 Connection c;
 	 try {
 	 inputStreamReader = new InputStreamReader(System.in);
 	 bufferedReader = new BufferedReader(inputStreamReader);
-	 //bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion9
+	 //bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion
 	 while (true){
 	     //mostramos por pantalla nuestro menu
      System.out.println("Introduzca 1 para crear una tabla ");

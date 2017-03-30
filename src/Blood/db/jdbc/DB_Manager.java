@@ -92,8 +92,7 @@ public class DB_Manager {
 			stmtSeq.close();
 			
 			// Close database connection
-			c.close();
-			System.out.println("Database connection closed.");
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -125,8 +124,8 @@ public class DB_Manager {
 		System.out.println("Search finished.");
 		
 		// Close database connection
-		c.close();
-		System.out.println("Database connection closed.");
+
+
 		
 }
 	catch(Exception ex){
@@ -177,8 +176,7 @@ public class DB_Manager {
 		// Drop tables: end
 		
 		// Close database connection
-		c.close();
-		System.out.println("Database connection closed.");
+
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -219,9 +217,7 @@ public class DB_Manager {
 		System.out.println("Patient has been inserted.");
 		// Insert new record: end
 
-		// Close database connection
-		c.close();
-		System.out.println("Database connection closed.");
+
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
