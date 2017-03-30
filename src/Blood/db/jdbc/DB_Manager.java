@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import Blood.db.pojos.Hospital;
@@ -30,6 +31,16 @@ public class DB_Manager {
 			}
 	
 }
+	public void SQLDisconnect(Connection c)
+	{
+		// Close database connection
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void SQLCreate() {
 		try {
 			// Open database connection

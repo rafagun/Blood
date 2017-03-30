@@ -15,7 +15,7 @@ public class Interface {
 	 //bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion
 	 while (true){
 	     //mostramos por pantalla nuestro menu
-     System.out.println("Introduzca 1 para crear una tabla ");
+     System.out.println("Introduzca 1 para conectar ");
 	 System.out.println("Introduzca 2 insertar ");
 	 System.out.println("Introduzca 3 mostrar ");
 	 System.out.println("Introduzca 4 para salir ");
@@ -34,6 +34,7 @@ case 3:
 
     break;
 case 4:	//salir del programa
+
 	System.exit(0);
 
 
