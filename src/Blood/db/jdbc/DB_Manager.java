@@ -14,9 +14,7 @@ import Blood.db.pojos.Hospital;
 
 public class DB_Manager {
 	Connection c;
-	public DB_Manager(){
-		super();
-	}
+
 
 	public void SQLConnect()  {
 			try {
@@ -43,16 +41,16 @@ public class DB_Manager {
 			e.printStackTrace();
 		}
 	}
-	 public void SQLCreate() {
+	 public void SQLCreate() throws SQLException {
 		try {
 			
 			// Create tables: begin
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE Hospital "
+			String sql1 = "CREATE TABLE Hospital"
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " location  TEXT,"
-					   + " range  INTEGER DEFAULT VALUE 0)";
+					   + " range  INTEGER)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 			/** Statement stmt2 = c.createStatement();
