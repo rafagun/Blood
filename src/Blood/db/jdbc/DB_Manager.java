@@ -41,7 +41,7 @@ public class DB_Manager {
 			e.printStackTrace();
 		}
 	}
-	public void SQLCreate() {
+	 public void SQLCreate() {
 		try {
 			
 			// Create tables: begin
