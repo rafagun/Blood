@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Blood.db.pojos.Hospital;
+
 
 
 public class DB_Manager {
@@ -107,54 +109,35 @@ public class DB_Manager {
 
 	public void SQLSelect(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 		Statement stmt = c.createStatement();
 		
 		String sql = "SELECT * FROM Hospital";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			/** int id = rs.getInt("id");
+			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			String location = rs.getString("location");
 			int range= rs.getInt("range");
-			Hospital hospital = new Hospital(id,name,location,range);
-			// no se que clase seria en nuestra database
-			**/
+			Hospital hospital = new Hospital (id,name,location,range);
+			System.out.println(hospital);
 		}
 		rs.close();
 		stmt.close();
 		System.out.println("Search finished.");
-		
-	
-
-
-		
 }
 	catch(Exception ex){
 		ex.printStackTrace();
 	}
-	
-	
-	
 }
 	public void SQLDrop(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 		
 		// Drop tables: begin
 		Statement stmt1 = c.createStatement();
 		String sql1 = "DROP TABLE hospitals";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		Statement stmt2 = c.createStatement();
+		/*Statement stmt2 = c.createStatement();
 		String sql2 = "DROP TABLE nurses";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
@@ -180,7 +163,7 @@ public class DB_Manager {
 		stmt7.close();
 		System.out.println("Tables removed.");
 		// Drop tables: end
-	
+	 */
 
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -188,11 +171,6 @@ public class DB_Manager {
 }
 	 public void SQLInsert(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 
 		// Get the patient information from the command prompt
 		System.out.println("Please, input the patient information:");
