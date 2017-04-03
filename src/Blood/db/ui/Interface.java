@@ -16,9 +16,10 @@ public class Interface {
 	 while (true){
 	     //mostramos por pantalla nuestro menu
      System.out.println("Introduzca 1 para conectar ");
-	 System.out.println("Introduzca 2 insertar ");
-	 System.out.println("Introduzca 3 mostrar ");
+	 System.out.println("Introduzca 2 crear ");
+	 System.out.println("Introduzca 3 insertar ");
 	 System.out.println("Introduzca 4 para salir ");
+	 System.out.println("Introduzca 4 para mostrar");
 	 
 int opcion = Integer.parseInt(bufferedReader.readLine());
 switch (opcion){
@@ -28,7 +29,7 @@ f= new DB_Manager();
 	f.SQLConnect();
 	break;
 case 2: 
-     
+     f.SQLCreate();
     break;
 case 3: 
 
