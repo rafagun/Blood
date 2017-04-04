@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import Blood.db.pojos.Hospital;
+//import Blood.db.pojos.Hospital;
 
 
 public class SQLSelect {
@@ -21,11 +21,11 @@ public class SQLSelect {
 			String sql = "SELECT * FROM Hospital";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				/*int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String location = rs.getString("location");
 				int range= rs.getInt("range");
-				Hospital hospital = new Hospital(id,name,location,range);
+				//Hospital hospital = new Hospital(id,name,location,range);*/
 				// no se que clase seria en nuestra database
 				
 			}
