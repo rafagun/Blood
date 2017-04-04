@@ -18,11 +18,11 @@ public class Interface {
 	 //bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion
 	 while (true){
 	     //mostramos por pantalla nuestro menu
-     System.out.println("Introduzca 1 para conectar ");
-	 System.out.println("Introduzca 2 crear ");
-	 System.out.println("Introduzca 3 insertar ");
-	 System.out.println("Introduzca 4 para mostrar");
-	 System.out.println("Introduzca 5 para salir ");
+     System.out.println("Introduce 1 to connect ");
+	 System.out.println("Introduce 2 to create ");
+	 System.out.println("Introduce 3 to insert ");
+	 System.out.println("Introduce 4 to show");
+	 System.out.println("Introduce 5 to exit ");
 
 	 
 int opcion = Integer.parseInt(bufferedReader.readLine());
@@ -49,8 +49,15 @@ case 3:
 	int rangeHosp = Integer.parseInt(rangeHospital);
 	Hospital hospitalInterface = new Hospital (nameHosp,locationHosp,rangeHosp);
 	f.SQLInsert(hospitalInterface);
+	break;
+
+case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the name of the hospital that you want to search");
+	String nameHospKB = reader1.readLine();
+	f.SQLSearch(nameHospKB);
+	break;
 	
-    break;
 case 5:	//salir del programa
 	f.SQLDisconnect();
 	System.exit(0);

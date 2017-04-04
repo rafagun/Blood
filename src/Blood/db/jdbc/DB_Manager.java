@@ -2,6 +2,7 @@ package Blood.db.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -182,6 +183,31 @@ public class DB_Manager {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	}
+	
+	
+	public void SQLSearch(String hospName) {
+		try {
+			String sql = "SELECT * FROM hospital WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, hospName);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String location = rs.getString("location");
+				int range = rs.getInt("range");
+				
+				Hospital hospital = new Hospital (id, name, location, range);
+				System.out.println(hospital);
+				
+		}
+			rs.close();
+			prep.close();
+			System.out.println("Search finished.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	}
