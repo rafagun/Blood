@@ -1,15 +1,16 @@
 package Blood.db.ui;
 import java.io.*;
+import java.sql.SQLException;
+
 //import java.sql.Connection;
-//import Blood.db.jdbc.*;
 import Blood.db.jdbc.*;
 public class Interface {
-	 public static void main(String[] args) 
+	 public static void main(String[] args) throws SQLException 
 	    {
 	       
 	 InputStreamReader inputStreamReader = null;
 	 BufferedReader bufferedReader = null;
-	
+	DB_Manager f = null;
 	 try {
 	 inputStreamReader = new InputStreamReader(System.in);
 	 bufferedReader = new BufferedReader(inputStreamReader);
@@ -17,26 +18,30 @@ public class Interface {
 	 while (true){
 	     //mostramos por pantalla nuestro menu
      System.out.println("Introduzca 1 para conectar ");
-	 System.out.println("Introduzca 2 insertar ");
-	 System.out.println("Introduzca 3 mostrar ");
-	 System.out.println("Introduzca 4 para salir ");
+	 System.out.println("Introduzca 2 crear ");
+	 System.out.println("Introduzca 3 insertar ");
+	 System.out.println("Introduzca 4 para mostrar");
+	 System.out.println("Introduzca 5 para salir ");
+
 	 
 int opcion = Integer.parseInt(bufferedReader.readLine());
 switch (opcion){
 
-case 1:
-	DB_Manager f = new DB_Manager();
-	f.SQLCreate();
+case 1: 
+	f= new DB_Manager();
+	f.SQLConnect();
 	break;
+
+
 case 2: 
-     
+     f.SQLCreate();
     break;
 case 3: 
 
 
     break;
-case 4:	//salir del programa
-
+case 5:	//salir del programa
+	f.SQLDisconnect();
 	System.exit(0);
 
 

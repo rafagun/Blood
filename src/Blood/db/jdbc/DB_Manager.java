@@ -8,61 +8,52 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Blood.db.pojos.Hospital;
+
 
 
 public class DB_Manager {
-	
-	public DB_Manager(){
-		super();
-	}
+	Connection c;
+
 
 	public void SQLConnect()  {
 			try {
 				// Open database connection
 				Class.forName("org.sqlite.JDBC");
-				Connection c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
+				c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
 				c.createStatement().execute("PRAGMA foreign_keys=ON");
 				System.out.println("Database connection opened.");
 				
-				// Here is where I do things with the database
-				
-				// Close database connection
-				c.close();
-				System.out.println("Database connection closed.");
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 	
 }
-	public void SQLDisconnect(Connection c)
+	public void SQLDisconnect()
 	{
 		// Close database connection
 		try {
 			c.close();
+			System.out.println("Database connection closed.");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public void SQLCreate() {
+	 public void SQLCreate() throws SQLException {
 		try {
-			// Open database connection
-			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
-			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
 			
 			// Create tables: begin
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE Hospital "
+			String sql1 = "CREATE TABLE Hospital"
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " location  TEXT,"
-					   + " range  INTEGER DEFAULT VALUE 0)";
+					   + " range  INTEGER)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
-			Statement stmt2 = c.createStatement();
+			/** Statement stmt2 = c.createStatement();
 			String sql2 = "CREATE TABLE Nurses "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
@@ -87,7 +78,7 @@ public class DB_Manager {
 					   + " employee_id   INTEGER  REFERENCES employees(id) ON UPDATE CASCADE ON DELETE SET NULL,"
 					   + " PRIMARY KEY (report_id,employee_id))";
 			stmt4.executeUpdate(sql4);
-			stmt4.close();
+			stmt4.close(); **/
 			System.out.println("Tables created.");
 			// Create table: end
 			
@@ -97,14 +88,14 @@ public class DB_Manager {
 			// are set when the first row is inserted, but since we
 			// are using JPA and JDBC in the same project, and JPA
 			// needs an initial value, we do this.
-			Statement stmtSeq = c.createStatement();
+			/**Statement stmtSeq = c.createStatement();
 			String sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('departments', 1)";
 			stmtSeq.executeUpdate(sqlSeq);
 			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('employees', 1)";
 			stmtSeq.executeUpdate(sqlSeq);
 			sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('reports', 1)";
 			stmtSeq.executeUpdate(sqlSeq);
-			stmtSeq.close();
+			stmtSeq.close();**/
 			
 		
 
@@ -116,54 +107,35 @@ public class DB_Manager {
 
 	public void SQLSelect(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 		Statement stmt = c.createStatement();
 		
 		String sql = "SELECT * FROM Hospital";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			/** int id = rs.getInt("id");
+			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			String location = rs.getString("location");
 			int range= rs.getInt("range");
-			Hospital hospital = new Hospital(id,name,location,range);
-			// no se que clase seria en nuestra database
-			**/
+			Hospital hospital = new Hospital (id,name,location,range);
+			System.out.println(hospital);
 		}
 		rs.close();
 		stmt.close();
 		System.out.println("Search finished.");
-		
-	
-
-
-		
 }
 	catch(Exception ex){
 		ex.printStackTrace();
 	}
-	
-	
-	
 }
 	public void SQLDrop(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 		
 		// Drop tables: begin
 		Statement stmt1 = c.createStatement();
 		String sql1 = "DROP TABLE hospitals";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		Statement stmt2 = c.createStatement();
+		/*Statement stmt2 = c.createStatement();
 		String sql2 = "DROP TABLE nurses";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
@@ -189,7 +161,7 @@ public class DB_Manager {
 		stmt7.close();
 		System.out.println("Tables removed.");
 		// Drop tables: end
-	
+	 */
 
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -197,11 +169,6 @@ public class DB_Manager {
 }
 	 public void SQLInsert(){
 	try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		Connection c = DriverManager.getConnection("jdbc:sqlite:./db/Blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
 
 		// Get the patient information from the command prompt
 		System.out.println("Please, input the patient information:");
