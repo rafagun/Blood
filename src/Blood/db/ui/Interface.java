@@ -24,7 +24,8 @@ switch (opcion){
 
 case 1:
 	DB_Manager f = new DB_Manager();
-	f.SQLCreate();
+	f.SQLConnect();
+	
 	break;
 case 2: 
      
