@@ -39,7 +39,7 @@ public class SQLSearch {
 				// Note that department is going to show null, even if the
 				// employee is assigned to one, that's because we didn't
 				// retrieve the department from the database. We should!!
-				Employee employee = new Employee(id, name, location, range);
+				Hospital hospital = new hospital(id, name, location, range);
 				System.out.println(hospital);
 				// Process the photo
 				
