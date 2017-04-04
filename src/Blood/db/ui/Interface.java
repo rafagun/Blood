@@ -4,13 +4,14 @@ import java.sql.SQLException;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
+import Blood.db.pojos.Hospital;
 public class Interface {
 	 public static void main(String[] args) throws SQLException 
 	    {
 	       
 	 InputStreamReader inputStreamReader = null;
 	 BufferedReader bufferedReader = null;
-	DB_Manager f = null;
+	 DB_Manager f = null;
 	 try {
 	 inputStreamReader = new InputStreamReader(System.in);
 	 bufferedReader = new BufferedReader(inputStreamReader);
@@ -36,9 +37,19 @@ case 1:
 case 2: 
      f.SQLCreate();
     break;
+    
 case 3: 
-
-
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the name of the hospital");
+	String nameHosp = reader.readLine();
+	System.out.println("Introduce the location of the hospital");
+	String locationHosp = reader.readLine();
+	System.out.println("Introduce the range of the hospital");
+	String rangeHospital = reader.readLine();
+	int rangeHosp = Integer.parseInt(rangeHospital);
+	Hospital hospitalInterface = new Hospital (nameHosp,locationHosp,rangeHosp);
+	f.SQLInsert(hospitalInterface);
+	
     break;
 case 5:	//salir del programa
 	f.SQLDisconnect();
