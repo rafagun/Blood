@@ -170,7 +170,7 @@ e.printStackTrace();
 public void SQLInsert(Hospital hospital){
 try {
 Statement stmt = c.createStatement();
-String sql = "INSERT INTO hospital (name, address, range) "
+String sql = "INSERT INTO hospital (name, location, range) "
 //Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
 //con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
 + "VALUES ('" + hospital.getName() + "', '" + hospital.getLocation()	+ "','"+ hospital.getRange() + "');";
@@ -186,7 +186,8 @@ e.printStackTrace();
 }
 }
 
-public void SQLSearch(String hospName) {
+public Hospital SQLSearch(String hospName) {
+	Hospital hospital = null;
 try {
 String sql = "SELECT * FROM hospital WHERE name LIKE ?";
 PreparedStatement prep = c.prepareStatement(sql);
@@ -198,16 +199,16 @@ String name = rs.getString("name");
 String location = rs.getString("location");
 int range = rs.getInt("range");
 
-Hospital hospital = new Hospital (id, name, location, range);
-System.out.println(hospital);
+hospital = new Hospital (id, name, location, range);
 
 }
 rs.close();
 prep.close();
-System.out.println("Search finished.");
+
 } catch (Exception e) {
 e.printStackTrace();
 }
+return hospital;
 }
 
 public Hospital SQLDelete(String nameHospital) throws IOException, SQLException {

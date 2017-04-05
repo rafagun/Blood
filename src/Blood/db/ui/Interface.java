@@ -56,7 +56,8 @@ case 4:
 BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
 System.out.println("Introduce the name of the hospital that you want to search");
 String nameHospKB = reader1.readLine();
-f.SQLSearch(nameHospKB);
+Hospital hospital = f.SQLSearch(nameHospKB);
+System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
 break;
 
 case 5: 
