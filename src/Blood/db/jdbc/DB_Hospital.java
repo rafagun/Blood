@@ -7,12 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 
 import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Manager {
+public class DB_Hospital {
 Connection c;
 
 
@@ -47,7 +49,7 @@ try {
 // Create tables: begin
 Statement stmt1 = c.createStatement();
 String sql1 = "CREATE TABLE Hospital "
-+ "(id INTEGER PRIMARY KEY AUTO INCREMENT , "
++ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 + "name TEXT NOT NULL, "
 + "location  TEXT, "
 + "range  INTEGER)";
@@ -105,7 +107,8 @@ e.printStackTrace();
 }	
 }
 
-public void SQLSelect(){
+public ArrayList<Hospital> SQLSelect(){
+ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
 try {
 Statement stmt = c.createStatement();
 
@@ -117,7 +120,7 @@ String name = rs.getString("name");
 String location = rs.getString("location");
 int range= rs.getInt("range");
 Hospital hospital = new Hospital (id,name,location,range);
-System.out.println(hospital);
+hospitals.add(hospital);
 }
 rs.close();
 stmt.close();
@@ -126,13 +129,14 @@ System.out.println("Search finished.");
 catch(Exception ex){
 ex.printStackTrace();
 }
+return hospitals;
 }
 public void SQLDrop(){
 try {
 
 // Drop tables: begin
 Statement stmt1 = c.createStatement();
-String sql1 = "DROP TABLE hospitals";
+String sql1 = "DROP TABLE hospital";
 stmt1.executeUpdate(sql1);
 stmt1.close();
 /*Statement stmt2 = c.createStatement();
@@ -211,24 +215,23 @@ e.printStackTrace();
 return hospital;
 }
 
-public Hospital SQLDelete(String nameHospital) throws IOException, SQLException {
-	Hospital hospital = null;
-	String sql = "SELECT * FROM Hospital";
+public void SQLDelete(String nameHospital) throws IOException, SQLException {
+	String sql = "DELETE FROM employees WHERE name=?";
 	PreparedStatement prep = c.prepareStatement(sql);
 	prep.setString(1, nameHospital);
-	ResultSet rs = prep.executeQuery();
-	while (rs.next()) {
-		int id = rs.getInt("id");
-		String name = rs.getString("name");
-		String location = rs.getString("location");
-		int range = rs.getInt("range");
-		hospital = new Hospital(id, name, location,range);
-		
-	}
-	rs.close();
+	prep.executeUpdate();
 	prep.close();
-	System.out.println("Delete is finished");
-	return hospital;
+
+	
     
 }
+public void SQLUpdate(String newname, String newlocation , Integer newrange) throws IOException , SQLException {
+String sql = "UPDATE departments SET address=? WHERE id=?";
+PreparedStatement prep = c.prepareStatement(sql);
+prep.setString(1, newname);
+prep.setString(2, newlocation);
+prep.setInt(3, newrange);
+prep.executeUpdate();
+}
+
 }
