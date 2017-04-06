@@ -95,6 +95,11 @@ public class Cells implements Serializable {
 	public void setPatients(List<Patient> patients) {
 		this.patients = patients;
 	}
+
+	@Override
+	public String toString() {
+		return "Cells [type=" + type + ", highL=" + highL + ", lowL=" + lowL + ", id=" + id + "]";
+	}
 	
 	
 	

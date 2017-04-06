@@ -118,4 +118,10 @@ public class Illnes implements Serializable {
 	public void setMolecules(List<Molecules> molecules) {
 		this.molecules = molecules;
 	}
+
+	@Override
+	public String toString() {
+		return "Illnes [id=" + id + ", name=" + name + ", type=" + type + ", chronic=" + chronic + "]";
+	}
+	
 }

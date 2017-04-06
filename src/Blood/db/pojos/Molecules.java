@@ -94,6 +94,11 @@ public class Molecules implements Serializable {
 	public void setIllnes(List<Illnes> illnes) {
 		this.illnes = illnes;
 	}
+	@Override
+	public String toString() {
+		return "Molecules [id=" + id + ", type=" + type + ", lowLevels=" + lowLevels + ", highLevels=" + highLevels
+				+ "]";
+	}
 	
 	
 }

@@ -87,27 +87,26 @@ case 7:
 case 8: 
 	BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Insert the ID of the hospital you want to change");
-		int idNumber = Integer.parseInt(readerUpdate.readLine());
-		System.out.println("Insert the number of the option that you want to change: ");
-		System.out.println("1.Change the name of the hospital");
-		System.out.println("2.Change the location of the hospital");
-		System.out.println("3.Change the range of the hospital");
-		int optionUpdate = Integer.parseInt(readerUpdate.readLine());
-		if (optionUpdate == 1){
-			System.out.println("Introduce new name:");
-			String name = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,name,idNumber);
-		} 
-		else if(optionUpdate == 2){
-			System.out.println("Introduce new location:");
-			String location = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,location,idNumber);
+		//int idNumber = Integer.parseInt(readerUpdate.readLine());
+		int id = Integer.parseInt(readerUpdate.readLine());
+		Hospital hosp= new Hospital();
+		System.out.println("Enter the new name of the hospital or press Inter");
+		String name= readerUpdate.readLine();
+		if (name.equals(null)){
+		hosp.setName(name);	
 		}
-		else if (optionUpdate ==3){
-			System.out.println("Introduce new range:");
-			String range = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,range,idNumber);
+		System.out.println("2.Enter the new location of the hospital or press Inter");
+		String location= readerUpdate.readLine();
+		if(location.equals(null)){
+			hosp.setLocation(location);
 		}
+		System.out.println("3.Enter the new range of the hospital or press Inter");
+		String r= readerUpdate.readLine();
+		if(r.equals(null)){
+			int range= Integer.parseInt(r);
+			hosp.setRange(range);
+		}
+		f.SQLUpdate(hosp);
 		break;
 	
 case 9:	//salir del programa

@@ -98,5 +98,10 @@ public void setNurses(List<Nurse> nurses) {
 	this.nurses = nurses;
 }
 
+@Override
+public String toString() {
+	return "Hospital [id=" + id + ", name=" + name + ", location=" + location + ", range=" + range + "]";
+}
+
 
 }

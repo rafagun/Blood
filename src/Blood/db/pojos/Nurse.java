@@ -72,4 +72,11 @@ public class Nurse implements Serializable {
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
+
+	@Override
+	public String toString() {
+		return "Nurse [id=" + id + ", name=" + name + ", hospital=" + hospital + "]";
+	}
+	
+	
 }
