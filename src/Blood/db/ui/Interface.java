@@ -23,7 +23,7 @@ while (true){
 System.out.println("Introduce 1 to connect ");
 System.out.println("Introduce 2 to create ");
 System.out.println("Introduce 3 to insert ");
-System.out.println("Introduce 4 to search");
+System.out.println("Introduce 4 to show");
 System.out.println("Introduce 5 to delete");
 System.out.println("Introduce 6 to select");
 System.out.println("Introduce 7 to drop");
@@ -86,6 +86,8 @@ case 7:
 
 case 8: 
 	BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Insert the ID of the hospital you want to change");
+		int idNumber = Integer.parseInt(readerUpdate.readLine());
 		System.out.println("Insert the number of the option that you want to change: ");
 		System.out.println("1.Change the name of the hospital");
 		System.out.println("2.Change the location of the hospital");
@@ -94,17 +96,17 @@ case 8:
 		if (optionUpdate == 1){
 			System.out.println("Introduce new name:");
 			String name = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,name);
+			f.SQLUpdate(optionUpdate,name,idNumber);
 		} 
 		else if(optionUpdate == 2){
 			System.out.println("Introduce new location:");
 			String location = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,location);
+			f.SQLUpdate(optionUpdate,location,idNumber);
 		}
 		else if (optionUpdate ==3){
 			System.out.println("Introduce new range:");
 			String range = readerUpdate.readLine();
-			f.SQLUpdate(optionUpdate,range);
+			f.SQLUpdate(optionUpdate,range,idNumber);
 		}
 		break;
 	
