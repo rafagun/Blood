@@ -181,8 +181,7 @@ String sql = "INSERT INTO hospital (name, location, range) "
 
 stmt.executeUpdate(sql);
 stmt.close();
-System.out.println("Patient information processed");
-System.out.println("Patient has been inserted.");
+
 
 
 } catch (Exception e) {
@@ -225,13 +224,25 @@ public void SQLDelete(String nameHospital) throws IOException, SQLException {
 	
     
 }
-public void SQLUpdate(String newname, String newlocation , Integer newrange) throws IOException , SQLException {
-String sql = "UPDATE departments SET address=? WHERE id=?";
+public void SQLUpdate(int opcion ,String newl) throws IOException , SQLException {
+	switch(opcion){
+	case 1 : String sql = "UPDATE Hospital SET name=? WHERE id=?";
 PreparedStatement prep = c.prepareStatement(sql);
-prep.setString(1, newname);
-prep.setString(2, newlocation);
-prep.setInt(3, newrange);
+prep.setString(1, newl);
 prep.executeUpdate();
+	case 2:
+		String sql2 = "UPDATE Hospital SET location=? WHERE name=?";
+		PreparedStatement prep2 = c.prepareStatement(sql2);
+		prep2.setString(2, newl);
+		prep2.executeUpdate();
+	case 3:
+		String sql3 = "UPDATE Hospital SET range=? WHERE name=?";
+		PreparedStatement prep3 = c.prepareStatement(sql3);
+		prep3.setInt(3, Integer.parseInt(newl));
+		prep3.executeUpdate();
+		}
+	
+
 }
 
 }
