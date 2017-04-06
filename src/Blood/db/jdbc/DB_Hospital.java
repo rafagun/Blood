@@ -189,9 +189,10 @@ e.printStackTrace();
 }
 }
 
-public Hospital SQLSearch(String hospName) {
+public Hospital SQLSearch(String hospName, String hospLocation) {
 	Hospital hospital = null;
 try {
+	if (hospName.equals(null)){
 String sql = "SELECT * FROM hospital WHERE name LIKE ?";
 PreparedStatement prep = c.prepareStatement(sql);
 prep.setString(1, hospName);
@@ -201,12 +202,27 @@ int id = rs.getInt("id");
 String name = rs.getString("name");
 String location = rs.getString("location");
 int range = rs.getInt("range");
-
 hospital = new Hospital (id, name, location, range);
-
-}
 rs.close();
 prep.close();
+
+	}
+}
+	if (hospLocation.equals(null)  ){
+		String sql = "SELECT * FROM hospital WHERE name LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, hospName);
+		ResultSet rs = prep.executeQuery();
+		while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String location = rs.getString("location");
+		int range = rs.getInt("range");
+		hospital = new Hospital (id, name, location, range);
+		rs.close();
+		prep.close();
+}
+	}
 
 } catch (Exception e) {
 e.printStackTrace();

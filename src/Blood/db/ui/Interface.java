@@ -59,11 +59,14 @@ break;
 
 case 4:
 BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
-System.out.println("Introduce the name of the hospital that you want to search");
-String nameHospKB = reader1.readLine();
-Hospital hospital = f.SQLSearch(nameHospKB);
-System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
-break;
+	System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+	String nameSearch = reader1.readLine();
+	System.out.println("If you want to search by location, introduce the location of the hospital you want to search by:");
+	String locationSearch = reader1.readLine();
+	Hospital hospital = f.SQLSearch(nameSearch,locationSearch);
+	System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
+
+	break;
 
 case 5: 
 	BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
