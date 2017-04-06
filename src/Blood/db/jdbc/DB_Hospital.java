@@ -216,7 +216,7 @@ return hospital;
 }
 
 public void SQLDelete(String nameHospital) throws IOException, SQLException {
-	String sql = "DELETE FROM employees WHERE name=?";
+	String sql = "DELETE FROM Hospital WHERE name=?";
 	PreparedStatement prep = c.prepareStatement(sql);
 	prep.setString(1, nameHospital);
 	prep.executeUpdate();
