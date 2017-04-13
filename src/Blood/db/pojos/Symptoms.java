@@ -20,7 +20,9 @@ public class Symptoms implements Serializable {
     	// TODO Auto-generated constructor stub
     }
     
-    public Symptoms(String type){
+    public Symptoms(Integer id, String type){
+    	super();
+    	this.id = id;
     	this.type = type;
     	this.patients = new ArrayList<Patient>();
     	this.illnes = new ArrayList<Illnes>();

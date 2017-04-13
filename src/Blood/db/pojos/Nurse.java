@@ -18,7 +18,9 @@ public class Nurse implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Nurse(String name, byte[] photo) {
+	public Nurse (Integer id, String name, byte[] photo) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.photo = photo;
 	}
