@@ -14,35 +14,8 @@ import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital {
-Connection c;
+public class DB_Hospital extends generalMethods{
 
-
-public void SQLConnect() {
-try {
-// Open database connection
-Class.forName("org.sqlite.JDBC");
-c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
-c.createStatement().execute("PRAGMA foreign_keys=ON");
-System.out.println("Database connection opened.");
-
-}
-catch (Exception e) {
-e.printStackTrace();
-}
-
-}
-public void SQLDisconnect()
-{
-// Close database connection
-try {
-c.close();
-System.out.println("Database connection closed.");
-} catch (SQLException e) {
-// TODO Auto-generated catch block
-e.printStackTrace();
-}
-}
 public void SQLCreate() throws SQLException {
 try {
 
