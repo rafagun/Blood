@@ -97,7 +97,7 @@ e.printStackTrace();
 public void SQLInsert(Cells cells){
 try {
 Statement stmt = c.createStatement();
-String sql = "INSERT INTO hospital (type, range) "
+String sql = "INSERT INTO cells (type, range) "
 //Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
 //con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
 + "VALUES ('" + cells.getType()	+ "','"+ cells.getHighL() + "','"+ cells.getLowL() + "' );";
