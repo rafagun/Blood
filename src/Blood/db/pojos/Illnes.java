@@ -27,7 +27,17 @@ public class Illnes implements Serializable {
 		this.setMolecules(new ArrayList<Molecules>());
 	}
 	
+	public Illnes(Integer id, String name, String type, Boolean chronic) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.chronic = chronic;
+	}
+
+	
 	public Illnes(String name, String type, Boolean chronic) {
+	
 		this.name = name;
 		this.type = type;
 		this.chronic = chronic;
