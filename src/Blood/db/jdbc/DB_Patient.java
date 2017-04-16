@@ -8,7 +8,7 @@ import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 
-public class DB_Patient extends generalMethods {
+public class DB_Patient extends generalMethods implements funcionesDB<Patient> {
 	
 	
 	public void SQLCreate() throws SQLException {
@@ -93,6 +93,34 @@ public class DB_Patient extends generalMethods {
 		try{
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM Patient WHERE id=?";
+			ResultSet rs = stmt.executeQuery(sql);
+			int id = rs.getInt("id");
+			patient.setId(id);
+			String name = rs.getString("name");
+			patient.setName(name);
+			int age = rs.getInt("age");
+			patient.setAge(age);
+			String blood = rs.getString("blood");
+			patient.setBlood(blood);
+			boolean smoker = rs.getBoolean("smooker");
+			patient.setSmoker(smoker);
+			String gender = rs.getString("gender");
+			patient.setGender(gender);
+			
+			rs.close();
+			stmt.close();
+		
+		}catch(Exception ex){
+		 ex.printStackTrace();
+		}
+			return patient;
+		}
+	
+	public Patient SQLSearch (String namePatient){// no se si esto esta bien del todo
+		Patient patient = new Patient();
+		try{
+			Statement stmt = c.createStatement();
+			String sql = "SELECT * FROM Patient WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
 			int id = rs.getInt("id");
 			patient.setId(id);
