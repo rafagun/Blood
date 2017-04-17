@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Blood.db.pojos.Cells;
+import Blood.db.pojos.Hospital;
 
 public class DB_Cells extends generalMethods implements funcionesDB<Cells>{
 
@@ -110,13 +111,33 @@ public void SQLDelete(String cellsType) throws IOException, SQLException {
 	prep.close();
 	
 }
-@Override
-public Cells SQLSearch(String nombre) {
-	// TODO Auto-generated method stub
-	return null;
+
+public Cells SQLSearch(String cellsType) {
+	Cells cells = null;
+try {
+	if (cellsType.equals(null)){
+String sql = "SELECT * FROM cells WHERE type LIKE ?";
+PreparedStatement prep = c.prepareStatement(sql);
+prep.setString(1, cellsType);
+ResultSet rs = prep.executeQuery();
+while (rs.next()) {
+int id = rs.getInt("id");
+String type = rs.getString("type");
+float HighL = rs.getInt("HighL");
+float LowL = rs.getInt("LowL");
+cells = new Cells (id, type, HighL, LowL);
+rs.close();
+prep.close();
+
+	}
+}
+
+} catch (Exception e) {
+e.printStackTrace();
+}
+return cells;
+}
 }
 	
-
-}
 
 
