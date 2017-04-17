@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import Blood.db.pojos.Hospital;
-import Blood.db.pojos.Nurse;
+
 import Blood.db.pojos.Patient;
 
 public class DB_Patient extends generalMethods implements funcionesDB<Patient> {

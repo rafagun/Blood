@@ -20,8 +20,9 @@ public class Cells implements Serializable {
 		this.setPatients(new ArrayList<Patient>());
 	}
 	
-	public Cells(String type, float highL, float lowL) {
+	public Cells(Integer id,String type, float highL, float lowL) {
 		super();
+		this.id = id;
 		this.type = type;
 		this.highL = highL;
 		this.lowL = lowL;

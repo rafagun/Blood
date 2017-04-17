@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Symptoms;
 
 public class DB_Symptoms {
