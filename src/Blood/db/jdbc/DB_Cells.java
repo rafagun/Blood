@@ -101,8 +101,13 @@ prep.executeUpdate();
 	
 		}
 @Override
-public void SQLDelete(String name) throws IOException, SQLException {
+public void SQLDelete(String cellsType) throws IOException, SQLException {
 	// TODO Auto-generated method stub
+	String sql = "DELETE FROM Cells WHERE name=?";
+	PreparedStatement prep = c.prepareStatement(sql);
+	prep.setString(1, cellsType);
+	prep.executeUpdate();
+	prep.close();
 	
 }
 @Override
