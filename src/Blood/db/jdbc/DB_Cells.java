@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Blood.db.pojos.Cells;
-import Blood.db.pojos.Hospital;
 
 public class DB_Cells extends generalMethods implements funcionesDB<Cells>{
 
