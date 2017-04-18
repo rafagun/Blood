@@ -7,6 +7,7 @@ import java.util.ArrayList;
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
 import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Patient;
 public class Interface {
 	static void menu1(){
 		
@@ -158,7 +159,108 @@ else if (selection == 2){//nurse
 	
 }
 else if (selection == 3){//patient
-	
+	DB_Patient dbPatient = new DB_Patient();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+
+	dbPatient.SQLConnect();
+	break;
+
+
+	case 2: 
+	dbPatient.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the name of the patient");
+	String namePatient = reader.readLine();
+	System.out.println("Introduce the blood type");
+	String bloodPatient = reader.readLine();
+	System.out.println("Introduce the age of the patient");
+	String agePatient = reader.readLine();
+	int age = Integer.parseInt(agePatient);
+	System.out.println("Introduce the gender");
+	String gender = reader.readLine();
+	System.out.println("Introduce if the patient is smoker or not");
+	String smokerpatient = reader.readLine();
+	Boolean smoker = Boolean.parseBoolean(smokerpatient);
+	Patient patient= new Patient (namePatient , age , bloodPatient, smoker , gender);
+	dbPatient.SQLInsert(patient);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		String nameSearch = reader1.readLine();
+		Patient patient1 = dbPatient.SQLSearch(nameSearch);
+		System.out.println("name:" + patient1.getName()+ ""+"age"+ patient1.getAge()+ ""+ "range:" +patient1.getBlood()+""+"smoker:"+patient1.getSmoker()+""+"gender:"+patient1.getGender());
+
+		break;
+
+	case 5: 
+		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the name of the hospital that you want to delete");
+		String patientname = readerDelete.readLine();
+		dbPatient.SQLDelete(patientname);
+		break;
+	 
+	case 6:
+		ArrayList<Patient> lista= new ArrayList<>();
+		lista = dbPatient.SQLSelect();
+		for (Patient patient11: lista){
+			System.out.println("name:" +patient11.getName()+""+ "age:"+patient11.getAge()+""+ "blood type:" +patient11.getBlood()+" "+"blood type:" +patient11.getSmoker()+""+"blood type:" +patient11.getGender());
+		}
+		break;
+		
+	case 7: 
+		dbPatient.SQLDrop();
+		break;
+
+	case 8: 
+		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
+		Patient patient11= new Patient();
+			System.out.println("Insert the ID of the patient ypu want to change");
+			int id = Integer.parseInt(readerUpdate.readLine());
+			System.out.println("Enter the new name of the hospital or press Inter");
+			String name= readerUpdate.readLine();
+			if (name.equals(null)){
+			patient11.setName(name);	
+			}
+			System.out.println("2.Enter the new blood type or press Inter");
+			String bloodtype= readerUpdate.readLine();
+			if(bloodtype.equals(null)){
+				patient11.setBlood(bloodtype);
+			}
+			System.out.println("3.Enter the new age of the patient or press Inter");
+			String r= readerUpdate.readLine();
+			if(r.equals(null)){
+				int age1= Integer.parseInt(r);
+				patient11.setAge(age1);
+			}
+			System.out.println("2.Change if it's smoker or not or press Inter");
+			String smoker1= readerUpdate.readLine();
+			Boolean smok = Boolean.parseBoolean(smoker1);
+			if(smoker1.equals(null)){
+				patient11.setSmoker(smok);
+			}
+			System.out.println("2.Enter the new gender or press Inter");
+			String gender1= readerUpdate.readLine();
+			if(bloodtype.equals(null)){
+				patient11.setGender(gender1);
+			}
+			dbPatient.SQLUpdate(patient11);
+			break;
+		
+	case 9:	//salir del programa
+	dbPatient.SQLDisconnect();
+	break;
+	}
+}
 }
 else if (selection == 4){//cells
 	
@@ -173,7 +275,7 @@ else if (selection == 7){//illness
 	
 }
 else if (selection == 8){//exitt
-	
+	System.exit(0);
 }
 
 }}
