@@ -92,8 +92,8 @@ public void setBlood(String blood) {
 public Boolean getSmoker() {
 	return smoker;
 }
-public void setSmoker(Boolean smoker) {
-	this.smoker = smoker;
+public void setSmoker(Boolean smoker1) {
+	this.smoker = smoker1;
 }
 public String getGender() {
 	return gender;

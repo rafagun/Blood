@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
+import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 public class Interface {
@@ -44,7 +45,7 @@ public static void main(String[] args) throws SQLException
 
 InputStreamReader inputStreamReader = null;
 BufferedReader bufferedReader = null;
-DB_Hospital f = null;
+
 try {
 inputStreamReader = new InputStreamReader(System.in);
 bufferedReader = new BufferedReader(inputStreamReader);
@@ -61,7 +62,7 @@ menu1();
 	
 if (selection==1){
 	
-	DB_Hospital dbHospital = new DB_Hospital();
+	DB_Hospital f = new DB_Hospital();
 	menu2();
 	while (true){
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -263,8 +264,72 @@ else if (selection == 3){//patient
 }
 }
 else if (selection == 4){//cells
-	
-}
+	DB_Cells f = new DB_Cells();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+	f.SQLConnect();
+	break;
+
+
+	case 2: 
+	f.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the type of the cell");
+	String cellType = reader.readLine();
+	System.out.println("Introduce the minimum normal level of the cell");
+	Integer minLevel =Integer.parseInt( reader.readLine());
+	System.out.println("Introduce the maximum level of the cell");
+	Integer maxLevel =Integer.parseInt(reader.readLine());
+
+	Cells cells  = new Cells();
+	f.SQLInsert(cells);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		String nameSearch = reader1.readLine();
+		
+		Cells cell = f.SQLSearch(nameSearch);
+		System.out.println("type:" + cell.getType()+ ""+"low level of the cell:"+ cell.getLowL()+ ""+ "high level of the cells:" +cell.getHighL());
+
+		break;
+
+	case 5: 
+		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the name of the hospital that you want to delete");
+		String nCells = readerDelete.readLine();
+		f.SQLDelete(nCells);
+		break;
+	 
+	case 6:
+		ArrayList<Cells> lista= new ArrayList<>();
+		lista = f.SQLSelect();
+		for (Cells cell1: lista){
+			System.out.println("type:" + cell1.getType()+ ""+"low level of the cell:"+ cell1.getLowL()+ ""+ "high level of the cells:" +cell1.getHighL());
+		}
+		break;
+		
+	case 7: 
+		f.SQLDrop();
+		break;
+
+	case 8:
+		break;
+		
+	case 9:	//salir del programa
+	f.SQLDisconnect();
+	break;
+	}
+	}
+	}
 else if (selection == 5){//molecules
 	
 }
@@ -275,6 +340,7 @@ else if (selection == 7){//illness
 	
 }
 else if (selection == 8){//exitt
+
 	System.exit(0);
 }
 

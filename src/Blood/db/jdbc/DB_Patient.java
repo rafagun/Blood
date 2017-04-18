@@ -86,11 +86,11 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 		e.printStackTrace();
 		}
 	}
-	public Patient SQLSearchId (Integer idPatient){// no se si esto esta bien del todo
+	public Patient SQLSearchId (Integer namePatient){// no se si esto esta bien del todo
 		Patient patient = new Patient();
 		try{
 			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM Patient WHERE id=?";
+			String sql = "SELECT * FROM Patient WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
 			int id = rs.getInt("id");
 			patient.setId(id);
