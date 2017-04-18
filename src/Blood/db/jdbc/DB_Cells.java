@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Cells;
 
-public class DB_Cells extends generalMethods implements funcionesDB<Cells>{
+public class DB_Cells extends generalMethods implements FunctionsDB<Cells>{
 
 	public void SQLCreate() throws SQLException{
 		try {

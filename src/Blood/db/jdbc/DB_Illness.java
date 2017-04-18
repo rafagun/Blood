@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import Blood.db.pojos.Illnes;
-public class DB_Illness extends generalMethods {
+public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 	public void SQLCreate() throws SQLException {
 		try {
 
@@ -150,6 +150,19 @@ public class DB_Illness extends generalMethods {
 	prep.setInt(4, illnes.getId());
 	prep.executeUpdate();
 	}
+
+	@Override
+	public Illnes SQLSearch(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void SQLDelete(String name) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 		
 	
 }
