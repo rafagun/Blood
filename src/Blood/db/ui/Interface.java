@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import Blood.db.jdbc.*;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
+import Blood.db.pojos.Symptoms;
 public class Interface {
 	static void menu1(){
 		
@@ -294,7 +296,7 @@ else if (selection == 4){//cells
 
 	case 4:
 	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		System.out.println("Introduce the name of the cell you want to search by:");
 		String nameSearch = reader1.readLine();
 		
 		Cells cell = f.SQLSearch(nameSearch);
@@ -303,10 +305,7 @@ else if (selection == 4){//cells
 		break;
 
 	case 5: 
-		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Introduce the name of the hospital that you want to delete");
-		String nCells = readerDelete.readLine();
-		f.SQLDelete(nCells);
+		
 		break;
 	 
 	case 6:
@@ -334,7 +333,63 @@ else if (selection == 5){//molecules
 	
 }
 else if (selection == 6){//Sympthomps
-	
+	DB_Symptoms f = new DB_Symptoms();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+	f.SQLConnect();
+	break;
+
+
+	case 2: 
+	f.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the type of the symptom");
+	String symptomsType = reader.readLine();
+	Symptoms symptomsInterface  = new Symptoms();
+	f.SQLInsert(symptomsInterface);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the type of the symptom you want to search:");
+		String nameSearch = reader1.readLine();
+		
+		Symptoms symptoms = f.SQLSearch(nameSearch);
+		System.out.println("type:" + symptoms.getType());
+
+		break;
+
+	case 5: 
+		
+		break;
+	 
+	case 6:
+		ArrayList<Symptoms> lista= new ArrayList<>();
+		lista = f.SQLSelect();
+		for (Symptoms symptoms1: lista){
+			System.out.println("type:" + symptoms1.getType());
+		}
+		break;
+		
+	case 7: 
+		f.SQLDrop();
+		break;
+
+	case 8:
+		break;
+		
+	case 9:	//salir del programa
+	f.SQLDisconnect();
+	break;
+	}
+	}
 }
 else if (selection == 7){//illness
 	
