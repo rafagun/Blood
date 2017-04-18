@@ -27,7 +27,11 @@ public class Symptoms implements Serializable {
     	this.patients = new ArrayList<Patient>();
     	this.illnes = new ArrayList<Illnes>();
     }
-
+    
+    public Symptoms(String type){
+    	super();
+    	this.type = type;
+    }
 @Override
 public int hashCode() {
 	final int prime = 31;

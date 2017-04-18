@@ -24,6 +24,11 @@ public class Nurse implements Serializable {
 		this.name = name;
 		this.photo = photo;
 	}
+	public Nurse (String name, byte[] photo) {
+		super();
+		this.name = name;
+		this.photo = photo;
+	}
 	
 	@Override
 	public int hashCode() {

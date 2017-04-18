@@ -30,8 +30,9 @@ public class Cells implements Serializable {
 		this.patients = new ArrayList<Patient>();
 		
 	}
-	public Cells(float highL, float lowL) {
+	public Cells( String type, float highL, float lowL) {
 		super();
+		this.type = type;
 		this.highL = highL;
 		this.lowL = lowL;
 	}

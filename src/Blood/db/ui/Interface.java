@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import Blood.db.jdbc.*;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Illnes;
+import Blood.db.pojos.Molecules;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 import Blood.db.pojos.Symptoms;
@@ -64,20 +66,20 @@ menu1();
 	
 if (selection==1){
 	
-	DB_Hospital f = new DB_Hospital();
+	DB_Hospital db_Hospital = new DB_Hospital();
 	menu2();
 	while (true){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
 	case 1: 
-	f= new DB_Hospital();
-	f.SQLConnect();
+	db_Hospital= new DB_Hospital();
+	db_Hospital.SQLConnect();
 	break;
 
 
 	case 2: 
-	f.SQLCreate();
+	db_Hospital.SQLCreate();
 	break;
 
 	case 3: 
@@ -90,7 +92,7 @@ if (selection==1){
 	String rangeHospital = reader.readLine();
 	int rangeHosp = Integer.parseInt(rangeHospital);
 	Hospital hospitalInterface = new Hospital (nameHosp,locationHosp,rangeHosp);
-	f.SQLInsert(hospitalInterface);
+	db_Hospital.SQLInsert(hospitalInterface);
 	break;
 
 	case 4:
@@ -99,7 +101,7 @@ if (selection==1){
 		String nameSearch = reader1.readLine();
 		System.out.println("If you want to search by location, introduce the location of the hospital you want to search by:");
 		String locationSearch = reader1.readLine();
-		Hospital hospital = f.SQLSearch(nameSearch,locationSearch);
+		Hospital hospital = db_Hospital.SQLSearch(nameSearch,locationSearch);
 		System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
 
 		break;
@@ -108,19 +110,19 @@ if (selection==1){
 		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Introduce the name of the hospital that you want to delete");
 		String nHospital = readerDelete.readLine();
-		f.SQLDelete(nHospital);
+		db_Hospital.SQLDelete(nHospital);
 		break;
 	 
 	case 6:
 		ArrayList<Hospital> lista= new ArrayList<>();
-		lista = f.SQLSelect();
+		lista = db_Hospital.SQLSelect();
 		for (Hospital hosp: lista){
 			System.out.println("name:" +hosp.getName()+ "location:"+hosp.getLocation()+ "range:" +hosp.getRange());
 		}
 		break;
 		
 	case 7: 
-		f.SQLDrop();
+		db_Hospital.SQLDrop();
 		break;
 
 	case 8: 
@@ -145,11 +147,11 @@ if (selection==1){
 				int range= Integer.parseInt(r);
 				hosp.setRange(range);
 			}
-			f.SQLUpdate(hosp);
+			db_Hospital.SQLUpdate(hosp);
 			break;
 		
 	case 9:	//salir del programa
-	f.SQLDisconnect();
+		db_Hospital.SQLDisconnect();
 	break;
 	}
 }
@@ -159,6 +161,92 @@ if (selection==1){
 }
 
 else if (selection == 2){//nurse
+	DB_Nurse db_Nurse = new DB_Nurse();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+	db_Nurse= new DB_Nurse();
+	db_Nurse.SQLConnect();
+	break;
+
+
+	case 2: 
+		db_Nurse.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the name of the nurse");
+	String nurseName = reader.readLine();
+	System.out.println("Introduce the photo of the nurse");
+	String nursePhoto = reader.readLine();
+	byte[] photo = nursePhoto.getBytes();
+	Nurse nurseInterface = new Nurse (nurseName,photo);
+	db_Nurse.SQLInsert(nurseInterface);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the name of the nurse you want to search:");
+		String nameSearch = reader1.readLine();
+		Nurse nurse = db_Nurse.SQLSearch(nameSearch);
+		System.out.println("name:" + nurse.getName()+ ""+"photo:"+ nurse.getPhoto());
+
+		break;
+
+	case 5: 
+		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the name of the nurse that you want to delete");
+		String nNurse = readerDelete.readLine();
+		db_Nurse.SQLDelete(nNurse);
+		break;
+	 
+	case 6:
+		ArrayList<Nurse> lista= new ArrayList<>();
+		lista = db_Nurse.SQLSelect();
+		for (Nurse nurse1: lista){
+			System.out.println("name:" +nurse1.getName()+ "photo:"+nurse1.getPhoto());
+		}
+		break;
+		
+	case 7: 
+		db_Nurse.SQLDrop();
+		break;
+
+	/** case 8: 
+		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Insert the ID of the hospital you want to change");
+			//int idNumber = Integer.parseInt(readerUpdate.readLine());
+			int id = Integer.parseInt(readerUpdate.readLine());
+			Hospital hosp= new Hospital();
+			System.out.println("Enter the new name of the hospital or press Inter");
+			String name= readerUpdate.readLine();
+			if (name.equals(null)){
+			hosp.setName(name);	
+			}
+			System.out.println("2.Enter the new location of the hospital or press Inter");
+			String location= readerUpdate.readLine();
+			if(location.equals(null)){
+				hosp.setLocation(location);
+			}
+			System.out.println("3.Enter the new range of the hospital or press Inter");
+			String r= readerUpdate.readLine();
+			if(r.equals(null)){
+				int range= Integer.parseInt(r);
+				hosp.setRange(range);
+			}
+			db_Nurse.SQLUpdate(nurse2);
+			break; **/
+		
+	case 9:	//salir del programa
+		db_Nurse.SQLDisconnect();
+	break;
+	}
+}
+	
 	
 }
 else if (selection == 3){//patient
@@ -286,11 +374,11 @@ else if (selection == 4){//cells
 	System.out.println("Introduce the type of the cell");
 	String cellType = reader.readLine();
 	System.out.println("Introduce the minimum normal level of the cell");
-	Integer minLevel =Integer.parseInt( reader.readLine());
+	float minLevel =Float.parseFloat( reader.readLine());
 	System.out.println("Introduce the maximum level of the cell");
-	Integer maxLevel =Integer.parseInt(reader.readLine());
+	float maxLevel =Float.parseFloat(reader.readLine());
 
-	Cells cells  = new Cells();
+	Cells cells  = new Cells (cellType, minLevel, maxLevel);
 	f.SQLInsert(cells);
 	break;
 
@@ -305,7 +393,7 @@ else if (selection == 4){//cells
 		break;
 
 	case 5: 
-		
+		System.out.println("cells cannot be deleted");
 		break;
 	 
 	case 6:
@@ -321,6 +409,7 @@ else if (selection == 4){//cells
 		break;
 
 	case 8:
+		System.out.println("cells cannot be modified");
 		break;
 		
 	case 9:	//salir del programa
@@ -330,7 +419,69 @@ else if (selection == 4){//cells
 	}
 	}
 else if (selection == 5){//molecules
-	
+	DB_Molecules f = new DB_Molecules();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+	f.SQLConnect();
+	break;
+
+
+	case 2: 
+	f.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the type of the molecule");
+	String moleculesType = reader.readLine();
+	System.out.println("Introduce the minimum normal level of the cell");
+	float minLevel =Float.parseFloat( reader.readLine());
+	System.out.println("Introduce the maximum level of the cell");
+	float maxLevel =Float.parseFloat(reader.readLine());
+
+	Molecules molecules  = new Molecules (moleculesType, minLevel, maxLevel);
+	f.SQLInsert(molecules);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the type of the molecule you want to search by:");
+		String typeSearch = reader1.readLine();
+		
+		Molecules moleculesInterface = f.SQLSearch(typeSearch);
+		System.out.println("type:" + moleculesInterface.getType()+ ""+"low level of the cell:"+ moleculesInterface.getLowLevels()+ ""+ "high level of the cells:" +moleculesInterface.getHighLevels());
+
+		break;
+
+	case 5: 
+		System.out.println("Molecules cannot be deleted");
+		break;
+	 
+	case 6:
+		ArrayList<Molecules> lista= new ArrayList<>();
+		lista = f.SQLSelect();
+		for (Molecules molecules1: lista){
+			System.out.println("type:" + molecules1.getType()+ ""+"low level of the cell:"+ molecules1.getLowLevels()+ ""+ "high level of the cells:" +molecules1.getHighLevels());
+		}
+		break;
+		
+	case 7: 
+		f.SQLDrop();
+		break;
+
+	case 8:
+		System.out.println("molecules cannot be modified");
+		break;
+		
+	case 9:	//salir del programa
+	f.SQLDisconnect();
+	break;
+	}
+	}
 }
 else if (selection == 6){//Sympthomps
 	DB_Symptoms f = new DB_Symptoms();
@@ -352,7 +503,7 @@ else if (selection == 6){//Sympthomps
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	System.out.println("Introduce the type of the symptom");
 	String symptomsType = reader.readLine();
-	Symptoms symptomsInterface  = new Symptoms();
+	Symptoms symptomsInterface  = new Symptoms(symptomsType);
 	f.SQLInsert(symptomsInterface);
 	break;
 
@@ -367,7 +518,7 @@ else if (selection == 6){//Sympthomps
 		break;
 
 	case 5: 
-		
+		System.out.println("Symptoms cannot be deleted");
 		break;
 	 
 	case 6:
@@ -383,6 +534,7 @@ else if (selection == 6){//Sympthomps
 		break;
 
 	case 8:
+		System.out.println("Symptoms cannot be modified");
 		break;
 		
 	case 9:	//salir del programa
@@ -392,7 +544,69 @@ else if (selection == 6){//Sympthomps
 	}
 }
 else if (selection == 7){//illness
-	
+	DB_Illness f = new DB_Illness();
+	menu2();
+	while (true){
+	opcion=Integer.parseInt(bufferedReader.readLine());
+	switch (opcion){
+
+	case 1: 
+	f.SQLConnect();
+	break;
+
+
+	case 2: 
+	f.SQLCreate();
+	break;
+
+	case 3: 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Introduce the name of the illness");
+	String illnessName = reader.readLine();
+	System.out.println("Introduce the type of the illness");
+	String illnessType =reader.readLine();
+	System.out.println("Introduce if it is chronic or not");
+	String illnessChronic = reader.readLine();
+	Boolean chronic = Boolean.parseBoolean(illnessChronic);
+	Illnes illnessInterface  = new Illnes(illnessName, illnessType, chronic);
+	f.SQLInsert(illnessInterface);
+	break;
+
+	case 4:
+	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Introduce the name of the illness you want to search:");
+		String nameSearch = reader1.readLine();
+		
+		Illnes illness = f.SQLSearch(nameSearch);
+		System.out.println("name:" + illness.getName()+ ""+"type"+ illness.getType()+ ""+ "chronic:" +illness.getChronic());
+
+		break;
+
+	case 5: 
+		System.out.println("Illnesses cannot be deleted");
+		break;
+	 
+	case 6:
+		ArrayList<Illnes> lista= new ArrayList<>();
+		lista = f.SQLSelect();
+		for (Illnes illness1: lista){
+			System.out.println("name:" + illness1.getName()+ ""+"type"+ illness1.getType()+ ""+ "chronic:" +illness1.getChronic());
+		}
+		break;
+		
+	case 7: 
+		f.SQLDrop();
+		break;
+
+	case 8:
+		System.out.println("Illnesses cannot be modified");
+		break;
+		
+	case 9:	//salir del programa
+	f.SQLDisconnect();
+	break;
+	}
+}
 }
 else if (selection == 8){//exitt
 
