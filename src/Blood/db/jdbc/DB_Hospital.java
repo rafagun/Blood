@@ -12,7 +12,7 @@ import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends generalMethods{
+public class DB_Hospital extends generalMethods implements FunctionsDB<Hospital> {
 
 public void SQLCreate() throws SQLException {
 try {
@@ -222,6 +222,12 @@ prep.executeUpdate();
 
 	
 		}
+
+@Override
+public Hospital SQLSearch(String nombre) {
+	// TODO Auto-generated method stub
+	return null;
+}
 	
 
 }

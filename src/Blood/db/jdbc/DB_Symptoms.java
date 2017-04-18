@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms {
+public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms> {
 	Connection c;
 
 	public void SQLConnect() {
@@ -121,8 +121,14 @@ public class DB_Symptoms {
 	prep.setInt(2, symptom.getId());
 	prep.executeUpdate();
 	}
+
+	@Override
+	public Symptoms SQLSearch(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	public ArrayList<Symptoms> SQLSearch(String sympType) {
+	/**public ArrayList<Symptoms> SQLSearch(String sympType) {
 		ArrayList<Symptoms> symptoms = new ArrayList<Symptoms>();
 	try {
 	
@@ -147,6 +153,6 @@ public class DB_Symptoms {
 	e.printStackTrace();
 	}
 	return symptoms;
-	}
+	}**/
 	
 }
