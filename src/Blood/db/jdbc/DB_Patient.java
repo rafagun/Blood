@@ -76,8 +76,7 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 		try {
 		Statement stmt = c.createStatement();
 		String sql = "INSERT INTO Patient (name, age,blood,smoker,gender) "
-		//Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
-		//con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
+
 		+ "VALUES ('" + patient.getName() + "','"+ patient.getAge() + "');";
 
 		stmt.executeUpdate(sql);

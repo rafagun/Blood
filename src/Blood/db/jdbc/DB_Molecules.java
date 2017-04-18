@@ -14,7 +14,7 @@ public class DB_Molecules extends generalMethods implements FunctionsDB<Molecule
 	public void SQLCreate() throws SQLException{
 		try {
 
-			// Create tables: begin
+
 			Statement stmt4 = c.createStatement();
 			String sql4 = "CREATE TABLE Molecules "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
@@ -56,38 +56,11 @@ return Molecules1;
 public void SQLDrop(){
 try {
 
-// Drop tables: begin
+
 Statement stmt4 = c.createStatement();
 String sql4 = "DROP TABLE cells";
 stmt4.executeUpdate(sql4);
 stmt4.close();
-/*Statement stmt2 = c.createStatement();
-String sql2 = "DROP TABLE nurses";
-stmt2.executeUpdate(sql2);
-stmt2.close();
-Statement stmt3 = c.createStatement();
-String sql3 = "DROP TABLE patients";
-stmt3.executeUpdate(sql3);
-stmt3.close();
-Statement stmt4 = c.createStatement();
-String sql4 = "DROP TABLE molecules";
-stmt4.executeUpdate(sql4);
-stmt4.close();
-Statement stmt5 = c.createStatement();
-String sql5 = "DROP TABLE cells";
-stmt5.executeUpdate(sql5);
-stmt5.close();
-Statement stmt6 = c.createStatement();
-String sql6 = "DROP TABLE symptoms";
-stmt6.executeUpdate(sql6);
-stmt6.close();
-Statement stmt7 = c.createStatement();
-String sql7 = "DROP TABLE illness";
-stmt7.executeUpdate(sql7);
-stmt7.close();
-System.out.println("Tables removed.");
-// Drop tables: end
-*/
 
 } catch (Exception e) {
 e.printStackTrace();
@@ -98,8 +71,7 @@ public void SQLInsert(Molecules molecules){
 try {
 Statement stmt = c.createStatement();
 String sql = "INSERT INTO molecules (type, range) "
-//Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
-//con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
+
 + "VALUES ('" + molecules.getType()	+ "','"+ molecules.getHighLevels() + "','"+ molecules.getLowLevels() + "' );";
 
 stmt.executeUpdate(sql);

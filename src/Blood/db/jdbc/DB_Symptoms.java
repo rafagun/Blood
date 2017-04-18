@@ -12,31 +12,9 @@ import java.util.ArrayList;
 import Blood.db.pojos.Symptoms;
 
 public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms> {
-	Connection c;
 
-	public void SQLConnect() {
-		try {
-		// Open database connection
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
 
-	}
-	
-	public void SQLDisconnect() {
-		// Close database connection
-		try {
-		c.close();
-		System.out.println("Database connection closed.");
-		} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-	}
+
 	public void SQLCreate() throws SQLException {
 		try {
 
@@ -56,8 +34,7 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 		try {
 		Statement stmt = c.createStatement();
 		String sql = "INSERT INTO Symptoms (type) "
-		//Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
-		//con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
+
 		+ "VALUES ('" + symptom.getType() +"');";
 
 		stmt.executeUpdate(sql);

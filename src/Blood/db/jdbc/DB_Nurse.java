@@ -53,7 +53,7 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 	public void SQLDrop(){
 		try {
 
-		// Drop tables: begin
+
 		Statement stmt2 = c.createStatement();
 		String sql2 = "DROP TABLE Nurses";
 		stmt2.executeUpdate(sql2);
@@ -78,8 +78,7 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 		try {
 		Statement stmt = c.createStatement();
 		String sql = "INSERT INTO Nurses (name, location, photo) "
-		//Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
-		//con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
+
 		+ "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
 
 		stmt.executeUpdate(sql);
