@@ -161,8 +161,4 @@ public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-		
-	
 }
