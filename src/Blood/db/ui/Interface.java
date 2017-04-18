@@ -172,7 +172,7 @@ else if (selection == 6){//Sympthomps
 else if (selection == 7){//illness
 	
 }
-else if (selection == 8){//exit
+else if (selection == 8){//exitt
 	
 }
 
