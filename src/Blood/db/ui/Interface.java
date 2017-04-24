@@ -55,20 +55,20 @@ inputStreamReader = new InputStreamReader(System.in);
 bufferedReader = new BufferedReader(inputStreamReader);
 //bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion
 
-int selection;
-int opcion;
+int selection=0;
+int opcion=0;
 
 while (true){
 //mostramos por pantalla nuestro menu
 menu1();
 
 	selection=Integer.parseInt(bufferedReader.readLine());
-	
+	opcion=0;
 if (selection==1){
 	
 	DB_Hospital db_Hospital = new DB_Hospital();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -151,7 +151,7 @@ if (selection==1){
 			break;
 		
 	case 9:	//salir del programa
-		db_Hospital.SQLDisconnect();
+		
 	break;
 	}
 }
@@ -163,7 +163,7 @@ if (selection==1){
 else if (selection == 2){//nurse
 	DB_Nurse db_Nurse = new DB_Nurse();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -242,7 +242,7 @@ else if (selection == 2){//nurse
 			break; **/
 		
 	case 9:	//salir del programa
-		db_Nurse.SQLDisconnect();
+		
 	break;
 	}
 }
@@ -252,7 +252,7 @@ else if (selection == 2){//nurse
 else if (selection == 3){//patient
 	DB_Patient dbPatient = new DB_Patient();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -348,7 +348,7 @@ else if (selection == 3){//patient
 			break;
 		
 	case 9:	//salir del programa
-	dbPatient.SQLDisconnect();
+	
 	break;
 	}
 }
@@ -413,7 +413,7 @@ else if (selection == 4){//cells
 		break;
 		
 	case 9:	//salir del programa
-	f.SQLDisconnect();
+	
 	break;
 	}
 	}
@@ -421,7 +421,7 @@ else if (selection == 4){//cells
 else if (selection == 5){//molecules
 	DB_Molecules f = new DB_Molecules();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -478,7 +478,7 @@ else if (selection == 5){//molecules
 		break;
 		
 	case 9:	//salir del programa
-	f.SQLDisconnect();
+	
 	break;
 	}
 	}
@@ -486,7 +486,7 @@ else if (selection == 5){//molecules
 else if (selection == 6){//Sympthomps
 	DB_Symptoms f = new DB_Symptoms();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -546,7 +546,7 @@ else if (selection == 6){//Sympthomps
 else if (selection == 7){//illness
 	DB_Illness f = new DB_Illness();
 	menu2();
-	while (true){
+	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -603,7 +603,7 @@ else if (selection == 7){//illness
 		break;
 		
 	case 9:	//salir del programa
-	f.SQLDisconnect();
+	opcion=10;
 	break;
 	}
 }
