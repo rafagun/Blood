@@ -67,8 +67,10 @@ menu1();
 if (selection==1){
 	
 	DB_Hospital db_Hospital = new DB_Hospital();
-	menu2();
+	
 	while (opcion!=9){
+		System.out.println("Introduzca que opcion quiere");
+		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
@@ -101,7 +103,7 @@ if (selection==1){
 		String nameSearch = reader1.readLine();
 		System.out.println("If you want to search by location, introduce the location of the hospital you want to search by:");
 		String locationSearch = reader1.readLine();
-		Hospital hospital = db_Hospital.SQLSearch(nameSearch,locationSearch);
+		Hospital hospital = db_Hospital.SQLSearch(nameSearch);
 		System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
 
 		break;
@@ -127,9 +129,10 @@ if (selection==1){
 
 	case 8: 
 		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("Insert the ID of the hospital you want to change");
+			System.out.println("Insert the name of the hospital you want to change");
 			//int idNumber = Integer.parseInt(readerUpdate.readLine());
-			int id = Integer.parseInt(readerUpdate.readLine());
+			String pname= readerUpdate.readLine();
+			
 			Hospital hosp= new Hospital();
 			System.out.println("Enter the new name of the hospital or press Inter");
 			String name= readerUpdate.readLine();
@@ -162,7 +165,7 @@ if (selection==1){
 
 else if (selection == 2){//nurse
 	DB_Nurse db_Nurse = new DB_Nurse();
-	menu2();
+	
 	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -251,7 +254,7 @@ else if (selection == 2){//nurse
 }
 else if (selection == 3){//patient
 	DB_Patient dbPatient = new DB_Patient();
-	menu2();
+
 	while (opcion!=9){
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){

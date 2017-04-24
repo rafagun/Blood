@@ -117,11 +117,10 @@ e.printStackTrace();
 }
 }
 
-public Hospital SQLSearch(String hospName, String hospLocation) {
-	Hospital hospital = null;
+public Hospital SQLSearch(String hospName) {
+	Hospital hospital =new Hospital();
 try {
-	if (hospName.equals(null)){
-String sql = "SELECT * FROM hospital WHERE name LIKE ?";
+	String sql = "SELECT * FROM hospital WHERE name LIKE ?";
 PreparedStatement prep = c.prepareStatement(sql);
 prep.setString(1, hospName);
 ResultSet rs = prep.executeQuery();
@@ -134,22 +133,6 @@ hospital = new Hospital (id, name, location, range);
 rs.close();
 prep.close();
 
-	}
-}
-	if (hospLocation.equals(null)  ){
-		String sql = "SELECT * FROM hospital WHERE name LIKE ?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setString(1, hospName);
-		ResultSet rs = prep.executeQuery();
-		while (rs.next()) {
-		int id = rs.getInt("id");
-		String name = rs.getString("name");
-		String location = rs.getString("location");
-		int range = rs.getInt("range");
-		hospital = new Hospital (id, name, location, range);
-		rs.close();
-		prep.close();
-}
 	}
 
 } catch (Exception e) {
@@ -169,22 +152,17 @@ public void SQLDelete(String nameHospital) throws IOException, SQLException {
     
 }
 public void SQLUpdate(Hospital hospital) throws IOException , SQLException {
-	String sql = "UPDATE Hospital SET name=?, location=? , range=? WHERE id=?";
+	String sql = "UPDATE Hospital SET name=?, location=? , range=?,  WHERE name=?";
 PreparedStatement prep = c.prepareStatement(sql);
 prep.setString(1, hospital.getName());
 prep.setString(2, hospital.getLocation());
 prep.setInt(3, hospital.getRange());
-prep.setInt(4, hospital.getId());
+
 prep.executeUpdate();
 
 	
 		}
 
-@Override
-public Hospital SQLSearch(String nombre) {
-	// TODO Auto-generated method stub
-	return null;
-}
 	
 
 }
