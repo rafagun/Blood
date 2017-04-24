@@ -77,7 +77,7 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 		Statement stmt = c.createStatement();
 		String sql = "INSERT INTO Patient (name, age,blood,smoker,gender) "
 
-		+ "VALUES ('" + patient.getName() + "','"+ patient.getAge() + "');";
+		+ "VALUES ('" + patient.getName()  + "','"+ patient.getAge() + "','"+ patient.getBlood() + "','"+ patient.getSmoker() + "','"+ patient.getGender()+ "','"+ patient.getAge() + "');";
 
 		stmt.executeUpdate(sql);
 		stmt.close();

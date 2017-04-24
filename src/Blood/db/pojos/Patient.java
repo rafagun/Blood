@@ -16,6 +16,7 @@ private Integer age;
 private String blood;
 private Boolean smoker;
 private String gender;
+private List<Nurse> nurses;
 private List<Symptoms> symptoms;
 private List<Cells> cells;
 private List<Molecules> molecules;
@@ -27,7 +28,7 @@ public Patient() {
 	this.setCells(new ArrayList<Cells>());
 	this.setMolecules(new ArrayList <Molecules>());
 }
-
+//modificar constructores porque falta clase nurse
 public Patient(String name, Integer age, String blood,Boolean smoker,String gender) {
 	this.name = name;
 	this.age = age;
@@ -124,6 +125,13 @@ public List<Molecules> getMolecules() {
 
 public void setMolecules(List<Molecules> molecules) {
 	this.molecules = molecules;
+}
+
+public List<Nurse> getNurses() {
+	return nurses;
+}
+public void setNurses(List<Nurse> nurses) {
+	this.nurses = nurses;
 }
 
 
