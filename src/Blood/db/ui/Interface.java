@@ -101,8 +101,6 @@ if (selection==1){
 	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
 		String nameSearch = reader1.readLine();
-		System.out.println("If you want to search by location, introduce the location of the hospital you want to search by:");
-		String locationSearch = reader1.readLine();
 		Hospital hospital = db_Hospital.SQLSearch(nameSearch);
 		System.out.println("name:" + hospital.getName()+ ""+"location:"+ hospital.getLocation()+ ""+ "range:" +hospital.getRange());
 
@@ -128,30 +126,18 @@ if (selection==1){
 		break;
 
 	case 8: 
+	
 		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("Insert the name of the hospital you want to change");
-			//int idNumber = Integer.parseInt(readerUpdate.readLine());
-			String pname= readerUpdate.readLine();
-			
-			Hospital hosp= new Hospital();
-			System.out.println("Enter the new name of the hospital or press Inter");
-			String name= readerUpdate.readLine();
-			if (name.equals(null)){
-			hosp.setName(name);	
-			}
-			System.out.println("2.Enter the new location of the hospital or press Inter");
-			String location= readerUpdate.readLine();
-			if(location.equals(null)){
-				hosp.setLocation(location);
-			}
-			System.out.println("3.Enter the new range of the hospital or press Inter");
-			String r= readerUpdate.readLine();
-			if(r.equals(null)){
-				int range= Integer.parseInt(r);
-				hosp.setRange(range);
-			}
-			db_Hospital.SQLUpdate(hosp);
-			break;
+		System.out.println("Input the hospital´s name you want to update");
+		String hospName = readerUpdate.readLine();
+		Hospital hosp = db_Hospital.SQLSearch(hospName);
+		System.out.println("Input the new name or press enter");
+		hosp.setName(readerUpdate.readLine());
+		System.out.println("Input the new location or press enter");
+		hosp.setLocation(readerUpdate.readLine());
+		System.out.println("Input the new range or press enter");
+		hosp.setRange(Integer.parseInt(readerUpdate.readLine()));
+		db_Hospital.SQLUpdate(hosp);
 		
 	case 9:	//salir del programa
 		
