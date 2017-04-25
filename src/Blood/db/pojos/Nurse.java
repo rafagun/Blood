@@ -1,6 +1,7 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Nurse implements Serializable {
@@ -17,6 +18,7 @@ public class Nurse implements Serializable {
 	public Nurse() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.patients= new ArrayList<>();
 	}
 	//modificar constructores porq falta lista de pacientes
 	public Nurse (Integer id, String name, byte[] photo) {
@@ -24,11 +26,13 @@ public class Nurse implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.photo = photo;
+		this.patients= new ArrayList<Patient>();
 	}
 	public Nurse (String name, byte[] photo) {
 		super();
 		this.name = name;
 		this.photo = photo;
+		this.patients=new ArrayList<Patient>();
 	}
 	
 	@Override

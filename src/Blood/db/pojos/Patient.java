@@ -20,6 +20,7 @@ private List<Nurse> nurses;
 private List<Symptoms> symptoms;
 private List<Cells> cells;
 private List<Molecules> molecules;
+private List<Illnes> illness;
 
 public Patient() {
 	super();
@@ -27,8 +28,26 @@ public Patient() {
 	// TODO Auto-generated constructor stub
 	this.setCells(new ArrayList<Cells>());
 	this.setMolecules(new ArrayList <Molecules>());
+	this.setIllness(new ArrayList<Illnes>());
+	this.setNurses(new ArrayList<Nurse>());
 }
-//modificar constructores porque falta clase nurse
+
+public Patient(Integer id, String name, Integer age, String blood, Boolean smoker, String gender
+	) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.age = age;
+	this.blood = blood;
+	this.smoker = smoker;
+	this.gender = gender;
+	this.nurses = new ArrayList<Nurse>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.cells = new ArrayList<Cells>();
+	this.molecules = new ArrayList<Molecules>();
+	this.illness = new ArrayList<Illnes>();
+}
+
 public Patient(String name, Integer age, String blood,Boolean smoker,String gender) {
 	this.name = name;
 	this.age = age;
@@ -38,6 +57,8 @@ public Patient(String name, Integer age, String blood,Boolean smoker,String gend
 	this.symptoms = new ArrayList<Symptoms>();
 	this.cells = new ArrayList<Cells>();
 	this.molecules = new ArrayList<Molecules>();
+	this.nurses= new ArrayList<Nurse>();
+	this.illness=new ArrayList<Illnes>();
 }
 
 
@@ -132,6 +153,12 @@ public List<Nurse> getNurses() {
 }
 public void setNurses(List<Nurse> nurses) {
 	this.nurses = nurses;
+}
+public List<Illnes> getIllness() {
+	return illness;
+}
+public void setIllness(List<Illnes> illness) {
+	this.illness = illness;
 }
 
 
