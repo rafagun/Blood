@@ -128,16 +128,30 @@ if (selection==1){
 	case 8: 
 	
 		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Input the hospital´s name you want to update");
-		String hospName = readerUpdate.readLine();
-		Hospital hosp = db_Hospital.SQLSearch(hospName);
-		System.out.println("Input the new name or press enter");
-		hosp.setName(readerUpdate.readLine());
-		System.out.println("Input the new location or press enter");
-		hosp.setLocation(readerUpdate.readLine());
+		System.out.println("Insert the name of the hospital you want to change");
+		String hospNameUpdate = readerUpdate.readLine();
+		Hospital hospUpdate = db_Hospital.SQLSearch(hospNameUpdate);
+		System.out.println("Enter the new name or press enter");
+		String newName = readerUpdate.readLine();
+		if (newName == hospUpdate.getName()){
+			newName = hospUpdate.getName();
+		}
+		hospUpdate.setName(newName);
+		
+		System.out.println("Enter the new location or press enter");
+		String newLocation = readerUpdate.readLine();
+		if (newLocation == hospUpdate.getLocation()){
+			newLocation = hospUpdate.getLocation();
+		}
+		hospUpdate.setLocation(newLocation);
+		
 		System.out.println("Input the new range or press enter");
-		hosp.setRange(Integer.parseInt(readerUpdate.readLine()));
-		db_Hospital.SQLUpdate(hosp);
+		Integer newRange = Integer.parseInt(readerUpdate.readLine());
+		if (newRange == hospUpdate.getRange()){
+			newRange = hospUpdate.getRange();
+		}
+		hospUpdate.setRange(newRange);
+		db_Hospital.SQLUpdate(hospUpdate, hospNameUpdate);
 		
 	case 9:	//salir del programa
 		

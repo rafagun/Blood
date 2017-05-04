@@ -151,17 +151,25 @@ public void SQLDelete(String nameHospital) throws IOException, SQLException {
 	
     
 }
-public void SQLUpdate(Hospital hospital) throws IOException , SQLException {
-	String sql = "UPDATE Hospital SET name=?, location=? , range=?,  WHERE name=?";
+public void SQLUpdate(Hospital hospUpdate, String hospNameUpdate) throws IOException , SQLException {
+	String sql = "UPDATE Hospital SET name=? ,location=? ,range=?  WHERE name=?";
 PreparedStatement prep = c.prepareStatement(sql);
-prep.setString(1, hospital.getName());
-prep.setString(2, hospital.getLocation());
-prep.setInt(3, hospital.getRange());
-
+prep.setString(1, hospUpdate.getName());
+prep.setString(2, hospUpdate.getLocation());
+prep.setInt(3, hospUpdate.getRange());
+prep.setString(4, hospNameUpdate);
+System.out.println("Update is finished");
 prep.executeUpdate();
+prep.close();
 
 	
 		}
+
+@Override
+public void SQLUpdate(Hospital objeto) throws IOException, SQLException {
+	// TODO Auto-generated method stub
+	
+}
 
 	
 
