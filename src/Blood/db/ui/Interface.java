@@ -109,7 +109,15 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		
 		System.out.println("Introduce the name of the hospital that you want to delete");
 		String nHospital = bufferedReader.readLine();
-		db_Hospital.SQLDelete(nHospital);
+		System.out.println("Insert the name of the hospital you want to change");
+		String hospDelete = bufferedReader.readLine();
+		List<Hospital> list = db_Hospital.SQLSearch(hospDelete);
+		Iterator<Hospital> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		int option1 = Integer.parseInt(bufferedReader.readLine());
+		db_Hospital.SQLDelete(list.get(option1));
 		System.out.println("The hospital has been removed");
 		break;
 	 
@@ -166,7 +174,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		else{
 		hospUpdate.get(option).setRange(newRange);
 		}
-		db_Hospital.SQLUpdate(hospUpdate.get(option), hospUpdate.get(option).getId());
+		db_Hospital.SQLUpdate(hospUpdate.get(option));
 		
 	case 8:	//salir del programa
 		

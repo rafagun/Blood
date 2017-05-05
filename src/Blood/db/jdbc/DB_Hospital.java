@@ -12,9 +12,9 @@ import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends GeneralMethods {
+public class DB_Hospital extends GeneralMethods{
 
-public void SQLCreate() throws SQLException {
+public void SQLCreate()  {
 try {
 
 // Create tables: begin
@@ -116,23 +116,28 @@ e.printStackTrace();
 return hospitales;
 }
 
-public void SQLDelete(String nameHospital) throws IOException, SQLException {
+public void SQLDelete(Hospital hospital) {
+	try{
 	String sql = "DELETE FROM Hospital WHERE name=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);
-	prep.setString(1, nameHospital);
+	prep.setInt(1, hospital.getId());
 	prep.executeUpdate();
 	prep.close();
-
-	
+	}
+	catch(SQLException ex){
+		ex.printStackTrace();
+		System.err.println("Fallo en la conexion, volviendo a intentar");
+		
+	}
     
 }
-public void SQLUpdate(Hospital hospUpdate, int id) throws IOException , SQLException {
+public void SQLUpdate(Hospital hospUpdate) throws IOException , SQLException {
 	String sql = "UPDATE Hospital SET name=? ,location=? ,range=?  WHERE id=?";
 PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, hospUpdate.getName());
 prep.setString(2, hospUpdate.getLocation());
 prep.setInt(3, hospUpdate.getRange());
-prep.setInt(4, id);
+prep.setInt(4, hospUpdate.getId());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();
