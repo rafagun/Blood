@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public abstract class generalMethods {
+public class generalMethods {
 	Connection c;	
 	
 	public void SQLConnect() {

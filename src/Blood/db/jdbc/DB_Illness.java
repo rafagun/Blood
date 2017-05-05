@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Blood.db.pojos.Illnes;
-public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
+public class DB_Illness extends generalMethods{
 	public void SQLCreate() throws SQLException {
 		try {
 
@@ -116,14 +116,5 @@ public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 	}
 	return illness;
 	}
-	@Override
-	public void SQLDelete(String name) throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void SQLUpdate(Illnes objeto) throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

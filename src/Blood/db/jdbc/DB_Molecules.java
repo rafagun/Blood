@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Molecules;
 
-public class DB_Molecules extends generalMethods implements FunctionsDB<Molecules>{
+public class DB_Molecules extends generalMethods{
 
 	public void SQLCreate() throws SQLException{
 		try {
@@ -106,16 +106,6 @@ prep.close();
 e.printStackTrace();
 }
 return molecules;
-}
-@Override
-public void SQLDelete(String name) throws IOException, SQLException {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void SQLUpdate(Molecules objeto) throws IOException, SQLException {
-	// TODO Auto-generated method stub
-	
 }
 
 }

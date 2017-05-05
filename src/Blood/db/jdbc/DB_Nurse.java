@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import Blood.db.pojos.Nurse;
 
 
-public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
+public class DB_Nurse extends generalMethods {
 	
 	
 	public void SQLCreate() throws SQLException {
@@ -108,11 +108,6 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 			return nurse;
 		}
 
-	@Override
-	public void SQLUpdate(Nurse objeto) throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/**public void SQLUpdate(Nurse nurseUpdate, String nurseNameUpdate) throws IOException , SQLException {
 		String sql = "UPDATE Nurse SET name=? ,photo=? WHERE name=?";
