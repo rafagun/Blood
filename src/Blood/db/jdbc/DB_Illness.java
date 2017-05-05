@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Blood.db.pojos.Illnes;
-public class DB_Illness extends generalMethods{
+public class DB_Illness extends GeneralMethods{
 	public void SQLCreate() throws SQLException {
 		try {
 

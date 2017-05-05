@@ -5,20 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.*;
 
 
 import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends generalMethods {
+public class DB_Hospital extends GeneralMethods {
 
 public void SQLCreate() throws SQLException {
 try {
 
 // Create tables: begin
-Statement stmt1 = c.createStatement();
+Statement stmt1 = super.c.createStatement();
 String sql1 = "CREATE TABLE Hospital "
 + "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 + "name TEXT NOT NULL, "
@@ -40,7 +40,7 @@ e.printStackTrace();
 public ArrayList<Hospital> SQLSelect(){
 ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
 try {
-Statement stmt = c.createStatement();
+Statement stmt = super.c.createStatement();
 
 String sql = "SELECT * FROM Hospital";
 ResultSet rs = stmt.executeQuery(sql);
@@ -65,7 +65,7 @@ public void SQLDrop(){
 try {
 
 // Drop tables: begin
-Statement stmt1 = c.createStatement();
+Statement stmt1 = super.c.createStatement();
 String sql1 = "DROP TABLE hospital";
 stmt1.executeUpdate(sql1);
 stmt1.close();
@@ -91,11 +91,11 @@ e.printStackTrace();
 }
 }
 
-public Hospital SQLSearch(String hospName) {
-	Hospital hospital =new Hospital();
+public List<Hospital> SQLSearch(String hospName) {
+	List<Hospital> hospitales = new LinkedList<>();
 try {
 	String sql = "SELECT * FROM hospital WHERE name LIKE ?";
-PreparedStatement prep = c.prepareStatement(sql);
+PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, hospName);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {
@@ -103,21 +103,22 @@ int id = rs.getInt("id");
 String name = rs.getString("name");
 String location = rs.getString("location");
 int range = rs.getInt("range");
-hospital = new Hospital (id, name, location, range);
+Hospital hospital = new Hospital (id, name, location, range);
+hospitales.add(hospital);
+}
+
 rs.close();
 prep.close();
-
-	}
 
 } catch (Exception e) {
 e.printStackTrace();
 }
-return hospital;
+return hospitales;
 }
 
 public void SQLDelete(String nameHospital) throws IOException, SQLException {
 	String sql = "DELETE FROM Hospital WHERE name=?";
-	PreparedStatement prep = c.prepareStatement(sql);
+	PreparedStatement prep = super.c.prepareStatement(sql);
 	prep.setString(1, nameHospital);
 	prep.executeUpdate();
 	prep.close();
@@ -125,13 +126,13 @@ public void SQLDelete(String nameHospital) throws IOException, SQLException {
 	
     
 }
-public void SQLUpdate(Hospital hospUpdate, String hospNameUpdate) throws IOException , SQLException {
-	String sql = "UPDATE Hospital SET name=? ,location=? ,range=?  WHERE name=?";
-PreparedStatement prep = c.prepareStatement(sql);
+public void SQLUpdate(Hospital hospUpdate, int id) throws IOException , SQLException {
+	String sql = "UPDATE Hospital SET name=? ,location=? ,range=?  WHERE id=?";
+PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, hospUpdate.getName());
 prep.setString(2, hospUpdate.getLocation());
 prep.setInt(3, hospUpdate.getRange());
-prep.setString(4, hospNameUpdate);
+prep.setInt(4, id);
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();

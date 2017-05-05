@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms extends generalMethods {
+public class DB_Symptoms extends GeneralMethods {
 
 
 
