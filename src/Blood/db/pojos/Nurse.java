@@ -1,8 +1,15 @@
 package Blood.db.pojos;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Nurse implements Serializable {
 	
@@ -73,8 +80,15 @@ public class Nurse implements Serializable {
 	public byte[] getPhoto() {
 		return photo;
 	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+	public void setPhoto(String direction) throws IOException {
+		File file = new File (direction);
+		BufferedImage bufferedImage = ImageIO.read(file);
+
+		 // get DataBufferBytes from Raster
+		 WritableRaster raster = bufferedImage .getRaster();
+		 DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+		 this.photo=data.getData();
 	}
 
 	public Hospital getHospital() {

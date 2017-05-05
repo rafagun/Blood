@@ -187,7 +187,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	DB_Nurse db_Nurse = new DB_Nurse();
 	
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -216,10 +216,10 @@ DB_Hospital db_Hospital = new DB_Hospital();
 
 		break;
 	
-	case 4:
+	case 4://queda hacer todo lo de hospital pero aqui.
 		System.out.println("Introduce the name of the nurse that you want to delete");
 		String nNurse = bufferedReader.readLine();
-		db_Nurse.SQLDelete(nNurse);
+		/*db_Nurse.SQLDelete(nNurse);*/
 		System.out.println("That nurse has been deleted");
 		break;
 	 

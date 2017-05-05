@@ -65,13 +65,13 @@ public class DB_Nurse extends GeneralMethods {
 		}
 	}
 	
-	public void SQLDelete(String nameNurse) throws IOException, SQLException {
-		String sql = "DELETE FROM Nurses WHERE name=?";
+	public void SQLDelete(Nurse nurse) throws IOException, SQLException {
+		String sql = "DELETE FROM Nurses WHERE id=?";
 		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setString(1, nameNurse);
+		prep.setInt(1, nurse.getId());
 		prep.executeUpdate();
 		prep.close();
-		System.out.println("Nurse with the name:" + nameNurse+ "has been deleted");
+		System.out.println("Nurse with the name:" + nurse.getName()+ "has been deleted");
 	}
 	
 	public void SQLInsert(Nurse nurse){
@@ -90,7 +90,7 @@ public class DB_Nurse extends GeneralMethods {
 	}
 	
 	public Nurse SQLSearch (String nurseName){
-		Nurse nurse = null;
+		Nurse nurse=null;
 		try{
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM Nurses WHERE name=?";
