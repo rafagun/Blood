@@ -301,16 +301,16 @@ else if (selection == 3){//patient
 
 	case 4:
 	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		System.out.println("If you want to search by name, introduce the name of the patient you want to search by:");
 		String nameSearch = reader1.readLine();
 		Patient patient1 = dbPatient.SQLSearch(nameSearch);
-		System.out.println("name:" + patient1.getName()+ ""+"age"+ patient1.getAge()+ ""+ "range:" +patient1.getBlood()+""+"smoker:"+patient1.getSmoker()+""+"gender:"+patient1.getGender());
+		System.out.println("name:" + patient1.getName()+ "       "+"age:"+ patient1.getAge()+ "         "+ "blood:" +patient1.getBlood()+"         "+"gender:"+patient1.getGender()+"            "+"smoker:"+patient1.getSmoker());
 
 		break;
 
 	case 5: 
 		BufferedReader readerDelete = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Introduce the name of the hospital that you want to delete");
+		System.out.println("Introduce the name of the patient that you want to delete");
 		String patientname = readerDelete.readLine();
 		dbPatient.SQLDelete(patientname);
 		break;
@@ -319,7 +319,7 @@ else if (selection == 3){//patient
 		ArrayList<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
-			System.out.println("name:" +patient11.getName()+""+ "age:"+patient11.getAge()+""+ "blood type:" +patient11.getBlood()+" "+"blood type:" +patient11.getSmoker()+""+"blood type:" +patient11.getGender());
+			System.out.println("name:" +patient11.getName()+"         "+ "age:"+patient11.getAge()+"         "+ "blood type:" +patient11.getBlood()+"         "+"gender:" +patient11.getGender()+"         "+"smoker:" +patient11.getSmoker());
 		}
 		break;
 		
@@ -328,46 +328,61 @@ else if (selection == 3){//patient
 		break;
 
 	case 8: 
-		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
-		Patient patient11= new Patient();
-			System.out.println("Insert the ID of the patient ypu want to change");
-			int id = Integer.parseInt(readerUpdate.readLine());
-			System.out.println("Enter the new name of the hospital or press Inter");
-			String name= readerUpdate.readLine();
-			if (name.equals(null)){
-			patient11.setName(name);	
-			}
-			System.out.println("2.Enter the new blood type or press Inter");
-			String bloodtype= readerUpdate.readLine();
-			if(bloodtype.equals(null)){
-				patient11.setBlood(bloodtype);
-			}
-			System.out.println("3.Enter the new age of the patient or press Inter");
-			String r= readerUpdate.readLine();
-			if(r.equals(null)){
-				int age1= Integer.parseInt(r);
-				patient11.setAge(age1);
-			}
-			System.out.println("2.Change if it's smoker or not or press Inter");
-			String smoker1= readerUpdate.readLine();
-			Boolean smok = Boolean.parseBoolean(smoker1);
-			if(smoker1.equals(null)){
-				patient11.setSmoker(smok);
-			}
-			System.out.println("2.Enter the new gender or press Inter");
-			String gender1= readerUpdate.readLine();
-			if(bloodtype.equals(null)){
-				patient11.setGender(gender1);
-			}
-			dbPatient.SQLUpdate(patient11);
-			break;
 		
-	case 9:	//salir del programa
-	
-	break;
+		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Insert the name of the patient you want to change");
+		String patientNameUpdate = readerUpdate.readLine();
+		Patient patientUpdate = dbPatient.SQLSearch(patientNameUpdate);
+		System.out.println("Enter the new name or press enter");
+		String newName = readerUpdate.readLine();
+		if (newName.equals("")){
+			newName = patientUpdate.getName();
+		}
+		else{
+		patientUpdate.setName(newName);
+		}
+		System.out.println("Enter the new age or press enter");
+		Integer newAge = Integer.parseInt(readerUpdate.readLine());
+		if (newAge.equals("")){
+			newAge = patientUpdate.getAge();
+		}
+		else {patientUpdate.setAge(newAge);}
+		
+		System.out.println("Enter the new blood type or press enter");
+		String newBlood = readerUpdate.readLine();
+		if (newBlood.equals("")){
+			newBlood = patientUpdate.getBlood();
+		}
+		else{
+		patientUpdate.setBlood(newBlood);
+		}
+		System.out.println("Enter the new gender or press enter");
+		String newGender = readerUpdate.readLine();
+		if (newGender.equals("")){
+			newGender = patientUpdate.getGender();
+		}
+		else{
+		patientUpdate.setGender(newGender);
+		}
+		/**System.out.println("Enter is the smoker change or press enter");
+		String newSmoker1 = reader.readLine();
+		Boolean smoker1 = Boolean.parseBoolean(newSmoker);
+
+		if (smoker1.equals("")){
+			smoker1 = patientUpdate.getSmoker();
+		}
+		else{
+		patientUpdate.setSmoker(smoker1);
+		}**/
+		dbPatient.SQLUpdate(patientUpdate, patientNameUpdate);
+		
+	}
 	}
 }
-}
+		
+		
+		
+		
 else if (selection == 4){//cells
 	DB_Cells db_cells = new DB_Cells();
 	while (opcion!=9){
