@@ -192,7 +192,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	System.out.println("Introduce the name of the nurse");
 	String nurseName = reader.readLine();
-	System.out.println("Introduce the photo of the nurse");
+	System.out.println("Introduce the direction of the photo with its extension");
 	String nursePhoto = reader.readLine();
 	byte[] photo = nursePhoto.getBytes();
 	Nurse nurseInterface = new Nurse (nurseName,photo);
