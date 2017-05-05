@@ -96,8 +96,7 @@ public class Molecules implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Molecules [id=" + id + ", type=" + type + ", lowLevels=" + lowLevels + ", highLevels=" + highLevels
-				+ "]";
+		return "Molecules: \nid=" + id + " \ntype=" + type + "\n lowLevels=" + lowLevels + "\n highLevels=" + highLevels;
 	}
 	
 }

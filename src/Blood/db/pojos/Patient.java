@@ -159,6 +159,9 @@ public List<Illnes> getIllness() {
 public void setIllness(List<Illnes> illness) {
 	this.illness = illness;
 }
+public String toString(){
+	return "Patient: \n name: "+name+"age:"+age+"gender: "+gender+"blood: "+blood+"smoker: "+smoker;
+}
 
 
 }

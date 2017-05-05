@@ -100,7 +100,7 @@ public void setNurses(List<Nurse> nurses) {
 
 @Override
 public String toString() {
-	return "Hospital [id=" + id + ", name=" + name + ", location=" + location + ", range=" + range + "]";
+	return "Hospital: \n id=" + id + "\n name=" + name + "\n location=" + location + "\n range=" + range;
 }
 
 

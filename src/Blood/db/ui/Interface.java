@@ -2,7 +2,7 @@ package Blood.db.ui;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
@@ -101,10 +101,12 @@ DB_Hospital db_Hospital = new DB_Hospital();
 
 	case 4:
 	BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		System.out.println("Introduce the name of the hospital you want to search:");
 		String nameSearch = reader1.readLine();
-		Hospital hospital = db_Hospital.SQLSearch(nameSearch);
-		System.out.println("name:" + hospital.getName()+ "       "+"location:"+ hospital.getLocation()+ "         "+ "range:" +hospital.getRange());
+		List<Hospital> hospitals = db_Hospital.SQLSearch(nameSearch);
+		for (Hospital hospital: hospitals){
+			System.out.println(hospital);
+		}
 
 		break;
 
@@ -132,7 +134,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 
 	case 8: 
 	
-		BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
+		/*BufferedReader readerUpdate = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Insert the name of the hospital you want to change");
 		String hospNameUpdate = readerUpdate.readLine();
 		Hospital hospUpdate = db_Hospital.SQLSearch(hospNameUpdate);
@@ -159,7 +161,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		else{
 		hospUpdate.setRange(newRange);
 		}
-		db_Hospital.SQLUpdate(hospUpdate, hospNameUpdate);
+		db_Hospital.SQLUpdate(hospUpdate, hospNameUpdate);*/
 		
 	case 9:	//salir del programa
 		
