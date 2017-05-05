@@ -69,7 +69,7 @@ if (selection==1){
 	
 DB_Hospital db_Hospital = new DB_Hospital();
 	
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -178,7 +178,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
  else if (selection == 2){//nurse
 	DB_Nurse db_Nurse = new DB_Nurse();
 	
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -271,7 +271,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 }
 else if (selection == 3){//patient
 	DB_Patient dbPatient = new DB_Patient();
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -376,7 +376,7 @@ else if (selection == 3){//patient
 }
 else if (selection == 4){//cells
 	DB_Cells db_cells = new DB_Cells();
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -443,7 +443,7 @@ else if (selection == 4){//cells
 	}
 else if (selection == 5){//molecules
 	DB_Molecules f = new DB_Molecules();
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -509,7 +509,7 @@ else if (selection == 5){//molecules
 }
 else if (selection == 6){//Sympthomps
 	DB_Symptoms f = new DB_Symptoms();
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
@@ -570,7 +570,7 @@ else if (selection == 6){//Sympthomps
 }
 else if (selection == 7){//illness
 	DB_Illness f = new DB_Illness();
-	while (opcion!=9){
+	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
