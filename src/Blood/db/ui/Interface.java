@@ -185,58 +185,54 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	switch (opcion){
 
 	case 1: 
-	db_Nurse= new DB_Nurse();
-	db_Nurse.SQLConnect();
-	break;
-
-
-	case 2: 
 		db_Nurse.SQLCreate();
 		System.out.println("The table has been created correctly");
 	break;
 
-	case 3: 
-	
-	System.out.println("Introduce the name of the nurse");
-	String nurseName = bufferedReader.readLine();
-	System.out.println("Introduce the direction of the photo with its extension");
-	String nursePhoto = bufferedReader.readLine();
-	byte[] photo = nursePhoto.getBytes();
-	Nurse nurseInterface = new Nurse (nurseName,photo);
-	db_Nurse.SQLInsert(nurseInterface);
-	System.out.println("the information has been added");
-	break;
+	case 2: 
+		System.out.println("Introduce the name of the nurse");
+		String nurseName = bufferedReader.readLine();
+		System.out.println("Introduce the direction of the photo with its extension");
+		String nursePhoto = bufferedReader.readLine();
+		byte[] photo = nursePhoto.getBytes();
+		Nurse nurseInterface = new Nurse (nurseName,photo);
+		db_Nurse.SQLInsert(nurseInterface);
+		System.out.println("the information has been added");
+		break;
 
-	case 4:
-	
+	case 3: 
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		Nurse nurse = db_Nurse.SQLSearch(nameSearch);
 		System.out.println("name:" + nurse.getName()+ "     "+"photo:"+ nurse.getPhoto());
 
 		break;
-
-	case 5: 
-		
+	
+	case 4:
 		System.out.println("Introduce the name of the nurse that you want to delete");
 		String nNurse = bufferedReader.readLine();
 		db_Nurse.SQLDelete(nNurse);
 		System.out.println("That nurse has been deleted");
 		break;
 	 
-	case 6:
+	
+
+	case 5: 
+		
 		ArrayList<Nurse> lista= new ArrayList<>();
 		lista = db_Nurse.SQLSelect();
 		for (Nurse nurse1: lista){
 			System.out.println("name:" +nurse1.getName()+ "         "+"photo:"+nurse1.getPhoto());
 		}
 		break;
+	 
+	case 6:
 		
-	case 7: 
 		db_Nurse.SQLDrop();
 		System.out.println("The table has been dropped");
 		break;
-
+	case 7: 
+	
     /**case 8: 
 		System.out.println("Insert the name of the nurse you want to change");
 		String nurseNameUpdate = bufferedReader.readLine();
@@ -260,8 +256,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		db_Nurse.SQLUpdate(nurseUpdate, nurseNameUpdate);
 		
 		**/
-		
-	case 9:	//salir del programa
+	case 8: //salir del programa
 		
 	break;
 	}
@@ -278,16 +273,10 @@ else if (selection == 3){//patient
 	switch (opcion){
 
 	case 1: 
-
-	dbPatient.SQLConnect();
-	break;
-
-
-	case 2: 
 	dbPatient.SQLCreate();
 	break;
 
-	case 3: 
+	case 2: 
 	
 	System.out.println("Introduce the name of the patient");
 	String namePatient = bufferedReader.readLine();
@@ -305,70 +294,76 @@ else if (selection == 3){//patient
 	dbPatient.SQLInsert(patient);
 	break;
 
-	case 4:
+	case 3:
 	
-		System.out.println("If you want to search by name, introduce the name of the hospital you want to search by:");
+		System.out.println("Introduce the name of the patient you want to search:");
 		String nameSearch = bufferedReader.readLine();
-		Patient patient1 = dbPatient.SQLSearch(nameSearch);
-		System.out.println("name:" + patient1.getName()+ ""+"age"+ patient1.getAge()+ ""+ "range:" +patient1.getBlood()+""+"smoker:"+patient1.getSmoker()+""+"gender:"+patient1.getGender());
-
+		List<Patient> patients = dbPatient.SQLSearch(nameSearch);
+		for (Patient patient1: patients){
+			System.out.println(patient1);
+		}
 		break;
 
-	case 5: 
+	case 4: 
 		
 		System.out.println("Introduce the name of the hospital that you want to delete");
 		String patientname = bufferedReader.readLine();
 		dbPatient.SQLDelete(patientname);
 		break;
 	 
-	case 6:
+	case 5:
 		ArrayList<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
-			System.out.println("name:" +patient11.getName()+""+ "age:"+patient11.getAge()+""+ "blood type:" +patient11.getBlood()+" "+"blood type:" +patient11.getSmoker()+""+"blood type:" +patient11.getGender());
+			System.out.println("name:" +patient11.getName()+"       "+ "age:"+patient11.getAge()+"        "+ "blood type:" +patient11.getBlood()+" "+"gender:" +patient11.getGender()+""+"smoker:" +patient11.getSmoker());
 		}
 		break;
 		
-	case 7: 
+	case 6: 
 		dbPatient.SQLDrop();
 		break;
 
-	case 8: 
+	/**case 7: 
+		System.out.println("Insert the name of the patient you want to change");
+		String patientNameUpdate = bufferedReader.readLine();
+		List<Patient> patientUpdate = dbPatient.SQLSearch(patientNameUpdate);
+		Iterator<Patient> it = patientUpdate.iterator();
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
+		}
+		int option = Integer.parseInt(bufferedReader.readLine());
 		
-		Patient patient11= new Patient();
-			System.out.println("Insert the ID of the patient ypu want to change");
-			int id = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Enter the new name of the hospital or press Inter");
-			String name= bufferedReader.readLine();
-			if (name.equals(null)){
-			patient11.setName(name);	
-			}
-			System.out.println("2.Enter the new blood type or press Inter");
-			String bloodtype= bufferedReader.readLine();
-			if(bloodtype.equals(null)){
-				patient11.setBlood(bloodtype);
-			}
-			System.out.println("3.Enter the new age of the patient or press Inter");
-			String r= bufferedReader.readLine();
-			if(r.equals(null)){
-				int age1= Integer.parseInt(r);
-				patient11.setAge(age1);
-			}
-			System.out.println("2.Change if it's smoker or not or press Inter");
-			String smoker1= bufferedReader.readLine();
-			Boolean smok = Boolean.parseBoolean(smoker1);
-			if(smoker1.equals(null)){
-				patient11.setSmoker(smok);
-			}
-			System.out.println("2.Enter the new gender or press Inter");
-			String gender1= bufferedReader.readLine();
-			if(bloodtype.equals(null)){
-				patient11.setGender(gender1);
-			}
-			dbPatient.SQLUpdate(patient11);
-			break;
 		
-	case 9:	//salir del programa
+		
+		System.out.println("Enter the new name or press enter");
+		String newName = bufferedReader.readLine();
+		if (newName.equals("")){
+			newName = hospUpdate.get(option).getName();
+		}
+		else{
+		hospUpdate.get(option).setName(newName);
+		}
+		System.out.println("Enter the new location or press enter");
+		String newLocation = bufferedReader.readLine();
+		if (newLocation.equals("")){
+			newLocation = hospUpdate.get(option).getLocation();
+		}
+		else {hospUpdate.get(option).setLocation(newLocation);}
+		
+		System.out.println("Input the new range or press enter");
+		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
+		int newRange = Integer.parseInt(linea);
+		if (linea.equals("")){
+			
+			newRange = hospUpdate.get(option).getRange();
+		}
+		else{
+		hospUpdate.get(option).setRange(newRange);
+		}
+		db_Hospital.SQLUpdate(hospUpdate.get(option), hospUpdate.get(option).getId());
+		**/
+	
+	case 8:	//salir del programa
 	
 	break;
 	}

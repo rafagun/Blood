@@ -15,7 +15,7 @@ public class DB_Cells extends GeneralMethods{
 		try {
 
 			// Create tables: begin
-			Statement stmt5 = c.createStatement();
+			Statement stmt5 = super.c.createStatement();
 			String sql5 = "CREATE TABLE Cells "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ "type  TEXT NOT NULL, "
@@ -33,7 +33,7 @@ public void SQLDrop(){
 try {
 
 // Drop tables: begin
-Statement stmt5 = c.createStatement();
+Statement stmt5 = super.c.createStatement();
 String sql5 = "DROP TABLE Cells";
 stmt5.executeUpdate(sql5);
 stmt5.close();
@@ -65,7 +65,7 @@ e.printStackTrace();
 public ArrayList<Cells> SQLSelect(){
 	ArrayList<Cells> cellsList = new ArrayList<Cells>();
 	try {
-	Statement stmt = c.createStatement();
+	Statement stmt = super.c.createStatement();
 	String sql = "SELECT * FROM Cells";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
@@ -91,7 +91,7 @@ public Cells SQLSearch(String cellsType) {
 	Cells cells = new Cells();
 try {
 String sql = "SELECT * FROM Cells WHERE type LIKE ?";
-PreparedStatement prep = c.prepareStatement(sql);
+PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, cellsType);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {

@@ -3,8 +3,10 @@ package Blood.db.jdbc;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-
+import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 
 public class DB_Patient extends GeneralMethods {
@@ -86,61 +88,35 @@ public class DB_Patient extends GeneralMethods {
 		e.printStackTrace();
 		}
 	}
-	public Patient SQLSearchId (Integer namePatient){// no se si esto esta bien del todo
-		Patient patient = new Patient();
-		try{
-			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM Patient WHERE name=?";
-			ResultSet rs = stmt.executeQuery(sql);
-			int id = rs.getInt("id");
-			patient.setId(id);
-			String name = rs.getString("name");
-			patient.setName(name);
-			int age = rs.getInt("age");
-			patient.setAge(age);
-			String blood = rs.getString("blood");
-			patient.setBlood(blood);
-			boolean smoker = rs.getBoolean("smooker");
-			patient.setSmoker(smoker);
-			String gender = rs.getString("gender");
-			patient.setGender(gender);
-			
-			rs.close();
-			stmt.close();
-		
-		}catch(Exception ex){
-		 ex.printStackTrace();
-		}
-			return patient;
-		}
+	public List<Patient> SQLSearch(String patientName) {
+		List<Patient> patients = new LinkedList<>();
+	try {
+		String sql = "SELECT * FROM Patient WHERE name LIKE ?";
+	PreparedStatement prep = super.c.prepareStatement(sql);
+	prep.setString(1, patientName);
+	ResultSet rs = prep.executeQuery();
+	while (rs.next()) {
+	int id = rs.getInt("id");
+	String name = rs.getString("name");
+	int age = rs.getInt("age");
+	String blood = rs.getString("blood");
+	String gender = rs.getString("gender");
+	Boolean smoker = rs.getBoolean("smoker");
 	
-	public Patient SQLSearch (String namePatient){// no se si esto esta bien del todo
-		Patient patient = new Patient();
-		try{
-			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM Patient WHERE name=?";
-			ResultSet rs = stmt.executeQuery(sql);
-			int id = rs.getInt("id");
-			patient.setId(id);
-			String name = rs.getString("name");
-			patient.setName(name);
-			int age = rs.getInt("age");
-			patient.setAge(age);
-			String blood = rs.getString("blood");
-			patient.setBlood(blood);
-			boolean smoker = rs.getBoolean("smooker");
-			patient.setSmoker(smoker);
-			String gender = rs.getString("gender");
-			patient.setGender(gender);
-			
-			rs.close();
-			stmt.close();
-		
-		}catch(Exception ex){
-		 ex.printStackTrace();
-		}
-			return patient;
-		}
+	
+	Patient patient = new Patient (id, name, age, blood, gender, smoker);
+	patients.add(patient);
+	}
+
+	rs.close();
+	prep.close();
+
+	} catch (Exception e) {
+	e.printStackTrace();
+	}
+	return patients;
+	}
+	
 	public void SQLDelete(String namePatient) throws IOException, SQLException {
 		String sql = "DELETE FROM Patient WHERE name=?";
 		PreparedStatement prep = c.prepareStatement(sql);
@@ -151,21 +127,20 @@ public class DB_Patient extends GeneralMethods {
 		
 	    
 	}
-	
-	public void SQLUpdate(Patient patient) throws IOException , SQLException {
-		String sql = "UPDATE Patient SET name=?, location=? , range=? WHERE id=?";
-	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, patient.getName());
-	prep.setInt(2, patient.getAge());
-	prep.setString(3, patient.getBlood());
-	prep.setString(5, patient.getGender());
-	prep.setBoolean(4, patient.getSmoker());
-	prep.setInt(6, patient.getId());
+	public void SQLUpdate(Patient patientUpdate, int id) throws IOException , SQLException {
+		String sql = "UPDATE Hospital SET name=? ,age=? ,blood=?, gender=?, smoker=?  WHERE id=?";
+	PreparedStatement prep = super.c.prepareStatement(sql);
+	prep.setString(1, patientUpdate.getName());
+	prep.setInt(2, patientUpdate.getAge());
+	prep.setString(3, patientUpdate.getBlood());
+	prep.setString(4, patientUpdate.getGender());
+	prep.setBoolean(5, patientUpdate.getSmoker());
+	prep.setInt(6, id);
+	System.out.println("Update is finished");
 	prep.executeUpdate();
+	prep.close();
 
-		
-			}
 	
-	
+}
 }
 
