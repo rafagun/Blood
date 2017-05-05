@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms> {
+public class DB_Symptoms extends generalMethods {
 
 
 
@@ -103,15 +103,6 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 	}
 	return symptoms;
 	}
-	@Override
-	public void SQLDelete(String name) throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void SQLUpdate(Symptoms objeto) throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

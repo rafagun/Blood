@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Patient;
 
-public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
+public class DB_Patient extends generalMethods {
 	
 	
 	public void SQLCreate() throws SQLException {

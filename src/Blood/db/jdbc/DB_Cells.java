@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Blood.db.pojos.Cells;
 
-public class DB_Cells extends generalMethods implements FunctionsDB<Cells>{
+public class DB_Cells extends generalMethods{
 
 	public void SQLCreate() throws SQLException{
 		try {
@@ -110,16 +110,7 @@ e.printStackTrace();
 }
 return cells;
 }
-@Override
-public void SQLDelete(String name) throws IOException, SQLException {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void SQLUpdate(Cells objeto) throws IOException, SQLException {
-	// TODO Auto-generated method stub
-	
-}
+
 }
 	
 
