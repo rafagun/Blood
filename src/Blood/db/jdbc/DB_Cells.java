@@ -19,8 +19,8 @@ public class DB_Cells extends generalMethods implements FunctionsDB<Cells>{
 			String sql5 = "CREATE TABLE Cells "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ "type  TEXT NOT NULL, "
-			+ "HighL INTEGER, "
-			+ "LowL  INTEGER)";
+			+ "lowL INTEGER, "
+			+ "HighL  INTEGER)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 			System.out.println("Tables created.");
@@ -34,7 +34,7 @@ try {
 
 // Drop tables: begin
 Statement stmt5 = c.createStatement();
-String sql5 = "DROP TABLE cells";
+String sql5 = "DROP TABLE Cells";
 stmt5.executeUpdate(sql5);
 stmt5.close();
 
@@ -46,10 +46,10 @@ e.printStackTrace();
 public void SQLInsert(Cells cells){
 try {
 Statement stmt = c.createStatement();
-String sql = "INSERT INTO cells (type, range) "
+String sql = "INSERT INTO Cells (type, lowL, highL) "
 //Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
 //con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
-+ "VALUES ('" + cells.getType()	+ "','"+ cells.getHighL() + "','"+ cells.getLowL() + "' );";
++ "VALUES ('" + cells.getType()	+ "','"+ cells.getLowL() + "','"+ cells.getHighL() + "' );";
 
 stmt.executeUpdate(sql);
 stmt.close();
@@ -71,9 +71,9 @@ public ArrayList<Cells> SQLSelect(){
 	while (rs.next()) {
 	int id = rs.getInt("id");
 	String type = rs.getString("type");
-	float highLevel = rs.getFloat("highL");
 	float lowLevel = rs.getFloat("lowL");
-	Cells cells = new Cells (id,type,highLevel,lowLevel);
+	float highLevel = rs.getFloat("highL");
+	Cells cells = new Cells (id,type,lowLevel,highLevel);
 	cellsList.add(cells);
 	}
 	rs.close();
@@ -87,54 +87,38 @@ public ArrayList<Cells> SQLSelect(){
 }
 
 
-
-    
-public void SQLUpdate(Cells cells) throws IOException , SQLException {
-	String sql = "UPDATE cells SET type=? , HighL=? , LowL=?  WHERE id=?";
-PreparedStatement prep = c.prepareStatement(sql);
-prep.setString(1, cells.getType());
-prep.setFloat(2, cells.getHighL());
-prep.setFloat(3, cells.getLowL());
-prep.setInt(4, cells.getId());
-prep.executeUpdate();
-
-	
-		}
-@Override
-public void SQLDelete(String cellsType) throws IOException, SQLException {
-	// TODO Auto-generated method stub
-	String sql = "DELETE FROM Cells WHERE name=?";
-	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, cellsType);
-	prep.executeUpdate();
-	prep.close();
-	
-}
-
 public Cells SQLSearch(String cellsType) {
-	Cells cells = null;
+	Cells cells = new Cells();
 try {
-	if (cellsType.equals(null)){
-String sql = "SELECT * FROM cells WHERE type LIKE ?";
+String sql = "SELECT * FROM Cells WHERE type LIKE ?";
 PreparedStatement prep = c.prepareStatement(sql);
 prep.setString(1, cellsType);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {
 int id = rs.getInt("id");
 String type = rs.getString("type");
-float HighL = rs.getInt("HighL");
 float LowL = rs.getInt("LowL");
-cells = new Cells (id, type, HighL, LowL);
+float HighL = rs.getInt("HighL");
+cells = new Cells (id, type, LowL, HighL);
 rs.close();
 prep.close();
 
 	}
-}
 
 } catch (Exception e) {
 e.printStackTrace();
 }
 return cells;
+}
+@Override
+public void SQLDelete(String name) throws IOException, SQLException {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void SQLUpdate(Cells objeto) throws IOException, SQLException {
+	// TODO Auto-generated method stub
+	
 }
 }
 	
