@@ -154,7 +154,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		else {hospUpdate.setLocation(newLocation);}
 		
 		System.out.println("Input the new range or press enter");
-		Integer newRange = Integer.parseInt(readerUpdate.readLine());
+		Integer newRange = Integer.parseInt(readerUpdate.readLine()); //cuando pongo espacio en blanco para que deje el mismo range falla
 		if (newRange.equals("")){
 			newRange = hospUpdate.getRange();
 		}
@@ -194,7 +194,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	System.out.println("Introduce the name of the nurse");
 	String nurseName = reader.readLine();
-	System.out.println("Introduce the photo of the nurse");
+	System.out.println("Introduce the direction of the photo with its extension");
 	String nursePhoto = reader.readLine();
 	byte[] photo = nursePhoto.getBytes();
 	Nurse nurseInterface = new Nurse (nurseName,photo);
@@ -407,7 +407,7 @@ else if (selection == 4){//cells
 		System.out.println("Introduce the name of the cell you want to search by:");
 		String nameSearch = reader1.readLine();
 		Cells cell = db_cells.SQLSearch(nameSearch);
-		System.out.println("type:" + cell.getType()+ ""+"lowl:"+ cell.getLowL()+ ""+ "highL:" +cell.getHighL());
+		System.out.println("type:" + cell.getType()+ "         "+"lowl:"+ cell.getLowL()+ "         "+ "highL:" +cell.getHighL());
 
 		break;
 
@@ -620,7 +620,7 @@ else if (selection == 7){//illness
 		ArrayList<Illnes> lista= new ArrayList<>();
 		lista = f.SQLSelect();
 		for (Illnes illness1: lista){
-			System.out.println("name:" + illness1.getName()+ "     "+"type"+ illness1.getType()+ "       "+ "chronic:" +illness1.getChronic());
+			System.out.println("name:" + illness1.getName()+ "     "+"type:"+ illness1.getType()+ "       "+ "chronic:" +illness1.getChronic());
 		}
 		break;
 		
