@@ -26,32 +26,6 @@ String sql1 = "CREATE TABLE Hospital "
 + "range  INTEGER)";
 stmt1.executeUpdate(sql1);
 stmt1.close();
-/** Statement stmt2 = c.createStatement();
-String sql2 = "CREATE TABLE Nurses "
-  + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-  + " name     TEXT     NOT NULL, "
-  + " photo    BLOB , "
-  + " hospital_id  INTEGER  REFERENCES hospital(id) ON DELETE CASCADE ) ";
-
-stmt2.executeUpdate(sql2);
-stmt2.close();
-Statement stmt3 = c.createStatement();
-String sql3 = "CREATE TABLE Patient "
-  + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-  + " name     TEXT     NOT NULL, "
-  + " age      INTEGER, "
-  + " blood	TEXT     NOT NULL,"
-  + "smoker     BOOLEAN "
-  + "gender     STRING NOT NULL)";
-stmt3.executeUpdate(sql3);
-stmt3.close();
-Statement stmt4 = c.createStatement();
-String sql4 = "CREATE TABLE authors "
-  + "(report_id     INTEGER  REFERENCES reports(id) ON UPDATE CASCADE ON DELETE SET NULL,"
-  + " employee_id   INTEGER  REFERENCES employees(id) ON UPDATE CASCADE ON DELETE SET NULL,"
-  + " PRIMARY KEY (report_id,employee_id))";
-stmt4.executeUpdate(sql4);
-stmt4.close(); **/
 System.out.println("Tables created.");
 
 

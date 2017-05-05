@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import Blood.db.pojos.Illnes;
 public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 	public void SQLCreate() throws SQLException {
@@ -28,16 +29,7 @@ public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 		// This is usually not needed, since the initial values
 		// are set when the first row is inserted, but since we
 		// are using JPA and JDBC in the same project, and JPA
-		// needs an initial value, we do this.
-		/**Statement stmtSeq = c.createStatement();
-		String sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('departments', 1)";
-		stmtSeq.executeUpdate(sqlSeq);
-		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('employees', 1)";
-		stmtSeq.executeUpdate(sqlSeq);
-		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('reports', 1)";
-		stmtSeq.executeUpdate(sqlSeq);
-		stmtSeq.close();**/
-
+		// needs an initial value, we do this
 
 
 		}
@@ -98,41 +90,25 @@ public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 		e.printStackTrace();
 		}
 		}
-	public ArrayList<Illnes> SQLSearch(String illName, String illType) {
-		ArrayList<Illnes> illness = new ArrayList<Illnes>();
+
+	public Illnes SQLSearch(String illnessName) {
+		Illnes illness =new Illnes();
 	try {
-		if (illName.equals(null)){
-	String sql = "SELECT * FROM Illnes WHERE type LIKE ?";
+		String sql = "SELECT * FROM Illnes WHERE name LIKE ?";
 	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, illType);
+	prep.setString(1, illnessName);
 	ResultSet rs = prep.executeQuery();
 	while (rs.next()) {
 	int id = rs.getInt("id");
 	String name = rs.getString("name");
-	String type= rs.getString("type");
-	Boolean chronic = rs.getBoolean("chronic");
-	Illnes illnes = new Illnes (id, name, type, chronic);
-	illness.add(illnes);
+	String type = rs.getString("type");
+	boolean chronic = rs.getBoolean("chronic");
+	illness.setChronic(chronic);
+	
+	illness = new Illnes (id, name, type, chronic);
 	rs.close();
 	prep.close();
-	
-		}
-	}
-		if (illType.equals(null)  ){
-			String sql = "SELECT * FROM illnes WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, illName);
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-			int id = rs.getInt("id");
-			String name = rs.getString("name");
-			String type = rs.getString("type");
-			Boolean chronic = rs.getBoolean("chronic");
-			Illnes illnes= new Illnes (id, name, type, chronic);
-			illness.add(illnes);
-			rs.close();
-			prep.close();
-	}
+
 		}
 
 	} catch (Exception e) {
@@ -140,24 +116,13 @@ public class DB_Illness extends generalMethods implements FunctionsDB<Illnes> {
 	}
 	return illness;
 	}
-
-	public void SQLUpdate(Illnes illnes) throws IOException , SQLException {
-		String sql = "UPDATE Illnes SET name=?, type=? , chronic=? WHERE id=?";
-	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, illnes.getName());
-	prep.setString(2, illnes.getType());
-	prep.setBoolean(3, 	illnes.getChronic());
-	prep.setInt(4, illnes.getId());
-	prep.executeUpdate();
-	}
-
-	@Override
-	public Illnes SQLSearch(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	@Override
 	public void SQLDelete(String name) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Illnes objeto) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		
 	}

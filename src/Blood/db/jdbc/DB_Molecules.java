@@ -19,8 +19,8 @@ public class DB_Molecules extends generalMethods implements FunctionsDB<Molecule
 			String sql4 = "CREATE TABLE Molecules "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ "type  TEXT NOT NULL, "
-			+ "HighLevels INTEGER, "
-			+ "LowLevels  INTEGER)";
+			+ "LowLevels INTEGER, "
+			+ "HighLevels  INTEGER)";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 			System.out.println("Tables created.");
@@ -38,9 +38,9 @@ String sql = "SELECT * FROM Molecules";
 ResultSet rs = stmt.executeQuery(sql);
 while (rs.next()) {
 String type = rs.getString("type");
-float HighL= rs.getFloat("HighL");
-float LowL= rs.getFloat("LowL");
-Molecules molecules = new Molecules(type,HighL,LowL);
+float LowL= rs.getFloat("LowLevels");
+float HighL= rs.getFloat("HighLevels");
+Molecules molecules = new Molecules(type,LowL,HighL);
 Molecules1.add(molecules);
 }
 rs.close();
@@ -58,7 +58,7 @@ try {
 
 
 Statement stmt4 = c.createStatement();
-String sql4 = "DROP TABLE cells";
+String sql4 = "DROP TABLE molecules";
 stmt4.executeUpdate(sql4);
 stmt4.close();
 
@@ -70,9 +70,9 @@ e.printStackTrace();
 public void SQLInsert(Molecules molecules){
 try {
 Statement stmt = c.createStatement();
-String sql = "INSERT INTO molecules (type, range) "
+String sql = "INSERT INTO molecules (type, LowLevels, HighLevels) "
 
-+ "VALUES ('" + molecules.getType()	+ "','"+ molecules.getHighLevels() + "','"+ molecules.getLowLevels() + "' );";
++ "VALUES ('" + molecules.getType()	+ "','"+ molecules.getLowLevels() + "','"+ molecules.getHighLevels() + "' );";
 
 stmt.executeUpdate(sql);
 stmt.close();
@@ -85,22 +85,20 @@ e.printStackTrace();
 }
 
 public Molecules SQLSearch(String moleculesType) {
-	Molecules molecules = null;
+	Molecules molecules = new Molecules();
 try {
-	if (moleculesType.equals(null)){
-String sql = "SELECT * FROM molecules WHERE name LIKE ?";
+String sql = "SELECT * FROM Molecules WHERE type LIKE ?";
 PreparedStatement prep = c.prepareStatement(sql);
 prep.setString(1, moleculesType);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {
 String type = rs.getString("type");
-float HighL = rs.getFloat("HighLevels");
 float LowL = rs.getFloat("LowLevels");
-molecules = new Molecules (type, HighL, LowL);
+float HighL = rs.getFloat("HighLevels");
+molecules = new Molecules (type, LowL, HighL);
 rs.close();
 prep.close();
 
-	}
 }
 
 
@@ -109,25 +107,16 @@ e.printStackTrace();
 }
 return molecules;
 }
-
-    
-public void SQLUpdate(Molecules molecules) throws IOException , SQLException {
-	String sql = "UPDATE molecules SET type=? , HighLevels=? , LowLevels=?  WHERE id=?";
-PreparedStatement prep = c.prepareStatement(sql);
-prep.setString(1, molecules.getType());
-prep.setFloat(2, molecules.getHighLevels());
-prep.setFloat(3, molecules.getLowLevels());
-prep.setInt(4, molecules.getId());
-prep.executeUpdate();
-
-	
-		}
 @Override
 public void SQLDelete(String name) throws IOException, SQLException {
 	// TODO Auto-generated method stub
 	
 }
+@Override
+public void SQLUpdate(Molecules objeto) throws IOException, SQLException {
+	// TODO Auto-generated method stub
 	
+}
 
 }
 
