@@ -14,12 +14,12 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 		try {	
 	Statement stmt3 = c.createStatement();
 	String sql3 = "CREATE TABLE Patient "
-	  + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-	  + " name     TEXT     NOT NULL, "
-	  + " age      INTEGER, "
-	  + " blood	TEXT     NOT NULL,"
-	  + "smoker     BOOLEAN "
-	  + "gender     STRING NOT NULL)";
+			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
+			+ "name TEXT NOT NULL, "
+			+ "blood  TEXT NOT NULL, "
+			+ "age INTEGER, "
+			+ "gender TEXT NOT NULL, "
+			+ "smoker  BOOLEAN)";
 	stmt3.executeUpdate(sql3);
 	stmt3.close();
 	System.out.println("Tables created.");
@@ -58,10 +58,10 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 		patient.setAge(age);
 		String blood = rs.getString("blood");
 		patient.setBlood(blood);
-		boolean smoker = rs.getBoolean("smooker");
-		patient.setSmoker(smoker);
 		String gender = rs.getString("gender");
 		patient.setGender(gender);
+		boolean smoker = rs.getBoolean("smoker");
+		patient.setSmoker(smoker);
 		patients.add(patient);
 		}
 		rs.close();
@@ -75,9 +75,9 @@ public class DB_Patient extends generalMethods implements FunctionsDB<Patient> {
 	public void SQLInsert(Patient patient){// falta por hacer lo de las comillas que es odioso
 		try {
 		Statement stmt = c.createStatement();
-		String sql = "INSERT INTO Patient (name, age,blood,smoker,gender) "
+		String sql = "INSERT INTO Patient (name, age, blood, gender, smoker) "
 
-		+ "VALUES ('" + patient.getName()  + "','"+ patient.getAge() + "','"+ patient.getBlood() + "','"+ patient.getSmoker() + "','"+ patient.getGender()+ "','"+ patient.getAge() + "');";
+		+ "VALUES ('" + patient.getName()  + "','"+ patient.getAge() + "','"+ patient.getBlood() + "','"+ patient.getGender() + "','"+ patient.getSmoker()+ "');";
 
 		stmt.executeUpdate(sql);
 		stmt.close();

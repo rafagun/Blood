@@ -77,7 +77,7 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 	public void SQLInsert(Nurse nurse){
 		try {
 		Statement stmt = c.createStatement();
-		String sql = "INSERT INTO Nurses (name, location, photo) "
+		String sql = "INSERT INTO Nurses (name,photo) "
 
 		+ "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
 
@@ -89,11 +89,11 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 		}
 	}
 	
-	public Nurse SQLSearchId (Integer idNurse){
+	public Nurse SQLSearch (String nurseName){
 		Nurse nurse = null;
 		try{
 			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM Nurses WHERE id=?";
+			String sql = "SELECT * FROM Nurses WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
@@ -109,14 +109,28 @@ public class DB_Nurse extends generalMethods implements FunctionsDB<Nurse> {
 		}
 
 	@Override
-	public Nurse SQLSearch(String nombre) {
+	public void SQLUpdate(Nurse objeto) throws IOException, SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
+	
+	/**public void SQLUpdate(Nurse nurseUpdate, String nurseNameUpdate) throws IOException , SQLException {
+		String sql = "UPDATE Nurse SET name=? ,photo=? WHERE name=?";
+	PreparedStatement prep = c.prepareStatement(sql);
+	prep.setString(1, nurseUpdate.getName());
+	prep.setString(2, nurseUpdate.getPhoto());
+	prep.setString(3, nurseNameUpdate);
+	System.out.println("Update is finished");
+	prep.executeUpdate();
+	prep.close();
+
+		
+			}
 
 	@Override
 	public void SQLUpdate(Nurse objeto) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		
-	}
+	}i
+	**/
 }

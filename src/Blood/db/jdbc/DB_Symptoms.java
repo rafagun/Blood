@@ -20,7 +20,8 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE Symptoms "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-		+ "type TEXT NOT NULL,)";
+		+ "type TEXT NOT NULL,"
+		+ "severity TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 		}
@@ -31,9 +32,9 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 	public void SQLInsert(Symptoms symptom){
 		try {
 		Statement stmt = c.createStatement();
-		String sql = "INSERT INTO Symptoms (type) "
+		String sql = "INSERT INTO Symptoms (type, severity) "
 
-		+ "VALUES ('" + symptom.getType() +"');";
+		+ "VALUES ('" + symptom.getType() +"','"+ symptom.getSeverity() + "');";
 
 		stmt.executeUpdate(sql);
 		stmt.close();
@@ -53,7 +54,8 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 		while (rs.next()) {
 		int id = rs.getInt("id");
 		String type = rs.getString("type");
-		Symptoms symptom = new Symptoms (id,type);
+		String severity =rs.getString("severity");
+		Symptoms symptom = new Symptoms (id,type,severity);
 		symptoms.add(symptom);
 		}
 		rs.close();
@@ -79,55 +81,37 @@ public class DB_Symptoms extends generalMethods implements FunctionsDB<Symptoms>
 		e.printStackTrace();
 		}
 	}
-	
-	public void SQLDelete(String nameSymptom) throws IOException, SQLException {
-		String sql = "DELETE FROM Symptoms WHERE name=?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setString(1, nameSymptom);
-		prep.executeUpdate();
-		prep.close();
-		System.out.println("Nurse with the name:" + nameSymptom+ "has been deleted");
-	}
-	
-	public void SQLUpdate(Symptoms symptom) throws IOException , SQLException {
-		String sql = "UPDATE Symptoms SET type=?, WHERE id=?";
-	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, symptom.getType());
-	prep.setInt(2, symptom.getId());
-	prep.executeUpdate();
-	}
-
-	@Override
-	public Symptoms SQLSearch(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/**public ArrayList<Symptoms> SQLSearch(String sympType) {
-		ArrayList<Symptoms> symptoms = new ArrayList<Symptoms>();
+	public Symptoms SQLSearch(String symptomsName) {
+		Symptoms symptoms =new Symptoms();
 	try {
-	
-	String sql = "SELECT * FROM Symptoms WHERE type LIKE ?";
+		String sql = "SELECT * FROM symptoms WHERE type LIKE ?";
 	PreparedStatement prep = c.prepareStatement(sql);
-	prep.setString(1, sympType);
+	prep.setString(1, symptomsName);
 	ResultSet rs = prep.executeQuery();
 	while (rs.next()) {
 	int id = rs.getInt("id");
 	String type = rs.getString("type");
-	Symptoms symptom = new Symptoms (id, type);
-	symptoms.add(symptom);
+	String severity = rs.getString("severity");
+	symptoms = new Symptoms (id, type, severity);
 	rs.close();
 	prep.close();
 
-		
-	}
-
-		
+		}
 
 	} catch (Exception e) {
 	e.printStackTrace();
 	}
 	return symptoms;
-	}**/
-	
+	}
+	@Override
+	public void SQLDelete(String name) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Symptoms objeto) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
