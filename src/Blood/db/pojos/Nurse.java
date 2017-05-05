@@ -87,7 +87,7 @@ public class Nurse implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nurse [id=" + id + ", name=" + name + ", hospital=" + hospital + "]";
+		return "Nurse: \nid=" + id + "\n name=" + name + "\n hospital=" + hospital;
 	}
 
 	public List<Patient> getPatients() {

@@ -131,7 +131,7 @@ public class Illnes implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Illnes [id=" + id + ", name=" + name + ", type=" + type + ", chronic=" + chronic + "]";
+		return "Illnes: \n id=" + id + "\n name=" + name + "\n type=" + type + "\n chronic=" + chronic ;
 	}
 	
 }
