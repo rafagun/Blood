@@ -10,6 +10,7 @@ public class Symptoms implements Serializable {
     
 	private Integer id;
     private String type;
+    private String severity;
     private List<Patient> patients;
     private List<Illnes> illnes;
     
@@ -20,17 +21,19 @@ public class Symptoms implements Serializable {
     	// TODO Auto-generated constructor stub
     }
     
-    public Symptoms(Integer id, String type){
+    public Symptoms(Integer id, String type, String severity){
     	super();
     	this.id = id;
     	this.type = type;
+    	this.severity = severity;
     	this.patients = new ArrayList<Patient>();
     	this.illnes = new ArrayList<Illnes>();
     }
     
-    public Symptoms(String type){
+    public Symptoms(String type, String severity){
     	super();
     	this.type = type;
+    	this.severity = severity;
     }
 @Override
 public int hashCode() {
@@ -67,6 +70,12 @@ public String getType() {
 }
 public void setType(String type) {
 	this.type = type;
+}
+public String getSeverity (){
+	return severity;
+}
+public void setSeverity (String severity){
+	this.severity = severity;
 }
 public List<Patient> getPatients() {
 	return patients;

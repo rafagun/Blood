@@ -32,8 +32,7 @@ public Patient() {
 	this.setNurses(new ArrayList<Nurse>());
 }
 
-public Patient(Integer id, String name, Integer age, String blood, Boolean smoker, String gender
-	) {
+public Patient(Integer id, String name, Integer age, String blood, String gender, Boolean smoker) {
 	super();
 	this.id = id;
 	this.name = name;
@@ -48,7 +47,7 @@ public Patient(Integer id, String name, Integer age, String blood, Boolean smoke
 	this.illness = new ArrayList<Illnes>();
 }
 
-public Patient(String name, Integer age, String blood,Boolean smoker,String gender) {
+public Patient(String name, Integer age, String blood, String gender, Boolean smoker) {
 	this.name = name;
 	this.age = age;
 	this.blood = blood;

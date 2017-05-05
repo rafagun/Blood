@@ -20,7 +20,7 @@ public class Cells implements Serializable {
 		this.setPatients(new ArrayList<Patient>());
 	}
 	
-	public Cells(Integer id,String type, float highL, float lowL) {
+	public Cells(Integer id,String type, float lowL, float highL) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -30,7 +30,7 @@ public class Cells implements Serializable {
 		this.patients = new ArrayList<Patient>();
 		
 	}
-	public Cells( String type, float highL, float lowL) {
+	public Cells( String type, float lowL, float highL) {
 		super();
 		this.type = type;
 		this.highL = highL;
@@ -100,7 +100,7 @@ public class Cells implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cells [type=" + type + ", highL=" + highL + ", lowL=" + lowL + ", id=" + id + "]";
+		return "Cells [type=" + type + ", lowL=" + lowL + ", highL=" + highL + ", id=" + id + "]";
 	}
 	
 	
