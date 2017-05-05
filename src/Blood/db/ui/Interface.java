@@ -375,9 +375,9 @@ else if (selection == 3){//patient
 		}
 		else{
 		patientUpdate.setSmoker(smoker1);
-		}**/
+		}**/ 
 		dbPatient.SQLUpdate(patientUpdate, patientNameUpdate);
-		
+		//hola
 	}
 	}
 }

@@ -132,7 +132,8 @@ public class DB_Patient extends generalMethods {
 	System.out.println("Update is finished");
 	prep.executeUpdate();
 	prep.close();
-
+//hhh
+	
 		
 			}
 	
