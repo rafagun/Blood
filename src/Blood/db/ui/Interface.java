@@ -340,84 +340,58 @@ else if (selection == 3){//patient
 		dbPatient.SQLDrop();
 		break;
 
-	case 7: /** 	System.out.println("Insert the name of the hospital you want to change");
-		String hospNameUpdate = bufferedReader.readLine();
-		List<Hospital> hospUpdate = db_Hospital.SQLSearch(hospNameUpdate);
-		Iterator<Hospital> it = hospUpdate.iterator();
+	case 7: 
+		System.out.println("Insert the name of the patient you want to change");
+		String patNameUpdate = bufferedReader.readLine();
+		List<Patient> patUpdate = dbPatient.SQLSearch(patNameUpdate);
+		Iterator<Patient> it = patUpdate.iterator();
 		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
-		int option = Integer.parseInt(bufferedReader.readLine());
+		System.out.println("Introduzca su correspondiente id");
+		int id1 = Integer.parseInt(bufferedReader.readLine());
 		
 		
 		
 		System.out.println("Enter the new name or press enter");
 		String newName = bufferedReader.readLine();
 		if (newName.equals("")){
-			newName = hospUpdate.get(option).getName();
+			newName = patUpdate.get(id1).getName();
 		}
 		else{
-		hospUpdate.get(option).setName(newName);
+		patUpdate.get(id1).setName(newName);
 		}
-		System.out.println("Enter the new location or press enter");
-		String newLocation = bufferedReader.readLine();
-		if (newLocation.equals("")){
-			newLocation = hospUpdate.get(option).getLocation();
+		System.out.println("Enter the new blood type or press enter");
+		String newBlood = bufferedReader.readLine();
+		if (newBlood.equals("")){
+			newBlood = patUpdate.get(id1).getBlood();
 		}
-		else {hospUpdate.get(option).setLocation(newLocation);}
+		else {patUpdate.get(id1).setBlood(newBlood);}
 		
-		System.out.println("Input the new range or press enter");
+		System.out.println("Input the new age or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newRange = Integer.parseInt(linea);
+		int newage = Integer.parseInt(linea);
 		if (linea.equals("")){
 			
-			newRange = hospUpdate.get(option).getRange();
+			newage = patUpdate.get(id1).getAge();
 		}
 		else{
-		hospUpdate.get(option).setRange(newRange);
+		patUpdate.get(id1).setAge(newage);
 		}
-		db_Hospital.SQLUpdate(hospUpdate.get(option));
-		
-	
-	**/
-		/**System.out.println("Insert the name of the patient you want to change");
-		String patientNameUpdate = bufferedReader.readLine();
-		List<Patient> patientUpdate = dbPatient.SQLSearch(patientNameUpdate);
-		Iterator<Patient> it = patientUpdate.iterator();
-		for(int i=0; it.hasNext(); i++){
-			System.out.println(i+".-"+it.next());
+		System.out.println("Enter the new gender or press enter");
+		String newgender = bufferedReader.readLine();
+		if (newgender.equals("")){
+			newgender = patUpdate.get(id1).getGender();
 		}
-		int option = Integer.parseInt(bufferedReader.readLine());
-		
-		
-		
-		System.out.println("Enter the new name or press enter");
-		String newName = bufferedReader.readLine();
-		if (newName.equals("")){
-			newName = hospUpdate.get(option).getName();
+		else {patUpdate.get(id1).setGender(newgender);}
+		System.out.println("Change if it is smoker or press enter");
+		String newSmoker = bufferedReader.readLine();
+		if (newSmoker.equals("")){
+			smoker= Boolean.parseBoolean(newSmoker);
+			smoker = patUpdate.get(id1).getSmoker();
 		}
-		else{
-		hospUpdate.get(option).setName(newName);
-		}
-		System.out.println("Enter the new location or press enter");
-		String newLocation = bufferedReader.readLine();
-		if (newLocation.equals("")){
-			newLocation = hospUpdate.get(option).getLocation();
-		}
-		else {hospUpdate.get(option).setLocation(newLocation);}
-		
-		System.out.println("Input the new range or press enter");
-		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newRange = Integer.parseInt(linea);
-		if (linea.equals("")){
-			
-			newRange = hospUpdate.get(option).getRange();
-		}
-		else{
-		hospUpdate.get(option).setRange(newRange);
-		}
-		db_Hospital.SQLUpdate(hospUpdate.get(option), hospUpdate.get(option).getId());
-**/
+		else {patUpdate.get(id1).setSmoker(Boolean.parseBoolean(newSmoker));}
+		dbPatient.SQLUpdate(patUpdate.get(id1));
 	
 	case 8:	//salir del programa
 	

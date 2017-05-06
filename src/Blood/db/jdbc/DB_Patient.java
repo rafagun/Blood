@@ -135,7 +135,7 @@ public class DB_Patient extends GeneralMethods {
 		
 	    
 	}
-	public void SQLUpdate(Patient patientUpdate, int id) throws IOException , SQLException {
+	public void SQLUpdate(Patient patientUpdate) throws IOException , SQLException {
 
 		String sql = "UPDATE Hospital SET name=? ,age=? ,blood=?, gender=?, smoker=?  WHERE id=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class DB_Patient extends GeneralMethods {
 	prep.setString(3, patientUpdate.getBlood());
 	prep.setString(4, patientUpdate.getGender());
 	prep.setBoolean(5, patientUpdate.getSmoker());
-	prep.setInt(6, id);
+	prep.setInt(6, patientUpdate.getId());
 	System.out.println("Update is finished");
 	prep.executeUpdate();
 	prep.close();
