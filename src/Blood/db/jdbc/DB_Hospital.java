@@ -118,7 +118,7 @@ return hospitales;
 
 public void SQLDelete(Hospital hospital) {
 	try{
-	String sql = "DELETE FROM Hospital WHERE name=?";
+	String sql = "DELETE FROM Hospital WHERE id=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);
 	prep.setInt(1, hospital.getId());
 	prep.executeUpdate();
