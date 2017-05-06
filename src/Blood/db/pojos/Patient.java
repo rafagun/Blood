@@ -160,7 +160,7 @@ public void setIllness(List<Illnes> illness) {
 	this.illness = illness;
 }
 public String toString(){
-	return "Patient: \n name: "+name+"age:"+age+"gender: "+gender+"blood: "+blood+"smoker: "+smoker;
+	return "Patient: \n name: "+name+ "\n"+"age:"+age+"\n"+"gender: "+gender+"\n"+"blood: "+blood+"\n"+"smoker: "+smoker;
 }
 
 

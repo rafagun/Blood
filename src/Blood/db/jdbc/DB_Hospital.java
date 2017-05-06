@@ -26,10 +26,6 @@ String sql1 = "CREATE TABLE Hospital "
 + "range  INTEGER)";
 stmt1.executeUpdate(sql1);
 stmt1.close();
-System.out.println("Tables created.");
-
-
-
 
 }
 catch (Exception e) {
@@ -54,7 +50,7 @@ hospitals.add(hospital);
 }
 rs.close();
 stmt.close();
-System.out.println("Search finished.");
+
 }
 catch(Exception ex){
 ex.printStackTrace();

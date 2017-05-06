@@ -117,17 +117,26 @@ public class DB_Patient extends GeneralMethods {
 	return patients;
 	}
 	
-	public void SQLDelete(String namePatient) throws IOException, SQLException {
-		String sql = "DELETE FROM Patient WHERE name=?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setString(1, namePatient);
+	public void SQLDelete(Patient patient) throws IOException, SQLException {
+		try{
+			String sql = "DELETE FROM Patient WHERE id=?";
+		PreparedStatement prep = super.c.prepareStatement(sql);
+		prep.setInt(1, patient.getId());
 		prep.executeUpdate();
 		prep.close();
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+			System.err.println("Fallo en la conexion, volviendo a intentar");
+			
+		}
+		
 
 		
 	    
 	}
 	public void SQLUpdate(Patient patientUpdate, int id) throws IOException , SQLException {
+
 		String sql = "UPDATE Hospital SET name=? ,age=? ,blood=?, gender=?, smoker=?  WHERE id=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);
 	prep.setString(1, patientUpdate.getName());

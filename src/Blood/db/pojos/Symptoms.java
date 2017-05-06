@@ -8,8 +8,7 @@ public class Symptoms implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Symptoms: \n id=" + id + "\n type=" + type + "\n severity=" + severity + "\n patients=" + patients
-				+ "\n illnes=" + illnes;
+		return "Symptoms: \n id=" + id + "\n type=" + type + "\n severity=" + severity;
 	}
 	private static final long serialVersionUID = 6952444966932416547L;
     

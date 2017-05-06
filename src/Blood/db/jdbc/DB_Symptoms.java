@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Symptoms;
 
 public class DB_Symptoms extends GeneralMethods {
@@ -14,7 +17,7 @@ public class DB_Symptoms extends GeneralMethods {
 
 
 	public void SQLCreate() throws SQLException {
-		try {
+	
 
 		// Create tables: begin
 		Statement stmt1 = c.createStatement();
@@ -24,10 +27,7 @@ public class DB_Symptoms extends GeneralMethods {
 		+ "severity TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		}
-		catch (Exception e) {
-		e.printStackTrace();
-		}	
+		
 		}
 	public void SQLInsert(Symptoms symptom){
 		try {
@@ -81,8 +81,8 @@ public class DB_Symptoms extends GeneralMethods {
 		e.printStackTrace();
 		}
 	}
-	public Symptoms SQLSearch(String symptomsName) {
-		Symptoms symptoms =new Symptoms();
+	public List<Symptoms> SQLSearch(String symptomsName) {
+		List<Symptoms> symptoms= new LinkedList<>();
 	try {
 		String sql = "SELECT * FROM symptoms WHERE type LIKE ?";
 	PreparedStatement prep = c.prepareStatement(sql);
@@ -92,11 +92,12 @@ public class DB_Symptoms extends GeneralMethods {
 	int id = rs.getInt("id");
 	String type = rs.getString("type");
 	String severity = rs.getString("severity");
-	symptoms = new Symptoms (id, type, severity);
+	Symptoms symptom = new Symptoms (id, type, severity);
+	symptoms.add(symptom);}
 	rs.close();
 	prep.close();
 
-		}
+		
 
 	} catch (Exception e) {
 	e.printStackTrace();

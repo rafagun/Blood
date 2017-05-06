@@ -107,9 +107,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 
 	case 4: 
 		
-		System.out.println("Introduce the name of the hospital that you want to delete");
-		String nHospital = bufferedReader.readLine();
-		System.out.println("Insert the name of the hospital you want to change");
+		System.out.println("Insert the name of the hospital you want to delete");
 		String hospDelete = bufferedReader.readLine();
 		List<Hospital> list = db_Hospital.SQLSearch(hospDelete);
 		Iterator<Hospital> ite = list.iterator();
@@ -313,12 +311,23 @@ else if (selection == 3){//patient
 		break;
 
 	case 4: 
+
 		
-		System.out.println("Introduce the name of the hospital that you want to delete");
+		
+		System.out.println("Introduce the name of the patient that you want to delete");
 		String patientname = bufferedReader.readLine();
-		dbPatient.SQLDelete(patientname);
+		List<Patient> list= dbPatient.SQLSearch(patientname);
+		Iterator<Patient> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		System.out.println("Introduzca su respectivo id");
+		int id = Integer.parseInt(bufferedReader.readLine());
+		dbPatient.SQLDelete(list.get(id));
+		System.out.println("The hospital has been removed");
+		 
 		break;
-	 
+
 	case 5:
 		ArrayList<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
@@ -331,8 +340,47 @@ else if (selection == 3){//patient
 		dbPatient.SQLDrop();
 		break;
 
-	/**case 7: 
-		System.out.println("Insert the name of the patient you want to change");
+	case 7: /** 	System.out.println("Insert the name of the hospital you want to change");
+		String hospNameUpdate = bufferedReader.readLine();
+		List<Hospital> hospUpdate = db_Hospital.SQLSearch(hospNameUpdate);
+		Iterator<Hospital> it = hospUpdate.iterator();
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
+		}
+		int option = Integer.parseInt(bufferedReader.readLine());
+		
+		
+		
+		System.out.println("Enter the new name or press enter");
+		String newName = bufferedReader.readLine();
+		if (newName.equals("")){
+			newName = hospUpdate.get(option).getName();
+		}
+		else{
+		hospUpdate.get(option).setName(newName);
+		}
+		System.out.println("Enter the new location or press enter");
+		String newLocation = bufferedReader.readLine();
+		if (newLocation.equals("")){
+			newLocation = hospUpdate.get(option).getLocation();
+		}
+		else {hospUpdate.get(option).setLocation(newLocation);}
+		
+		System.out.println("Input the new range or press enter");
+		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
+		int newRange = Integer.parseInt(linea);
+		if (linea.equals("")){
+			
+			newRange = hospUpdate.get(option).getRange();
+		}
+		else{
+		hospUpdate.get(option).setRange(newRange);
+		}
+		db_Hospital.SQLUpdate(hospUpdate.get(option));
+		
+	
+	**/
+		/**System.out.println("Insert the name of the patient you want to change");
 		String patientNameUpdate = bufferedReader.readLine();
 		List<Patient> patientUpdate = dbPatient.SQLSearch(patientNameUpdate);
 		Iterator<Patient> it = patientUpdate.iterator();
@@ -369,7 +417,7 @@ else if (selection == 3){//patient
 		hospUpdate.get(option).setRange(newRange);
 		}
 		db_Hospital.SQLUpdate(hospUpdate.get(option), hospUpdate.get(option).getId());
-		**/
+**/
 	
 	case 8:	//salir del programa
 	
@@ -491,7 +539,7 @@ else if (selection == 5){//molecules
 		ArrayList<Molecules> lista= new ArrayList<>();
 		lista = f.SQLSelect();
 		for (Molecules molecules1: lista){
-			System.out.println("type:" + molecules1.getType()+ "     "+"low level of the molecules:"+ molecules1.getLowLevels()+ "       "+ "high level of the molecules:" +molecules1.getHighLevels());
+			System.out.println(molecules1);
 		}
 		break;
 		
@@ -511,68 +559,72 @@ else if (selection == 5){//molecules
 	}
 }
 else if (selection == 6){//Sympthomps
-	DB_Symptoms f = new DB_Symptoms();
+	DB_Symptoms db_symptoms = new DB_Symptoms();
 	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-	f.SQLConnect();
+	case 1: try {
+		db_symptoms.SQLCreate();
+	System.out.println("the table has been created correctly");
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("Esta tabla ya existe");
+		}	
 	break;
-
 
 	case 2: 
-	f.SQLCreate();
-	System.out.println("the table has been created correctly");
-	break;
-
-	case 3: 
 	System.out.println("Introduce the type of the symptom");
 	String symptomsType = bufferedReader.readLine();
 	System.out.println("Introduce the severity of the symptom");
 	String symptomsSeverity = bufferedReader.readLine();
 	Symptoms symptomsInterface  = new Symptoms(symptomsType,symptomsSeverity);
-	f.SQLInsert(symptomsInterface);
+	db_symptoms.SQLInsert(symptomsInterface);
 	System.out.println("the information has been insert");
 	break;
 
-	case 4:
+	case 3:
 		System.out.println("Introduce the type of the symptom you want to search:");
 		String typeSearch = bufferedReader.readLine();
 		
-		Symptoms symptoms = f.SQLSearch(typeSearch);
-		System.out.println("type:" + symptoms.getType()+ "        "+"severity:"+ symptoms.getSeverity());
-		break;
-
-	case 5: 
-		System.out.println("Symptoms cannot be deleted");
-		break;
-	 
-	case 6:
-		ArrayList<Symptoms> lista= new ArrayList<>();
-		lista = f.SQLSelect();
-		for (Symptoms symptoms1: lista){
-			System.out.println("type:" + symptoms1.getType()+ "       "+"severity:"+ symptoms1.getSeverity());
+		List<Symptoms> symptoms = db_symptoms.SQLSearch(typeSearch);
+		for (Symptoms symptom: symptoms){
+			System.out.println(symptom);
 		}
 		break;
 		
-	case 7: 
-		f.SQLDrop();
+
+
+	case 4: 
+		System.out.println("Symptoms cannot be deleted");
+		break;
+	 
+	case 5: 
+		ArrayList<Symptoms> lista= new ArrayList<>();
+		lista = db_symptoms.SQLSelect();
+		for (Symptoms symptoms1: lista){
+			System.out.println(symptoms1);
+		}
+		break;
+		
+	case 6: 
+		db_symptoms.SQLDrop();
 		break;
 
-	case 8:
+	case 7:
 		System.out.println("Symptoms cannot be modified");
 		break;
 		
-	case 9:	//salir del programa
+	case 8:	//salir del programa
 	break;
 	}
 	}
 }
 else if (selection == 7){//illness
-	DB_Illness f = new DB_Illness();
+	DB_Illness db_illness = new DB_Illness();
 	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
@@ -580,58 +632,57 @@ else if (selection == 7){//illness
 	switch (opcion){
 
 	case 1: 
-	f.SQLConnect();
-	break;
-
-
-	case 2: 
-	f.SQLCreate();
+	db_illness.SQLCreate();
 	System.out.println("tables are created correctly");
 	break;
 
-	case 3: 
+	case 2: 
 	System.out.println("Introduce the name of the illness");
 	String illnessName = bufferedReader.readLine();
 	System.out.println("Introduce the type of the illness");
 	String illnessType =bufferedReader.readLine();
 	System.out.println("Introduce if it is chronic or not");
 	String illnessChronic = bufferedReader.readLine();
+	//solo inserta false
 	Boolean chronic = Boolean.parseBoolean(illnessChronic);
 	Illnes illnessInterface  = new Illnes(illnessName, illnessType, chronic);
-	f.SQLInsert(illnessInterface);
+	db_illness.SQLInsert(illnessInterface);
 	System.out.println("the information is already insert");
 	break;
 
-	case 4:
+	case 3:
 		System.out.println("Introduce the name of the illness you want to search:");
 		String nameSearch = bufferedReader.readLine();
-		Illnes illness = f.SQLSearch(nameSearch);
-		System.out.println("name:" + illness.getName()+ "      "+"type"+ illness.getType()+ "      "+ "chronic:" +illness.getChronic());
+		List<Illnes> illness = db_illness.SQLSearch(nameSearch);
+		for(Illnes illnes: illness){
+			System.out.println(illnes);
+		}
+		
 
 		break;
 
-	case 5: 
+	case 4: 
 		System.out.println("Illnesses cannot be deleted");
 		break;
 	 
-	case 6:
+	case 5:
 		ArrayList<Illnes> lista= new ArrayList<>();
-		lista = f.SQLSelect();
+		lista = db_illness.SQLSelect();
 		for (Illnes illness1: lista){
-			System.out.println("name:" + illness1.getName()+ "     "+"type:"+ illness1.getType()+ "       "+ "chronic:" +illness1.getChronic());
+			System.out.println(illness1);
 		}
 		break;
 		
-	case 7: 
-		f.SQLDrop();
+	case 6: 
+		db_illness.SQLDrop();
 		System.out.println("table has been removed");
 		break;
 
-	case 8:
+	case 7:
 		System.out.println("Illnesses cannot be modified");
 		break;
 		
-	case 9:	//salir del programa
+	case 8:	//salir del programa
 	break;
 	}
 }

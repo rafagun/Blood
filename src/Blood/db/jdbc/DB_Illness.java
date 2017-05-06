@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import Blood.db.pojos.Illnes;
 public class DB_Illness extends GeneralMethods{
@@ -91,8 +93,8 @@ public class DB_Illness extends GeneralMethods{
 		}
 		}
 
-	public Illnes SQLSearch(String illnessName) {
-		Illnes illness =new Illnes();
+	public List<Illnes> SQLSearch(String illnessName) {
+		List<Illnes> illness =new LinkedList<Illnes>();
 	try {
 		String sql = "SELECT * FROM Illnes WHERE name LIKE ?";
 	PreparedStatement prep = c.prepareStatement(sql);
@@ -103,13 +105,12 @@ public class DB_Illness extends GeneralMethods{
 	String name = rs.getString("name");
 	String type = rs.getString("type");
 	boolean chronic = rs.getBoolean("chronic");
-	illness.setChronic(chronic);
-	
-	illness = new Illnes (id, name, type, chronic);
+	Illnes illnes = new Illnes (id, name, type, chronic);
+	illness.add(illnes);}
 	rs.close();
 	prep.close();
 
-		}
+		
 
 	} catch (Exception e) {
 	e.printStackTrace();
