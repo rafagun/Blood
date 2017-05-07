@@ -91,7 +91,7 @@ e.printStackTrace();
 public List<Molecules> SQLSearch(String moleculeName) {
 	List<Molecules> molecules = new LinkedList<>();
 try {
-	String sql = "SELECT * FROM Molecules WHERE name LIKE ?";
+	String sql = "SELECT * FROM Molecules WHERE type LIKE ?";
 PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, moleculeName);
 ResultSet rs = prep.executeQuery();

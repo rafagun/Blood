@@ -93,7 +93,7 @@ public ArrayList<Cells> SQLSelect(){
 public List<Cells> SQLSearch(String cellsName) {
 	List<Cells> cells = new LinkedList<>();
 try {
-	String sql = "SELECT * FROM Cells WHERE name LIKE ?";
+	String sql = "SELECT * FROM Cells WHERE type LIKE ?";
 PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setString(1, cellsName);
 ResultSet rs = prep.executeQuery();
