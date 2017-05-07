@@ -70,7 +70,7 @@ if (selection==1){
 DB_Hospital db_Hospital = new DB_Hospital();
 	
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want:");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -273,7 +273,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 else if (selection == 3){//patient
 	DB_Patient dbPatient = new DB_Patient();
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want: ");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -401,134 +401,217 @@ else if (selection == 3){//patient
 }
 else if (selection == 4){//cells
 	DB_Cells db_cells = new DB_Cells();
+	
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want: ");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
 	case 1: 
-	db_cells= new DB_Cells();
-	db_cells.SQLConnect();
-	break;
-
-
-	case 2: 
 	db_cells.SQLCreate();
+	System.out.println("The table cells has been created");
+	break;
+	
+	case 2:
+	System.out.println("Introduce the type of the cell: ");
+	String nameCell = bufferedReader.readLine();
+	System.out.println("Introduce the low level of the cell: ");
+	Float lowL = Float.parseFloat(bufferedReader.readLine());
+	System.out.println("Introduce the high level of the cell: ");
+	Float highL = Float.parseFloat(bufferedReader.readLine());
+	Cells cellsInterface = new Cells(nameCell,lowL,highL);
+	db_cells.SQLInsert(cellsInterface);
+	System.out.println("The information has been introduced propertly");
 	break;
 
 	case 3: 
-	System.out.println("Introduce the type of the cell");
-	String cellType = bufferedReader.readLine();
-	System.out.println("Introduce the minimum normal level of the cell");
-	float minLevel =Float.parseFloat( bufferedReader.readLine());
-	System.out.println("Introduce the maximum level of the cell");
-	float maxLevel =Float.parseFloat(bufferedReader.readLine());
+		System.out.println("Introduce the name of the cell you want to search:");
+		String nameSearch = bufferedReader.readLine();
+		List<Cells> cells = db_cells.SQLSearch(nameSearch);
+		for (Cells cell: cells){
+			System.out.println(cell);
+		}
 
-	Cells cells  = new Cells (cellType, minLevel, maxLevel);
-	db_cells.SQLInsert(cells);
-	System.out.println("cells are correctly intsert");
-	break;
+		break;
 
 	case 4:
-		System.out.println("Introduce the name of the cell you want to search by:");
-		String nameSearch = bufferedReader.readLine();
-		Cells cell = db_cells.SQLSearch(nameSearch);
-		System.out.println("type:" + cell.getType()+ "         "+"lowl:"+ cell.getLowL()+ "         "+ "highL:" +cell.getHighL());
-
+		System.out.println("Insert the name of the cell you want to delete: ");
+		String cellDelete = bufferedReader.readLine();
+		List<Cells> list = db_cells.SQLSearch(cellDelete);
+		Iterator<Cells> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		int option1 = Integer.parseInt(bufferedReader.readLine());
+		db_cells.SQLDelete(list.get(option1));
+		System.out.println("The cell has been removed");
 		break;
 
 	case 5: 
-		System.out.println("cells cannot be deleted");
-		break;
-	 
-	case 6:
-		// hay que borrar todo, no solo el contenido ya que al mostrarlo una vez borrado, muestra null no un error de que no existe
-		ArrayList<Cells> lista= new ArrayList<>();
-		lista = db_cells.SQLSelect();
-		for (Cells cell1: lista){
-			System.out.println("type:" + cell1.getType()+ "     "+"low level of the cell:"+ cell1.getLowL()+ "      "+ "high level of the cells:" +cell1.getHighL());
+		ArrayList<Cells> listCells = new ArrayList<>();
+		listCells = db_cells.SQLSelect();
+		for(Cells cell : listCells){
+			System.out.println("type: " +cell.getType());
 		}
 		break;
 		
-	case 7: 
+		
+	case 6: 
 		db_cells.SQLDrop();
-		System.out.println("the tables has been dropped");
+		System.out.println("The table has been dropped");
 		break;
+	
+	case 7: 
+		System.out.println("Insert the name of the cell you want to change");
+		String cellTypeUpdate = bufferedReader.readLine();
+		List<Cells> cellsUpdate = db_cells.SQLSearch(cellTypeUpdate);
+		Iterator<Cells> it = cellsUpdate.iterator();
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
+		}
+		int option = Integer.parseInt(bufferedReader.readLine());
+		
+		
+		
+		System.out.println("Enter the new name or press enter");
+		String newName = bufferedReader.readLine();
+		if (newName.equals("")){
+			newName = cellsUpdate.get(option).getType();
+		}
+		else{
+		cellsUpdate.get(option).setType(newName);
+		}
+		System.out.println("Enter the new low level or press enter");
+		String newLevel = bufferedReader.readLine();
+		Float newLowLevel = Float.parseFloat(newLevel);
+		if (newLevel.equals("")){
+			
+			newLowLevel = cellsUpdate.get(option).getLowL();
+		}
+		else {cellsUpdate.get(option).setLowL(newLowLevel);}
+		
+		System.out.println("Enter the new high level or press enter");
+		String newLevel2 = bufferedReader.readLine();
+		Float newHighLevel = Float.parseFloat(newLevel2);
+		if (newLevel.equals("")){
+			
+			newHighLevel = cellsUpdate.get(option).getHighL();
+		}
+		else {cellsUpdate.get(option).setHighL(newHighLevel);}
+		
+		db_cells.SQLUpdate(cellsUpdate.get(option));
 
 	case 8:
-		System.out.println("cells cannot be modified");
 		break;
-		
-	case 9:	//salir del programa
-	
-	break;
 	}
 	}
 	}
 else if (selection == 5){//molecules
-	DB_Molecules f = new DB_Molecules();
+	DB_Molecules db_molecules = new DB_Molecules();
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want: ");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
-
-	case 1: 
-	f.SQLConnect();
-	break;
-
-
-	case 2: 
-	f.SQLCreate();
-	break;
-
-	case 3: 
-	System.out.println("Introduce the type of the molecule");
-	String moleculesType = bufferedReader.readLine();
-	System.out.println("Introduce the minimum normal level of the cell");
-	float minLevel =Float.parseFloat( bufferedReader.readLine());
-	System.out.println("Introduce the maximum level of the cell");
-	float maxLevel =Float.parseFloat(bufferedReader.readLine());
-
-	Molecules molecules  = new Molecules (moleculesType, minLevel, maxLevel);
-	f.SQLInsert(molecules);
-	System.out.println("molecules correctly insert");
-	break;
-
-	case 4:
-		System.out.println("Introduce the type of the molecule you want to search by:");
-		String typeSearch = bufferedReader.readLine();
-		
-		Molecules moleculesInterface = f.SQLSearch(typeSearch);
-		System.out.println("type:" + moleculesInterface.getType()+ "     "+"low level of the cell:"+ moleculesInterface.getLowLevels()+ "      "+ "high level of the cells:" +moleculesInterface.getHighLevels());
-
-		break;
-
-	case 5: 
-		System.out.println("Molecules cannot be deleted");
-		break;
-	 
-	case 6:
-		ArrayList<Molecules> lista= new ArrayList<>();
-		lista = f.SQLSelect();
-		for (Molecules molecules1: lista){
-			System.out.println(molecules1);
-		}
-		break;
-		
-	case 7: 
-		f.SQLDrop();
-		System.out.println("Table molecules has been deleted");
-		break;
-
-	case 8:
-		System.out.println("molecules cannot be modified");
-		break;
-		
-	case 9:	//salir del programa
 	
-	break;
+	case 1: 
+		
+		db_molecules.SQLCreate();
+		System.out.println("The table molecules has been created");
+		break;
+		
+		case 2:
+		System.out.println("Introduce the type of the molecule: ");
+		String nameMolecule = bufferedReader.readLine();
+		System.out.println("Introduce the low level of the molecule: ");
+		Integer lowL = Integer.parseInt(bufferedReader.readLine());
+		System.out.println("Introduce the high level of the molecule: ");
+		Integer highL = Integer.parseInt(bufferedReader.readLine());
+		Molecules moleculesInterface = new Molecules(nameMolecule,highL,lowL);
+		db_molecules.SQLInsert(moleculesInterface);
+		System.out.println("The information has been introduced propertly");
+		break;
+
+		case 3: 
+			System.out.println("Introduce the name of the molecule you want to search:");
+			String nameSearch = bufferedReader.readLine();
+			List<Molecules> molecules = db_molecules.SQLSearch(nameSearch);
+			for (Molecules molecule: molecules){
+				System.out.println(molecule);
+			}
+			break;
+
+		case 4:
+			System.out.println("Insert the name of the molecule you want to delete: ");
+			String moleculeDelete = bufferedReader.readLine();
+			List<Molecules> list = db_molecules.SQLSearch(moleculeDelete);
+			Iterator<Molecules> ite = list.iterator();
+			for(int i=0; ite.hasNext(); i++){
+				System.out.println(i+".-"+ite.next());
+			}
+			int option1 = Integer.parseInt(bufferedReader.readLine());
+			db_molecules.SQLDelete(list.get(option1));
+			System.out.println("The molecule has been removed");
+			break;
+
+		case 5: 
+			ArrayList<Molecules> listMolecules = new ArrayList<>();
+			listMolecules = db_molecules.SQLSelect();
+			for(Molecules molecule : listMolecules){
+				System.out.println("type: " +molecule.getType());
+			}
+			break;
+			
+			
+		case 6: 
+			db_molecules.SQLDrop();
+			System.out.println("The table has been dropped");
+			break;
+		
+		case 7: 
+			System.out.println("Insert the name of the molecule you want to change");
+			String moleculeTypeUpdate = bufferedReader.readLine();
+			List<Molecules> moleculesUpdate = db_molecules.SQLSearch(moleculeTypeUpdate);
+			Iterator<Molecules> it = moleculesUpdate.iterator();
+			for(int i=0; it.hasNext(); i++){
+				System.out.println(i+".-"+it.next());
+			}
+			int option = Integer.parseInt(bufferedReader.readLine());
+			
+			
+			
+			System.out.println("Enter the new name or press enter");
+			String newName = bufferedReader.readLine();
+			if (newName.equals("")){
+				newName = moleculesUpdate.get(option).getType();
+			}
+			else{
+			moleculesUpdate.get(option).setType(newName);
+			}
+			System.out.println("Enter the new low level or press enter");
+			String newLevel = bufferedReader.readLine();
+			Integer newLowLevel = Integer.parseInt(newLevel);
+			if (newLevel.equals("")){
+				
+				newLowLevel = moleculesUpdate.get(option).getLowLevels();
+			}
+			else {moleculesUpdate.get(option).setLowLevels(newLowLevel);}
+			
+			System.out.println("Enter the new high level or press enter");
+			String newLevel2 = bufferedReader.readLine();
+			Integer newHighLevel = Integer.parseInt(newLevel2);
+			if (newLevel.equals("")){
+				
+				newHighLevel = moleculesUpdate.get(option).getHighLevels();
+			}
+			else {moleculesUpdate.get(option).setHighLevels(newHighLevel);}
+			
+			db_molecules.SQLUpdate(moleculesUpdate.get(option));
+
+		case 8:
+			break;
+	
 	}
 	}
 }

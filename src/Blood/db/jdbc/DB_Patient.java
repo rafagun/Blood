@@ -127,7 +127,7 @@ public class DB_Patient extends GeneralMethods {
 		}
 		catch(SQLException ex){
 			ex.printStackTrace();
-			System.err.println("Fallo en la conexion, volviendo a intentar");
+			System.err.println("ERROR");
 			
 		}
 		

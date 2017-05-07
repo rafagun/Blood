@@ -122,7 +122,7 @@ public void SQLDelete(Hospital hospital) {
 	}
 	catch(SQLException ex){
 		ex.printStackTrace();
-		System.err.println("Fallo en la conexion, volviendo a intentar");
+		System.err.println("ERROR");
 		
 	}
     
@@ -137,9 +137,7 @@ prep.setInt(4, hospUpdate.getId());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();
-
-	
-		}
+}
 
 	
 

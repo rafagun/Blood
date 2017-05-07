@@ -11,8 +11,8 @@ public class Molecules implements Serializable {
 	
 	private Integer id;
 	private String type;
-	private float lowLevels;
-	private float highLevels;
+	private Integer lowLevels;
+	private Integer highLevels;
 	private List<Patient> patients;
 	private List<Illnes> illnes;
 	
@@ -22,7 +22,17 @@ public class Molecules implements Serializable {
 		this.setPatients(new ArrayList<Patient>());
 		this.setIllnes(new ArrayList<Illnes>());
 	}
-	public Molecules(String type,float highL, float lowL){
+	
+	public Molecules (String type, Integer highL, Integer lowL){
+		this.type = type;
+		this.lowLevels = highL;
+		this.highLevels = lowL;
+		this.patients = new ArrayList<Patient>();
+		this.illnes = new ArrayList<Illnes>();
+		
+	}
+	public Molecules(Integer id, String type,Integer highL, Integer lowL){
+		this.id = id;
 		this.type = type;
 		this.lowLevels = highL;
 		this.highLevels = lowL;
@@ -66,13 +76,13 @@ public class Molecules implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public float getLowLevels() {
+	public Integer getLowLevels() {
 		return lowLevels;
 	}
 	public void setLowLevels(Integer lowLevels) {
 		this.lowLevels = lowLevels;
 	}
-	public float getHighLevels() {
+	public Integer getHighLevels() {
 		return highLevels;
 	}
 	public void setHighLevels(Integer highLevels) {
