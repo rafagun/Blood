@@ -134,8 +134,8 @@ public void SQLUpdate(Molecules molecUpdate) throws IOException , SQLException {
 PreparedStatement prep = super.c.prepareStatement(sql);
 prep.setInt(1,molecUpdate.getId());
 prep.setString(2, molecUpdate.getType());
-prep.setInt(3, molecUpdate.getLowLevels());
-prep.setInt(4, molecUpdate.getHighLevels());
+prep.setFloat(3, molecUpdate.getLowLevels());
+prep.setFloat(4, molecUpdate.getHighLevels());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();

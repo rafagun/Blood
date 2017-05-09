@@ -104,7 +104,7 @@ public class DB_Patient extends GeneralMethodsJdbc {
 	Boolean smoker = rs.getBoolean("smoker");
 	
 	
-	Patient patient = new Patient (id, name, age, blood, gender, smoker);
+	Patient patient = new Patient (id, name, age, blood, smoker, gender);
 	patients.add(patient);
 	}
 

@@ -1,16 +1,28 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Cells")
 public class Cells implements Serializable {
-
 	private static final long serialVersionUID = -1755945494914985765L;
+	@Id
+	@GeneratedValue(generator="Cells")
+	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
 	private String type;
 	private float highL;
 	private float lowL;
 	private Integer id;
-	private List<Illnes> illnes;
+	@ManyToMany(mappedBy="cells")
+	private List<Illnes> illness;
+	@ManyToMany
+	@JoinTable(name="pats-cells",
+	joinColumns={@JoinColumn(name="cells_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
 	private List<Patient> patients;	
 
 	public Cells() {
@@ -20,17 +32,17 @@ public class Cells implements Serializable {
 		this.setPatients(new ArrayList<Patient>());
 	}
 	
-	public Cells(Integer id,String type, float lowL, float highL) {
+	public Cells(Integer id,String type, float highL, float lowL) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.highL = highL;
 		this.lowL = lowL;
-		this.illnes = new ArrayList<Illnes>();
+		this.illness = new ArrayList<Illnes>();
 		this.patients = new ArrayList<Patient>();
 		
 	}
-	public Cells( String type, float lowL, float highL) {
+	public Cells( String type, float highL, float lowL) {
 		super();
 		this.type = type;
 		this.highL = highL;
@@ -86,10 +98,10 @@ public class Cells implements Serializable {
 		this.id = id;
 	}
 	public List<Illnes> getIllnes() {
-		return illnes;
+		return illness;
 	}
-	public void setIllnes(List<Illnes> illnes) {
-		this.illnes = illnes;
+	public void setIllnes(List<Illnes> illness) {
+		this.illness = illness;
 	}
 	public List<Patient> getPatients() {
 		return patients;
@@ -97,13 +109,29 @@ public class Cells implements Serializable {
 	public void setPatients(List<Patient> patients) {
 		this.patients = patients;
 	}
+	public void addIllnes (Illnes illnes){
+		if (!illness.contains(illnes)) {
+			this.illness.add(illnes);
+		}
+	}
+	public void removeIllnes (Illnes illnes){
+		if (illness.contains(illnes)) {
+			this.illness.remove(illnes);
+		}
+	}
+	public void addPatient(Patient patient) {
+		if (!patients.contains(patient)) {
+			this.patients.add(patient);
+		}
+	}
 
+	public void removePatient(Patient patient) {
+		if (patients.contains(patient)) {
+			this.patients.remove(patient);
+		}
+	}
 	@Override
 	public String toString() {
-		return "Cells [type=" + type + ", lowL=" + lowL + ", highL=" + highL + ", id=" + id + "]";
+		return "Cells [type=" + type + ", highL=" + highL + ", lowL=" + lowL + ", id=" + id + "]";
 	}
-	
-	
-	
-	
 }

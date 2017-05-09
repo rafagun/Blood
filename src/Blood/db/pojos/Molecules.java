@@ -4,17 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+@Entity
+@Table(name="Molecules")
 public class Molecules implements Serializable {
-
-	
-	private static final long serialVersionUID = -3290462529390006987L;
-	
+private static final long serialVersionUID = -3290462529390006987L;
+	@Id
+	@GeneratedValue(generator="Molecules")
+	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
 	private Integer id;
 	private String type;
-	private Integer lowLevels;
-	private Integer highLevels;
+	private float lowLevels;
+	private float highLevels;
+	@ManyToMany
+	@JoinTable(name="pats-mol",
+	joinColumns={@JoinColumn(name="molecules_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
 	private List<Patient> patients;
-	private List<Illnes> illnes;
+	@ManyToMany(mappedBy="molecules")
+	private List<Illnes> illness;
 	
 	public Molecules() {
 		super();
@@ -22,24 +30,19 @@ public class Molecules implements Serializable {
 		this.setPatients(new ArrayList<Patient>());
 		this.setIllnes(new ArrayList<Illnes>());
 	}
-	
-	public Molecules (String type, Integer highL, Integer lowL){
+	public Molecules(int id, String type,float highL, float lowL){
+		this.id= id;
 		this.type = type;
 		this.lowLevels = highL;
 		this.highLevels = lowL;
 		this.patients = new ArrayList<Patient>();
-		this.illnes = new ArrayList<Illnes>();
-		
+		this.illness = new ArrayList<Illnes>();
 	}
-	public Molecules(Integer id, String type,Integer highL, Integer lowL){
-		this.id = id;
-		this.type = type;
-		this.lowLevels = highL;
-		this.highLevels = lowL;
-		this.patients = new ArrayList<Patient>();
-		this.illnes = new ArrayList<Illnes>();
+	public Molecules (String type , float high , float low){
+		this.type=type;
+		this.highLevels=high;
+		this.lowLevels=low;
 	}
-	
 	
 	@Override
 	public int hashCode() {
@@ -76,17 +79,17 @@ public class Molecules implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Integer getLowLevels() {
+	public float getLowLevels() {
 		return lowLevels;
 	}
-	public void setLowLevels(Integer lowLevels) {
-		this.lowLevels = lowLevels;
+	public void setLowLevels(Float newLowLevel) {
+		this.lowLevels = newLowLevel;
 	}
-	public Integer getHighLevels() {
+	public float getHighLevels() {
 		return highLevels;
 	}
-	public void setHighLevels(Integer highLevels) {
-		this.highLevels = highLevels;
+	public void setHighLevels(float newHighLevel) {
+		this.highLevels = newHighLevel;
 	}
 
 	public List<Patient> getPatients() {
@@ -98,15 +101,36 @@ public class Molecules implements Serializable {
 	}
 
 	public List<Illnes> getIllnes() {
-		return illnes;
+		return illness;
 	}
 
 	public void setIllnes(List<Illnes> illnes) {
-		this.illnes = illnes;
+		this.illness = illnes;
+	}
+	public void addPatient(Patient patient) {
+		if (!patients.contains(patient)) {
+			this.patients.add(patient);
+		}
+	}
+
+	public void removePatient(Patient patient) {
+		if (patients.contains(patient)) {
+			this.patients.remove(patient);
+		}
+	}
+	public void addIllnes (Illnes illnes){
+		if (!illness.contains(illnes)) {
+			this.illness.add(illnes);
+		}
+	}
+	public void removeIllnes (Illnes illnes){
+		if (illness.contains(illnes)) {
+			this.illness.remove(illnes);
+		}
 	}
 	@Override
 	public String toString() {
-		return "Molecules: \nid=" + id + " \ntype=" + type + "\n lowLevels=" + lowLevels + "\n highLevels=" + highLevels;
+		return "Molecules [id=" + id + ", type=" + type + ", lowLevels=" + lowLevels + ", highLevels=" + highLevels
+				+ "]";
 	}
-	
 }

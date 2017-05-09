@@ -4,19 +4,41 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Illnes")
+
 public class Illnes implements Serializable {
-	
-	
-	private static final long serialVersionUID = -7280949047692384198L;
-	
+private static final long serialVersionUID = -7280949047692384198L;
+	@Id
+	@GeneratedValue(generator="Illnes")
+	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
 	private Integer id;
 	private String name;
 	private String type;
 	private Boolean chronic;
+	@ManyToMany
+	@JoinTable(name="symp-ill",
+	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 	private List<Symptoms> symptoms;
+	@ManyToMany
+	@JoinTable(name="cells-ill",
+	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="cells_id", referencedColumnName="id")})
 	private List<Cells> cells;
+	@ManyToMany
+	@JoinTable(name="pats-ill",
+	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
 	private List<Patient> patients;
+	@ManyToMany
+	@JoinTable(name="mol-ill",
+	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="molecules_id", referencedColumnName="id")})
 	private List<Molecules> molecules;
+
 	
 	public Illnes() {
 		super();
@@ -128,10 +150,52 @@ public class Illnes implements Serializable {
 	public void setMolecules(List<Molecules> molecules) {
 		this.molecules = molecules;
 	}
+	public void addPatient(Patient patient) {
+		if (!patients.contains(patient)) {
+			this.patients.add(patient);
+		}
+	}
 
+	public void removePatient(Patient patient) {
+		if (patients.contains(patient)) {
+			this.patients.remove(patient);
+		}
+	}
+	public void addSymptoms (Symptoms symptom){
+		if (!symptoms.contains(symptom)) {
+			this.symptoms.add(symptom);
+		}
+	}
+	public void removeSymptom (Symptoms symptom){
+		if (symptoms.contains(symptom)) {
+			this.symptoms.remove(symptom);
+		}
+	}
+	public void addMolecule(Molecules molecule) {
+		if (!molecules.contains(molecule)) {
+			this.molecules.add(molecule);
+		}
+	}
+
+	public void removeMolecule(Molecules molecule) {
+		if (molecules.contains(molecule)) {
+			this.molecules.remove(molecule);
+		}
+	}
+	public void addCell(Cells cell) {
+		if (!cells.contains(cell)) {
+			this.cells.add(cell);
+		}
+	}
+
+	public void removeCell(Cells cell) {
+		if (cells.contains(cell)) {
+			this.cells.remove(cell);
+		}
+	}
 	@Override
 	public String toString() {
-		return "Illnes: \n id=" + id + "\n name=" + name + "\n type=" + type + "\n chronic=" + chronic ;
+		return "Illnes [id=" + id + ", name=" + name + ", type=" + type + ", chronic=" + chronic + "]";
 	}
-	
+
 }

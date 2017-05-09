@@ -11,13 +11,13 @@
  
 		<!-- Entity Class -->
 		<!-- Classes that are going to be converted into tables.The tables of the relationships don't need to be done-->
-		<class>Blood.db.pojosJpa.Cells</class>
-		<class>Blood.db.pojosJpa.Hospital</class>
-		<class>Blood.db.pojosJpa.Illnes</class>
-		<class>Blood.db.pojosJpa.Molecules</class>
-		<class>Blood.db.pojosJpa.Nurse</class>
-		<class>Blood.db.pojosJpa.Patient</class>
-		<class>Blood.db.pojosJpa.Symptoms</class>
+		<class>Blood.db.pojos.Cells</class>
+		<class>Blood.db.pojos.Hospital</class>
+		<class>Blood.db.pojos.Illnes</class>
+		<class>Blood.db.pojos.Molecules</class>
+		<class>Blood.db.pojos.Nurse</class>
+		<class>Blood.db.pojos.Patient</class>
+		<class>Blood.db.pojos.Symptoms</class>
  
 		<properties>	
 			<!-- Connection properties -->

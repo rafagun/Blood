@@ -8,8 +8,8 @@ import java.util.List;
 
 import Blood.db.jpa.GeneralMethods;
 import Blood.db.jpa.JPAHospital;
-import Blood.db.pojosJpa.Hospital;
-import Blood.db.pojosJpa.Nurse;
+import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Nurse;
 
 
 

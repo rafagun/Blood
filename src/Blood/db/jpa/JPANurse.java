@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import Blood.db.pojosJpa.Nurse;
+import Blood.db.pojos.Nurse;
 
 public class JPANurse extends GeneralMethods {
 	

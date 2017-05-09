@@ -296,7 +296,7 @@ else if (selection == 3){//patient
 	System.out.println("Introduce if the patient is smoker or not");
 	String smokerpatient = bufferedReader.readLine();
 	Boolean smoker = Boolean.parseBoolean(smokerpatient);
-	Patient patient= new Patient (namePatient , age , bloodPatient, gender , smoker);
+	Patient patient= new Patient (namePatient , age , bloodPatient, smoker ,gender );
 	dbPatient.SQLInsert(patient);
 	break;
 
@@ -452,7 +452,7 @@ else if (selection == 4){//cells
 		ArrayList<Cells> listCells = new ArrayList<>();
 		listCells = db_cells.SQLSelect();
 		for(Cells cell : listCells){
-			System.out.println("type: " +cell.getType());
+			System.out.println(cell);
 		}
 		break;
 		
@@ -559,7 +559,7 @@ else if (selection == 5){//molecules
 			ArrayList<Molecules> listMolecules = new ArrayList<>();
 			listMolecules = db_molecules.SQLSelect();
 			for(Molecules molecule : listMolecules){
-				System.out.println("type: " +molecule.getType());
+				System.out.println(molecule);
 			}
 			break;
 			
@@ -591,7 +591,7 @@ else if (selection == 5){//molecules
 			}
 			System.out.println("Enter the new low level or press enter");
 			String newLevel = bufferedReader.readLine();
-			Integer newLowLevel = Integer.parseInt(newLevel);
+			Float newLowLevel = Float.parseFloat(newLevel);
 			if (newLevel.equals("")){
 				
 				newLowLevel = moleculesUpdate.get(option).getLowLevels();
@@ -600,7 +600,7 @@ else if (selection == 5){//molecules
 			
 			System.out.println("Enter the new high level or press enter");
 			String newLevel2 = bufferedReader.readLine();
-			Integer newHighLevel = Integer.parseInt(newLevel2);
+			float newHighLevel = Float.parseFloat (newLevel2);
 			if (newLevel.equals("")){
 				
 				newHighLevel = moleculesUpdate.get(option).getHighLevels();

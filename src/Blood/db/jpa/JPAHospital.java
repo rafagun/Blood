@@ -9,8 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import Blood.db.pojosJpa.Hospital;
-import Blood.db.pojosJpa.Nurse;
+import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Nurse;
 public class JPAHospital extends GeneralMethods {
 	
 	public void SQLInsert(Hospital hospital){

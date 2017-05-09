@@ -1,45 +1,80 @@
 package Blood.db.pojos;
-
 import java.awt.image.BufferedImage;
+
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
+import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Patient;
+
+@Entity
+@Table(name="Nurses")
 public class Nurse implements Serializable {
-	
-	
-	private static final long serialVersionUID = 1857194774423858547L;
-	
+private static final long serialVersionUID = 1857194774423858547L;
+	@Id
+	@GeneratedValue(generator="Nurses")
+	@TableGenerator(name="Nurses", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Nurses")
 	private Integer id;
 	private String name;
+	@Basic(fetch=FetchType.LAZY)
+	@Lob
 	private byte[] photo;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="hosp_id")
 	private Hospital hospital;
+	@ManyToMany(mappedBy="nurses")
 	private List<Patient> patients;
 	
+	//modificar constructores lista de pacientes
 	public Nurse() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.patients= new ArrayList<>();
+		this.patients = new ArrayList<>();
 	}
-	//modificar constructores porq falta lista de pacientes
+	
+	public Nurse(String name, byte[] photo, Hospital hospital, List<Patient> patients) {
+		super();
+		this.name = name;
+		this.photo = photo;
+		this.hospital = hospital;
+		this.patients = patients;
+	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
 	public Nurse (Integer id, String name, byte[] photo) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.photo = photo;
-		this.patients= new ArrayList<Patient>();
 	}
 	public Nurse (String name, byte[] photo) {
 		super();
 		this.name = name;
 		this.photo = photo;
-		this.patients=new ArrayList<Patient>();
 	}
 	
 	@Override
@@ -78,17 +113,27 @@ public class Nurse implements Serializable {
 		this.name = name;
 	}
 	public byte[] getPhoto() {
+		
+		
 		return photo;
 	}
-	public void setPhoto(String direction) throws IOException {
-		File file = new File (direction);
-		BufferedImage bufferedImage = ImageIO.read(file);
+	public void setPhoto(String direction) {
+		try{
+			File file = new File (direction);
+			BufferedImage bufferedImage = ImageIO.read(file);
+			
+			 // get DataBufferBytes from Raster
+			
+			 WritableRaster raster = bufferedImage.getRaster();
+			 DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
 
-		 // get DataBufferBytes from Raster
-		 WritableRaster raster = bufferedImage .getRaster();
-		 DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-
-		 this.photo=data.getData();
+			 this.photo=data.getData();
+			
+		}
+		catch (Exception ex){
+			
+		}
+		
 	}
 
 	public Hospital getHospital() {
@@ -98,20 +143,20 @@ public class Nurse implements Serializable {
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
+	public void addPatient(Patient patient) {
+		if (!patients.contains(patient)) {
+			this.patients.add(patient);
+		}
+	}
+
+	public void removePatient(Patient patient) {
+		if (patients.contains(patient)) {
+			this.patients.remove(patient);
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "Nurse: \nid=" + id + "\n name=" + name + "\n hospital=" + hospital;
+		return "Nurse [id=" + id + ", name=" + name + ", hospital=" + hospital + "]";
 	}
-
-	public List<Patient> getPatients() {
-		return patients;
-	}
-
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}
-	
-	
 }
-

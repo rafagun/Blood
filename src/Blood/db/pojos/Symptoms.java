@@ -1,27 +1,33 @@
 package Blood.db.pojos;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+@Entity
+@Table(name="Symptoms")
 
-public class Symptoms implements Serializable {
-
-	@Override
-	public String toString() {
-		return "Symptoms: \n id=" + id + "\n type=" + type + "\n severity=" + severity;
-	}
-	private static final long serialVersionUID = 6952444966932416547L;
-    
+public class Symptoms implements Serializable{
+private static final long serialVersionUID = 6952444966932416547L;
+    @Id
+    @GeneratedValue(generator="Symptoms")
+    @TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
 	private Integer id;
     private String type;
     private String severity;
+	@ManyToMany
+	@JoinTable(name="pats-symp",
+	joinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
     private List<Patient> patients;
-    private List<Illnes> illnes;
+    @ManyToMany(mappedBy="symptoms")
+    private List<Illnes> illness;
     
     public Symptoms() {
     	super();
     	this.patients = new ArrayList<>();
-    	this.illnes = new ArrayList<>();
+    	this.illness = new ArrayList<>();
     	// TODO Auto-generated constructor stub
     }
     
@@ -29,15 +35,15 @@ public class Symptoms implements Serializable {
     	super();
     	this.id = id;
     	this.type = type;
-    	this.severity = severity;
+    	this.severity=severity;
     	this.patients = new ArrayList<Patient>();
-    	this.illnes = new ArrayList<Illnes>();
+    	this.illness = new ArrayList<Illnes>();
     }
     
     public Symptoms(String type, String severity){
     	super();
     	this.type = type;
-    	this.severity = severity;
+    	this.severity= severity;
     }
 @Override
 public int hashCode() {
@@ -75,12 +81,6 @@ public String getType() {
 public void setType(String type) {
 	this.type = type;
 }
-public String getSeverity (){
-	return severity;
-}
-public void setSeverity (String severity){
-	this.severity = severity;
-}
 public List<Patient> getPatients() {
 	return patients;
 }
@@ -88,11 +88,40 @@ public void setPatients(List<Patient> patients) {
 	this.patients = patients;
 }
 public List<Illnes> getIllnes() {
-	return illnes;
+	return illness;
 }
-public void setIllnes(List<Illnes> illnes) {
-	this.illnes = illnes;
+public void setIllnes(List<Illnes> illness) {
+	this.illness = illness;
+}
+public void addIllnes (Illnes illnes){
+	if (!illness.contains(illnes)) {
+		this.illness.add(illnes);
+	}
+}
+public void removeIllnes (Illnes illnes){
+	if (illness.contains(illnes)) {
+		this.illness.remove(illnes);
+	}
+}
+public void addPatient(Patient patient) {
+	if (!patients.contains(patient)) {
+		this.patients.add(patient);
+	}
 }
 
+public void removePatient(Patient patient) {
+	if (patients.contains(patient)) {
+		this.patients.remove(patient);
+	}
+}
+@Override
+public String toString() {
+	return "Symptoms [id=" + id + ", type=" + type + "]";
+}
+
+public String getSeverity() {
+	// TODO Auto-generated method stub
+	return severity;
+}
 
 }
