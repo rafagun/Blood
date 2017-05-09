@@ -14,7 +14,7 @@ import Blood.db.pojos.Molecules;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 import Blood.db.pojos.Symptoms;
-public class Interface extends GeneralMethods {
+public class Interface extends GeneralMethodsJdbc {
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");
@@ -57,7 +57,7 @@ bufferedReader = new BufferedReader(inputStreamReader);
 int selection=0;
 int opcion=0;
 	
-	GeneralMethods.SQLConnect();
+	GeneralMethodsJdbc.SQLConnect();
 	
 while (true){
 //mostramos por pantalla nuestro menu
@@ -745,7 +745,7 @@ else if (selection == 7){//illness
 }
 }
 else if (selection == 8){//exitt
-	GeneralMethods.SQLDisconnect();
+	GeneralMethodsJdbc.SQLDisconnect();
 	System.exit(0);
 }
 

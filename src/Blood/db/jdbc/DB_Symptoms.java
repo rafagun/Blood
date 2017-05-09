@@ -12,7 +12,7 @@ import java.util.List;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms extends GeneralMethods {
+public class DB_Symptoms extends GeneralMethodsJdbc {
 
 
 

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Blood.db.pojos.Illnes;
-public class DB_Illness extends GeneralMethods{
+public class DB_Illness extends GeneralMethodsJdbc{
 	public void SQLCreate() throws SQLException {
 		try {
 

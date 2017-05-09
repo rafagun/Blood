@@ -9,7 +9,7 @@ import java.util.List;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 
-public class DB_Patient extends GeneralMethods {
+public class DB_Patient extends GeneralMethodsJdbc {
 	
 	
 	public void SQLCreate() throws SQLException {

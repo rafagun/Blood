@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import Blood.db.pojos.Nurse;
 
 
-public class DB_Nurse extends GeneralMethods {
+public class DB_Nurse extends GeneralMethodsJdbc {
 	
 	
 	public void SQLCreate() throws SQLException {
