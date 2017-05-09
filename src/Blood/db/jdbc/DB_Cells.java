@@ -12,7 +12,7 @@ import java.util.List;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
 
-public class DB_Cells extends GeneralMethodsJdbc{
+public class DB_Cells extends Connect{
 
 	public void SQLCreate() throws SQLException{
 		try {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import Blood.db.pojos.Nurse;
 
 
-public class DB_Nurse extends GeneralMethodsJdbc {
+public class DB_Nurse extends Connect {
 	
 	
 	public void SQLCreate() throws SQLException {

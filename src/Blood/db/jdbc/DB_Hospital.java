@@ -12,7 +12,7 @@ import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends GeneralMethodsJdbc{
+public class DB_Hospital extends Connect{
 
 public void SQLCreate()  {
 try {

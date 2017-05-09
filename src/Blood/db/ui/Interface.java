@@ -7,6 +7,8 @@ import java.util.List;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
+import Blood.db.jpa.GeneralMethods;
+import Blood.db.jpa.JPAHospital;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Illnes;
@@ -14,7 +16,7 @@ import Blood.db.pojos.Molecules;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 import Blood.db.pojos.Symptoms;
-public class Interface extends GeneralMethodsJdbc {
+public class Interface extends GeneralMethods implements GeneralMethodsJdbc {
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");
@@ -43,6 +45,13 @@ public class Interface extends GeneralMethodsJdbc {
 	
 	}
 	
+	static void menu3(){
+		System.out.println("Introduce the manager you want to work with");
+		System.out.println("1.- JDBC manager");
+		System.out.println("2.-JPA manager");
+		System.out.println("3.-Exit");
+	}
+	
 public static void main(String[] args) throws SQLException 
 {
 
@@ -56,7 +65,11 @@ bufferedReader = new BufferedReader(inputStreamReader);
 
 int selection=0;
 int opcion=0;
-	
+	while (true){
+		menu3();
+		int sel= Integer.parseInt(bufferedReader.readLine());
+		if (sel==1){
+		
 	GeneralMethodsJdbc.SQLConnect();
 	
 while (true){
@@ -744,10 +757,128 @@ else if (selection == 7){//illness
 }
 else if (selection == 8){//exitt
 	GeneralMethodsJdbc.SQLDisconnect();
-	System.exit(0);
+	break;
 }
 
-}}
+}
+		}
+		else if(sel==2){
+			try{
+				GeneralMethods.StartMethod();
+			menu1();	
+			
+			int option =Integer.parseInt( bufferedReader.readLine());
+			if (option == 1){
+				JPAHospital jpa_Hospital = new JPAHospital();
+				System.out.println("Choose an option");
+				menu2();
+				int sele = Integer.parseInt(bufferedReader.readLine());
+				if (sele ==1){//Insert
+					Hospital hospital = new Hospital();
+					System.out.println("Introduce a name");
+					hospital.setName(bufferedReader.readLine());
+					System.out.println("Introduce a location");
+					hospital.setLocation(bufferedReader.readLine());
+					System.out.print("Introduce a range");
+					hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
+					jpa_Hospital.SQLInsert(hospital);
+					
+				}
+				else if(sele == 2){//delete
+					System.out.println("Introduce the name of the hospital that you want to delete");
+					List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
+					Iterator it = hospitals.iterator();
+					 
+					for(int i=1; it.hasNext(); i++){
+						System.out.println(i+".-"+it.toString());
+					}
+					System.out.println("Introduzca el hospital que desea seleccionar");
+					int op =Integer.parseInt(bufferedReader.readLine());
+					jpa_Hospital.SQLDelete(hospitals.get(op));// the hospital we were looking for
+					
+						
+				}
+				else if (sele == 3){//read
+					System.out.println("Introduce the name of the hospital that you want to delete");
+					List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
+					Iterator<Hospital> it = hospitals.iterator();
+					for(int i=1; it.hasNext(); i++){
+						System.out.println(i+".-"+it.toString());
+					}
+				}
+				else if (sele == 4){//update
+					System.out.println("Introduce the name of the hospital that you want to delete");
+					List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
+					Iterator it = hospitals.iterator();
+					 
+					for(int i=1; it.hasNext(); i++){
+						System.out.println(i+".-"+it.toString());
+					}
+					
+					System.out.println("Introduzca el hospital que desea seleccionar");
+					int op =Integer.parseInt(bufferedReader.readLine());
+					Hospital newHosp = new Hospital();
+					
+					System.out.println("Introduce the changes you want to make in the name or press enter");
+					String name = bufferedReader.readLine();
+					if (name.equals("")) newHosp.setName(hospitals.get(op).getName());
+					else newHosp.setName(name);
+					
+					System.out.println("Introduce the changes you want to make in the Location or press enter");
+					
+					String location = bufferedReader.readLine();
+					if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
+					else newHosp.setLocation(location);
+					
+					System.out.println("Introduce the changes you want to make in the name or press enter");
+					String lineaRange = bufferedReader.readLine();
+					if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
+					else{
+						newHosp.setRange(Integer.parseInt(lineaRange));
+					}
+					
+					jpa_Hospital.SQLUpdate(hospitals.get(op), newHosp);
+				}
+				
+				else if (sele == 5){//
+					
+					
+				}
+			}
+			else if (option==2){//nurse
+				menu2();
+				Nurse nurse = new Nurse();
+				System.out.println("Choose an option");
+				int sele = Integer.parseInt(bufferedReader.readLine());
+				if (sele == 1) {
+					
+					System.out.println("Introduce a name");
+					nurse.setName(bufferedReader.readLine());
+					System.out.println("Introduce the direction of the photo with its extension");
+					nurse.setPhoto(bufferedReader.readLine());
+					System.out.println("Introduce his/her hospital");
+					
+					
+				}
+			}
+			
+				}
+				catch(Exception ex){
+					ex.printStackTrace();
+				}
+			
+			
+		//aqui jpa	
+		}
+		else if (sel==3){
+			System.exit(0);
+		}
+	
+	
+}
+	
+	
+}
 catch (IOException ex)
 {
 //entrara en el catch y se lanzara una excepcion en el caso de que no se haya leido correctamente
@@ -772,6 +903,4 @@ ex.printStackTrace();
 }
 
 }
-}}
-
-//HOLA	   	   
+}}   	   

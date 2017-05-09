@@ -1,9 +1,15 @@
 package Blood.db.jpa;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-public class GeneralMethods {
+import Blood.db.jdbc.Connect;
+
+public abstract class GeneralMethods extends Connect {
 	protected static EntityManager em;
 	
 	static protected EntityManager StartMethod() {

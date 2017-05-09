@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
+import javax.persistence.EntityManager;
+
 
 
 public interface FunctionsDB <Obj> {
