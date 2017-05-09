@@ -1,7 +1,9 @@
 package Blood.db.jdbc;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -74,9 +76,13 @@ public class DB_Nurse extends GeneralMethodsJdbc {
 		System.out.println("Nurse with the name:" + nurse.getName()+ "has been deleted");
 	}
 	
-	public void SQLInsert(Nurse nurse){
+	public void SQLInsert(String nurname , String nameFile){
 		try {
 		Statement stmt = c.createStatement();
+		File photo= new File ("./photos/"+nameFile);
+		InputStream streamblob= new FileInputStream(photo);
+		byte[] bytesblob= new byte [streamblob.available()];
+		Nurse nurse= new Nurse(nurname, bytesblob);
 		String sql = "INSERT INTO Nurses (name,photo) "
 
 		+ "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";

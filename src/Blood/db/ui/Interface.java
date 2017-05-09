@@ -199,10 +199,8 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		System.out.println("Introduce the name of the nurse");
 		String nurseName = bufferedReader.readLine();
 		System.out.println("Introduce the direction of the photo with its extension");
-		String nursePhoto = bufferedReader.readLine();
-		byte[] photo = nursePhoto.getBytes();
-		Nurse nurseInterface = new Nurse (nurseName,photo);
-		db_Nurse.SQLInsert(nurseInterface);
+		String Filephoto = bufferedReader.readLine();
+		db_Nurse.SQLInsert(nurseName , Filephoto);
 		System.out.println("the information has been added");
 		break;
 
