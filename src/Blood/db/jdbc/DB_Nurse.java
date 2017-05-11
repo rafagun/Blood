@@ -14,12 +14,12 @@ import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
 
 
-public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
+public class DB_Nurse implements FunctionsDB <Nurse> {
 	
 	
 	public void SQLCreate() throws SQLException {
 		try {
-		Statement stmt2 = c.createStatement();
+		Statement stmt2 = Connect.c.createStatement();
 		String sql2 = "CREATE TABLE Nurses "
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ "name TEXT NOT NULL,"
@@ -27,7 +27,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 				+ "hospital_id INTEGER REFERENCES hospital(id) ON DELETE CASCADE)";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "CREATE TABLE NursesPatients"
 				+ "(nurseId INTEGER REFERENCES Nurses(id) ON DELETE SET NULL"
 				+ "patientId INTEGER REFERENCES Patient(id) ON DELETE SET NULL"
@@ -44,7 +44,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 	public ArrayList<Nurse> SQLSelect(){
 		ArrayList<Nurse> nurses = new ArrayList<Nurse>();
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "SELECT * FROM Nurses";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -67,7 +67,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 		try {
 
 
-		Statement stmt2 = c.createStatement();
+		Statement stmt2 = Connect.c.createStatement();
 		String sql2 = "DROP TABLE Nurses";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
@@ -80,7 +80,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 	
 	public void SQLDelete(Nurse nurse) throws IOException, SQLException {
 		String sql = "DELETE FROM Nurses WHERE id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = Connect.c.prepareStatement(sql);
 		prep.setInt(1, nurse.getId());
 		prep.executeUpdate();
 		prep.close();
@@ -89,7 +89,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 	
 	public void SQLInsert(Nurse nurse){
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
@@ -102,7 +102,7 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 	public List<Nurse> SQLSearch (String nurseName){
 		List<Nurse> nurses  = new LinkedList<>();
 		try{
-			Statement stmt = c.createStatement();
+			Statement stmt = Connect.c.createStatement();
 			String sql = "SELECT * FROM Nurses WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
 			int id = rs.getInt("id");
@@ -118,6 +118,12 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 		}
 			return nurses;
 		}
+
+	@Override
+	public void SQLUpdate(Nurse oldObj, Nurse newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 	/**public void SQLUpdate(Nurse nurseUpdate, String nurseNameUpdate) throws IOException , SQLException {

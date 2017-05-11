@@ -12,13 +12,13 @@ import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends Connect implements FunctionsDB<Hospital>{
+public class DB_Hospital implements FunctionsDB<Hospital>{
 
 public void SQLCreate()  {
 try {
 
 // Create tables: begin
-Statement stmt1 = super.c.createStatement();
+Statement stmt1 = Connect.c.createStatement();
 String sql1 = "CREATE TABLE Hospital "
 + "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 + "name TEXT NOT NULL, "
@@ -36,7 +36,7 @@ e.printStackTrace();
 public List<Hospital> SQLSelect(){
 List<Hospital> hospitals = new ArrayList<Hospital>();
 try {
-Statement stmt = super.c.createStatement();
+Statement stmt = Connect.c.createStatement();
 
 String sql = "SELECT * FROM Hospital";
 ResultSet rs = stmt.executeQuery(sql);
@@ -61,7 +61,7 @@ public void SQLDrop(){
 try {
 
 // Drop tables: begin
-Statement stmt1 = super.c.createStatement();
+Statement stmt1 = Connect.c.createStatement();
 String sql1 = "DROP TABLE hospital";
 stmt1.executeUpdate(sql1);
 stmt1.close();
@@ -72,7 +72,7 @@ e.printStackTrace();
 }
 public void SQLInsert(Hospital hospital){
 try {
-Statement stmt = c.createStatement();
+Statement stmt = Connect.c.createStatement();
 String sql = "INSERT INTO hospital (name, location, range) "
 
 + "VALUES ('" + hospital.getName() + "', '" + hospital.getLocation()	+ "','"+ hospital.getRange() + "');";
@@ -91,7 +91,7 @@ public List<Hospital> SQLSearch(String hospName) {
 	List<Hospital> hospitales = new LinkedList<>();
 try {
 	String sql = "SELECT * FROM hospital WHERE name LIKE ?";
-PreparedStatement prep = super.c.prepareStatement(sql);
+PreparedStatement prep = Connect.c.prepareStatement(sql);
 prep.setString(1, hospName);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {
@@ -115,7 +115,7 @@ return hospitales;
 public void SQLDelete(Hospital hospital) throws IOException, SQLException {
 	try{
 	String sql = "DELETE FROM Hospital WHERE id=?";
-	PreparedStatement prep = super.c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setInt(1, hospital.getId());
 	prep.executeUpdate();
 	prep.close();
@@ -129,7 +129,7 @@ public void SQLDelete(Hospital hospital) throws IOException, SQLException {
 }
 public void SQLUpdate(Hospital hospUpdate) throws IOException , SQLException {
 	String sql = "UPDATE Hospital SET name=? ,location=? ,range=?  WHERE id=?";
-PreparedStatement prep = super.c.prepareStatement(sql);
+PreparedStatement prep = Connect.c.prepareStatement(sql);
 prep.setString(1, hospUpdate.getName());
 prep.setString(2, hospUpdate.getLocation());
 prep.setInt(3, hospUpdate.getRange());
@@ -137,6 +137,12 @@ prep.setInt(4, hospUpdate.getId());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();
+}
+
+@Override
+public void SQLUpdate(Hospital oldObj, Hospital newObj) throws IOException, SQLException {
+	// TODO Auto-generated method stub
+	
 }
 
 	

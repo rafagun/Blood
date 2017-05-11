@@ -11,13 +11,13 @@ import java.util.List;
 import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Illnes;
 
-public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
+public class DB_Illness implements FunctionsDB<Illnes>{
 	
 	public void SQLCreate() throws SQLException {
 		try {
 
 		// Create tables: begin
-		Statement stmt1 = c.createStatement();
+		Statement stmt1 = Connect.c.createStatement();
 		String sql = "CREATE TABLE Illnes "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 		+ "name TEXT NOT NULL, "
@@ -61,7 +61,7 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 	public List<Illnes> SQLSelect() {
 		List<Illnes> illness = new ArrayList<Illnes>();
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 
 		String sql = "SELECT * FROM Illnes";
 		ResultSet rs = stmt.executeQuery(sql);
@@ -86,7 +86,7 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 		try {
 
 		// Drop tables: begin
-		Statement stmt1 = c.createStatement();
+		Statement stmt1 = Connect.c.createStatement();
 		String sql1 = "DROP TABLE illnes";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -96,7 +96,7 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 		}}
 	public void SQLInsert(Illnes illnes){
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "INSERT INTO illnes (name, type, chronic) "
 		//Se ponen comillas simples y comillas dobles porque las dobles dentro del parentesis se eliminan
 		//con las de "VALUES" y por tanto quedan las comillas simples que son las necesarias en SQL.
@@ -116,7 +116,7 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 		List<Illnes> illness =new LinkedList<Illnes>();
 	try {
 		String sql = "SELECT * FROM Illnes WHERE name LIKE ?";
-	PreparedStatement prep = c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, illnessName);
 	ResultSet rs = prep.executeQuery();
 	while (rs.next()) {
@@ -135,6 +135,16 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 	e.printStackTrace();
 	}
 	return illness;
+	}
+	@Override
+	public void SQLDelete(Illnes obj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Illnes oldObj, Illnes newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

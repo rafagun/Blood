@@ -1,5 +1,6 @@
 package Blood.db.ui;
 import java.io.*;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +8,6 @@ import java.util.List;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
-import Blood.db.jpa.GeneralMethods;
 import Blood.db.jpa.JPAHospital;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
@@ -16,7 +16,7 @@ import Blood.db.pojos.Molecules;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 import Blood.db.pojos.Symptoms;
-public class Interface extends GeneralMethods implements GeneralMethodsJdbc {
+public class Interface{
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");
@@ -70,7 +70,7 @@ int opcion=0;
 		int sel= Integer.parseInt(bufferedReader.readLine());
 		if (sel==1){
 		
-	GeneralMethodsJdbc.SQLConnect();
+	Connect.SQLConnect();
 	
 while (true){
 //mostramos por pantalla nuestro menu
@@ -225,8 +225,8 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	case 3: 
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
-		Nurse nurse = db_Nurse.SQLSearch(nameSearch);
-		System.out.println("name:" + nurse.getName()+ "     "+"photo:"+ nurse.getPhoto());
+		List<Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
+		
 
 		break;
 	
@@ -739,7 +739,7 @@ else if (selection == 7){//illness
 		break;
 	 
 	case 5:
-		ArrayList<Illnes> lista= new ArrayList<>();
+		List<Illnes> lista= new ArrayList<>();
 		lista = db_illness.SQLSelect();
 		for (Illnes illness1: lista){
 			System.out.println(illness1);
@@ -761,7 +761,7 @@ else if (selection == 7){//illness
 }
 }
 else if (selection == 8){//exitt
-	GeneralMethodsJdbc.SQLDisconnect();
+	Connect.SQLDisconnect();
 	break;
 }
 
@@ -771,7 +771,7 @@ else if (selection == 8){//exitt
 			try{
 				int option=0;
 				while(option!=8){
-				GeneralMethods.StartMethod();
+				Connect.StartMethod();
 			menu1();	
 			System.out.println("Introduce an option:");
 			

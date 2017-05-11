@@ -13,21 +13,21 @@ import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
+public class DB_Symptoms implements FunctionsDB <Symptoms> {
 
 
 
 	public void SQLCreate() throws SQLException {
 
 		// Create tables: begin
-		Statement stmt1 = c.createStatement();
+		Statement stmt1 = Connect.c.createStatement();
 		String sql1 = "CREATE TABLE Symptoms "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 		+ "type TEXT NOT NULL,"
 		+ "severity TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		stmt1 = c.createStatement();
+		stmt1 = Connect.c.createStatement();
 		String sql2 = "CREATE TABLE SympsIlls"
 				+ "(symptomsId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE"
 				+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
@@ -40,7 +40,7 @@ public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 		}
 	public void SQLInsert(Symptoms symptom){
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "INSERT INTO Symptoms (type, severity) "
 
 		+ "VALUES ('" + symptom.getType() +"','"+ symptom.getSeverity() + "');";
@@ -57,7 +57,7 @@ public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 	public ArrayList<Symptoms> SQLSelect(){
 		ArrayList<Symptoms> symptoms = new ArrayList<Symptoms>();
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "SELECT * FROM Symptoms";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -80,7 +80,7 @@ public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 		try {
 
 		// Drop tables: begin
-		Statement stmt2 = c.createStatement();
+		Statement stmt2 = Connect.c.createStatement();
 		String sql2 = "DROP TABLE Symptoms";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
@@ -94,7 +94,7 @@ public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 		List<Symptoms> symptoms= new LinkedList<>();
 	try {
 		String sql = "SELECT * FROM symptoms WHERE type LIKE ?";
-	PreparedStatement prep = c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, symptomsName);
 	ResultSet rs = prep.executeQuery();
 	while (rs.next()) {

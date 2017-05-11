@@ -13,13 +13,13 @@ import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Molecules;
 
-public class DB_Molecules extends Connect implements FunctionsDB<Molecules>{
+public class DB_Molecules implements FunctionsDB<Molecules>{
 
 	public void SQLCreate() throws SQLException{
 		try {
 
 
-			Statement stmt4 = c.createStatement();
+			Statement stmt4 = Connect.c.createStatement();
 			String sql4 = "CREATE TABLE Molecules "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ "type  TEXT NOT NULL, "
@@ -36,7 +36,7 @@ public class DB_Molecules extends Connect implements FunctionsDB<Molecules>{
 public ArrayList<Molecules> SQLSelect(){
 ArrayList<Molecules> Molecules1 = new ArrayList<Molecules>();
 try {
-Statement stmt = c.createStatement();
+Statement stmt = Connect.c.createStatement();
 
 String sql = "SELECT * FROM Molecules";
 ResultSet rs = stmt.executeQuery(sql);
@@ -62,7 +62,7 @@ public void SQLDrop(){
 try {
 
 
-Statement stmt4 = c.createStatement();
+Statement stmt4 = Connect.c.createStatement();
 String sql4 = "DROP TABLE molecules";
 stmt4.executeUpdate(sql4);
 stmt4.close();
@@ -74,7 +74,7 @@ e.printStackTrace();
 
 public void SQLInsert(Molecules molecules){
 try {
-Statement stmt = c.createStatement();
+Statement stmt = Connect.c.createStatement();
 String sql = "INSERT INTO molecules (id, type, lowLevels, highLevels) "
 
 + "VALUES ('"+molecules.getId()+"','" + molecules.getType()	+ "','"+ molecules.getLowLevels() + "','"+ molecules.getHighLevels() + "' );";
@@ -93,7 +93,7 @@ public List<Molecules> SQLSearch(String moleculeName) {
 	List<Molecules> molecules = new LinkedList<>();
 try {
 	String sql = "SELECT * FROM Molecules WHERE type LIKE ?";
-PreparedStatement prep = super.c.prepareStatement(sql);
+PreparedStatement prep = Connect.c.prepareStatement(sql);
 prep.setString(1, moleculeName);
 ResultSet rs = prep.executeQuery();
 while (rs.next()) {
@@ -117,7 +117,7 @@ return molecules;
 public void SQLDelete(Molecules molecule) throws IOException, SQLException {
 	try{
 	String sql = "DELETE FROM Molecules WHERE id=?";
-	PreparedStatement prep = super.c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setInt(1, molecule.getId());
 	prep.executeUpdate();
 	prep.close();
@@ -132,7 +132,7 @@ public void SQLDelete(Molecules molecule) throws IOException, SQLException {
 
 public void SQLUpdate(Molecules molecUpdate) throws IOException , SQLException {
 	String sql = "UPDATE Molecules SET id= ? ,type=? ,lowLevels=? ,highLevels=?  WHERE id=?";
-PreparedStatement prep = super.c.prepareStatement(sql);
+PreparedStatement prep = Connect.c.prepareStatement(sql);
 prep.setInt(1,molecUpdate.getId());
 prep.setString(2, molecUpdate.getType());
 prep.setFloat(3, molecUpdate.getLowLevels());
@@ -140,6 +140,11 @@ prep.setFloat(4, molecUpdate.getHighLevels());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();
+}
+@Override
+public void SQLUpdate(Molecules oldObj, Molecules newObj) throws IOException, SQLException {
+	// TODO Auto-generated method stub
+	
 }
 
 }

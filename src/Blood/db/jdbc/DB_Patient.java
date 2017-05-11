@@ -10,12 +10,12 @@ import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 
-public class DB_Patient extends Connect implements FunctionsDB<Patient> {
+public class DB_Patient implements FunctionsDB<Patient> {
 	
 	
 	public void SQLCreate() throws SQLException {
 		try {	
-	Statement stmt3 = c.createStatement();
+	Statement stmt3 = Connect.c.createStatement();
 	String sql3 = "CREATE TABLE Patient "
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 			+ "name TEXT NOT NULL, "
@@ -26,7 +26,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	stmt3.executeUpdate(sql3);
 	stmt3.close();
 	
-	stmt3= c.createStatement();
+	stmt3= Connect.c.createStatement();
 	String sql = "CREATE TABLE PatsMolecules"
 			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
 			+ "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE"
@@ -35,7 +35,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	
 	stmt3.executeUpdate(sql);
 	stmt3.close();
-	stmt3 = c.createStatement();
+	stmt3 = Connect.c.createStatement();
 	String sql1 = "CREATE TABLE PatsCells"
 			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
 			+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE "
@@ -43,7 +43,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 			+ "PRIMARY KEY (patientID,cellsId))";
 	stmt3.executeUpdate(sql1);
 	stmt3.close();
-	stmt3 = c.createStatement();
+	stmt3 = Connect.c.createStatement();
 	String sql2 = "CREATE TABLE PatsIllnes"
 			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
 			+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
@@ -52,7 +52,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	stmt3.executeUpdate(sql2);
 	stmt3.close();
 
-	stmt3 = c.createStatement();
+	stmt3 = Connect.c.createStatement();
 	String sql31 = "CREATE TABLE PatsSymptoms"
 			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
 			+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE"
@@ -73,7 +73,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	
 	public void SQLDrop(){
 		try {
-	Statement stmt3 = c.createStatement();
+	Statement stmt3 = Connect.c.createStatement();
 	String sql3 = "DROP TABLE Patient";
 	stmt3.executeUpdate(sql3);
 	stmt3.close();
@@ -87,7 +87,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		try {
 			Patient patient = new Patient();
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "SELECT * FROM Patient";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -115,7 +115,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	}
 	public void SQLInsert(Patient patient){// falta por hacer lo de las comillas que es odioso
 		try {
-		Statement stmt = c.createStatement();
+		Statement stmt = Connect.c.createStatement();
 		String sql = "INSERT INTO Patient (name, age, blood, gender, smoker) "
 
 		+ "VALUES ('" + patient.getName()  + "','"+ patient.getAge() + "','"+ patient.getBlood() + "','"+ patient.getGender() + "','"+ patient.getSmoker()+ "');";
@@ -131,7 +131,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 		List<Patient> patients = new LinkedList<>();
 	try {
 		String sql = "SELECT * FROM Patient WHERE name LIKE ?";
-	PreparedStatement prep = super.c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, patientName);
 	ResultSet rs = prep.executeQuery();
 	while (rs.next()) {
@@ -159,7 +159,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	public void SQLDelete(Patient patient) throws IOException, SQLException {
 		try{
 			String sql = "DELETE FROM Patient WHERE id=?";
-		PreparedStatement prep = super.c.prepareStatement(sql);
+		PreparedStatement prep = Connect.c.prepareStatement(sql);
 		prep.setInt(1, patient.getId());
 		prep.executeUpdate();
 		prep.close();
@@ -177,7 +177,7 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	public void SQLUpdate(Patient patientUpdate) throws IOException , SQLException {
 
 		String sql = "UPDATE Hospital SET name=? ,age=? ,blood=?, gender=?, smoker=?  WHERE id=?";
-	PreparedStatement prep = super.c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, patientUpdate.getName());
 	prep.setInt(2, patientUpdate.getAge());
 	prep.setString(3, patientUpdate.getBlood());
@@ -190,5 +190,11 @@ public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 
 	
 }
+
+	@Override
+	public void SQLUpdate(Patient oldObj, Patient newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

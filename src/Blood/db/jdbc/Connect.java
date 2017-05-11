@@ -1,10 +1,47 @@
 package Blood.db.jdbc;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 import Blood.db.jpa.FunctionsDB;
 
 public abstract class Connect {// the pupose of this class is to avoid the multiple inheritance problem that we had with GeneralMethods
-	protected static Connection c;
-	
+public static Connection c;
+public static void SQLConnect() {
+	try {
+	// Open database connection
+	Class.forName("org.sqlite.JDBC");
+	Connect.c = DriverManager.getConnection("jdbc:sqlite:./db/blood.db");
+	Connect.c.createStatement().execute("PRAGMA foreign_keys=ON");
+	System.out.println("Database connection opened.");
+	} catch (Exception e) {
+	e.printStackTrace();
+	}
+
+}
+
+public static void SQLDisconnect() {
+	// Close database connection
+	try {
+	Connect.c.close();
+	System.out.println("Database connection closed.");
+	} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+}
+
+ public static EntityManager em;
+
+public static EntityManager StartMethod() {
+    em = Persistence.createEntityManagerFactory("blood-provider").createEntityManager();
+	em.getTransaction().begin();
+	em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
+	em.getTransaction().commit();
+	return em;
+}
 }
