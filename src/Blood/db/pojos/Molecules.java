@@ -11,7 +11,7 @@ public class Molecules implements Serializable {
 private static final long serialVersionUID = -3290462529390006987L;
 	@Id
 	@GeneratedValue(generator="Molecules")
-	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
+	@TableGenerator(name="Molecules", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Molecules")
 	private Integer id;
 	private String type;
 	private float lowLevels;

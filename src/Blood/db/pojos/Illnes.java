@@ -13,7 +13,7 @@ public class Illnes implements Serializable {
 private static final long serialVersionUID = -7280949047692384198L;
 	@Id
 	@GeneratedValue(generator="Illnes")
-	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
+	@TableGenerator(name="Illnes", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Illnes")
 	private Integer id;
 	private String name;
 	private String type;
