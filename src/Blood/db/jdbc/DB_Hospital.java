@@ -34,7 +34,7 @@ e.printStackTrace();
 }
 
 public List<Hospital> SQLSelect(){
-ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
+List<Hospital> hospitals = new ArrayList<Hospital>();
 try {
 Statement stmt = super.c.createStatement();
 
