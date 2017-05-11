@@ -18,12 +18,28 @@ public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
 
 		// Create tables: begin
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE Illnes "
+		String sql = "CREATE TABLE Illnes "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT ,"
 		+ "name TEXT NOT NULL, "
 		+ "type TEXT NOT NULL, "
 		+ "chronic BOOLEAN)";
-		stmt1.executeUpdate(sql1);
+		stmt1.executeUpdate(sql);
+		stmt1.close();
+		String sqL1 = "CREATE TABLE Illnes-Molecules "
+				+ "(moleculesId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE"
+				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
+				+ "Level INTEGER  NOT NULL"
+				+ "H-L TEXT NOT NULL "
+				+ "PRIMARY KEY (moleculesId,IllnesId))";
+		stmt1.executeUpdate(sqL1);
+		stmt1.close();
+		String sqL2 = "CREATE TABLE Illnes-Cells "
+				+ "(cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE"
+				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
+				+ "Level INTEGER  NOT NULL"
+				+ "H-L TEXT NOT NULL "
+				+ "PRIMARY KEY (cellsId,IllnesId))";
+		stmt1.executeUpdate(sqL2);
 		stmt1.close();
 		
 	

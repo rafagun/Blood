@@ -31,7 +31,7 @@ public class JPAHospital extends GeneralMethods {
 	
 	
 	 Hospital SQLSearch1(String name){
-		Query q1 = em.createNativeQuery("SELECT * FROM hospital WHERE name LIKE ?", Hospital.class);
+		Query q1 = em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Hospital.class);
 		q1.setParameter(1, "%" + name + "%");
 		Hospital hospital = (Hospital) q1.getSingleResult();
 		return hospital;

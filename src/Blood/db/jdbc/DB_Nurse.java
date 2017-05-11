@@ -29,9 +29,9 @@ public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 		stmt2.close();
 		Statement stmt = c.createStatement();
 		String sql = "CREATE TABLE NursesPatients"
-				+ "(nurseId INTEGER REFERENCES Nurses(id)"
-				+ "patientId INTEGER REFERENCES Patient(id)"
-				+ "PRIMARY KEY (nurseId,patientId))";
+				+ "(nurseId INTEGER REFERENCES Nurses(id) ON DELETE SET NULL"
+				+ "patientId INTEGER REFERENCES Patient(id) ON DELETE SET NULL"
+				+ "PRIMARY KEY (nurseId,patientId) )";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		System.out.println("Tables are created");

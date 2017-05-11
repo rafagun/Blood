@@ -29,8 +29,8 @@ public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 		stmt1.close();
 		stmt1 = c.createStatement();
 		String sql2 = "CREATE TABLE SympsIlls"
-				+ "(symptomsId INTEGER REFERENCES Symptoms(id)"
-				+ "illnesId INTEGER REFERENCES Illnes(id)"
+				+ "(symptomsId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE"
+				+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
 				+ "place TEXT"
 				+ "PRIMARY KEY (simptomsID,illnesId)";
 		stmt1.executeUpdate(sql1);

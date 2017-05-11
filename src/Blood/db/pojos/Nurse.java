@@ -41,7 +41,7 @@ private static final long serialVersionUID = 1857194774423858547L;
 	private Hospital hospital;
 	@ManyToMany(mappedBy="nurses")
 	private List<Patient> patients;
-	
+	private String fileName;
 	//modificar constructores lista de pacientes
 	public Nurse() {
 		super();
@@ -49,12 +49,21 @@ private static final long serialVersionUID = 1857194774423858547L;
 		this.patients = new ArrayList<>();
 	}
 	
-	public Nurse(String name, byte[] photo, Hospital hospital, List<Patient> patients) {
+	public Nurse(String name, byte[] photo, Hospital hospital, List<Patient> patients, String fileName) {
 		super();
 		this.name = name;
 		this.photo = photo;
 		this.hospital = hospital;
 		this.patients = patients;
+		this.fileName=fileName;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public List<Patient> getPatients() {

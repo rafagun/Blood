@@ -12,7 +12,7 @@ public class Symptoms implements Serializable{
 private static final long serialVersionUID = 6952444966932416547L;
     @Id
     @GeneratedValue(generator="Symptoms")
-    @TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
+    @TableGenerator(name="Symptoms", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Symptoms")
 	private Integer id;
     private String type;
     private String severity;
@@ -122,6 +122,11 @@ public String toString() {
 public String getSeverity() {
 	// TODO Auto-generated method stub
 	return severity;
+}
+
+public void setSeverity(String severity2) {
+	// TODO Auto-generated method stub
+	
 }
 
 }
