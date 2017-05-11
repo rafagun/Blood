@@ -33,7 +33,7 @@ e.printStackTrace();
 }	
 }
 
-public ArrayList<Hospital> SQLSelect(){
+public List<Hospital> SQLSelect(){
 ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
 try {
 Statement stmt = super.c.createStatement();

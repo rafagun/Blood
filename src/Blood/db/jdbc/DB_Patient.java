@@ -24,7 +24,36 @@ public class DB_Patient extends Connect {
 			+ "smoker  BOOLEAN)";
 	stmt3.executeUpdate(sql3);
 	stmt3.close();
+	
+	stmt3= c.createStatement();
+	String sql = "CREATE TABLE PatsMolecules"
+			+ "(patientId INTEGER REFERENCES Patient(id)"
+			+ "moleculeId INTEGER REFERENCES Molecules(id)"
+			+ "Level INTEGER  NOT NULL "
+			+ "PRIMARY KEY (patientId,moleculeId))";
+	
 	System.out.println("Tables created.");
+	stmt3.executeUpdate(sql);
+	stmt3.close();
+	stmt3 = c.createStatement();
+	String sql1 = "CREATE TABLE PatsCells"
+			+ "(patientId INTEGER REFERENCES Patient(id)"
+			+ "cellsId INTEGER REFERENCES Cells(id)"
+			+ "Level INTEGER NOT NULL"
+			+ "PRIMARY KEY (patientID,cellsId))";
+	stmt3.executeUpdate(sql1);
+	stmt3.close();
+	stmt3 = c.createStatement();
+	String sql2 = "CREATE TABLE PatsIllnes"
+			+ "(patientId INTEGER REFERENCES Patient(id)"
+			+ "illnesId INTEGER REFERENCES Illnes(id)"
+			+ "severity TEXT"
+			+ "PRIMARY KEY (patientId, illnesId))";
+	stmt3.executeUpdate(sql2);
+	stmt3.close();
+	
+	
+	
 	}
 		
 	catch(Exception ex){

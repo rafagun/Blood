@@ -26,6 +26,15 @@ public class DB_Symptoms extends Connect {
 		+ "severity TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+		stmt1 = c.createStatement();
+		String sql2 = "CREATE TABLE SympsIlls"
+				+ "(symptomsId INTEGER REFERENCES Symptoms(id)"
+				+ "illnesId INTEGER REFERENCES Illnes(id)"
+				+ "place TEXT"
+				+ "PRIMARY KEY (simptomsID,illnesId)";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+		
 		
 		}
 	public void SQLInsert(Symptoms symptom){

@@ -23,7 +23,14 @@ public class DB_Nurse extends Connect {
 				+ "hospital_id INTEGER REFERENCES hospital(id) ON DELETE CASCADE)";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
-		System.out.println("Table Nurses is created");
+		Statement stmt = c.createStatement();
+		String sql = "CREATE TABLE NursesPatients"
+				+ "(nurseId INTEGER REFERENCES Nurses(id)"
+				+ "patientId INTEGER REFERENCES Patient(id)"
+				+ "PRIMARY KEY (nurseId,patientId))";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		System.out.println("Tables are created");
 		
 		} catch (Exception e){
 			e.printStackTrace();

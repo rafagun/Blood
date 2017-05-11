@@ -133,7 +133,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		break;
 	 
 	case 5:
-		ArrayList<Hospital> lista= new ArrayList<>();
+		List<Hospital> lista;
 		lista = db_Hospital.SQLSelect();
 		for (Hospital hosp: lista){
 			System.out.println("name:" +hosp.getName()+"          "+"location:"+hosp.getLocation()+"         "+ "range:" +hosp.getRange());
