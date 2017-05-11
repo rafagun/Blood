@@ -95,6 +95,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 
 	case 2: 
 	
+	
 	System.out.println("Introduce the name of the hospital");
 	String nameHosp = bufferedReader.readLine();
 	System.out.println("Introduce the location of the hospital");
@@ -213,7 +214,11 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		String nurseName = bufferedReader.readLine();
 		System.out.println("Introduce the direction of the photo with its extension");
 		String Filephoto = bufferedReader.readLine();
-		db_Nurse.SQLInsert(nurseName , Filephoto);
+		File photo= new File ("./photos/"+Filephoto);
+		InputStream streamblob= new FileInputStream(photo);
+		byte[] bytesblob= new byte [streamblob.available()];
+		Nurse nurseInsert = new Nurse (nurseName,bytesblob);
+		db_Nurse.SQLInsert(nurseInsert);
 		System.out.println("the information has been added");
 		break;
 

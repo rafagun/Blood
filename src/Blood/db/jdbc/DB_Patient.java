@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 
-public class DB_Patient extends Connect {
+public class DB_Patient extends Connect implements FunctionsDB<Patient> {
 	
 	
 	public void SQLCreate() throws SQLException {

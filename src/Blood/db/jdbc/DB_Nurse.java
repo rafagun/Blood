@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
+import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
 
 
-public class DB_Nurse extends Connect {
+public class DB_Nurse extends Connect implements FunctionsDB <Nurse> {
 	
 	
 	public void SQLCreate() throws SQLException {
@@ -83,17 +87,10 @@ public class DB_Nurse extends Connect {
 		System.out.println("Nurse with the name:" + nurse.getName()+ "has been deleted");
 	}
 	
-	public void SQLInsert(String nurname , String nameFile){
+	public void SQLInsert(Nurse nurse){
 		try {
 		Statement stmt = c.createStatement();
-		File photo= new File ("./photos/"+nameFile);
-		InputStream streamblob= new FileInputStream(photo);
-		byte[] bytesblob= new byte [streamblob.available()];
-		Nurse nurse= new Nurse(nurname, bytesblob);
-		String sql = "INSERT INTO Nurses (name,photo) "
-
-		+ "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
-
+		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		System.out.println("Nurse has been inserted");
@@ -102,8 +99,8 @@ public class DB_Nurse extends Connect {
 		}
 	}
 	
-	public Nurse SQLSearch (String nurseName){
-		Nurse nurse=null;
+	public List<Nurse> SQLSearch (String nurseName){
+		List<Nurse> nurses  = new LinkedList<>();
 		try{
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM Nurses WHERE name=?";
@@ -111,14 +108,15 @@ public class DB_Nurse extends Connect {
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			byte[] photo = rs.getBytes("photo");
-			nurse = new Nurse(id,name,photo);
+			Nurse nurse = new Nurse (id,name,photo);
+			nurses.add(nurse);
 			rs.close();
 			stmt.close();
 		
 		}catch(Exception ex){
 		 ex.printStackTrace();
 		}
-			return nurse;
+			return nurses;
 		}
 
 	

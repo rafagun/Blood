@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Symptoms;
 
-public class DB_Symptoms extends Connect {
+public class DB_Symptoms extends Connect implements FunctionsDB <Symptoms> {
 
 
 
@@ -111,6 +112,17 @@ public class DB_Symptoms extends Connect {
 	e.printStackTrace();
 	}
 	return symptoms;
+	}
+	
+	@Override
+	public void SQLDelete(Symptoms obj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Symptoms oldObj, Symptoms newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

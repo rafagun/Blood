@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Hospital;
 
-public class DB_Cells extends Connect{
+public class DB_Cells extends Connect implements FunctionsDB<Cells>{
 
 	public void SQLCreate() throws SQLException{
 		try {

@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Molecules;
 
-public class DB_Molecules extends Connect{
+public class DB_Molecules extends Connect implements FunctionsDB<Molecules>{
 
 	public void SQLCreate() throws SQLException{
 		try {
@@ -113,7 +114,7 @@ e.printStackTrace();
 return molecules;
 }
 
-public void SQLDelete(Molecules molecule) {
+public void SQLDelete(Molecules molecule) throws IOException, SQLException {
 	try{
 	String sql = "DELETE FROM Molecules WHERE id=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);

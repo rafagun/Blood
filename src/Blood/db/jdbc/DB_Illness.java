@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Illnes;
-public class DB_Illness extends Connect{
+
+public class DB_Illness extends Connect implements FunctionsDB<Illnes>{
+	
 	public void SQLCreate() throws SQLException {
 		try {
 
@@ -39,8 +42,8 @@ public class DB_Illness extends Connect{
 		e.printStackTrace();
 		}	
 		}
-	public ArrayList<Illnes> SQLSelect(){
-		ArrayList<Illnes> illness = new ArrayList<Illnes>();
+	public List<Illnes> SQLSelect() {
+		List<Illnes> illness = new ArrayList<Illnes>();
 		try {
 		Statement stmt = c.createStatement();
 

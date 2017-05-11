@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 
 
 
-public class DB_Hospital extends Connect{
+public class DB_Hospital extends Connect implements FunctionsDB<Hospital>{
 
 public void SQLCreate()  {
 try {
@@ -112,7 +112,7 @@ e.printStackTrace();
 return hospitales;
 }
 
-public void SQLDelete(Hospital hospital) {
+public void SQLDelete(Hospital hospital) throws IOException, SQLException {
 	try{
 	String sql = "DELETE FROM Hospital WHERE id=?";
 	PreparedStatement prep = super.c.prepareStatement(sql);
