@@ -27,29 +27,38 @@ public class DB_Patient extends Connect {
 	
 	stmt3= c.createStatement();
 	String sql = "CREATE TABLE PatsMolecules"
-			+ "(patientId INTEGER REFERENCES Patient(id)"
-			+ "moleculeId INTEGER REFERENCES Molecules(id)"
+			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
+			+ "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE"
 			+ "Level INTEGER  NOT NULL "
 			+ "PRIMARY KEY (patientId,moleculeId))";
 	
-	System.out.println("Tables created.");
 	stmt3.executeUpdate(sql);
 	stmt3.close();
 	stmt3 = c.createStatement();
 	String sql1 = "CREATE TABLE PatsCells"
-			+ "(patientId INTEGER REFERENCES Patient(id)"
-			+ "cellsId INTEGER REFERENCES Cells(id)"
+			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
+			+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE "
 			+ "Level INTEGER NOT NULL"
 			+ "PRIMARY KEY (patientID,cellsId))";
 	stmt3.executeUpdate(sql1);
 	stmt3.close();
 	stmt3 = c.createStatement();
 	String sql2 = "CREATE TABLE PatsIllnes"
-			+ "(patientId INTEGER REFERENCES Patient(id)"
-			+ "illnesId INTEGER REFERENCES Illnes(id)"
+			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
+			+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
 			+ "severity TEXT"
 			+ "PRIMARY KEY (patientId, illnesId))";
 	stmt3.executeUpdate(sql2);
+	stmt3.close();
+
+	stmt3 = c.createStatement();
+	String sql31 = "CREATE TABLE PatsSymptoms"
+			+ "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
+			+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE"
+			+ "level TEXT"
+			+"place TEXT NULL"
+			+ "PRIMARY KEY (patientId, sympId))";
+	stmt3.executeUpdate(sql31);
 	stmt3.close();
 	
 	
