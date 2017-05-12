@@ -1,5 +1,6 @@
 package Blood.db.jpa;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -7,7 +8,7 @@ import javax.persistence.Query;
 import Blood.db.jdbc.Connect;
 import Blood.db.pojos.Illnes;
 
-public class JPAIllnes {
+public class JPAIllnes implements FunctionsDB<Illnes>{
 	public void SQLInsert(Illnes illnes){
 		
 		
@@ -34,7 +35,7 @@ public class JPAIllnes {
 	
 	public List<Illnes> SQLSearch(String name){
 		
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM hospital WHERE name LIKE ?", Illnes.class);
+		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Illnes WHERE name LIKE ?", Illnes.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Illnes> illness = (List<Illnes>) q1.getResultList();
 		return illness;
@@ -47,6 +48,25 @@ public class JPAIllnes {
 		newill.setType(oldill.getType());
 		newill.setChronic(oldill.getChronic());
 		Connect.em.getTransaction().commit();
+	}
+
+	@Override
+	public void SQLCreate() throws SQLException {
+		// The tables must be created from JDBC	
+		
+	}
+
+	@Override
+	public List<Illnes> SQLSelect() {
+		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Illnes", Illnes.class);
+		List<Illnes> illness = (List<Illnes>) q1.getResultList();
+		return illness;
+	}
+
+	@Override
+	public void SQLDrop() {
+		// JPA cannot work with tables
+		
 	}
 	
 }

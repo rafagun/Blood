@@ -9,14 +9,8 @@ import java.util.List;
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
 import Blood.db.jpa.JPAHospital;
-import Blood.db.pojos.Cells;
-import Blood.db.pojos.Hospital;
-import Blood.db.pojos.Illnes;
-import Blood.db.pojos.Molecules;
-import Blood.db.pojos.Nurse;
-import Blood.db.pojos.Patient;
-import Blood.db.pojos.Symptoms;
-public class Interface{
+import Blood.db.pojos.*;
+public class Interface extends Connect {
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");

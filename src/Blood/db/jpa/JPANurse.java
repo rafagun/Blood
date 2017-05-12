@@ -10,12 +10,12 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import Blood.db.jdbc.Connect;
-import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
 
-public class JPANurse {
+
+public class JPANurse implements FunctionsDB<Nurse> {
 	
-	void SQLInsert(Nurse nurse){
+	public void SQLInsert(Nurse nurse){
 		
 		
 		Connect.em.getTransaction().begin();
@@ -23,7 +23,7 @@ public class JPANurse {
 		Connect.em.getTransaction().commit();
 	}
 	
-	void SQLDelete(Nurse nurse){
+	public void SQLDelete(Nurse nurse){
 		
 		Connect.em.getTransaction().begin();
 		Connect.em.remove(nurse);
@@ -47,12 +47,33 @@ public class JPANurse {
 			
 		}
 		
-		public void SQLUpdate(Nurse oldnurse, Hospital newnurse){
+		public void SQLUpdate(Nurse oldnurse, Nurse newnurse){
 			Connect.em.getTransaction().begin();
 			newnurse.setName(oldnurse.getName());
 //photo
 			Connect.em.getTransaction().commit();
 		}
+
+		@Override
+		public void SQLCreate() throws SQLException {
+			// The tables must be created from JDBC	
+			
+		}
+
+		@Override
+		public List<Nurse> SQLSelect() {
+			Query q1 = Connect.em.createNativeQuery("SELECT * FROM Nurses", Nurse.class);
+			List<Nurse> nurses = (List<Nurse>) q1.getResultList();
+			return nurses;
+		}
+
+		@Override
+		public void SQLDrop() {
+			// JPA cannot work with tables
+			
+		}
+
+
 	
 	
 	

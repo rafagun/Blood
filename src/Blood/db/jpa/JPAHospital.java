@@ -3,6 +3,7 @@ package Blood.db.jpa;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -11,8 +12,9 @@ import javax.persistence.Query;
 
 import Blood.db.jdbc.Connect;
 import Blood.db.pojos.Hospital;
-import Blood.db.pojos.Nurse;
-public class JPAHospital {
+
+
+public class JPAHospital implements FunctionsDB<Hospital>{
 	
 	public void SQLInsert(Hospital hospital){
 		
@@ -53,6 +55,25 @@ public class JPAHospital {
 		newHosp.setLocation(oldHosp.getLocation());
 		newHosp.setRange(oldHosp.getRange());
 		Connect.em.getTransaction().commit();
+	}
+
+	@Override
+	public void SQLCreate() throws SQLException {
+		// The tables must be created from JDBC	
+	}
+
+	@Override
+	public List<Hospital> SQLSelect() {
+		Query q1 = Connect.em.createNativeQuery("SELECT * FROM hospital", Hospital.class);
+		List<Hospital> hospitals = (List<Hospital>) q1.getResultList();
+		return hospitals;
+
+	}
+
+	@Override
+	public void SQLDrop() {
+		// JPA cannot work with tables
+		
 	}
 	
 

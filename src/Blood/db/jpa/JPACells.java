@@ -1,5 +1,6 @@
 package Blood.db.jpa;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -8,7 +9,7 @@ import Blood.db.jdbc.Connect;
 import Blood.db.pojos.Cells;
 
 
-public class JPACells {
+public class JPACells implements FunctionsDB<Cells> {
 
 	public void SQLInsert(Cells cell){
 		
@@ -49,5 +50,24 @@ public class JPACells {
 		newCell.setLowL(oldCell.getLowL());
 		newCell.setHighL(oldCell.getHighL());
 		Connect.em.getTransaction().commit();
+	}
+
+	@Override
+	public void SQLCreate() throws SQLException {
+		// The tables must be created from JDBC	
+		
+	}
+
+	@Override
+	public List<Cells> SQLSelect() {
+		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Cells", Cells.class);
+		List<Cells> cells = (List<Cells>) q1.getResultList();
+		return cells;
+	}
+
+	@Override
+	public void SQLDrop() {
+		// JPA cannot work with tables
+		
 	}
 }
