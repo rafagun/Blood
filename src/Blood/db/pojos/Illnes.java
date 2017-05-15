@@ -5,38 +5,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.*;
 
 @Entity
 @Table(name="Illnes")
-
+@XmlRootElement(name="Illnes")
+@XmlType(propOrder={"name","type","chronic","symptoms","cells","patients","molecules"})
 public class Illnes implements Serializable {
 private static final long serialVersionUID = -7280949047692384198L;
 	@Id
 	@GeneratedValue(generator="Illnes")
 	@TableGenerator(name="Illnes", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Illnes")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String type;
+	@XmlElement
 	private Boolean chronic;
 	@ManyToMany
 	@JoinTable(name="symp-ill",
 	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
+	@XmlElementWrapper(name="Symptoms")
+	@XmlElement(name="Symptom")
 	private List<Symptoms> symptoms;
 	@ManyToMany
 	@JoinTable(name="cells-ill",
 	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="cells_id", referencedColumnName="id")})
+	@XmlElementWrapper(name="Cells")
+	@XmlElement(name="Cell")
 	private List<Cells> cells;
 	@ManyToMany
 	@JoinTable(name="pats-ill",
 	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
+	@XmlElementWrapper(name="Patients")
+	@XmlElement(name="Patient")
 	private List<Patient> patients;
 	@ManyToMany
 	@JoinTable(name="mol-ill",
 	joinColumns={@JoinColumn(name="illnes_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="molecules_id", referencedColumnName="id")})
+	@XmlElementWrapper(name="Molecules")
+	@XmlElement(name="Molecule")
 	private List<Molecules> molecules;
 
 	

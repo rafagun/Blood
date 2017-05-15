@@ -20,25 +20,34 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.*;
 
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Patient;
 
 @Entity
 @Table(name="Nurses")
+@XmlRootElement(name="Nurse")
+@XmlType(propOrder={"name","photo","hospital","patients"})
 public class Nurse implements Serializable {
 private static final long serialVersionUID = 1857194774423858547L;
 	@Id
 	@GeneratedValue(generator="Nurses")
 	@TableGenerator(name="Nurses", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Nurses")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
 	@Basic(fetch=FetchType.LAZY)
 	@Lob
+	@XmlTransient
 	private byte[] photo;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="hosp_id")
+	@XmlTransient
 	private Hospital hospital;
+	@XmlElementWrapper(name="Patients")
+	@XmlElement(name="Patient")
 	@ManyToMany(mappedBy="nurses")
 	private List<Patient> patients;
 	private String fileName;

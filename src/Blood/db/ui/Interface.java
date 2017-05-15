@@ -172,13 +172,14 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		
 		System.out.println("Input the new range or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newRange = Integer.parseInt(linea);
+		int newRange;
 		if (linea.equals("")){
 			
 			newRange = hospUpdate.get(option).getRange();
 		}
 		else{
-		hospUpdate.get(option).setRange(newRange);
+			newRange = Integer.parseInt(linea);
+			hospUpdate.get(option).setRange(newRange);
 		}
 		db_Hospital.SQLUpdate(hospUpdate.get(option));
 		

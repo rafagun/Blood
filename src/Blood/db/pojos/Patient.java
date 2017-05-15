@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.*;
 
 import Blood.db.pojos.Cells;
 import Blood.db.pojos.Illnes;
@@ -20,30 +21,48 @@ import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Symptoms;
 @Entity
 @Table(name="Patient")
+@XmlRootElement(name="Patient")
+@XmlType(propOrder={"name","age","blood","smoker","gender","nurses","symptoms","cells","molecules","illnes"})
 public class Patient implements Serializable {
 	private static final long serialVersionUID = -136657724985479318L;
 	
 	@Id
 	@GeneratedValue(generator="Patient")
 	@TableGenerator(name="Patient", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Patient")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private Integer age;
+	@XmlElement
 	private String blood;
+	@XmlElement
 	private Boolean smoker;
+	@XmlElement
 	private String gender;
 	@ManyToMany
 	@JoinTable(name="nurs-pats",
 	joinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="nurse_id", referencedColumnName="id")})
+	@XmlElementWrapper(name="Nurses")
+	@XmlElement(name="Nurse")
 	private List<Nurse> nurses;
 	@ManyToMany(mappedBy="patients")
+	@XmlElementWrapper(name="Symptoms")
+	@XmlElement(name="Symptom")
 	private List<Symptoms> symptoms;
 	@ManyToMany(mappedBy="patients")
+	@XmlElementWrapper(name="Cells")
+	@XmlElement(name="Cell")
 	private List<Cells> cells;
 	@ManyToMany(mappedBy="patients")
+	@XmlElementWrapper(name="Molecules")
+	@XmlElement(name="Molecule")
 	private List<Molecules> molecules;
 	@ManyToMany(mappedBy="patients")
+	@XmlElementWrapper(name="Illness")
+	@XmlElement(name="Illnes")
 	private List<Illnes> illness;
 
 	public Patient() {

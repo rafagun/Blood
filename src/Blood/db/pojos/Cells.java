@@ -5,25 +5,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 @Entity
 @Table(name="Cells")
+@XmlRootElement(name="Cells")
+@XmlType(propOrder={"type","highL","lowL","patients","illnes"})
 public class Cells implements Serializable {
 	private static final long serialVersionUID = -1755945494914985765L;
 	@Id
 	@GeneratedValue(generator="Cells")
 	@TableGenerator(name="Cells", table="sql_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="Cells")
+	@XmlAttribute
 	private String type;
+	@XmlElement
 	private float highL;
+	@XmlElement
 	private float lowL;
+	@XmlAttribute
 	private Integer id;
-	@ManyToMany(mappedBy="cells")
-	private List<Illnes> illness;
 	@ManyToMany
 	@JoinTable(name="pats-cells",
 	joinColumns={@JoinColumn(name="cells_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="patient_id", referencedColumnName="id")})
-	private List<Patient> patients;	
+	@XmlElementWrapper(name="Patients")
+	@XmlElement(name="Patient")
+	private List<Patient> patients;
+	@ManyToMany(mappedBy="cells")
+	@XmlElementWrapper(name="Illness")
+	@XmlElement(name="Illnes")
+	private List<Illnes> illness;
 
 	public Cells() {
 		super();

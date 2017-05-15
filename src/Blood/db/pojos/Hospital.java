@@ -3,20 +3,29 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import Blood.db.pojos.Nurse;
 @Entity
 @Table(name="Hospital")
+@XmlRootElement (name="Hospital")
+@XmlType(propOrder = { "name", "location", "range", "nurses" })
 public class Hospital implements Serializable {
 	private static final long serialVersionUID = -8273180762878531017L;
 	@Id
 	@GeneratedValue(generator="Hospital")
 	@TableGenerator(name="Hospital",table="sqlite_sequence", pkColumnName="name" , valueColumnName="seq",pkColumnValue="Hospital")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String location;
+	@XmlElement
 	private Integer range;
 	@OneToMany(mappedBy="hospital")
+	@XmlElementWrapper(name="nurses")
+	@XmlElement(name="nurse")
 	private List<Nurse> nurses;
 	
 	public Hospital() {
