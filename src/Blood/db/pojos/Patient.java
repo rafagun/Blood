@@ -75,7 +75,7 @@ public class Patient implements Serializable {
 		this.setMolecules(new ArrayList <Molecules>());
 	}
 	//modificar constructores porque falta clase nurse
-	public Patient(int id,String name, Integer age, String blood,Boolean smoker,String gender) {
+	public Patient(int id, String name, Integer age, String blood, String gender, Boolean smoker) {
 		this.id=id;
 		this.name = name;
 		this.age = age;
@@ -88,7 +88,7 @@ public class Patient implements Serializable {
 		this.nurses= new ArrayList<Nurse>();
 		this.illness= new ArrayList<Illnes>();
 	}
-	public Patient (String name , Integer age , String blood , Boolean smoker, String gender){
+	public Patient (String name , Integer age , String blood , String gender, Boolean smoker){
 		this.name=name;
 		this.age=age;
 		this.blood=blood;

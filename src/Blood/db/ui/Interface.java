@@ -220,17 +220,27 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	case 3: 
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
-		List<Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
-		
-
-		break;
+		List <Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
+		for (Nurse nurse: nurses){
+			System.out.println(nurse);
+		}
+	  break;
 	
-	case 4://queda hacer todo lo de hospital pero aqui.
-		System.out.println("Introduce the name of the nurse that you want to delete");
-		String nNurse = bufferedReader.readLine();
-		/*db_Nurse.SQLDelete(nNurse);*/
-		System.out.println("That nurse has been deleted");
+	case 4:
+		System.out.println("Insert the name of the Nurse you want to delete");
+		String nurseDelete = bufferedReader.readLine();
+		List<Nurse> list = db_Nurse.SQLSearch(nurseDelete);
+		Iterator<Nurse> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		int option1 = Integer.parseInt(bufferedReader.readLine());
+		db_Nurse.SQLDelete(list.get(option1));
+		System.out.println("The nurse has been removed");
 		break;
+		
+		
+		
 	 
 	
 
@@ -307,7 +317,7 @@ else if (selection == 3){//patient
 	System.out.println("Introduce if the patient is smoker or not");
 	String smokerpatient = bufferedReader.readLine();
 	Boolean smoker = Boolean.parseBoolean(smokerpatient);
-	Patient patient= new Patient (namePatient , age , bloodPatient, smoker ,gender );
+	Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
 	dbPatient.SQLInsert(patient);
 	break;
 
@@ -343,7 +353,7 @@ else if (selection == 3){//patient
 		ArrayList<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
-			System.out.println("name:" +patient11.getName()+"       "+ "age:"+patient11.getAge()+"        "+ "blood type:" +patient11.getBlood()+" "+"gender:" +patient11.getGender()+""+"smoker:" +patient11.getSmoker());
+			System.out.println("name:" +patient11.getName()+"       "+ "age:"+patient11.getAge()+"        "+ "blood type:" +patient11.getBlood()+"         "+"gender:" +patient11.getGender()+"          "+"smoker:" +patient11.getSmoker());
 		}
 		break;
 		
@@ -381,20 +391,23 @@ else if (selection == 3){//patient
 		
 		System.out.println("Input the new age or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newage = Integer.parseInt(linea);
+		int newage;
 		if (linea.equals("")){
 			
 			newage = patUpdate.get(id1).getAge();
 		}
 		else{
+			newage = Integer.parseInt(linea);
 		patUpdate.get(id1).setAge(newage);
 		}
+		
 		System.out.println("Enter the new gender or press enter");
 		String newgender = bufferedReader.readLine();
 		if (newgender.equals("")){
 			newgender = patUpdate.get(id1).getGender();
 		}
 		else {patUpdate.get(id1).setGender(newgender);}
+		
 		System.out.println("Change if it is smoker or press enter");
 		String newSmoker = bufferedReader.readLine();
 		if (newSmoker.equals("")){

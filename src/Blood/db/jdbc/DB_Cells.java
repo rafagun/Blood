@@ -12,7 +12,6 @@ import java.util.List;
 
 import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Cells;
-import Blood.db.pojos.Hospital;
 
 public class DB_Cells implements FunctionsDB<Cells>{
 	
@@ -58,7 +57,7 @@ String sql = "INSERT INTO Cells (type, lowL, HighL) "
 
 stmt.executeUpdate(sql);
 stmt.close();
-
+System.out.println("Cells has been added");
 
 
 } catch (Exception e) {
