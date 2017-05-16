@@ -30,7 +30,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 			stmt3 = Connect.c.createStatement();
 			String sql1 = "CREATE TABLE PatsCells" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
 					+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE " + "Level INTEGER NOT NULL"
-					+ "PRIMARY KEY (patientID,cellsId))";
+					+ "PRIMARY KEY (patientId,cellsId))";
 			stmt3.executeUpdate(sql1);
 			stmt3.close();
 			stmt3 = Connect.c.createStatement();
@@ -53,7 +53,49 @@ public class DB_Patient implements FunctionsDB<Patient> {
 			ex.printStackTrace();
 		}
 	}
-
+	public void SQLRelationPI(int illnes, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO PatsIllnes (patientId, illnesId) " + "VALUES ('" + patient + "','"+ illnes + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
+	
+	public void SQLRelationPC(int cells, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO PatsCells (patientId, cellsId) " + "VALUES ('" + patient + "','"+ cells + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
+	
+	public void SQLRelationPM(int molecules, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO PatsMolecules (patientId, moleculeId) " + "VALUES ('" + patient + "','"+ molecules + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
+	public void SQLRelationPS(int symptoms, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO PatsSymptoms (patientId, sympId) " + "VALUES ('" + patient + "','"+ symptoms + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
+	
 	public void SQLDrop() {
 		try {
 			Statement stmt3 = Connect.c.createStatement();

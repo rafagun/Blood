@@ -424,26 +424,124 @@ else if (selection == 3){//patient
 	
 	break;
 	case 9 : 
-		DB_Nurse db_Nurse = new DB_Nurse();
-		System.out.println("Introduce the nurse to the one who want to assign un patient");
-		String name= bufferedReader.readLine();
-		List<Nurse> nurs=db_Nurse.SQLSearch(name);
-		Iterator<Nurse> it3=nurs.iterator();
-		for(int i=0; it3.hasNext(); i++){
-			System.out.println(i+".-"+it3.next());
+		System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
+				+ "2 la relacion patient-illnes , 3 la relacion patient-cells , 4 la relacion patient-molecules"
+				+ "5 la relacion patient-symptoms");
+		int op= Integer.parseInt(bufferedReader.readLine());
+		switch(op){
+		case 1: {
+			DB_Nurse db_Nurse = new DB_Nurse();
+			System.out.println("Introduce the nurse to the one who want to assign un patient");
+			String name= bufferedReader.readLine();
+			List<Nurse> nurs=db_Nurse.SQLSearch(name);
+			Iterator<Nurse> it3=nurs.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idnurse = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el paciente que le quiere asignar");
+			String namepat= bufferedReader.readLine();
+			List<Patient> pat = dbPatient.SQLSearch(namepat);
+			Iterator<Patient> it2 = pat.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idpat = Integer.parseInt(bufferedReader.readLine());
+			db_Nurse.SQLRelation(idnurse, idpat);
+		} case 2: {
+			DB_Illness db_illnes = new DB_Illness();
+			System.out.println("Introduce the illnes to the one who want to assign un patient");
+			String name= bufferedReader.readLine();
+			List<Illnes> ills=db_illnes.SQLSearch(name);
+			Iterator<Illnes> it3=ills.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idill = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el paciente que le quiere asignar");
+			String namepat= bufferedReader.readLine();
+			List<Patient> pat = dbPatient.SQLSearch(namepat);
+			Iterator<Patient> it2 = pat.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idpat = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPI(idill, idpat);
 		}
-		System.out.println("Introduzca su correspondiente id");
-		int idnurse = Integer.parseInt(bufferedReader.readLine());
-		System.out.println("Introduzca el paciente que le quiere asignar");
-		String namepat= bufferedReader.readLine();
-		List<Patient> pat = dbPatient.SQLSearch(namepat);
-		Iterator<Patient> it2 = pat.iterator();
-		for(int i=0; it2.hasNext(); i++){
-			System.out.println(i+".-"+it2.next());
+		case 3 :
+		{
+			DB_Cells db_cells = new DB_Cells();
+			System.out.println("Introduce the cells to the one who want to assign un patient");
+			String name= bufferedReader.readLine();
+			List<Cells> cells=db_cells.SQLSearch(name);
+			Iterator<Cells> it3=cells.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idcells = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el paciente que le quiere asignar");
+			String namepat= bufferedReader.readLine();
+			List<Patient> pat = dbPatient.SQLSearch(namepat);
+			Iterator<Patient> it2 = pat.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idpat = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPC(idcells, idpat);
 		}
-		System.out.println("Introduzca su correspondiente id");
-		int idpat = Integer.parseInt(bufferedReader.readLine());
-		db_Nurse.SQLRelation(idnurse, idpat);
+		case 4 : {
+			DB_Molecules db_molecules = new DB_Molecules();
+			System.out.println("Introduce the molecules to the one who want to assign un patient");
+			String name= bufferedReader.readLine();
+			List<Molecules> mols=db_molecules.SQLSearch(name);
+			Iterator<Molecules> it3=mols.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idmol = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el paciente que le quiere asignar");
+			String namepat= bufferedReader.readLine();
+			List<Patient> pat = dbPatient.SQLSearch(namepat);
+			Iterator<Patient> it2 = pat.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idpat = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPM(idmol, idpat);
+		}
+		case 5:
+		{
+			DB_Symptoms db_symptoms = new DB_Symptoms();
+			System.out.println("Introduce the illnes to the one who want to assign un patient");
+			String name= bufferedReader.readLine();
+			List<Symptoms> symps=db_symptoms.SQLSearch(name);
+			Iterator<Symptoms> it3=symps.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idsymp = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el paciente que le quiere asignar");
+			String namepat= bufferedReader.readLine();
+			List<Patient> pat = dbPatient.SQLSearch(namepat);
+			Iterator<Patient> it2 = pat.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
+			}
+			System.out.println("Introduzca su correspondiente id");
+			int idpat = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPS(idsymp, idpat);
+		}
+		}
+	
 		
 		break;
 	}

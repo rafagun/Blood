@@ -111,6 +111,16 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		e.printStackTrace();
 		}
 		}
+	public void SQLRelation(int illnes, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO NursesPatients (nurseId , patientId) " + "VALUES ('" + illnes + "','"+ patient + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
 
 	public List<Illnes> SQLSearch(String illnessName) {
 		List<Illnes> illness =new LinkedList<Illnes>();
