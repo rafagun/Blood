@@ -170,9 +170,9 @@ public class DB_Patient implements FunctionsDB<Patient> {
 				int age = rs.getInt("age");
 				String blood = rs.getString("blood");
 				String gender = rs.getString("gender");
-				Boolean smoker = rs.getBoolean("smoker");
-
-				Patient patient = new Patient(id, name, age, blood, smoker, gender);
+				String smokerStr = rs.getString("smoker");
+				boolean smoker = Boolean.parseBoolean(smokerStr);
+				Patient patient = new Patient(id, name, age, blood, gender, smoker);
 				patients.add(patient);
 			}
 

@@ -8,9 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import Blood.db.jpa.FunctionsDB;
-import Blood.db.pojos.Hospital;
+import Blood.db.pojos.Cells;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 
@@ -53,7 +57,7 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 	}
 	
 	public ArrayList<Nurse> SQLSelect(){
-		ArrayList<Nurse> nurses = new ArrayList<Nurse>();
+		ArrayList<Nurse> nurseList = new ArrayList<Nurse>();
 		try {
 		Statement stmt = Connect.c.createStatement();
 		String sql = "SELECT * FROM Nurses";
@@ -63,7 +67,7 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		String name = rs.getString("name");
 		byte[] photo = rs.getBytes("photo");
 		Nurse nurse = new Nurse (id,name,photo);
-		nurses.add(nurse);
+		nurseList.add(nurse);
 		}
 		rs.close();
 		stmt.close();
@@ -71,7 +75,7 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		} catch(Exception ex){
 		ex.printStackTrace();
 		}
-		return nurses;
+		return nurseList;
 	}
 	
 	public void SQLDrop(){
@@ -90,12 +94,18 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 	}
 	
 	public void SQLDelete(Nurse nurse) throws IOException, SQLException {
+		try{
 		String sql = "DELETE FROM Nurses WHERE id=?";
 		PreparedStatement prep = Connect.c.prepareStatement(sql);
 		prep.setInt(1, nurse.getId());
 		prep.executeUpdate();
 		prep.close();
-		System.out.println("Nurse with the name:" + nurse.getName()+ "has been deleted");
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+			System.err.println("ERROR");
+			}
+		System.out.println("Nurse with the name:" + nurse.getName()+  "  has been deleted");
 	}
 	
 	public void SQLInsert(Nurse nurse, int id){
@@ -108,28 +118,47 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		e.printStackTrace();
 		}
 	}
+
 	
 	public List<Nurse> SQLSearch (String nurseName){
 		List<Nurse> nurses  = new LinkedList<>();
 		try{
 			
-			Statement stmt = Connect.c.createStatement();
+			/**Statement stmt = Connect.c.createStatement();
 			String sql = "SELECT * FROM Nurses WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			byte[] photo = rs.getBytes("photo");
 			Nurse nurse = new Nurse (id,name,photo);
-			nurses.add(nurse);
-			rs.close();
-			stmt.close();
-		
-		}catch(Exception ex){
-		 ex.printStackTrace();
-		}
-			return nurses;
-		}
+			nurses.add(nurse);**/
 
+			String sql = "SELECT * FROM Nurses WHERE name LIKE ?";
+			PreparedStatement prep = Connect.c.prepareStatement(sql);
+			prep.setString(1, nurseName);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				byte[] photo = rs.getBytes("photo");
+				Nurse nurse = new Nurse (id,name,photo);
+				nurses.add(nurse);
+		}
+			rs.close();
+			prep.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			}
+			return nurses;
+			}
+		
+		
+		
+		
+		
+		
+		
 	@Override
 	public void SQLUpdate(Nurse oldObj, Nurse newObj) throws IOException, SQLException {
 		// TODO Auto-generated method stub
