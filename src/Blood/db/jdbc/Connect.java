@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 
 import Blood.db.jpa.FunctionsDB;
 
-public abstract class Connect {// the pupose of this class is to avoid the multiple inheritance problem that we had with GeneralMethods
+public abstract class Connect {
 public static Connection c;
 public static void SQLConnect() {
 	try {
@@ -33,15 +33,5 @@ public static void SQLDisconnect() {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 	}
-}
-
- public static EntityManager em;
-
-public static EntityManager StartMethod() {
-    em = Persistence.createEntityManagerFactory("blood-provider").createEntityManager();
-	em.getTransaction().begin();
-	em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
-	em.getTransaction().commit();
-	return em;
 }
 }

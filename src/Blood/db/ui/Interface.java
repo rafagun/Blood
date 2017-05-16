@@ -1,6 +1,7 @@
 package Blood.db.ui;
 import java.io.*;
 
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +10,9 @@ import java.util.List;
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
 import Blood.db.jpa.JPAHospital;
+import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
-public class Interface extends Connect {
+public class Interface {
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");
@@ -55,7 +57,7 @@ BufferedReader bufferedReader = null;
 try {
 inputStreamReader = new InputStreamReader(System.in);
 bufferedReader = new BufferedReader(inputStreamReader);
-//bucle infinito para mostrar nuestro menu hasta que pulsemos la opcion
+
 
 int selection=0;
 int opcion=0;
@@ -68,7 +70,7 @@ int opcion=0;
 	
 	
 while (true){
-//mostramos por pantalla nuestro menu
+
 menu1();
 	
 	selection=Integer.parseInt(bufferedReader.readLine());
@@ -803,7 +805,7 @@ else if (selection == 8){//exitt
 			try{
 				int option=0;
 				while(option!=8){
-				Connect.StartMethod();
+			eManager.StartMethod();
 			menu1();	
 			System.out.println("Introduce an option:");
 			

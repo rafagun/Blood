@@ -13,22 +13,22 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 	public void SQLInsert(Molecules molecule){
 		
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.persist(molecule);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.persist(molecule);
+		eManager.em.getTransaction().commit();
 	}
 	
 	public void SQLDelete(Molecules molecule){
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.remove(molecule);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.remove(molecule);
+		eManager.em.getTransaction().commit();
 		
 	}
 	
 	
 	Molecules SQLSearch1(String name){
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Molecules.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Molecules.class);
 		q1.setParameter(1, "%" + name + "%");
 		Molecules molecule = (Molecules) q1.getSingleResult();
 		return molecule;
@@ -36,7 +36,7 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 	
 	public List<Molecules> SQLSearch(String name){
 		
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Molecules WHERE name LIKE ?", Molecules.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Molecules WHERE name LIKE ?", Molecules.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Molecules> molecules = (List<Molecules>) q1.getResultList();
 		return molecules;
@@ -44,11 +44,11 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 	}
 	
 	public void SQLUpdate(Molecules oldmol, Molecules newmol){
-		Connect.em.getTransaction().begin();
+		eManager.em.getTransaction().begin();
 		newmol.setType(oldmol.getType());
 		newmol.setHighLevels(oldmol.getHighLevels());
 		newmol.setLowLevels(oldmol.getLowLevels());
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().commit();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 
 	@Override
 	public List<Molecules> SQLSelect() {
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Molecules", Molecules.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Molecules", Molecules.class);
 		List<Molecules> molecules = (List<Molecules>) q1.getResultList();
 		return molecules;
 	}

@@ -19,22 +19,22 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	public void SQLInsert(Hospital hospital){
 		
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.persist(hospital);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.persist(hospital);
+		eManager.em.getTransaction().commit();
 	}
 	
 	public void SQLDelete(Hospital hospital){
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.remove(hospital);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.remove(hospital);
+		eManager.em.getTransaction().commit();
 		
 	}
 	
 	
 	 Hospital SQLSearch1(String name){
-		Query q1 =Connect.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Hospital.class);
+		Query q1 =eManager.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Hospital.class);
 		q1.setParameter(1, "%" + name + "%");
 		Hospital hospital = (Hospital) q1.getSingleResult();
 		return hospital;
@@ -42,7 +42,7 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	
 	public List<Hospital> SQLSearch(String name){
 		
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM hospital WHERE name LIKE ?", Hospital.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM hospital WHERE name LIKE ?", Hospital.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Hospital> hospitals = (List<Hospital>) q1.getResultList();
 		return hospitals;
@@ -50,11 +50,11 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	}
 	
 	public void SQLUpdate(Hospital oldHosp, Hospital newHosp){
-		Connect.em.getTransaction().begin();
+		eManager.em.getTransaction().begin();
 		newHosp.setName(oldHosp.getName());
 		newHosp.setLocation(oldHosp.getLocation());
 		newHosp.setRange(oldHosp.getRange());
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().commit();
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 
 	@Override
 	public List<Hospital> SQLSelect() {
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM hospital", Hospital.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM hospital", Hospital.class);
 		List<Hospital> hospitals = (List<Hospital>) q1.getResultList();
 		return hospitals;
 
