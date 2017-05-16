@@ -18,21 +18,21 @@ public class JPANurse implements FunctionsDB<Nurse> {
 	public void SQLInsert(Nurse nurse){
 		
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.persist(nurse);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.persist(nurse);
+		eManager.em.getTransaction().commit();
 	}
 	
 	public void SQLDelete(Nurse nurse){
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.remove(nurse);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.remove(nurse);
+		eManager.em.getTransaction().commit();
 		
 	}
 	
 	 Nurse SQLSearch1 (String name){
-			Query q1 = Connect.em.createNativeQuery("SELECT * FROM Nurses WHERE name LIKE ?", Nurse.class);
+			Query q1 = eManager.em.createNativeQuery("SELECT * FROM Nurses WHERE name LIKE ?", Nurse.class);
 			q1.setParameter(1, "%" + name + "%");
 			Nurse nurses= (Nurse) q1.getSingleResult();
 			return nurses;
@@ -40,7 +40,7 @@ public class JPANurse implements FunctionsDB<Nurse> {
 		
 		public List<Nurse> SQLSearch(String name){
 			
-			Query q1 = Connect.em.createNativeQuery("SELECT * FROM Nurses WHERE name LIKE ?", Nurse.class);
+			Query q1 = eManager.em.createNativeQuery("SELECT * FROM Nurses WHERE name LIKE ?", Nurse.class);
 			q1.setParameter(1, "%" + name + "%");
 			List<Nurse> nurses = (List<Nurse>) q1.getResultList();
 			return nurses;
@@ -48,10 +48,10 @@ public class JPANurse implements FunctionsDB<Nurse> {
 		}
 		
 		public void SQLUpdate(Nurse oldnurse, Nurse newnurse){
-			Connect.em.getTransaction().begin();
+			eManager.em.getTransaction().begin();
 			newnurse.setName(oldnurse.getName());
 //photo
-			Connect.em.getTransaction().commit();
+			eManager.em.getTransaction().commit();
 		}
 
 		@Override
@@ -62,7 +62,7 @@ public class JPANurse implements FunctionsDB<Nurse> {
 
 		@Override
 		public List<Nurse> SQLSelect() {
-			Query q1 = Connect.em.createNativeQuery("SELECT * FROM Nurses", Nurse.class);
+			Query q1 = eManager.em.createNativeQuery("SELECT * FROM Nurses", Nurse.class);
 			List<Nurse> nurses = (List<Nurse>) q1.getResultList();
 			return nurses;
 		}

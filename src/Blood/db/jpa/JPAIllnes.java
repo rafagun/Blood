@@ -12,22 +12,22 @@ public class JPAIllnes implements FunctionsDB<Illnes>{
 	public void SQLInsert(Illnes illnes){
 		
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.persist(illnes);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.persist(illnes);
+		eManager.em.getTransaction().commit();
 	}
 	
 	public void SQLDelete(Illnes illnes){
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.remove(illnes);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.remove(illnes);
+		eManager.em.getTransaction().commit();
 		
 	}
 	
 	
 	Illnes SQLSearch1(String name){
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Illnes WHERE name LIKE ?", Illnes.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Illnes WHERE name LIKE ?", Illnes.class);
 		q1.setParameter(1, "%" + name + "%");
 		Illnes illnes = (Illnes) q1.getSingleResult();
 		return illnes;
@@ -35,7 +35,7 @@ public class JPAIllnes implements FunctionsDB<Illnes>{
 	
 	public List<Illnes> SQLSearch(String name){
 		
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Illnes WHERE name LIKE ?", Illnes.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Illnes WHERE name LIKE ?", Illnes.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Illnes> illness = (List<Illnes>) q1.getResultList();
 		return illness;
@@ -43,11 +43,11 @@ public class JPAIllnes implements FunctionsDB<Illnes>{
 	}
 	
 	public void SQLUpdate(Illnes oldill, Illnes newill){
-		Connect.em.getTransaction().begin();
+		eManager.em.getTransaction().begin();
 		newill.setName(oldill.getName());
 		newill.setType(oldill.getType());
 		newill.setChronic(oldill.getChronic());
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().commit();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class JPAIllnes implements FunctionsDB<Illnes>{
 
 	@Override
 	public List<Illnes> SQLSelect() {
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Illnes", Illnes.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Illnes", Illnes.class);
 		List<Illnes> illness = (List<Illnes>) q1.getResultList();
 		return illness;
 	}
