@@ -1,11 +1,12 @@
 package Blood.db.jpa;
 
 import java.sql.SQLException;
+
 import java.util.List;
 
 import javax.persistence.Query;
 
-import Blood.db.jdbc.Connect;
+import Blood.db.jpa.eManager;
 import Blood.db.pojos.Cells;
 
 
@@ -14,22 +15,22 @@ public class JPACells implements FunctionsDB<Cells> {
 	public void SQLInsert(Cells cell){
 		
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.persist(cell);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.persist(cell);
+		eManager.em.getTransaction().commit();
 	}
 	
 	public void SQLDelete(Cells cell){
 		
-		Connect.em.getTransaction().begin();
-		Connect.em.remove(cell);
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().begin();
+		eManager.em.remove(cell);
+		eManager.em.getTransaction().commit();
 		
 	}
 	
 	
 	 Cells SQLSearch1(String name){
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Cells WHERE name LIKE ?", Cells.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Cells WHERE name LIKE ?", Cells.class);
 		q1.setParameter(1, "%" + name + "%");
 		Cells cell = (Cells) q1.getSingleResult();
 		return cell;
@@ -37,7 +38,7 @@ public class JPACells implements FunctionsDB<Cells> {
 	
 	public List<Cells> SQLSearch(String name){
 		
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Cells WHERE name LIKE ?", Cells.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Cells WHERE name LIKE ?", Cells.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Cells> cells = (List<Cells>) q1.getResultList();
 		return cells;
@@ -45,11 +46,11 @@ public class JPACells implements FunctionsDB<Cells> {
 	}
 	
 	public void SQLUpdate(Cells oldCell, Cells newCell){
-		Connect.em.getTransaction().begin();
+		eManager.em.getTransaction().begin();
 		newCell.setType(oldCell.getType());
 		newCell.setLowL(oldCell.getLowL());
 		newCell.setHighL(oldCell.getHighL());
-		Connect.em.getTransaction().commit();
+		eManager.em.getTransaction().commit();
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class JPACells implements FunctionsDB<Cells> {
 
 	@Override
 	public List<Cells> SQLSelect() {
-		Query q1 = Connect.em.createNativeQuery("SELECT * FROM Cells", Cells.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Cells", Cells.class);
 		List<Cells> cells = (List<Cells>) q1.getResultList();
 		return cells;
 	}
