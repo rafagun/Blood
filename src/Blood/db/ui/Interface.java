@@ -66,6 +66,7 @@ int opcion=0;
 		
 	Connect.SQLConnect();
 	
+	
 while (true){
 //mostramos por pantalla nuestro menu
 menu1();
@@ -184,6 +185,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		db_Hospital.SQLUpdate(hospUpdate.get(option));
 		
 	case 8:	//salir del programa
+
 		
 	break;
 	}
@@ -213,7 +215,17 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		InputStream streamblob= new FileInputStream(photo);
 		byte[] bytesblob= new byte [streamblob.available()];
 		Nurse nurseInsert = new Nurse (nurseName,bytesblob);
-		db_Nurse.SQLInsert(nurseInsert);
+		System.out.println("Introduce the name of the hospital when the nurse work");
+		String namehosp= bufferedReader.readLine();
+		DB_Hospital db_hospital= new DB_Hospital();
+		List<Hospital> list = db_hospital.SQLSearch(namehosp);
+		Iterator<Hospital> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		System.out.println("Introduce the id of the hospital");
+		int idhosp = Integer.parseInt(bufferedReader.readLine());
+		db_Nurse.SQLInsert(nurseInsert, idhosp);
 		System.out.println("the information has been added");
 		break;
 
@@ -221,7 +233,9 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		List<Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
-		
+		for (Nurse nurse: nurses){
+			System.out.println(nurse);
+		}
 
 		break;
 	
@@ -407,6 +421,29 @@ else if (selection == 3){//patient
 	case 8:	//salir del programa
 	
 	break;
+	case 9 : 
+		DB_Nurse db_Nurse = new DB_Nurse();
+		System.out.println("Introduce the nurse to the one who want to assign un patient");
+		String name= bufferedReader.readLine();
+		List<Nurse> nurs=db_Nurse.SQLSearch(name);
+		Iterator<Nurse> it3=nurs.iterator();
+		for(int i=0; it3.hasNext(); i++){
+			System.out.println(i+".-"+it3.next());
+		}
+		System.out.println("Introduzca su correspondiente id");
+		int idnurse = Integer.parseInt(bufferedReader.readLine());
+		System.out.println("Introduzca el paciente que le quiere asignar");
+		String namepat= bufferedReader.readLine();
+		List<Patient> pat = dbPatient.SQLSearch(namepat);
+		Iterator<Patient> it2 = pat.iterator();
+		for(int i=0; it2.hasNext(); i++){
+			System.out.println(i+".-"+it2.next());
+		}
+		System.out.println("Introduzca su correspondiente id");
+		int idpat = Integer.parseInt(bufferedReader.readLine());
+		db_Nurse.SQLRelation(idnurse, idpat);
+		
+		break;
 	}
 }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
+import Blood.db.pojos.Patient;
 
 
 public class DB_Nurse implements FunctionsDB <Nurse> {
@@ -38,6 +39,16 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		
 		} catch (Exception e){
 			e.printStackTrace();
+		}
+	}
+	public void SQLRelation(int nurse, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO NursesPatients (nurseId , patientId) " + "VALUES ('" + nurse + "','"+ patient + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
 		}
 	}
 	
@@ -87,13 +98,12 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		System.out.println("Nurse with the name:" + nurse.getName()+ "has been deleted");
 	}
 	
-	public void SQLInsert(Nurse nurse){
+	public void SQLInsert(Nurse nurse, int id){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "');";
+		String sql = "INSERT INTO Nurses (name,photo,hospital_id) " + "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "','"+ id + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
-		System.out.println("Nurse has been inserted");
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
@@ -102,6 +112,7 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 	public List<Nurse> SQLSearch (String nurseName){
 		List<Nurse> nurses  = new LinkedList<>();
 		try{
+			
 			Statement stmt = Connect.c.createStatement();
 			String sql = "SELECT * FROM Nurses WHERE name=?";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -121,6 +132,11 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 
 	@Override
 	public void SQLUpdate(Nurse oldObj, Nurse newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLInsert(Nurse obj) {
 		// TODO Auto-generated method stub
 		
 	}
