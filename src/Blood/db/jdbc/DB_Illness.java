@@ -69,7 +69,8 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		int id = rs.getInt("id");
 		String name = rs.getString("name");
 		String type = rs.getString("type");
-		Boolean chronic = rs.getBoolean("chronic");
+		String strchronic = rs.getString("chronic");
+		boolean chronic = Boolean.parseBoolean(strchronic);
 		Illnes illnes = new Illnes (id,name,type,chronic);
 		illness.add(illnes);
 		}

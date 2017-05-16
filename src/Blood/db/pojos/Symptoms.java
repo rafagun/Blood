@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 @Entity
 @Table(name="Symptoms")
 @XmlRootElement(name="Symptoms")
-@XmlType(propOrder={"typeç","severity","patients","illness"})
+@XmlType(propOrder={"typeï¿½","severity","patients","illness"})
 public class Symptoms implements Serializable{
 private static final long serialVersionUID = 6952444966932416547L;
     @Id
@@ -125,7 +125,7 @@ public void removePatient(Patient patient) {
 }
 @Override
 public String toString() {
-	return "Symptoms [id=" + id + ", type=" + type + "]";
+	return "Symptoms [id=" + id + ", type=" + type + ", severity=" + severity +"]";
 }
 
 public String getSeverity() {
