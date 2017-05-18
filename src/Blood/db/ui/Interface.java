@@ -279,30 +279,40 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		System.out.println("The table has been dropped");
 		break;
 	case 7: 
-	
-    /**case 8: 
+
 		System.out.println("Insert the name of the nurse you want to change");
 		String nurseNameUpdate = bufferedReader.readLine();
-		Nurse nurseUpdate = db_Nurse.SQLSearch(nurseNameUpdate);
+		List<Nurse> nurseUpdate = db_Nurse.SQLSearch(nurseNameUpdate);
+		Iterator<Nurse> it = nurseUpdate.iterator();
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
+		}
+		int option = Integer.parseInt(bufferedReader.readLine());
+		
+		
+		
 		System.out.println("Enter the new name or press enter");
 		String newName = bufferedReader.readLine();
 		if (newName.equals("")){
-			newName = nurseUpdate.getName();
+			newName = nurseUpdate.get(option).getName();
 		}
 		else{
-		nurseUpdate.setName(newName);
+		nurseUpdate.get(option).setName(newName);
 		}
 		System.out.println("Enter the new photo or press enter");
-		String newPhoto = bufferedReader.readLine();
+		
+
+			
+		/**String newPhoto = bufferedReader.readLine();
 		if (newPhoto.equals("")){
-			newPhoto = nurseUpdate.getPhoto();
+			newPhoto = nurseUpdate.get(option).setPhoto(newPhoto);
 		}
-		else {nurseUpdate.setPhoto(newPhoto);}
+		else {
+			nurseUpdate.get(option).setPhoto(newPhoto);}
 		
-		
-		db_Nurse.SQLUpdate(nurseUpdate, nurseNameUpdate);
-		
+		db_Nurse.SQLUpdate(nurseUpdate.get(option));
 		**/
+		
 	case 8: //salir del programa
 		
 	break;

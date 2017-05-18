@@ -502,9 +502,9 @@ public class Patient implements Serializable {
 
 	public String toString() {
 
-		return "Patient [id=" + id + ", name=" + name + ", age=" + age + ", blood=" + blood + ", smoker=" + smoker
+		return "Patient [id=" + id + ", name=" + name + ", age=" + age + ", blood=" + blood + ", gender=" + gender
 
-				+ ", gender=" + gender + "]";
+				+ ", smoker=" + smoker + "]";
 
 	}
 
