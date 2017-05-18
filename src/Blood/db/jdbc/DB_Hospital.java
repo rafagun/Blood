@@ -66,7 +66,7 @@ String sql1 = "DROP TABLE hospital";
 stmt1.executeUpdate(sql1);
 stmt1.close();
 
-} catch (Exception e) {
+} catch (Exception e) {   
 e.printStackTrace();
 }
 }

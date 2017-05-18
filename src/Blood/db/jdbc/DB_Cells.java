@@ -116,13 +116,13 @@ e.printStackTrace();
 return cells;
 }
 
-public void SQLUpdate(Cells cellUpdate) throws IOException , SQLException {
+public void SQLUpdate(Cells cellsUpdate) throws IOException , SQLException {
 	String sql = "UPDATE Cells SET id=? ,type=? ,lowL=? ,HighL=? WHERE id=?";
 PreparedStatement prep = Connect.c.prepareStatement(sql);
-prep.setInt(1, cellUpdate.getId());
-prep.setString(2, cellUpdate.getType());
-prep.setFloat(3, cellUpdate.getLowL());
-prep.setFloat(4, cellUpdate.getHighL());
+prep.setInt(1, cellsUpdate.getId());
+prep.setString(2, cellsUpdate.getType());
+prep.setFloat(3, cellsUpdate.getLowL());
+prep.setFloat(4, cellsUpdate.getHighL());
 System.out.println("Update is finished");
 prep.executeUpdate();
 prep.close();

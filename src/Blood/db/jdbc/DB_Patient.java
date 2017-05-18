@@ -36,9 +36,12 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 			Statement stmt3 = Connect.c.createStatement();
 
-			String sql3 = "CREATE TABLE Patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT ," + "name TEXT NOT NULL, "
-
-					+ "blood  TEXT NOT NULL, " + "age DATE, " + "gender TEXT NOT NULL, " + "smoker  BOOLEAN)";
+			String sql3 = "CREATE TABLE Patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT ," 
+			+ "name TEXT NOT NULL, "
+			+ "blood  TEXT NOT NULL, " 
+			+ "age DATE, " 
+			+ "gender TEXT NOT NULL, " 
+			+ "smoker  BOOLEAN)";
 
 			stmt3.executeUpdate(sql3);
 
@@ -48,9 +51,10 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 			stmt3 = Connect.c.createStatement();
 
-			String sql = "CREATE TABLE PatsMolecules" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE" + "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE" + "Level INTEGER  NOT NULL "
-
-					+ "PRIMARY KEY (patientId,moleculeId))";
+			String sql = "CREATE TABLE PatsMolecules" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE," 
+			+ "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE," 
+			+ "Level INTEGER  NOT NULL, " 
+			+ "PRIMARY KEY (patientId,moleculeId))";
 
 
 
@@ -60,11 +64,10 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 			stmt3 = Connect.c.createStatement();
 
-			String sql1 = "CREATE TABLE PatsCells" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-
-					+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE " + "Level INTEGER NOT NULL"
-
-					+ "PRIMARY KEY (patientId,cellsId))";
+			String sql1 = "CREATE TABLE PatsCells" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE,"
+			+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE, " 
+			+ "Level INTEGER NOT NULL,"
+			+ "PRIMARY KEY (patientId,cellsId))";
 
 			stmt3.executeUpdate(sql1);
 
@@ -72,10 +75,9 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 			stmt3 = Connect.c.createStatement();
 
-			String sql2 = "CREATE TABLE PatsIllnes" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-
-					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE" + "severity TEXT"
-
+			String sql2 = "CREATE TABLE PatsIllnes" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE,"
+					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE," 
+					+ "severity TEXT,"
 					+ "PRIMARY KEY (patientId, illnesId))";
 
 			stmt3.executeUpdate(sql2);
@@ -86,10 +88,10 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 			stmt3 = Connect.c.createStatement();
 
-			String sql31 = "CREATE TABLE PatsSymptoms" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-
-					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE" + "level TEXT" + "place TEXT NULL"
-
+			String sql31 = "CREATE TABLE PatsSymptoms" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE,"
+					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE," 
+					+ "level TEXT,"
+					+ "place TEXT NULL,"
 					+ "PRIMARY KEY (patientId, sympId))";
 
 			stmt3.executeUpdate(sql31);
@@ -197,25 +199,19 @@ public class DB_Patient implements FunctionsDB<Patient> {
 	
 
 	public void SQLDrop() {
-
 		try {
 
+			// Drop tables: begin
 			Statement stmt3 = Connect.c.createStatement();
-
 			String sql3 = "DROP TABLE Patient";
-
 			stmt3.executeUpdate(sql3);
-
 			stmt3.close();
 
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-
-		}
-
-	}
-
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+			}
+		
 
 
 	public ArrayList<Patient> SQLSelect() {

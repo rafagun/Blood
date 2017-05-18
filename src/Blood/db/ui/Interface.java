@@ -636,6 +636,9 @@ else if (selection == 4){//cells
 		break;
 	
 	case 7: 
+		
+	
+		
 		System.out.println("Insert the name of the cell you want to change");
 		String cellTypeUpdate = bufferedReader.readLine();
 		List<Cells> cellsUpdate = db_cells.SQLSearch(cellTypeUpdate);
@@ -646,7 +649,6 @@ else if (selection == 4){//cells
 		int option = Integer.parseInt(bufferedReader.readLine());
 		
 		
-		
 		System.out.println("Enter the new name or press enter");
 		String newName = bufferedReader.readLine();
 		if (newName.equals("")){
@@ -655,23 +657,31 @@ else if (selection == 4){//cells
 		else{
 		cellsUpdate.get(option).setType(newName);
 		}
+		
 		System.out.println("Enter the new low level or press enter");
 		String newLevel = bufferedReader.readLine();
-		Float newLowLevel = Float.parseFloat(newLevel);
+		float newLowLevel;
+
 		if (newLevel.equals("")){
-			
 			newLowLevel = cellsUpdate.get(option).getLowL();
 		}
-		else {cellsUpdate.get(option).setLowL(newLowLevel);}
+		else {
+			newLowLevel = Float.parseFloat(newLevel);
+			cellsUpdate.get(option).setLowL(newLowLevel);
+			}
+	
 		
 		System.out.println("Enter the new high level or press enter");
 		String newLevel2 = bufferedReader.readLine();
-		Float newHighLevel = Float.parseFloat(newLevel2);
-		if (newLevel.equals("")){
+		float newHighLevel;
+		if (newLevel2.equals("")){
 			
 			newHighLevel = cellsUpdate.get(option).getHighL();
 		}
-		else {cellsUpdate.get(option).setHighL(newHighLevel);}
+		else {
+			newHighLevel = Float.parseFloat(newLevel2);
+			cellsUpdate.get(option).setHighL(newHighLevel);
+			}
 		
 		db_cells.SQLUpdate(cellsUpdate.get(option));
 
