@@ -3,6 +3,8 @@ import java.io.*;
 
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -322,22 +324,25 @@ else if (selection == 3){//patient
 	break;
 
 	case 2: 
-	
-	System.out.println("Introduce the name of the patient");
-	String namePatient = bufferedReader.readLine();
-	System.out.println("Introduce the blood type");
-	String bloodPatient = bufferedReader.readLine();
-	System.out.println("Introduce the age of the patient");
-	String agePatient = bufferedReader.readLine();
-	int age = Integer.parseInt(agePatient);
-	System.out.println("Introduce the gender");
-	String gender = bufferedReader.readLine();
-	System.out.println("Introduce if the patient is smoker or not");
-	String smokerpatient = bufferedReader.readLine();
-	Boolean smoker = Boolean.parseBoolean(smokerpatient);
-	Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
-	dbPatient.SQLInsert(patient);
-	break;
+		
+		System.out.println("Introduce the name of the patient");
+		String namePatient = bufferedReader.readLine();
+		System.out.println("Introduce the blood type");
+		String bloodPatient = bufferedReader.readLine();
+		System.out.println("Introduce the age of the patient");
+		String agePatient = bufferedReader.readLine();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate age = LocalDate.parse(agePatient, formatter);
+		System.out.println("Introduce the gender");
+		String gender = bufferedReader.readLine();
+		System.out.println("Introduce if the patient is smoker or not");
+		String smokerpatient = bufferedReader.readLine();
+		Boolean smoker = Boolean.parseBoolean(smokerpatient);
+		Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
+		dbPatient.SQLInsert(patient);
+		break;
+
+
 
 	case 3:
 	
@@ -363,7 +368,7 @@ else if (selection == 3){//patient
 		System.out.println("Introduzca su respectivo id");
 		int id = Integer.parseInt(bufferedReader.readLine());
 		dbPatient.SQLDelete(list.get(id));
-		System.out.println("The hospital has been removed");
+		System.out.println("The patient has been removed");
 		 
 		break;
 
@@ -409,15 +414,18 @@ else if (selection == 3){//patient
 		
 		System.out.println("Input the new age or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newage;
+		LocalDate newage;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		if (linea.equals("")){
 			
 			newage = patUpdate.get(id1).getAge();
 		}
 		else{
-			newage = Integer.parseInt(linea);
+			newage = LocalDate.parse(linea, f);
 		patUpdate.get(id1).setAge(newage);
 		}
+		
+
 		
 		System.out.println("Enter the new gender or press enter");
 		String newgender = bufferedReader.readLine();
