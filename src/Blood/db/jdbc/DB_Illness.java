@@ -111,6 +111,7 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
+		
 		}
 	public void SQLRelation(int illnes, int patient){
 		try {
