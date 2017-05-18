@@ -25,22 +25,24 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		+ "chronic BOOLEAN)";
 		stmt1.executeUpdate(sql);
 		stmt1.close();
-		String sqL1 = "CREATE TABLE Illnes-Molecules "
-				+ "(moleculesId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE"
-				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
-				+ "Level INTEGER  NOT NULL"
-				+ "H-L TEXT NOT NULL "
+		Statement stmt2 = Connect.c.createStatement();
+		String sqL1 = "CREATE TABLE IllnesMolecules "
+				+ "(moleculesId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE, "
+				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE, "
+				+ "Level INTEGER  NOT NULL, "
+				+ "HL TEXT NOT NULL, "
 				+ "PRIMARY KEY (moleculesId,IllnesId))";
-		stmt1.executeUpdate(sqL1);
-		stmt1.close();
-		String sqL2 = "CREATE TABLE Illnes-Cells "
-				+ "(cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE"
-				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
-				+ "Level INTEGER  NOT NULL"
-				+ "H-L TEXT NOT NULL "
+		stmt2.executeUpdate(sqL1);
+		stmt2.close();
+		Statement stmt3 = Connect.c.createStatement();
+		String sqL2 = "CREATE TABLE IllnesCells "
+				+ "(cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE, "
+				+ "IllnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE, "
+				+ "Level INTEGER  NOT NULL, "
+				+ "HL TEXT NOT NULL, "
 				+ "PRIMARY KEY (cellsId,IllnesId))";
-		stmt1.executeUpdate(sqL2);
-		stmt1.close();
+		stmt3.executeUpdate(sqL2);
+		stmt3.close();
 		
 	
 		// Create table: end

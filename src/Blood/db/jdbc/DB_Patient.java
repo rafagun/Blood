@@ -15,37 +15,37 @@ public class DB_Patient implements FunctionsDB<Patient> {
 	public void SQLCreate() throws SQLException {
 		try {
 			Statement stmt3 = Connect.c.createStatement();
-			String sql3 = "CREATE TABLE Patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT ," + "name TEXT NOT NULL, "
-					+ "blood  TEXT NOT NULL, " + "age INTEGER, " + "gender TEXT NOT NULL, " + "smoker  BOOLEAN)";
+			String sql3 = "CREATE TABLE Patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, "
+					+ "blood  TEXT NOT NULL, " + "age INTEGER, " + "gender TEXT NOT NULL, " + "smoker  BOOLEAN )";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
-			stmt3 = Connect.c.createStatement();
-			String sql = "CREATE TABLE PatsMolecules" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-					+ "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE" + "Level INTEGER  NOT NULL "
+			Statement stmt4= Connect.c.createStatement();
+			String sql = "CREATE TABLE PatsMolecules" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
+					+ "moleculeId INTEGER REFERENCES Molecules(id) ON DELETE CASCADE, " + "Level INTEGER  NOT NULL, "
 					+ "PRIMARY KEY (patientId,moleculeId))";
 
-			stmt3.executeUpdate(sql);
-			stmt3.close();
-			stmt3 = Connect.c.createStatement();
-			String sql1 = "CREATE TABLE PatsCells" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-					+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE " + "Level INTEGER NOT NULL"
+			stmt4.executeUpdate(sql);
+			stmt4.close();
+			Statement stmt5 = Connect.c.createStatement();
+			String sql1 = "CREATE TABLE PatsCells" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
+					+ "cellsId INTEGER REFERENCES Cells(id) ON DELETE CASCADE, " + "Level INTEGER NOT NULL, "
 					+ "PRIMARY KEY (patientId,cellsId))";
-			stmt3.executeUpdate(sql1);
-			stmt3.close();
-			stmt3 = Connect.c.createStatement();
-			String sql2 = "CREATE TABLE PatsIllnes" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE" + "severity TEXT"
+			stmt5.executeUpdate(sql1);
+			stmt5.close();
+			Statement stmt6 = Connect.c.createStatement();
+			String sql2 = "CREATE TABLE PatsIllnes" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
+					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE, " + "severity TEXT, "
 					+ "PRIMARY KEY (patientId, illnesId))";
-			stmt3.executeUpdate(sql2);
-			stmt3.close();
+			stmt6.executeUpdate(sql2);
+			stmt6.close();
 
-			stmt3 = Connect.c.createStatement();
-			String sql31 = "CREATE TABLE PatsSymptoms" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE"
-					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE" + "level TEXT" + "place TEXT NULL"
+			Statement stmt7 = Connect.c.createStatement();
+			String sql31 = "CREATE TABLE PatsSymptoms" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
+					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE, " + "level TEXT, " + "place TEXT NULL, "
 					+ "PRIMARY KEY (patientId, sympId))";
-			stmt3.executeUpdate(sql31);
-			stmt3.close();
+			stmt7.executeUpdate(sql31);
+			stmt7.close();
 
 		}
 

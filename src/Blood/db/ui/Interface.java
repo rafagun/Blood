@@ -125,6 +125,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		for(int i=0; ite.hasNext(); i++){
 			System.out.println(i+".-"+ite.next());
 		}
+		System.out.println("Introduzca su id:");
 		int option1 = Integer.parseInt(bufferedReader.readLine());
 		db_Hospital.SQLDelete(list.get(option1));
 		System.out.println("The hospital has been removed");
@@ -438,10 +439,12 @@ else if (selection == 3){//patient
 	
 	break;
 	case 9 : 
-		System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
+		int op=0;
+		while(op==6){
+			System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
 				+ "2 la relacion patient-illnes , 3 la relacion patient-cells , 4 la relacion patient-molecules"
-				+ "5 la relacion patient-symptoms");
-		int op= Integer.parseInt(bufferedReader.readLine());
+				+ "5 la relacion patient-symptoms y 6 para salir");
+		 op= Integer.parseInt(bufferedReader.readLine());
 		switch(op){
 		case 1: {
 			DB_Nurse db_Nurse = new DB_Nurse();
@@ -555,7 +558,7 @@ else if (selection == 3){//patient
 			dbPatient.SQLRelationPS(idsymp, idpat);
 		}
 		}
-	
+		}
 		
 		break;
 	}

@@ -26,16 +26,16 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		try {
 		Statement stmt2 = Connect.c.createStatement();
 		String sql2 = "CREATE TABLE Nurses "
-				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ "name TEXT NOT NULL,"
-				+ "photo BLOB,"
+				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ "name TEXT NOT NULL, "
+				+ "photo BLOB, "
 				+ "hospital_id INTEGER REFERENCES hospital(id) ON DELETE CASCADE)";
 		stmt2.executeUpdate(sql2);
 		stmt2.close();
 		Statement stmt = Connect.c.createStatement();
 		String sql = "CREATE TABLE NursesPatients"
-				+ "(nurseId INTEGER REFERENCES Nurses(id) ON DELETE SET NULL"
-				+ "patientId INTEGER REFERENCES Patient(id) ON DELETE SET NULL"
+				+ "(nurseId INTEGER REFERENCES Nurses(id) ON DELETE SET NULL, "
+				+ "patientId INTEGER REFERENCES Patient(id) ON DELETE SET NULL, "
 				+ "PRIMARY KEY (nurseId,patientId) )";
 		stmt.executeUpdate(sql);
 		stmt.close();
