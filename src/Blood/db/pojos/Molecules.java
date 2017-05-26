@@ -21,9 +21,9 @@ private static final long serialVersionUID = -3290462529390006987L;
 	@XmlAttribute
 	private String type;
 	@XmlElement
-	private float lowLevels;
+	private int lowLevels;
 	@XmlElement
-	private float highLevels;
+	private int highLevels;
 	@ManyToMany
 	@JoinTable(name="pats-mol",
 	joinColumns={@JoinColumn(name="molecules_id", referencedColumnName="id")},
@@ -42,7 +42,7 @@ private static final long serialVersionUID = -3290462529390006987L;
 		this.setPatients(new ArrayList<Patient>());
 		this.setIllnes(new ArrayList<Illnes>());
 	}
-	public Molecules(int id, String type,float highL, float lowL){
+	public Molecules(int id, String type, int highL, int lowL){
 		this.id= id;
 		this.type = type;
 		this.lowLevels = highL;
@@ -50,7 +50,7 @@ private static final long serialVersionUID = -3290462529390006987L;
 		this.patients = new ArrayList<Patient>();
 		this.illness = new ArrayList<Illnes>();
 	}
-	public Molecules (String type , float high , float low){
+	public Molecules (String type , int high , int low){
 		this.type=type;
 		this.highLevels=high;
 		this.lowLevels=low;
@@ -91,16 +91,16 @@ private static final long serialVersionUID = -3290462529390006987L;
 	public void setType(String type) {
 		this.type = type;
 	}
-	public float getLowLevels() {
+	public int getLowLevels() {
 		return lowLevels;
 	}
-	public void setLowLevels(Float newLowLevel) {
+	public void setLowLevels(int newLowLevel) {
 		this.lowLevels = newLowLevel;
 	}
-	public float getHighLevels() {
+	public int getHighLevels() {
 		return highLevels;
 	}
-	public void setHighLevels(float newHighLevel) {
+	public void setHighLevels(int newHighLevel) {
 		this.highLevels = newHighLevel;
 	}
 

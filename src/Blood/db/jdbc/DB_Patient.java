@@ -35,14 +35,14 @@ public class DB_Patient implements FunctionsDB<Patient> {
 			stmt5.close();
 			Statement stmt6 = Connect.c.createStatement();
 			String sql2 = "CREATE TABLE PatsIllnes" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
-					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE, " + "severity TEXT, "
+					+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE, "
 					+ "PRIMARY KEY (patientId, illnesId))";
 			stmt6.executeUpdate(sql2);
 			stmt6.close();
 
 			Statement stmt7 = Connect.c.createStatement();
 			String sql31 = "CREATE TABLE PatsSymptoms" + "(patientId INTEGER REFERENCES Patient(id) ON DELETE CASCADE, "
-					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE, " + "level TEXT, " + "place TEXT NULL, "
+					+ "sympId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE, " + "Level TEXT, " + "place TEXT NULL, "
 					+ "PRIMARY KEY (patientId, sympId))";
 			stmt7.executeUpdate(sql31);
 			stmt7.close();
@@ -64,10 +64,10 @@ public class DB_Patient implements FunctionsDB<Patient> {
 		}
 	}
 	
-	public void SQLRelationPC(int cells, int patient){
+	public void SQLRelationPC(int cells, int patient, int level){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO PatsCells (patientId, cellsId) " + "VALUES ('" + patient + "','"+ cells + "');";
+		String sql = "INSERT INTO PatsCells (patientId, cellsId, Level) " + "VALUES ('" + patient + "','"+ cells+ "','"+ level + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {
@@ -75,20 +75,20 @@ public class DB_Patient implements FunctionsDB<Patient> {
 		}
 	}
 	
-	public void SQLRelationPM(int molecules, int patient){
+	public void SQLRelationPM(int molecules, int patient, int level){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO PatsMolecules (patientId, moleculeId) " + "VALUES ('" + patient + "','"+ molecules + "');";
+		String sql = "INSERT INTO PatsMolecules (patientId, moleculeId, Level) " + "VALUES ('" + patient + "','"+ molecules + "','"+ level + "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
 	}
-	public void SQLRelationPS(int symptoms, int patient){
+	public void SQLRelationPS(int symptoms, int patient, int level , String place){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO PatsSymptoms (patientId, sympId) " + "VALUES ('" + patient + "','"+ symptoms + "');";
+		String sql = "INSERT INTO PatsSymptoms (patientId, sympId, Level , place ) " + "VALUES ('" + patient + "','"+ symptoms + "','"+level+ "','"+ place+ "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {

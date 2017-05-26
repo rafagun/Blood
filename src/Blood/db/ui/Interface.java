@@ -91,46 +91,38 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	break;
 
 	case 2: 
-	
-	
-	System.out.println("Introduce the name of the hospital");
-	String nameHosp = bufferedReader.readLine();
-	System.out.println("Introduce the location of the hospital");
-	String locationHosp = bufferedReader.readLine();
-	System.out.println("Introduce the range of the hospital");
-	String rangeHospital = bufferedReader.readLine();
-	int rangeHosp = Integer.parseInt(rangeHospital);
-	Hospital hospitalInterface = new Hospital (nameHosp,locationHosp,rangeHosp);
-	db_Hospital.SQLInsert(hospitalInterface);
-	System.out.println("The information has been insert correctly");
+		Hospital hospital = new Hospital();
+		System.out.println("Introduce a name");
+		hospital.setName(bufferedReader.readLine());
+		System.out.println("Introduce a location");
+		hospital.setLocation(bufferedReader.readLine());
+		System.out.print("Introduce a range");
+		hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
+		db_Hospital.SQLInsert(hospital);
 	break;
 
 	case 3:
-	
-		System.out.println("Introduce the name of the hospital you want to search:");
-		String nameSearch = bufferedReader.readLine();
-		List<Hospital> hospitals = db_Hospital.SQLSearch(nameSearch);
-		for (Hospital hospital: hospitals){
-			System.out.println(hospital);
-		}
-
-		break;
-
+	{
+		System.out.println("Introduce the name of the hospital that you want to search");
+		List<Hospital> hospitals = db_Hospital.SQLSearch(bufferedReader.readLine());
+		Iterator<Hospital> it = hospitals.iterator();
+		for(int i=1; it.hasNext(); i++){
+			System.out.println(i+".-"+it.toString());
+		}}
+break;
 	case 4: 
-		
-		System.out.println("Insert the name of the hospital you want to delete");
-		String hospDelete = bufferedReader.readLine();
-		List<Hospital> list = db_Hospital.SQLSearch(hospDelete);
-		Iterator<Hospital> ite = list.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
+	{
+		System.out.println("Introduce the name of the hospital that you want to delete");
+		List<Hospital> hospitalss = db_Hospital.SQLSearch(bufferedReader.readLine());
+		Iterator it = hospitalss.iterator();
+		 
+		for(int i=1; it.hasNext(); i++){
+			System.out.println(i+".-"+it.toString());
 		}
-		System.out.println("Introduzca su id:");
-		int option1 = Integer.parseInt(bufferedReader.readLine());
-		db_Hospital.SQLDelete(list.get(option1));
-		System.out.println("The hospital has been removed");
-		break;
-	 
+		System.out.println("Introduzca el hospital que desea seleccionar");
+		int op =Integer.parseInt(bufferedReader.readLine());
+		db_Hospital.SQLDelete(hospitalss.get(op));// the hospital we were looking for
+	} break;
 	case 5:
 		List<Hospital> lista;
 		lista = db_Hospital.SQLSelect();
@@ -146,47 +138,41 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		break;
 
 	case 7: 
-	
+	{
+
 		
-		System.out.println("Insert the name of the hospital you want to change");
-		String hospNameUpdate = bufferedReader.readLine();
-		List<Hospital> hospUpdate = db_Hospital.SQLSearch(hospNameUpdate);
-		Iterator<Hospital> it = hospUpdate.iterator();
-		for(int i=0; it.hasNext(); i++){
-			System.out.println(i+".-"+it.next());
+		System.out.println("Introduce the name of the hospital that you want to delete");
+		List<Hospital> hospitals = db_Hospital.SQLSearch(bufferedReader.readLine());
+		Iterator it = hospitals.iterator();
+		 
+		for(int i=1; it.hasNext(); i++){
+			System.out.println(i+".-"+it.toString());
 		}
-		int option = Integer.parseInt(bufferedReader.readLine());
 		
+		System.out.println("Introduzca el hospital que desea seleccionar");
+		int op =Integer.parseInt(bufferedReader.readLine());
+		Hospital newHosp = new Hospital();
 		
+		System.out.println("Introduce the changes you want to make in the name or press enter");
+		String name = bufferedReader.readLine();
+		if (name.equals("")) newHosp.setName(hospitals.get(op).getName());
+		else newHosp.setName(name);
 		
-		System.out.println("Enter the new name or press enter");
-		String newName = bufferedReader.readLine();
-		if (newName.equals("")){
-			newName = hospUpdate.get(option).getName();
-		}
+		System.out.println("Introduce the changes you want to make in the Location or press enter");
+		
+		String location = bufferedReader.readLine();
+		if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
+		else newHosp.setLocation(location);
+		
+		System.out.println("Introduce the changes you want to make in the name or press enter");
+		String lineaRange = bufferedReader.readLine();
+		if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
 		else{
-		hospUpdate.get(option).setName(newName);
+			newHosp.setRange(Integer.parseInt(lineaRange));
 		}
-		System.out.println("Enter the new location or press enter");
-		String newLocation = bufferedReader.readLine();
-		if (newLocation.equals("")){
-			newLocation = hospUpdate.get(option).getLocation();
-		}
-		else {hospUpdate.get(option).setLocation(newLocation);}
 		
-		System.out.println("Input the new range or press enter");
-		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newRange;
-		if (linea.equals("")){
-			
-			newRange = hospUpdate.get(option).getRange();
-		}
-		else{
-			newRange = Integer.parseInt(linea);
-			hospUpdate.get(option).setRange(newRange);
-		}
-		db_Hospital.SQLUpdate(hospUpdate.get(option));
-		
+		db_Hospital.SQLUpdate(hospitals.get(op), newHosp);
+	} break;
 	case 8:	//salir del programa
 
 		
@@ -351,20 +337,18 @@ else if (selection == 3){//patient
 
 	case 4: 
 
-		
-		
+	{
 		System.out.println("Introduce the name of the patient that you want to delete");
-		String patientname = bufferedReader.readLine();
-		List<Patient> list= dbPatient.SQLSearch(patientname);
-		Iterator<Patient> ite = list.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
-		}
-		System.out.println("Introduzca su respectivo id");
-		int id = Integer.parseInt(bufferedReader.readLine());
-		dbPatient.SQLDelete(list.get(id));
-		System.out.println("The hospital has been removed");
+		List<Patient> patients2 = dbPatient.SQLSearch(bufferedReader.readLine());
+		Iterator it = patients2.iterator();
 		 
+		for(int i=1; it.hasNext(); i++){
+			System.out.println(i+".-"+it.toString());
+		}
+		System.out.println("Introduzca el patient que desea seleccionar");
+		int op =Integer.parseInt(bufferedReader.readLine());
+		dbPatient.SQLDelete(patients2.get(op));// the hospital we were looking for
+	}
 		break;
 
 	case 5:
@@ -440,7 +424,7 @@ else if (selection == 3){//patient
 	break;
 	case 9 : 
 		int op=0;
-		while(op==6){
+		while(op!=6){
 			System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
 				+ "2 la relacion patient-illnes , 3 la relacion patient-cells , 4 la relacion patient-molecules"
 				+ "5 la relacion patient-symptoms y 6 para salir");
@@ -467,7 +451,8 @@ else if (selection == 3){//patient
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			db_Nurse.SQLRelation(idnurse, idpat);
-		} case 2: {
+		} break;
+		 case 2: {
 			DB_Illness db_illnes = new DB_Illness();
 			System.out.println("Introduce the illnes to the one who want to assign un patient");
 			String name= bufferedReader.readLine();
@@ -488,7 +473,7 @@ else if (selection == 3){//patient
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			dbPatient.SQLRelationPI(idill, idpat);
-		}
+		} break;
 		case 3 :
 		{
 			DB_Cells db_cells = new DB_Cells();
@@ -510,8 +495,10 @@ else if (selection == 3){//patient
 			}
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPC(idcells, idpat);
-		}
+			System.out.println("Introduzca su nivel");
+			int level = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPC(idcells, idpat, level);
+		} break;
 		case 4 : {
 			DB_Molecules db_molecules = new DB_Molecules();
 			System.out.println("Introduce the molecules to the one who want to assign un patient");
@@ -532,12 +519,14 @@ else if (selection == 3){//patient
 			}
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPM(idmol, idpat);
-		}
+			System.out.println("Introduzca su nivel");
+			int level = Integer.parseInt(bufferedReader.readLine());
+			dbPatient.SQLRelationPM(idmol, idpat, level);
+		} break;
 		case 5:
 		{
 			DB_Symptoms db_symptoms = new DB_Symptoms();
-			System.out.println("Introduce the illnes to the one who want to assign un patient");
+			System.out.println("Introduce the symptoms to the one who want to assign un patient");
 			String name= bufferedReader.readLine();
 			List<Symptoms> symps=db_symptoms.SQLSearch(name);
 			Iterator<Symptoms> it3=symps.iterator();
@@ -555,7 +544,11 @@ else if (selection == 3){//patient
 			}
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPS(idsymp, idpat);
+			System.out.println("Introduzca su nivel");
+			int level = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduzca el sitio");
+			String place = bufferedReader.readLine();
+			dbPatient.SQLRelationPS(idsymp, idpat, level , place);
 		}
 		}
 		}
@@ -690,9 +683,9 @@ else if (selection == 5){//molecules
 		System.out.println("Introduce the type of the molecule: ");
 		String nameMolecule = bufferedReader.readLine();
 		System.out.println("Introduce the low level of the molecule: ");
-		Integer lowL = Integer.parseInt(bufferedReader.readLine());
+		int lowL =  Integer.parseInt(bufferedReader.readLine());
 		System.out.println("Introduce the high level of the molecule: ");
-		Integer highL = Integer.parseInt(bufferedReader.readLine());
+		int highL = Integer.parseInt(bufferedReader.readLine());
 		Molecules moleculesInterface = new Molecules(nameMolecule,highL,lowL);
 		db_molecules.SQLInsert(moleculesInterface);
 		System.out.println("The information has been introduced propertly");
@@ -756,7 +749,7 @@ else if (selection == 5){//molecules
 			}
 			System.out.println("Enter the new low level or press enter");
 			String newLevel = bufferedReader.readLine();
-			Float newLowLevel = Float.parseFloat(newLevel);
+			int newLowLevel = Integer.parseInt(newLevel);
 			if (newLevel.equals("")){
 				
 				newLowLevel = moleculesUpdate.get(option).getLowLevels();
@@ -765,7 +758,7 @@ else if (selection == 5){//molecules
 			
 			System.out.println("Enter the new high level or press enter");
 			String newLevel2 = bufferedReader.readLine();
-			float newHighLevel = Float.parseFloat (newLevel2);
+			int newHighLevel = Integer.parseInt (newLevel2);
 			if (newLevel.equals("")){
 				
 				newHighLevel = moleculesUpdate.get(option).getHighLevels();

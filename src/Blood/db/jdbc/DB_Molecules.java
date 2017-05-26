@@ -24,7 +24,7 @@ public class DB_Molecules implements FunctionsDB<Molecules>{
 			+ "(id INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ "type  TEXT NOT NULL, "
 			+ "lowLevels INTEGER, "
-			+ "highLevels  INTEGER)";
+			+ "highLevels  INTEGER )";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 			System.out.println("Tables created.");
