@@ -15,13 +15,13 @@ public class Hospital implements Serializable {
 	@Id
 	@GeneratedValue(generator="Hospital")
 	@TableGenerator(name="Hospital",table="sqlite_sequence", pkColumnName="name" , valueColumnName="seq",pkColumnValue="Hospital")
-	@XmlAttribute
+	@XmlTransient
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
 	@XmlElement
 	private String location;
-	@XmlElement
+	@XmlAtribute
 	private Integer range;
 	@OneToMany(mappedBy="hospital")
 	@XmlElementWrapper(name="nurses")

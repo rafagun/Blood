@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Hospitals>
+<Hospital range="1">
+<name>La paz</name>
+<location>Madrid</location>
+</Hospital>
+<Hospital range="0">
+<name>Nosa Señora dos Ollos Grandes</name>
+<location>Lugo</location>
+</Hospital>
+<Hospital range="4">
+<name>Gregorio Marañon</name>
+<location>Madrid</location>
+</Hospital>
+<Hospital range="5">
+<name>Ramon y Cajal</name>
+<location>Madrid</location>
+</Hospital>
+</Hospitals>
