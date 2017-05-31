@@ -339,7 +339,7 @@ else if (selection == 3){//patient
 		String namePatient = bufferedReader.readLine();
 		System.out.println("Introduce the blood type");
 		String bloodPatient = bufferedReader.readLine();
-		System.out.println("Introduce the age of the patient");
+		System.out.println("Introduce the age of the patient (yyyy-mm-dd)");
 		String agePatient = bufferedReader.readLine();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate age = LocalDate.parse(agePatient, formatter);
