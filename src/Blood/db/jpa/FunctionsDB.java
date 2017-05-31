@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 public interface FunctionsDB <Obj> {
 	public void SQLCreate() throws SQLException;
 	public List<Obj> SQLSelect();
-	public void SQLDrop();
 	public void SQLInsert(Obj obj);
 	public List<Obj> SQLSearch(String name);
 	public void SQLDelete(Obj obj) throws IOException, SQLException;

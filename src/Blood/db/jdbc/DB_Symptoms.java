@@ -76,20 +76,7 @@ public class DB_Symptoms implements FunctionsDB <Symptoms> {
 		return symptoms;
 	}
 	
-	public void SQLDrop(){
-		try {
 
-		// Drop tables: begin
-		Statement stmt2 = Connect.c.createStatement();
-		String sql2 = "DROP TABLE Symptoms";
-		stmt2.executeUpdate(sql2);
-		stmt2.close();
-		System.out.println("Table Symptoms has been dropped");
-		
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
-	}
 	public List<Symptoms> SQLSearch(String symptomsName) {
 		List<Symptoms> symptoms= new LinkedList<>();
 	try {

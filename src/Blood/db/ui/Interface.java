@@ -38,11 +38,11 @@ public class Interface {
 	System.out.println("Introduce 3 to show");
 	System.out.println("Introduce 4 to delete");
 	System.out.println("Introduce 5 to select");
-	System.out.println("Introduce 6 to drop");
-	System.out.println("Introduce 7 to update");
-	System.out.println("Introduce 8 to exit");
-	System.out.println("Introduce 9 para asignar relaciones en las clases correspondientes:");
-	
+	System.out.println("Introduce 6 to update");
+	System.out.println("Introduce 7 to exit");
+	System.out.println("Introduce 8 to assign relationships in the classes that correspond:");
+	System.out.println("Introduce 9 to pass from java to xml:");
+	System.out.println("Introduce 10 to pass from xml to java:");
 	}
 	
 	static void menu3(){
@@ -147,13 +147,8 @@ break;
 		}
 		break;
 		// hay que borrar todo, no solo el contenido ya que al mostrarlo una vez borrado, muestra null no un error de que no existe
-		
-	case 6: 
-		JPAHospital.SQLDrop();
-		System.out.println("the table has dropped");
-		break;
 
-	case 7: 
+	case 6: 
 	{
 
 		
@@ -189,7 +184,7 @@ break;
 		
 		JPAHospital.SQLUpdate(hospitals.get(op), newHosp);
 	} break;
-	case 8:	//salir del programa
+	case 7:	//salir del programa
 
 		
 	break;
@@ -273,12 +268,8 @@ break;
 		}
 		break;
 	 
-	case 6:
-		
-		db_Nurse.SQLDrop();
-		System.out.println("The table has been dropped");
-		break;
-	case 7: 
+	
+	case 6: 
 
 		System.out.println("Insert the name of the nurse you want to change");
 		String nurseNameUpdate = bufferedReader.readLine();
@@ -313,7 +304,7 @@ break;
 		db_Nurse.SQLUpdate(nurseUpdate.get(option));
 		**/
 		
-	case 8: //salir del programa
+	case 7: //salir del programa
 		
 	break;
 	}
@@ -398,11 +389,9 @@ else if (selection == 3){//patient
 		}
 		break;
 		
-	case 6: 
-		dbPatient.SQLDrop();
-		break;
+	
 
-	case 7: 
+	case 6: 
 		System.out.println("Insert the name of the patient you want to change");
 		String patNameUpdate = bufferedReader.readLine();
 		List<Patient> patUpdate = dbPatient.SQLSearch(patNameUpdate);
@@ -461,10 +450,10 @@ else if (selection == 3){//patient
 		else {patUpdate.get(id1).setSmoker(Boolean.parseBoolean(newSmoker));}
 		dbPatient.SQLUpdate(patUpdate.get(id1));
 	
-	case 8:	//salir del programa
+	case 7:	//salir del programa
 	
 	break;
-	case 9 : 
+	case 8 : 
 		int op=0;
 		while(op!=6){
 			System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
@@ -658,12 +647,8 @@ else if (selection == 4){//cells
 		break;
 		
 		
-	case 6: 
-		db_cells.SQLDrop();
-		System.out.println("The table has been dropped");
-		break;
 	
-	case 7: 
+	case 6: 
 		
 	
 		
@@ -713,7 +698,7 @@ else if (selection == 4){//cells
 		
 		db_cells.SQLUpdate(cellsUpdate.get(option));
 
-	case 8:
+	case 7:
 		break;
 	}
 	}
@@ -774,13 +759,8 @@ else if (selection == 5){//molecules
 			}
 			break;
 			
-			
+
 		case 6: 
-			db_molecules.SQLDrop();
-			System.out.println("The table has been dropped");
-			break;
-		
-		case 7: 
 			System.out.println("Insert the name of the molecule you want to change");
 			String moleculeTypeUpdate = bufferedReader.readLine();
 			List<Molecules> moleculesUpdate = db_molecules.SQLSearch(moleculeTypeUpdate);
@@ -820,7 +800,7 @@ else if (selection == 5){//molecules
 			
 			db_molecules.SQLUpdate(moleculesUpdate.get(option));
 
-		case 8:
+		case 7:
 			break;
 	
 	}
@@ -877,16 +857,13 @@ else if (selection == 6){//Sympthomps
 			System.out.println(symptoms1);
 		}
 		break;
-		
-	case 6: 
-		db_symptoms.SQLDrop();
-		break;
 
-	case 7:
+
+	case 6:
 		System.out.println("Symptoms cannot be modified");
 		break;
 		
-	case 8:	//salir del programa
+	case 7:	//salir del programa
 	break;
 	}
 	}
@@ -941,16 +918,12 @@ else if (selection == 7){//illness
 		}
 		break;
 		
-	case 6: 
-		db_illness.SQLDrop();
-		System.out.println("table has been removed");
-		break;
 
-	case 7:
+	case 6:
 		System.out.println("Illnesses cannot be modified");
 		break;
 		
-	case 8:	//salir del programa
+	case 7:	//salir del programa
 	break;
 	}
 }

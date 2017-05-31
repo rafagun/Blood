@@ -85,18 +85,7 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		}
 		return illness;
 		}
-	public void SQLDrop(){
-		try {
-
-		// Drop tables: begin
-		Statement stmt1 = Connect.c.createStatement();
-		String sql1 = "DROP TABLE illnes";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();
-
-		} catch (Exception e) {
-		e.printStackTrace();
-		}}
+	
 	public void SQLInsert(Illnes illnes){
 		try {
 		Statement stmt = Connect.c.createStatement();

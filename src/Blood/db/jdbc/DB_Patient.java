@@ -198,21 +198,6 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 	
 
-	public void SQLDrop() {
-		try {
-
-			// Drop tables: begin
-			Statement stmt3 = Connect.c.createStatement();
-			String sql3 = "DROP TABLE Patient";
-			stmt3.executeUpdate(sql3);
-			stmt3.close();
-
-			} catch (Exception e) {
-			e.printStackTrace();
-			}
-			}
-		
-
 
 	public ArrayList<Patient> SQLSelect() {
 

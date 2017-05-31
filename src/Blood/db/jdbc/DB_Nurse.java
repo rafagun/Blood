@@ -78,20 +78,6 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		return nurseList;
 	}
 	
-	public void SQLDrop(){
-		try {
-
-
-		Statement stmt2 = Connect.c.createStatement();
-		String sql2 = "DROP TABLE Nurses";
-		stmt2.executeUpdate(sql2);
-		stmt2.close();
-		System.out.println("Table Nurses has been dropped");
-		
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
-	}
 	
 	public void SQLDelete(Nurse nurse) throws IOException, SQLException {
 		try{

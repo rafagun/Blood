@@ -58,19 +58,6 @@ ex.printStackTrace();
 return Molecules1;
 }
 
-public void SQLDrop(){
-try {
-
-
-Statement stmt4 = Connect.c.createStatement();
-String sql4 = "DROP TABLE molecules";
-stmt4.executeUpdate(sql4);
-stmt4.close();
-
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
 
 public void SQLInsert(Molecules molecules){
 try {

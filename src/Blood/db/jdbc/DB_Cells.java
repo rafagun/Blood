@@ -33,19 +33,7 @@ public class DB_Cells implements FunctionsDB<Cells>{
 			e.printStackTrace();
 			}	
 }
-public void SQLDrop(){
-try {
 
-// Drop tables: begin
-Statement stmt5 = Connect.c.createStatement();
-String sql5 = "DROP TABLE Cells";
-stmt5.executeUpdate(sql5);
-stmt5.close();
-
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
 
 public void SQLInsert(Cells cells){
 try {
