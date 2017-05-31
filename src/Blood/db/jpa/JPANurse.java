@@ -74,7 +74,12 @@ public class JPANurse implements FunctionsDB<Nurse> {
 		}
 
 
-	
+		public static Nurse SQLSearch2 (int id){
+				Query q2 = eManager.em.createNativeQuery("SELECT * FROM Nurses WHERE id=?", Nurse.class);
+				q2.setParameter(1, id );
+				Nurse nurses= (Nurse) q2.getSingleResult();
+				return nurses;
+			}
 	
 	
 

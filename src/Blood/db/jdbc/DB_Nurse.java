@@ -171,23 +171,18 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 	}
 
 	
-	/**public void SQLUpdate(Nurse nurseUpdate, String nurseNameUpdate) throws IOException , SQLException {
+	public void SQLUpdate(Nurse nurseUpdate) throws IOException , SQLException {
 		String sql = "UPDATE Nurse SET name=? ,photo=? WHERE name=?";
-	PreparedStatement prep = c.prepareStatement(sql);
+	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, nurseUpdate.getName());
-	prep.setString(2, nurseUpdate.getPhoto());
-	prep.setString(3, nurseNameUpdate);
+	prep.setBytes(2, nurseUpdate.getPhoto());
+	prep.setInt(3, nurseUpdate.getId());
 	System.out.println("Update is finished");
 	prep.executeUpdate();
 	prep.close();
 
 		
 			}
-
-	@Override
-	public void SQLUpdate(Nurse objeto) throws IOException, SQLException {
-		// TODO Auto-generated method stub
 		
-	}i
-	**/
-}
+	}
+	

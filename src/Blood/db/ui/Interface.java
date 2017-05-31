@@ -3,6 +3,8 @@ import java.io.*;
 
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
 import Blood.db.jpa.JPAHospital;
+import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
 public class Interface {
@@ -38,6 +41,7 @@ public class Interface {
 	System.out.println("Introduce 6 to drop");
 	System.out.println("Introduce 7 to update");
 	System.out.println("Introduce 8 to exit");
+	System.out.println("Introduce 9 para asignar relaciones en las clases correspondientes:");
 	
 	}
 	
@@ -77,7 +81,7 @@ menu1();
 	opcion=0;
 if (selection==1){
 	
-DB_Hospital db_Hospital = new DB_Hospital();
+JPAHospital JPAHospital = new JPAHospital();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want:");
@@ -86,7 +90,7 @@ DB_Hospital db_Hospital = new DB_Hospital();
 	switch (opcion){
 
 	case 1: 
-	db_Hospital.SQLCreate();
+	JPAHospital.SQLCreate();
 	System.out.println("The table hospital has been created");
 	break;
 
@@ -98,13 +102,25 @@ DB_Hospital db_Hospital = new DB_Hospital();
 		hospital.setLocation(bufferedReader.readLine());
 		System.out.print("Introduce a range");
 		hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
-		db_Hospital.SQLInsert(hospital);
+		System.out.println("Introduzca el nombre de la enfermera que desee:");
+		JPANurse JPAnurse= new JPANurse();
+		String name= bufferedReader.readLine();
+		List<Nurse> nurses=JPAnurse.SQLSearch(name);
+		Iterator<Nurse> ite = nurses.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		System.out.println("Introduce the id of the nurse");
+		int idnurse = Integer.parseInt(bufferedReader.readLine());
+		Nurse nurse=JPANurse.SQLSearch2(idnurse);
+		hospital.addNurse(nurse);
+		JPAHospital.SQLInsert(hospital);
 	break;
 
 	case 3:
 	{
 		System.out.println("Introduce the name of the hospital that you want to search");
-		List<Hospital> hospitals = db_Hospital.SQLSearch(bufferedReader.readLine());
+		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator<Hospital> it = hospitals.iterator();
 		for(int i=1; it.hasNext(); i++){
 			System.out.println(i+".-"+it.toString());
@@ -113,7 +129,7 @@ break;
 	case 4: 
 	{
 		System.out.println("Introduce the name of the hospital that you want to delete");
-		List<Hospital> hospitalss = db_Hospital.SQLSearch(bufferedReader.readLine());
+		List<Hospital> hospitalss = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitalss.iterator();
 		 
 		for(int i=1; it.hasNext(); i++){
@@ -121,11 +137,11 @@ break;
 		}
 		System.out.println("Introduzca el hospital que desea seleccionar");
 		int op =Integer.parseInt(bufferedReader.readLine());
-		db_Hospital.SQLDelete(hospitalss.get(op));// the hospital we were looking for
+		JPAHospital.SQLDelete(hospitalss.get(op));// the hospital we were looking for
 	} break;
 	case 5:
 		List<Hospital> lista;
-		lista = db_Hospital.SQLSelect();
+		lista = JPAHospital.SQLSelect();
 		for (Hospital hosp: lista){
 			System.out.println("name:" +hosp.getName()+"          "+"location:"+hosp.getLocation()+"         "+ "range:" +hosp.getRange());
 		}
@@ -133,7 +149,7 @@ break;
 		// hay que borrar todo, no solo el contenido ya que al mostrarlo una vez borrado, muestra null no un error de que no existe
 		
 	case 6: 
-		db_Hospital.SQLDrop();
+		JPAHospital.SQLDrop();
 		System.out.println("the table has dropped");
 		break;
 
@@ -142,7 +158,7 @@ break;
 
 		
 		System.out.println("Introduce the name of the hospital that you want to delete");
-		List<Hospital> hospitals = db_Hospital.SQLSearch(bufferedReader.readLine());
+		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitals.iterator();
 		 
 		for(int i=1; it.hasNext(); i++){
@@ -263,30 +279,40 @@ break;
 		System.out.println("The table has been dropped");
 		break;
 	case 7: 
-	
-    /**case 8: 
+
 		System.out.println("Insert the name of the nurse you want to change");
 		String nurseNameUpdate = bufferedReader.readLine();
-		Nurse nurseUpdate = db_Nurse.SQLSearch(nurseNameUpdate);
+		List<Nurse> nurseUpdate = db_Nurse.SQLSearch(nurseNameUpdate);
+		Iterator<Nurse> it = nurseUpdate.iterator();
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
+		}
+		int option = Integer.parseInt(bufferedReader.readLine());
+		
+		
+		
 		System.out.println("Enter the new name or press enter");
 		String newName = bufferedReader.readLine();
 		if (newName.equals("")){
-			newName = nurseUpdate.getName();
+			newName = nurseUpdate.get(option).getName();
 		}
 		else{
-		nurseUpdate.setName(newName);
+		nurseUpdate.get(option).setName(newName);
 		}
 		System.out.println("Enter the new photo or press enter");
-		String newPhoto = bufferedReader.readLine();
+		
+
+			
+		/**String newPhoto = bufferedReader.readLine();
 		if (newPhoto.equals("")){
-			newPhoto = nurseUpdate.getPhoto();
+			newPhoto = nurseUpdate.get(option).setPhoto(newPhoto);
 		}
-		else {nurseUpdate.setPhoto(newPhoto);}
+		else {
+			nurseUpdate.get(option).setPhoto(newPhoto);}
 		
-		
-		db_Nurse.SQLUpdate(nurseUpdate, nurseNameUpdate);
-		
+		db_Nurse.SQLUpdate(nurseUpdate.get(option));
 		**/
+		
 	case 8: //salir del programa
 		
 	break;
@@ -308,22 +334,25 @@ else if (selection == 3){//patient
 	break;
 
 	case 2: 
-	
-	System.out.println("Introduce the name of the patient");
-	String namePatient = bufferedReader.readLine();
-	System.out.println("Introduce the blood type");
-	String bloodPatient = bufferedReader.readLine();
-	System.out.println("Introduce the age of the patient");
-	String agePatient = bufferedReader.readLine();
-	int age = Integer.parseInt(agePatient);
-	System.out.println("Introduce the gender");
-	String gender = bufferedReader.readLine();
-	System.out.println("Introduce if the patient is smoker or not");
-	String smokerpatient = bufferedReader.readLine();
-	Boolean smoker = Boolean.parseBoolean(smokerpatient);
-	Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
-	dbPatient.SQLInsert(patient);
-	break;
+		
+		System.out.println("Introduce the name of the patient");
+		String namePatient = bufferedReader.readLine();
+		System.out.println("Introduce the blood type");
+		String bloodPatient = bufferedReader.readLine();
+		System.out.println("Introduce the age of the patient");
+		String agePatient = bufferedReader.readLine();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate age = LocalDate.parse(agePatient, formatter);
+		System.out.println("Introduce the gender");
+		String gender = bufferedReader.readLine();
+		System.out.println("Introduce if the patient is smoker or not");
+		String smokerpatient = bufferedReader.readLine();
+		Boolean smoker = Boolean.parseBoolean(smokerpatient);
+		Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
+		dbPatient.SQLInsert(patient);
+		break;
+
+
 
 	case 3:
 	
@@ -341,6 +370,16 @@ else if (selection == 3){//patient
 		System.out.println("Introduce the name of the patient that you want to delete");
 		List<Patient> patients2 = dbPatient.SQLSearch(bufferedReader.readLine());
 		Iterator it = patients2.iterator();
+		String patientname = bufferedReader.readLine();
+		List<Patient> list= dbPatient.SQLSearch(patientname);
+		Iterator<Patient> ite = list.iterator();
+		for(int i=0; ite.hasNext(); i++){
+			System.out.println(i+".-"+ite.next());
+		}
+		System.out.println("Introduzca su respectivo id");
+		int id = Integer.parseInt(bufferedReader.readLine());
+		dbPatient.SQLDelete(list.get(id));
+		System.out.println("The patient has been removed");
 		 
 		for(int i=1; it.hasNext(); i++){
 			System.out.println(i+".-"+it.toString());
@@ -393,15 +432,18 @@ else if (selection == 3){//patient
 		
 		System.out.println("Input the new age or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		int newage;
+		LocalDate newage;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		if (linea.equals("")){
 			
 			newage = patUpdate.get(id1).getAge();
 		}
 		else{
-			newage = Integer.parseInt(linea);
+			newage = LocalDate.parse(linea, f);
 		patUpdate.get(id1).setAge(newage);
 		}
+		
+
 		
 		System.out.println("Enter the new gender or press enter");
 		String newgender = bufferedReader.readLine();
@@ -499,6 +541,7 @@ else if (selection == 3){//patient
 			int level = Integer.parseInt(bufferedReader.readLine());
 			dbPatient.SQLRelationPC(idcells, idpat, level);
 		} break;
+		
 		case 4 : {
 			DB_Molecules db_molecules = new DB_Molecules();
 			System.out.println("Introduce the molecules to the one who want to assign un patient");
@@ -545,7 +588,7 @@ else if (selection == 3){//patient
 			System.out.println("Introduzca su correspondiente id");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduzca su nivel");
-			int level = Integer.parseInt(bufferedReader.readLine());
+			String level = bufferedReader.readLine();
 			System.out.println("Introduzca el sitio");
 			String place = bufferedReader.readLine();
 			dbPatient.SQLRelationPS(idsymp, idpat, level , place);
@@ -621,6 +664,9 @@ else if (selection == 4){//cells
 		break;
 	
 	case 7: 
+		
+	
+		
 		System.out.println("Insert the name of the cell you want to change");
 		String cellTypeUpdate = bufferedReader.readLine();
 		List<Cells> cellsUpdate = db_cells.SQLSearch(cellTypeUpdate);
@@ -631,7 +677,6 @@ else if (selection == 4){//cells
 		int option = Integer.parseInt(bufferedReader.readLine());
 		
 		
-		
 		System.out.println("Enter the new name or press enter");
 		String newName = bufferedReader.readLine();
 		if (newName.equals("")){
@@ -640,23 +685,31 @@ else if (selection == 4){//cells
 		else{
 		cellsUpdate.get(option).setType(newName);
 		}
+		
 		System.out.println("Enter the new low level or press enter");
 		String newLevel = bufferedReader.readLine();
-		Float newLowLevel = Float.parseFloat(newLevel);
+		float newLowLevel;
+
 		if (newLevel.equals("")){
-			
 			newLowLevel = cellsUpdate.get(option).getLowL();
 		}
-		else {cellsUpdate.get(option).setLowL(newLowLevel);}
+		else {
+			newLowLevel = Float.parseFloat(newLevel);
+			cellsUpdate.get(option).setLowL(newLowLevel);
+			}
+	
 		
 		System.out.println("Enter the new high level or press enter");
 		String newLevel2 = bufferedReader.readLine();
-		Float newHighLevel = Float.parseFloat(newLevel2);
-		if (newLevel.equals("")){
+		float newHighLevel;
+		if (newLevel2.equals("")){
 			
 			newHighLevel = cellsUpdate.get(option).getHighL();
 		}
-		else {cellsUpdate.get(option).setHighL(newHighLevel);}
+		else {
+			newHighLevel = Float.parseFloat(newLevel2);
+			cellsUpdate.get(option).setHighL(newHighLevel);
+			}
 		
 		db_cells.SQLUpdate(cellsUpdate.get(option));
 
