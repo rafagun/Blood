@@ -170,9 +170,9 @@ break;
 		Hospital newHosp = new Hospital();
 		
 		System.out.println("Introduce the changes you want to make in the name or press enter");
-		String name = bufferedReader.readLine();
-		if (name.equals("")) newHosp.setName(hospitals.get(op).getName());
-		else newHosp.setName(name);
+		String name1 = bufferedReader.readLine();
+		if (name1.equals("")) newHosp.setName(hospitals.get(op).getName());
+		else newHosp.setName(name1);
 		
 		System.out.println("Introduce the changes you want to make in the Location or press enter");
 		
@@ -187,7 +187,7 @@ break;
 			newHosp.setRange(Integer.parseInt(lineaRange));
 		}
 		
-		db_Hospital.SQLUpdate(hospitals.get(op), newHosp);
+		JPAHospital.SQLUpdate(hospitals.get(op), newHosp);
 	} break;
 	case 8:	//salir del programa
 
