@@ -67,12 +67,6 @@ public class JPANurse implements FunctionsDB<Nurse> {
 			return nurses;
 		}
 
-		@Override
-		public void SQLDrop() {
-			// JPA cannot work with tables
-			
-		}
-
 
 		public static Nurse SQLSearch2 (int id){
 				Query q2 = eManager.em.createNativeQuery("SELECT * FROM Nurses WHERE id=?", Nurse.class);

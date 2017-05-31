@@ -69,15 +69,4 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 		return hospitals;
 
 	}
-
-	@Override
-	public void SQLDrop() {
-		// JPA cannot work with tables
-		
-	}
-	
-
-
-
-
 }

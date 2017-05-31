@@ -65,10 +65,4 @@ public class JPACells implements FunctionsDB<Cells> {
 		List<Cells> cells = (List<Cells>) q1.getResultList();
 		return cells;
 	}
-
-	@Override
-	public void SQLDrop() {
-		// JPA cannot work with tables
-		
-	}
 }

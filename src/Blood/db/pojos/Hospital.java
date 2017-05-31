@@ -21,7 +21,7 @@ public class Hospital implements Serializable {
 	private String name;
 	@XmlElement
 	private String location;
-	@XmlAtribute
+	@XmlAttribute
 	private Integer range;
 	@OneToMany(mappedBy="hospital")
 	@XmlElementWrapper(name="nurses")

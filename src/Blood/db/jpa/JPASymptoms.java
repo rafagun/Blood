@@ -62,11 +62,5 @@ public class JPASymptoms implements FunctionsDB<Symptoms> {
 		List<Symptoms> symptoms = (List<Symptoms>) q1.getResultList();
 		return symptoms;
 	}
-
-	@Override
-	public void SQLDrop() {
-		// JPA cannot work with tables
-		
-	}
 	
 }

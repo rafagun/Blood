@@ -65,11 +65,5 @@ public class JPAPatient implements FunctionsDB<Patient> {
 		List<Patient> patients = (List<Patient>) q1.getResultList();
 		return patients;
 	}
-
-	@Override
-	public void SQLDrop() {
-		// JPA cannot work with tables
-		
-	}
 	
 }

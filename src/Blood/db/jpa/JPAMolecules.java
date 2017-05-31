@@ -63,11 +63,5 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 		List<Molecules> molecules = (List<Molecules>) q1.getResultList();
 		return molecules;
 	}
-
-	@Override
-	public void SQLDrop() {
-		// JPA cannot work with tables
-		
-	}
 	
 }

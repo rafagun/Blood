@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
 import Blood.db.jpa.JPAHospital;
 import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
+import Blood.db.xml.Java2Xml;
+import Blood.db.xml.Xml2Java;
 public class Interface {
 	static void menu1(){
 		
@@ -52,7 +56,7 @@ public class Interface {
 		System.out.println("3.-Exit");
 	}
 	
-public static void main(String[] args) throws SQLException 
+public static void main(String[] args) throws SQLException, JAXBException 
 {
 
 InputStreamReader inputStreamReader = null;
@@ -650,8 +654,6 @@ else if (selection == 4){//cells
 	
 	case 6: 
 		
-	
-		
 		System.out.println("Insert the name of the cell you want to change");
 		String cellTypeUpdate = bufferedReader.readLine();
 		List<Cells> cellsUpdate = db_cells.SQLSearch(cellTypeUpdate);
@@ -844,8 +846,6 @@ else if (selection == 6){//Sympthomps
 		}
 		break;
 		
-
-
 	case 4: 
 		System.out.println("Symptoms cannot be deleted");
 		break;
@@ -863,8 +863,26 @@ else if (selection == 6){//Sympthomps
 		System.out.println("Symptoms cannot be modified");
 		break;
 		
-	case 7:	//salir del programa
-	break;
+	case 7:
+		List<Symptoms> newList = new ArrayList<Symptoms> ();
+		DB_Symptoms symptom1 = null;
+		newList = symptom1.SQLSelect();
+		Java2Xml java2xml = new Java2Xml();
+		java2xml.java2XMLSymptoms(newList);
+		break;
+		
+	case 8: 
+		Xml2Java xml2Java = new Xml2Java ();
+		List<Symptoms> list1 = new ArrayList<Symptoms>();
+		list1 = xml2Java.xml2JavaSymptoms();
+		for(Symptoms symptom : list1){
+			System.out.println(symptom);
+		}
+		break;
+	
+	case 9:
+		break;
+		
 	}
 	}
 }
