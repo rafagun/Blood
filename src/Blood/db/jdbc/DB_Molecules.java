@@ -62,14 +62,12 @@ return Molecules1;
 public void SQLInsert(Molecules molecules){
 try {
 Statement stmt = Connect.c.createStatement();
-String sql = "INSERT INTO molecules (id, type, lowLevels, highLevels) "
-
-+ "VALUES ('"+molecules.getId()+"','" + molecules.getType()	+ "','"+ molecules.getLowLevels() + "','"+ molecules.getHighLevels() + "' );";
+String sql = "INSERT INTO molecules (type, lowLevels, highLevels)"
++ "VALUES ('" + molecules.getType()	+ "','"+ molecules.getLowLevels() + "','"+ molecules.getHighLevels() + "');";
 
 stmt.executeUpdate(sql);
 stmt.close();
-
-
+System.out.println("Molecules has been added");
 
 } catch (Exception e) {
 e.printStackTrace();

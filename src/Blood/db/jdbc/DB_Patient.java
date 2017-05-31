@@ -403,7 +403,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 		prep.setString(1, patientUpdate.getName());
 
-		prep.setAge(2, patientUpdate.getAge());
+		prep.setLocalDate(2, patientUpdate.getAge());
 
 		prep.setString(3, patientUpdate.getBlood());
 

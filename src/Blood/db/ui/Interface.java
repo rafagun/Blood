@@ -156,7 +156,7 @@ break;
 	{
 
 		
-		System.out.println("Introduce the name of the hospital that you want to delete");
+		System.out.println("Introduce the name of the hospital that you want to change");
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitals.iterator();
 		 
@@ -164,7 +164,7 @@ break;
 			System.out.println(i+".-"+it.toString());
 		}
 		
-		System.out.println("Introduzca el hospital que desea seleccionar");
+		System.out.println("Introduce the hospital that want to change");
 		int op =Integer.parseInt(bufferedReader.readLine());
 		Hospital newHosp = new Hospital();
 		
@@ -179,7 +179,7 @@ break;
 		if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
 		else newHosp.setLocation(location);
 		
-		System.out.println("Introduce the changes you want to make in the name or press enter");
+		System.out.println("Introduce the changes you want to make in the range or press enter");
 		String lineaRange = bufferedReader.readLine();
 		if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
 		else{
@@ -274,39 +274,9 @@ break;
 	 
 	
 	case 6: 
+		System.out.println("nurses cannot change any of these attributes");
+		break;
 
-		System.out.println("Insert the name of the nurse you want to change");
-		String nurseNameUpdate = bufferedReader.readLine();
-		List<Nurse> nurseUpdate = db_Nurse.SQLSearch(nurseNameUpdate);
-		Iterator<Nurse> it = nurseUpdate.iterator();
-		for(int i=0; it.hasNext(); i++){
-			System.out.println(i+".-"+it.next());
-		}
-		int option = Integer.parseInt(bufferedReader.readLine());
-		
-		
-		
-		System.out.println("Enter the new name or press enter");
-		String newName = bufferedReader.readLine();
-		if (newName.equals("")){
-			newName = nurseUpdate.get(option).getName();
-		}
-		else{
-		nurseUpdate.get(option).setName(newName);
-		}
-		System.out.println("Enter the new photo or press enter");
-		
-
-			
-		/**String newPhoto = bufferedReader.readLine();
-		if (newPhoto.equals("")){
-			newPhoto = nurseUpdate.get(option).setPhoto(newPhoto);
-		}
-		else {
-			nurseUpdate.get(option).setPhoto(newPhoto);}
-		
-		db_Nurse.SQLUpdate(nurseUpdate.get(option));
-		**/
 		
 	case 7: //salir del programa
 		
@@ -630,16 +600,8 @@ else if (selection == 4){//cells
 		break;
 
 	case 4:
-		System.out.println("Insert the name of the cell you want to delete: ");
-		String cellDelete = bufferedReader.readLine();
-		List<Cells> list = db_cells.SQLSearch(cellDelete);
-		Iterator<Cells> ite = list.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
-		}
-		int option1 = Integer.parseInt(bufferedReader.readLine());
-		db_cells.SQLDelete(list.get(option1));
-		System.out.println("The cell has been removed");
+	
+		System.out.println("The cell cannot been removed");
 		break;
 
 	case 5: 
@@ -653,53 +615,8 @@ else if (selection == 4){//cells
 		
 	
 	case 6: 
-		
-		System.out.println("Insert the name of the cell you want to change");
-		String cellTypeUpdate = bufferedReader.readLine();
-		List<Cells> cellsUpdate = db_cells.SQLSearch(cellTypeUpdate);
-		Iterator<Cells> it = cellsUpdate.iterator();
-		for(int i=0; it.hasNext(); i++){
-			System.out.println(i+".-"+it.next());
-		}
-		int option = Integer.parseInt(bufferedReader.readLine());
-		
-		
-		System.out.println("Enter the new name or press enter");
-		String newName = bufferedReader.readLine();
-		if (newName.equals("")){
-			newName = cellsUpdate.get(option).getType();
-		}
-		else{
-		cellsUpdate.get(option).setType(newName);
-		}
-		
-		System.out.println("Enter the new low level or press enter");
-		String newLevel = bufferedReader.readLine();
-		float newLowLevel;
-
-		if (newLevel.equals("")){
-			newLowLevel = cellsUpdate.get(option).getLowL();
-		}
-		else {
-			newLowLevel = Float.parseFloat(newLevel);
-			cellsUpdate.get(option).setLowL(newLowLevel);
-			}
-	
-		
-		System.out.println("Enter the new high level or press enter");
-		String newLevel2 = bufferedReader.readLine();
-		float newHighLevel;
-		if (newLevel2.equals("")){
-			
-			newHighLevel = cellsUpdate.get(option).getHighL();
-		}
-		else {
-			newHighLevel = Float.parseFloat(newLevel2);
-			cellsUpdate.get(option).setHighL(newHighLevel);
-			}
-		
-		db_cells.SQLUpdate(cellsUpdate.get(option));
-
+		System.out.println("Cells cannot be update");
+		break;
 	case 7:
 		break;
 	}
@@ -726,7 +643,7 @@ else if (selection == 5){//molecules
 		int lowL =  Integer.parseInt(bufferedReader.readLine());
 		System.out.println("Introduce the high level of the molecule: ");
 		int highL = Integer.parseInt(bufferedReader.readLine());
-		Molecules moleculesInterface = new Molecules(nameMolecule,highL,lowL);
+		Molecules moleculesInterface = new Molecules(nameMolecule,lowL,highL);
 		db_molecules.SQLInsert(moleculesInterface);
 		System.out.println("The information has been introduced propertly");
 		break;
@@ -741,16 +658,8 @@ else if (selection == 5){//molecules
 			break;
 
 		case 4:
-			System.out.println("Insert the name of the molecule you want to delete: ");
-			String moleculeDelete = bufferedReader.readLine();
-			List<Molecules> list = db_molecules.SQLSearch(moleculeDelete);
-			Iterator<Molecules> ite = list.iterator();
-			for(int i=0; ite.hasNext(); i++){
-				System.out.println(i+".-"+ite.next());
-			}
-			int option1 = Integer.parseInt(bufferedReader.readLine());
-			db_molecules.SQLDelete(list.get(option1));
-			System.out.println("The molecule has been removed");
+			
+			System.out.println("The molecule cannot be removed");
 			break;
 
 		case 5: 
@@ -763,45 +672,8 @@ else if (selection == 5){//molecules
 			
 
 		case 6: 
-			System.out.println("Insert the name of the molecule you want to change");
-			String moleculeTypeUpdate = bufferedReader.readLine();
-			List<Molecules> moleculesUpdate = db_molecules.SQLSearch(moleculeTypeUpdate);
-			Iterator<Molecules> it = moleculesUpdate.iterator();
-			for(int i=0; it.hasNext(); i++){
-				System.out.println(i+".-"+it.next());
-			}
-			int option = Integer.parseInt(bufferedReader.readLine());
-			
-			
-			
-			System.out.println("Enter the new name or press enter");
-			String newName = bufferedReader.readLine();
-			if (newName.equals("")){
-				newName = moleculesUpdate.get(option).getType();
-			}
-			else{
-			moleculesUpdate.get(option).setType(newName);
-			}
-			System.out.println("Enter the new low level or press enter");
-			String newLevel = bufferedReader.readLine();
-			int newLowLevel = Integer.parseInt(newLevel);
-			if (newLevel.equals("")){
-				
-				newLowLevel = moleculesUpdate.get(option).getLowLevels();
-			}
-			else {moleculesUpdate.get(option).setLowLevels(newLowLevel);}
-			
-			System.out.println("Enter the new high level or press enter");
-			String newLevel2 = bufferedReader.readLine();
-			int newHighLevel = Integer.parseInt (newLevel2);
-			if (newLevel.equals("")){
-				
-				newHighLevel = moleculesUpdate.get(option).getHighLevels();
-			}
-			else {moleculesUpdate.get(option).setHighLevels(newHighLevel);}
-			
-			db_molecules.SQLUpdate(moleculesUpdate.get(option));
-
+			System.out.println("molecules cannot be changed");
+			break;
 		case 7:
 			break;
 	
