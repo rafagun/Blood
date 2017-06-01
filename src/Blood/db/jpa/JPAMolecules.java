@@ -1,5 +1,6 @@
 package Blood.db.jpa;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -62,6 +63,12 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Molecules", Molecules.class);
 		List<Molecules> molecules = (List<Molecules>) q1.getResultList();
 		return molecules;
+	}
+
+	@Override
+	public void SQLUpdate(Molecules obj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

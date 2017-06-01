@@ -74,6 +74,12 @@ public class JPANurse implements FunctionsDB<Nurse> {
 				Nurse nurses= (Nurse) q2.getSingleResult();
 				return nurses;
 			}
+
+		@Override
+		public void SQLUpdate(Nurse obj) throws IOException, SQLException {
+			// TODO Auto-generated method stub
+			
+		}
 	
 	
 

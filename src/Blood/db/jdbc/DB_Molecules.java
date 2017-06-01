@@ -33,7 +33,7 @@ public class DB_Molecules implements FunctionsDB<Molecules>{
 			e.printStackTrace();
 			}	
 }
-public ArrayList<Molecules> SQLSelect(){
+public List<Molecules> SQLSelect(){
 ArrayList<Molecules> Molecules1 = new ArrayList<Molecules>();
 try {
 Statement stmt = Connect.c.createStatement();

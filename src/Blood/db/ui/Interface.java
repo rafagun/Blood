@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.jpa.JPAHospital;
 import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
@@ -85,7 +86,7 @@ menu1();
 	opcion=0;
 if (selection==1){
 	
-JPAHospital JPAHospital = new JPAHospital();
+FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want:");
@@ -108,7 +109,7 @@ JPAHospital JPAHospital = new JPAHospital();
 		System.out.print("Introduce a range");
 		hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
 		System.out.println("Introduzca el nombre de la enfermera que desee:");
-		JPANurse JPAnurse= new JPANurse();
+		FunctionsDB<Nurse> JPAnurse= new JPANurse();
 		String name= bufferedReader.readLine();
 		List<Nurse> nurses=JPAnurse.SQLSearch(name);
 		Iterator<Nurse> ite = nurses.iterator();
@@ -198,7 +199,7 @@ break;
 }
 
  else if (selection == 2){//nurse
-	DB_Nurse db_Nurse = new DB_Nurse();
+	NurseInterface db_Nurse = new DB_Nurse();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want");
@@ -222,15 +223,16 @@ break;
 		Nurse nurseInsert = new Nurse (nurseName,bytesblob);
 		System.out.println("Introduce the name of the hospital when the nurse work");
 		String namehosp= bufferedReader.readLine();
-		DB_Hospital db_hospital= new DB_Hospital();
+		FunctionsDB<Hospital> db_hospital= new DB_Hospital();
 		List<Hospital> list = db_hospital.SQLSearch(namehosp);
 		Iterator<Hospital> ite = list.iterator();
 		for(int i=0; ite.hasNext(); i++){
 			System.out.println(i+".-"+ite.next());
 		}
-		System.out.println("Introduce the id of the hospital");
+		System.out.println("Introduce the hospital");
 		int idhosp = Integer.parseInt(bufferedReader.readLine());
-		db_Nurse.SQLInsert(nurseInsert, idhosp);
+		db_Nurse.SQLInsert(nurseInsert);
+		db_Nurse.SQLnurseHosp(nurseInsert.getId(), list.get(idhosp).getId());
 		System.out.println("the information has been added");
 		break;
 
@@ -266,7 +268,7 @@ break;
 
 	case 5: 
 		
-		ArrayList<Nurse> lista= new ArrayList<>();
+		List<Nurse> lista= new ArrayList<>();
 		lista = db_Nurse.SQLSelect();
 		for (Nurse nurse1: lista){
 			System.out.println("name:" +nurse1.getName()+ "         "+"photo:"+nurse1.getPhoto());
@@ -288,7 +290,7 @@ break;
 	
 }
 else if (selection == 3){//patient
-	DB_Patient dbPatient = new DB_Patient();
+	PatientInterface dbPatient = new DB_Patient();
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
 		menu2();
@@ -357,7 +359,7 @@ else if (selection == 3){//patient
 		break;
 
 	case 5:
-		ArrayList<Patient> lista= new ArrayList<>();
+		List<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
 			System.out.println("name:" +patient11.getName()+"       "+ "age:"+patient11.getAge()+"        "+ "blood type:" +patient11.getBlood()+"         "+"gender:" +patient11.getGender()+"          "+"smoker:" +patient11.getSmoker());
@@ -437,77 +439,79 @@ else if (selection == 3){//patient
 		 op= Integer.parseInt(bufferedReader.readLine());
 		switch(op){
 		case 1: {
-			DB_Nurse db_Nurse = new DB_Nurse();
-			System.out.println("Introduce the nurse to the one who want to assign un patient");
+			FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
+			System.out.println("Introduce the name of the patient´s nurse");
 			String name= bufferedReader.readLine();
 			List<Nurse> nurs=db_Nurse.SQLSearch(name);
 			Iterator<Nurse> it3=nurs.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the nurse of the patient");
 			int idnurse = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca el paciente que le quiere asignar");
+			System.out.println("Introduce the patient´s name");
 			String namepat= bufferedReader.readLine();
 			List<Patient> pat = dbPatient.SQLSearch(namepat);
 			Iterator<Patient> it2 = pat.iterator();
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the patient ");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			db_Nurse.SQLRelation(idnurse, idpat);
+			dbPatient.SQLRelationNP(nurs.get(idnurse).getId(),pat.get(idpat).getId());
+			
+			;
 		} break;
 		 case 2: {
-			DB_Illness db_illnes = new DB_Illness();
-			System.out.println("Introduce the illnes to the one who want to assign un patient");
+			FunctionsDB<Illnes> db_illnes = new DB_Illness();
+			System.out.println("Introduce the name of the illness");
 			String name= bufferedReader.readLine();
 			List<Illnes> ills=db_illnes.SQLSearch(name);
 			Iterator<Illnes> it3=ills.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the illnes");
 			int idill = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca el paciente que le quiere asignar");
+			System.out.println("Introduce the name of the patient");
 			String namepat= bufferedReader.readLine();
 			List<Patient> pat = dbPatient.SQLSearch(namepat);
 			Iterator<Patient> it2 = pat.iterator();
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the patient");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPI(idill, idpat);
+			dbPatient.SQLRelationPI(ills.get(idill).getId(), pat.get(idpat).getId());
 		} break;
 		case 3 :
 		{
-			DB_Cells db_cells = new DB_Cells();
-			System.out.println("Introduce the cells to the one who want to assign un patient");
+			FunctionsDB<Cells> db_cells = new DB_Cells();
+			System.out.println("Introduce the name of the cell");
 			String name= bufferedReader.readLine();
 			List<Cells> cells=db_cells.SQLSearch(name);
 			Iterator<Cells> it3=cells.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the cell");
 			int idcells = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca el paciente que le quiere asignar");
+			System.out.println("Introduce the name of the patient");
 			String namepat= bufferedReader.readLine();
 			List<Patient> pat = dbPatient.SQLSearch(namepat);
 			Iterator<Patient> it2 = pat.iterator();
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the patient");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca su nivel");
+			System.out.println("Introduce the level of the cell");
 			int level = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPC(idcells, idpat, level);
+			dbPatient.SQLRelationPC(cells.get(idcells).getId(), pat.get(idpat).getId(), level);
 		} break;
 		
 		case 4 : {
-			DB_Molecules db_molecules = new DB_Molecules();
+			FunctionsDB<Molecules> db_molecules = new DB_Molecules();
 			System.out.println("Introduce the molecules to the one who want to assign un patient");
 			String name= bufferedReader.readLine();
 			List<Molecules> mols=db_molecules.SQLSearch(name);
@@ -532,30 +536,30 @@ else if (selection == 3){//patient
 		} break;
 		case 5:
 		{
-			DB_Symptoms db_symptoms = new DB_Symptoms();
-			System.out.println("Introduce the symptoms to the one who want to assign un patient");
+			FunctionsDB db_symptoms = new DB_Symptoms();
+			System.out.println("Introduce the name of the sympthom");
 			String name= bufferedReader.readLine();
 			List<Symptoms> symps=db_symptoms.SQLSearch(name);
 			Iterator<Symptoms> it3=symps.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the sympthom");
 			int idsymp = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca el paciente que le quiere asignar");
+			System.out.println("Introduce the name of the patient");
 			String namepat= bufferedReader.readLine();
 			List<Patient> pat = dbPatient.SQLSearch(namepat);
 			Iterator<Patient> it2 = pat.iterator();
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduzca su correspondiente id");
+			System.out.println("Introduce the patient");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduzca su nivel");
+			System.out.println("Introduce the level of risk for the patient");
 			String level = bufferedReader.readLine();
-			System.out.println("Introduzca el sitio");
+			System.out.println("Introduce the place of the sympthom");
 			String place = bufferedReader.readLine();
-			dbPatient.SQLRelationPS(idsymp, idpat, level , place);
+			dbPatient.SQLRelationPS(symps.get(idsymp).getId(), pat.get(idpat).getId(), level , place);
 		}
 		}
 		}
@@ -565,7 +569,7 @@ else if (selection == 3){//patient
 }
 }
 else if (selection == 4){//cells
-	DB_Cells db_cells = new DB_Cells();
+	FunctionsDB<Cells> db_cells = new DB_Cells();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
@@ -606,7 +610,7 @@ else if (selection == 4){//cells
 		break;
 
 	case 5: 
-		ArrayList<Cells> listCells = new ArrayList<>();
+		List<Cells> listCells = new ArrayList<>();
 		listCells = db_cells.SQLSelect();
 		for(Cells cell : listCells){
 			System.out.println(cell);
@@ -624,7 +628,7 @@ else if (selection == 4){//cells
 	}
 	}
 else if (selection == 5){//molecules
-	DB_Molecules db_molecules = new DB_Molecules();
+	FunctionsDB<Molecules> db_molecules = new DB_Molecules();
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
 		menu2();
@@ -664,7 +668,7 @@ else if (selection == 5){//molecules
 			break;
 
 		case 5: 
-			ArrayList<Molecules> listMolecules = new ArrayList<>();
+			List<Molecules> listMolecules = new ArrayList<>();
 			listMolecules = db_molecules.SQLSelect();
 			for(Molecules molecule : listMolecules){
 				System.out.println(molecule);
@@ -682,9 +686,9 @@ else if (selection == 5){//molecules
 	}
 }
 else if (selection == 6){//Sympthomps
-	DB_Symptoms db_symptoms = new DB_Symptoms();
+	FunctionsDB<Symptoms> db_symptoms = new DB_Symptoms();
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -724,7 +728,7 @@ else if (selection == 6){//Sympthomps
 		break;
 	 
 	case 5: 
-		ArrayList<Symptoms> lista= new ArrayList<>();
+		List<Symptoms> lista= new ArrayList<>();
 		lista = db_symptoms.SQLSelect();
 		for (Symptoms symptoms1: lista){
 			System.out.println(symptoms1);
@@ -738,7 +742,7 @@ else if (selection == 6){//Sympthomps
 		
 	case 7:
 		List<Symptoms> newList = new ArrayList<Symptoms> ();
-		DB_Symptoms symptom1 = null;
+		FunctionsDB<Symptoms> symptom1 = null;
 		newList = symptom1.SQLSelect();
 		Java2Xml java2xml = new Java2Xml();
 		java2xml.java2XMLSymptoms(newList);
@@ -760,9 +764,9 @@ else if (selection == 6){//Sympthomps
 	}
 }
 else if (selection == 7){//illness
-	DB_Illness db_illness = new DB_Illness();
+	FunctionsDB<Illnes> db_illness = new DB_Illness();
 	while (opcion!=8){
-		System.out.println("Introduzca que opcion quiere");
+		System.out.println("Introduce the option you want");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
@@ -836,7 +840,7 @@ else if (selection == 8){//exitt
 			
 			 option =Integer.parseInt( bufferedReader.readLine());
 			if (option == 1){
-				JPAHospital jpa_Hospital = new JPAHospital();
+				FunctionsDB<Hospital> jpa_Hospital = new JPAHospital();
 				
 				menu2();
 				System.out.println("Choose an option");

@@ -69,4 +69,10 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 		return hospitals;
 
 	}
+
+	@Override
+	public void SQLUpdate(Hospital obj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }
