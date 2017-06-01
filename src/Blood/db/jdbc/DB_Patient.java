@@ -40,7 +40,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 			String sql3 = "CREATE TABLE Patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT ," 
 			+ "name TEXT NOT NULL, "
 			+ "blood  TEXT NOT NULL, " 
-			+ "age DATE, " 
+			+ "age INTEGER, " 
 			+ "gender TEXT NOT NULL, " 
 			+ "smoker  BOOLEAN)";
 
@@ -225,13 +225,15 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 				patient.setName(name);
 
-				String agestr = rs.getString("age");
+				int agestr = rs.getInt("age");
+				
+				patient.setAge(agestr);
 
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-				LocalDate age = LocalDate.parse(agestr, formatter);
+				//LocalDate age = LocalDate.parse(agestr, formatter);
 
-				patient.setAge(age);
+				//patient.setAge(age);
 
 				String blood = rs.getString("blood");
 
@@ -323,11 +325,11 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 				String name = rs.getString("name");
 
-				String agestr = rs.getString("age");
+				int agestr = rs.getInt("age");
 
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-				LocalDate age = LocalDate.parse(agestr, formatter);
+				//LocalDate age = LocalDate.parse(agestr, formatter);
 
 				String blood = rs.getString("blood");
 
@@ -337,7 +339,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 				boolean smoker = Boolean.parseBoolean(smokerStr);
 
-				Patient patient = new Patient(id, name, age, blood, gender, smoker);
+				Patient patient = new Patient(id, name, agestr, blood, gender, smoker);
 
 				patients.add(patient);
 
@@ -403,7 +405,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 
 		prep.setString(1, patientUpdate.getName());
 
-		prep.setLocalDate(2, patientUpdate.getAge());
+		prep.setInt(2, patientUpdate.getAge());
 
 		prep.setString(3, patientUpdate.getBlood());
 

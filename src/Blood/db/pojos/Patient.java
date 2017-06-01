@@ -74,7 +74,7 @@ public class Patient implements Serializable {
 
 	@XmlElement
 
-	private LocalDate age;
+	private Integer age;
 
 	@XmlElement
 
@@ -156,7 +156,7 @@ public class Patient implements Serializable {
 
 	//modificar constructores porque falta clase nurse
 
-	public Patient(int id, String name, LocalDate age, String blood, String gender, Boolean smoker) {
+	public Patient(int id, String name, int age, String blood, String gender, Boolean smoker) {
 
 		this.id=id;
 
@@ -182,7 +182,7 @@ public class Patient implements Serializable {
 
 	}
 
-	public Patient (String name , LocalDate age , String blood , String gender, Boolean smoker){
+	public Patient (String name , int age , String blood , String gender, Boolean smoker){
 
 		this.name=name;
 
@@ -272,13 +272,13 @@ public class Patient implements Serializable {
 
 	}
 
-	public LocalDate getAge() {
+	public int getAge() {
 
 		return age;
 
 	}
 
-	public void setAge(LocalDate age) {
+	public void setAge(int age) {
 
 		this.age = age;
 

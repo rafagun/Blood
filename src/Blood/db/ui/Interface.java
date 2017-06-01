@@ -305,16 +305,16 @@ else if (selection == 3){//patient
 		String namePatient = bufferedReader.readLine();
 		System.out.println("Introduce the blood type");
 		String bloodPatient = bufferedReader.readLine();
-		System.out.println("Introduce the age of the patient (yyyy-mm-dd)");
-		String agePatient = bufferedReader.readLine();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate age = LocalDate.parse(agePatient, formatter);
+		System.out.println("Introduce the age of the patient: ");
+		Integer agePatient = Integer.parseInt(bufferedReader.readLine());
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//LocalDate age = LocalDate.parse(agePatient, formatter);
 		System.out.println("Introduce the gender");
 		String gender = bufferedReader.readLine();
 		System.out.println("Introduce if the patient is smoker or not");
 		String smokerpatient = bufferedReader.readLine();
 		Boolean smoker = Boolean.parseBoolean(smokerpatient);
-		Patient patient= new Patient (namePatient , age , bloodPatient, gender, smoker );
+		Patient patient= new Patient (namePatient , agePatient , bloodPatient, gender, smoker );
 		dbPatient.SQLInsert(patient);
 		break;
 
@@ -396,15 +396,15 @@ else if (selection == 3){//patient
 		
 		System.out.println("Input the new age or press enter");
 		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		LocalDate newage;
-		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		Integer newage;
+		//DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		if (linea.equals("")){
 			
 			newage = patUpdate.get(id1).getAge();
 		}
 		else{
-			newage = LocalDate.parse(linea, f);
-		patUpdate.get(id1).setAge(newage);
+			newage = Integer.parseInt(linea);
+			patUpdate.get(id1).setAge(newage);
 		}
 		
 
