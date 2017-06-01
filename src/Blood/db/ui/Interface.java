@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 
 //import java.sql.Connection;
 import Blood.db.jdbc.*;
+import Blood.db.jpa.FunctionsDB;
 import Blood.db.jpa.JPAHospital;
 import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
@@ -34,6 +35,28 @@ public class Interface {
 	
 	}
 	
+	static void inicializeTables(){
+		try{
+		FunctionsDB<Hospital> hospital =new DB_Hospital();
+		hospital.SQLCreate();
+		FunctionsDB<Nurse> nurse =new DB_Nurse();
+		nurse.SQLCreate();
+		FunctionsDB<Patient> patient =new DB_Patient();
+		patient.SQLCreate();
+		FunctionsDB<Cells> cells =new DB_Cells();
+		cells.SQLCreate();
+		FunctionsDB<Molecules> molecules =new DB_Molecules();
+		molecules.SQLCreate();
+		FunctionsDB<Illnes> illnes =new DB_Illness();
+		illnes.SQLCreate();
+		FunctionsDB<Symptoms> sympthoms =new DB_Symptoms();
+		sympthoms.SQLCreate();
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		
+	}
 	
 	
 	static void menu2(){
@@ -75,6 +98,7 @@ int opcion=0;
 		if (sel==1){
 		
 	Connect.SQLConnect();
+	inicializeTables();
 	
 	
 while (true){
@@ -85,7 +109,7 @@ menu1();
 	opcion=0;
 if (selection==1){
 	
-JPAHospital JPAHospital = new JPAHospital();
+FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want:");
@@ -197,7 +221,7 @@ break;
 }
 
  else if (selection == 2){//nurse
-	DB_Nurse db_Nurse = new DB_Nurse();
+	FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want");
@@ -265,7 +289,7 @@ break;
 
 	case 5: 
 		
-		ArrayList<Nurse> lista= new ArrayList<>();
+		List<Nurse> lista= new ArrayList<>();
 		lista = db_Nurse.SQLSelect();
 		for (Nurse nurse1: lista){
 			System.out.println("name:" +nurse1.getName()+ "         "+"photo:"+nurse1.getPhoto());
@@ -287,7 +311,7 @@ break;
 	
 }
 else if (selection == 3){//patient
-	DB_Patient dbPatient = new DB_Patient();
+	FunctionsDB<Patient> dbPatient = new DB_Patient();
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
 		menu2();
@@ -356,7 +380,7 @@ else if (selection == 3){//patient
 		break;
 
 	case 5:
-		ArrayList<Patient> lista= new ArrayList<>();
+		List<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
 			System.out.println("name:" +patient11.getName()+"       "+ "age:"+patient11.getAge()+"        "+ "blood type:" +patient11.getBlood()+"         "+"gender:" +patient11.getGender()+"          "+"smoker:" +patient11.getSmoker());
@@ -436,7 +460,7 @@ else if (selection == 3){//patient
 		 op= Integer.parseInt(bufferedReader.readLine());
 		switch(op){
 		case 1: {
-			DB_Nurse db_Nurse = new DB_Nurse();
+			FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
 			System.out.println("Introduce the nurse to the one who want to assign un patient");
 			String name= bufferedReader.readLine();
 			List<Nurse> nurs=db_Nurse.SQLSearch(name);
@@ -458,7 +482,7 @@ else if (selection == 3){//patient
 			db_Nurse.SQLRelation(idnurse, idpat);
 		} break;
 		 case 2: {
-			DB_Illness db_illnes = new DB_Illness();
+			FunctionsDB<Illnes> db_illnes = new DB_Illness();
 			System.out.println("Introduce the illnes to the one who want to assign un patient");
 			String name= bufferedReader.readLine();
 			List<Illnes> ills=db_illnes.SQLSearch(name);
@@ -564,7 +588,7 @@ else if (selection == 3){//patient
 }
 }
 else if (selection == 4){//cells
-	DB_Cells db_cells = new DB_Cells();
+	FunctionsDB<Cells> db_cells = new DB_Cells();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
@@ -605,7 +629,7 @@ else if (selection == 4){//cells
 		break;
 
 	case 5: 
-		ArrayList<Cells> listCells = new ArrayList<>();
+		List<Cells> listCells = new ArrayList<>();
 		listCells = db_cells.SQLSelect();
 		for(Cells cell : listCells){
 			System.out.println(cell);
@@ -623,7 +647,7 @@ else if (selection == 4){//cells
 	}
 	}
 else if (selection == 5){//molecules
-	DB_Molecules db_molecules = new DB_Molecules();
+	FunctionsDB<Molecules> db_molecules = new DB_Molecules();
 	while (opcion!=8){
 		System.out.println("Introduce the option you want: ");
 		menu2();
@@ -663,7 +687,7 @@ else if (selection == 5){//molecules
 			break;
 
 		case 5: 
-			ArrayList<Molecules> listMolecules = new ArrayList<>();
+			List<Molecules> listMolecules = new ArrayList<>();
 			listMolecules = db_molecules.SQLSelect();
 			for(Molecules molecule : listMolecules){
 				System.out.println(molecule);
@@ -681,7 +705,7 @@ else if (selection == 5){//molecules
 	}
 }
 else if (selection == 6){//Sympthomps
-	DB_Symptoms db_symptoms = new DB_Symptoms();
+	FunctionsDB<Symptoms> db_symptoms = new DB_Symptoms();
 	while (opcion!=8){
 		System.out.println("Introduzca que opcion quiere");
 		menu2();
@@ -723,7 +747,7 @@ else if (selection == 6){//Sympthomps
 		break;
 	 
 	case 5: 
-		ArrayList<Symptoms> lista= new ArrayList<>();
+		List<Symptoms> lista= new ArrayList<>();
 		lista = db_symptoms.SQLSelect();
 		for (Symptoms symptoms1: lista){
 			System.out.println(symptoms1);
