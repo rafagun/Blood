@@ -22,12 +22,12 @@ import java.util.List;
 import Blood.db.jpa.FunctionsDB;
 
 import Blood.db.pojos.Hospital;
-
+import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 
 
 
-public class DB_Patient implements FunctionsDB<Patient> {
+public class DB_Patient implements PatientInterface {
 
 
 
@@ -175,6 +175,17 @@ public class DB_Patient implements FunctionsDB<Patient> {
 		}
 
 	}
+	
+	public void SQLRelationNP(int nurse, int patient){
+		try {
+		Statement stmt = Connect.c.createStatement();
+		String sql = "INSERT INTO NursesPatients (nurseId , patientId) " + "VALUES ('" + nurse + "','"+ patient + "');";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
 
 	public void SQLRelationPS(int symptoms, int patient, String level , String place){
 
@@ -199,7 +210,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 	
 
 
-	public ArrayList<Patient> SQLSelect() {
+	public List<Patient> SQLSelect() {
 
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 

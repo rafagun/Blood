@@ -15,11 +15,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Cells;
+import Blood.db.pojos.Hospital;
 import Blood.db.pojos.Nurse;
 import Blood.db.pojos.Patient;
 
 
-public class DB_Nurse implements FunctionsDB <Nurse> {
+public class DB_Nurse implements NurseInterface {
 	
 	
 	public void SQLCreate() throws SQLException {
@@ -45,18 +46,9 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 			e.printStackTrace();
 		}
 	}
-	public void SQLRelation(int nurse, int patient){
-		try {
-		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO NursesPatients (nurseId , patientId) " + "VALUES ('" + nurse + "','"+ patient + "');";
-		stmt.executeUpdate(sql);
-		stmt.close();
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
-	}
+
 	
-	public ArrayList<Nurse> SQLSelect(){
+	public List<Nurse> SQLSelect(){
 		ArrayList<Nurse> nurseList = new ArrayList<Nurse>();
 		try {
 		Statement stmt = Connect.c.createStatement();
@@ -94,16 +86,28 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		System.out.println("Nurse with the name:" + nurse.getName()+  "  has been deleted");
 	}
 	
-	public void SQLInsert(Nurse nurse, int id){
+	public void SQLInsert(Nurse nurse){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO Nurses (name,photo,hospital_id) " + "VALUES ('" + nurse.getName() + "','"+ nurse.getPhoto() + "','"+ id + "');";
+		String sql = "INSERT INTO Nurses (name,photo,hospital_id) " + "VALUES ('" + nurse.getName() +  "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
 	}
+	
+		public void SQLnurseHosp(int nurse, int hosp) throws SQLException{
+			
+			String sql = "UPDATE Nurses SET id_hospital=? WHERE id=?";
+			PreparedStatement stmt = Connect.c.prepareStatement(sql);
+			stmt.setInt(1,hosp);
+			stmt.setInt(2, nurse);
+			stmt.executeUpdate();
+			
+			
+		}
+		
 
 	
 	public List<Nurse> SQLSearch (String nurseName){
@@ -150,15 +154,10 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public void SQLInsert(Nurse obj) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 	public void SQLUpdate(Nurse nurseUpdate) throws IOException , SQLException {
-		String sql = "UPDATE Nurse SET name=? ,photo=? WHERE name=?";
+		String sql = "UPDATE Nurse SET name=? ,photo=? WHERE id=?";
 	PreparedStatement prep = Connect.c.prepareStatement(sql);
 	prep.setString(1, nurseUpdate.getName());
 	prep.setBytes(2, nurseUpdate.getPhoto());

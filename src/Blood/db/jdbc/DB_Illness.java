@@ -104,16 +104,6 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		}
 		
 		}
-	public void SQLRelation(int illnes, int patient){
-		try {
-		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO NursesPatients (nurseId , patientId) " + "VALUES ('" + illnes + "','"+ patient + "');";
-		stmt.executeUpdate(sql);
-		stmt.close();
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
-	}
 
 	public List<Illnes> SQLSearch(String illnessName) {
 		List<Illnes> illness =new LinkedList<Illnes>();
@@ -146,6 +136,11 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 	}
 	@Override
 	public void SQLUpdate(Illnes oldObj, Illnes newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Illnes obj) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		
 	}

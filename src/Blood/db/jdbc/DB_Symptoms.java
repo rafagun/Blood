@@ -54,7 +54,7 @@ public class DB_Symptoms implements FunctionsDB <Symptoms> {
 		e.printStackTrace();
 		}
 		}
-	public ArrayList<Symptoms> SQLSelect(){
+	public List<Symptoms> SQLSelect(){
 		ArrayList<Symptoms> symptoms = new ArrayList<Symptoms>();
 		try {
 		Statement stmt = Connect.c.createStatement();
@@ -108,6 +108,11 @@ public class DB_Symptoms implements FunctionsDB <Symptoms> {
 	}
 	@Override
 	public void SQLUpdate(Symptoms oldObj, Symptoms newObj) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void SQLUpdate(Symptoms obj) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		
 	}

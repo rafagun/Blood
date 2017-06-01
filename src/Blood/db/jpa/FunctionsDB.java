@@ -15,4 +15,5 @@ public interface FunctionsDB <Obj> {
 	public List<Obj> SQLSearch(String name);
 	public void SQLDelete(Obj obj) throws IOException, SQLException;
 	public void SQLUpdate(Obj oldObj, Obj newObj) throws IOException , SQLException;
+	public void SQLUpdate(Obj obj) throws IOException, SQLException;
 }
