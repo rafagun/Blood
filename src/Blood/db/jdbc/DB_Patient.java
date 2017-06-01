@@ -199,7 +199,7 @@ public class DB_Patient implements FunctionsDB<Patient> {
 	
 
 
-	public List<Patient> SQLSelect() {
+	public ArrayList<Patient> SQLSelect() {
 
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 

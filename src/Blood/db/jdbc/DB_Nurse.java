@@ -56,7 +56,7 @@ public class DB_Nurse implements FunctionsDB <Nurse> {
 		}
 	}
 	
-	public List<Nurse> SQLSelect(){
+	public ArrayList<Nurse> SQLSelect(){
 		ArrayList<Nurse> nurseList = new ArrayList<Nurse>();
 		try {
 		Statement stmt = Connect.c.createStatement();
