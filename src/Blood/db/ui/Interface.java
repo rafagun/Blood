@@ -89,6 +89,7 @@ JPAHospital JPAHospital = new JPAHospital();
 	
 	while (opcion!=8){
 		System.out.println("Introduce the option you want:");
+		System.out.println("Introduce the option you want:");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
