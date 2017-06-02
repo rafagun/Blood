@@ -187,8 +187,8 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 		System.out.println("Introduce the name of the hospital that you want to search");
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator<Hospital> it = hospitals.iterator();
-		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
 		}}
 break;
 	case 3: 
@@ -197,8 +197,8 @@ break;
 		List<Hospital> hospitalss = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitalss.iterator();
 		 
-		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
 		}
 		System.out.println("Introduce the hospital you want to select");
 		int op =Integer.parseInt(bufferedReader.readLine());
@@ -220,8 +220,8 @@ break;
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitals.iterator();
 		 
-		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+		for(int i=0; it.hasNext(); i++){
+			System.out.println(i+".-"+it.next());
 		}
 		
 		System.out.println("Introduce the hospital that want to change");
@@ -393,30 +393,18 @@ else if (selection == 3){//patient
 
 	case 3: 
 
-	{
-		System.out.println("Introduce the name of the patient that you want to delete");
-		List<Patient> patients2 = dbPatient.SQLSearch(bufferedReader.readLine());
-		Iterator it = patients2.iterator();
-		String patientname = bufferedReader.readLine();
-		List<Patient> list= dbPatient.SQLSearch(patientname);
-		Iterator<Patient> ite = list.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
+		System.out.println("Insert the name of the patient you want to delete");
+		String patientDelete = bufferedReader.readLine();
+		List<Patient> list1 = dbPatient.SQLSearch(patientDelete);
+		Iterator<Patient> ite1 = list1.iterator();
+		for(int i=0; ite1.hasNext(); i++){
+			System.out.println(i+".-"+ite1.next());
 		}
-		System.out.println("Introduce its id");
-		int id = Integer.parseInt(bufferedReader.readLine());
-		dbPatient.SQLDelete(list.get(id));
+		int option1 = Integer.parseInt(bufferedReader.readLine());
+		dbPatient.SQLDelete(list1.get(option1));
 		System.out.println("The patient has been removed");
-		 
-		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
-		}
-		System.out.println("Introduce the patient you want to select");
-		int op =Integer.parseInt(bufferedReader.readLine());
-		dbPatient.SQLDelete(patients2.get(op));// the hospital we were looking for
-	}
 		break;
-
+	
 	case 4:
 		List<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
@@ -435,7 +423,7 @@ else if (selection == 3){//patient
 		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
-		System.out.println("Introduce its id");
+		System.out.println("Introduce the patient");
 		int id1 = Integer.parseInt(bufferedReader.readLine());
 		
 		
@@ -495,14 +483,14 @@ else if (selection == 3){//patient
 		switch(op){
 		case 1: {
 			FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
-			System.out.println("Introduce the name of the patient's nurse");
+			System.out.println("Introduce the name of the nurse");
 			String name= bufferedReader.readLine();
 			List<Nurse> nurs=db_Nurse.SQLSearch(name);
 			Iterator<Nurse> it3=nurs.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce the nurse of the patient");
+			System.out.println("Introduce the nurse");
 			int idnurse = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the patient's name");
 			String namepat= bufferedReader.readLine();
@@ -574,7 +562,7 @@ else if (selection == 3){//patient
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce its id");
+			System.out.println("Introduce the molecule");
 			int idmol = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the patient you want to assign");
 			String namepat= bufferedReader.readLine();
@@ -583,7 +571,7 @@ else if (selection == 3){//patient
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduce its id");
+			System.out.println("Introduce the patient");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the level");
 			int level = Integer.parseInt(bufferedReader.readLine());
@@ -807,7 +795,7 @@ else if (selection == 6){//Sympthomps
 		for(int i=0; it3.hasNext(); i++){
 			System.out.println(i+".-"+it3.next());
 		}
-		System.out.println("Introduce the id of the illnes: ");
+		System.out.println("Introduce the illnes: ");
 		int idIllnes = Integer.parseInt(bufferedReader.readLine());
 		System.out.println("Introduce the symptom: ");
 		String nameSymptom= bufferedReader.readLine();
@@ -817,7 +805,7 @@ else if (selection == 6){//Sympthomps
 		for(int i=0; it2.hasNext(); i++){
 			System.out.println(i+".-"+it2.next());
 		}
-		System.out.println("Introduce the id of the symptom:");
+		System.out.println("Introduce the symptom:");
 		int idSymp = Integer.parseInt(bufferedReader.readLine());
 		
 		System.out.println("Introduce the place where the desease is produced:");
@@ -898,7 +886,7 @@ else if (selection == 7){//illness
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce the id of the molecule: ");
+			System.out.println("Introduce the molecule: ");
 			int idMolecule = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the illnes name:");
@@ -908,7 +896,7 @@ else if (selection == 7){//illness
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduce the illnes id: ");
+			System.out.println("Introduce the illnes: ");
 			int idIllnes = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the level of the molecule: ");
@@ -927,7 +915,7 @@ else if (selection == 7){//illness
 				for(int i=0; it3.hasNext(); i++){
 					System.out.println(i+".-"+it3.next());
 				}
-				System.out.println("Introduce the id of the cell: ");
+				System.out.println("Introduce the the cell: ");
 				int idCell = Integer.parseInt(bufferedReader.readLine());
 				System.out.println("Introduce the illnes name:");
 				String nameIllnes= bufferedReader.readLine();
@@ -936,7 +924,7 @@ else if (selection == 7){//illness
 				for(int i=0; it2.hasNext(); i++){
 					System.out.println(i+".-"+it2.next());
 				}
-				System.out.println("Introduce the illnes id: ");
+				System.out.println("Introduce the illnes: ");
 				int idIllnes = Integer.parseInt(bufferedReader.readLine());
 				
 				System.out.println("Introduce the level of the cell: ");
@@ -957,6 +945,7 @@ else if (selection == 7){//illness
 }
 else if (selection == 8){//exit
 	Connect.SQLDisconnect();
+	System.exit(0);
 	break;
 }
 
