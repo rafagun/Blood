@@ -455,16 +455,14 @@ else if (selection == 3){//patient
 		else {patUpdate.get(id1).setBlood(newBlood);}
 		
 		System.out.println("Input the new age or press enter");
-		String linea =bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
-		Integer newage;
+		String newAge = bufferedReader.readLine(); //cuando pongo espacio en blanco para que deje el mismo range falla
 		//DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		if (linea.equals("")){
-			
-			newage = patUpdate.get(id1).getAge();
+		if (newAge.equals("")){
+		    int age = Integer.parseInt(newAge);
+			age = patUpdate.get(id1).getAge();
 		}
 		else{
-			newage = Integer.parseInt(linea);
-			patUpdate.get(id1).setAge(newage);
+			patUpdate.get(id1).setAge(Integer.parseInt(newAge));
 		}
 		
 
@@ -496,7 +494,7 @@ else if (selection == 3){//patient
 		switch(op){
 		case 1: {
 			FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
-			System.out.println("Introduce the name of the patient�s nurse");
+			System.out.println("Introduce the name of the patient's nurse");
 			String name= bufferedReader.readLine();
 			List<Nurse> nurs=db_Nurse.SQLSearch(name);
 			Iterator<Nurse> it3=nurs.iterator();
@@ -505,7 +503,7 @@ else if (selection == 3){//patient
 			}
 			System.out.println("Introduce the nurse of the patient");
 			int idnurse = Integer.parseInt(bufferedReader.readLine());
-			System.out.println("Introduce the patient�s name");
+			System.out.println("Introduce the patient's name");
 			String namepat= bufferedReader.readLine();
 			List<Patient> pat = dbPatient.SQLSearch(namepat);
 			Iterator<Patient> it2 = pat.iterator();
@@ -715,7 +713,7 @@ else if (selection == 5){//molecules
 
 		case 3:
 			
-			System.out.println("The molecule cannot be removed");
+			System.out.println("molecules cannot be removed");
 			break;
 
 		case 4: 
@@ -809,15 +807,15 @@ else if (selection == 6){//Sympthomps
 		System.out.println("Introduce the id of the symptoms that you have chosen: ");
 		Integer optionSympRelation = Integer.parseInt(bufferedReader.readLine());
 		
-		System.out.println("Introduce the name of the illnes: ");
+		System.out.println("Introduce the name of the illness: ");
 		String nameIllnes = bufferedReader.readLine();
 		IllnessInterface db_illness = new DB_Illness();
 		List<Illnes> listIllness= db_illness.SQLSearch(nameIllnes);
 		for(Illnes IllnesRelations : listIllness){
-			System.out.println("Id of the illnes: "+IllnesRelations.getId()+ "name of the illnes: " +IllnesRelations.getType());
+			System.out.println("Id of the illness: "+IllnesRelations.getId()+ "name of the illness: " +IllnesRelations.getType());
 		}
 
-		System.out.println("Introduce the id of the illnes that you have chosen: ");
+		System.out.println("Introduce the id of the illness that you have chosen: ");
 		int optionIllRelation = Integer.parseInt(bufferedReader.readLine());
 		
 		System.out.println("Introduce the place where the disease is produced: ");
@@ -894,13 +892,13 @@ else if (selection == 7){//illness
 		switch(optionRelat){
 		case 1: {
 			
-			System.out.println("Introduce the name of the illnes:");
+			System.out.println("Introduce the name of the illness:");
 			String nameIllnes = bufferedReader.readLine();
 			List<Illnes> listIllnes = db_illness.SQLSearch(nameIllnes);
 			for(Illnes illnesRelations : listIllnes){
-				System.out.println("Id of the illnes: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
+				System.out.println("Id of the illness: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
 			}
-			System.out.println("Introduce the id of the illnes that you have chosen: ");
+			System.out.println("Introduce the id of the illness that you have chosen: ");
 			int optionIllRelation = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the name of the molecule: ");
@@ -924,13 +922,13 @@ else if (selection == 7){//illness
 		} 
 		break;
 		 case 2: {
-			System.out.println("Introduce the name of the illnes:");
+			System.out.println("Introduce the name of the illness:");
 			String nameIllnes = bufferedReader.readLine();
 			List<Illnes> listIllnes = db_illness.SQLSearch(nameIllnes);
 			for(Illnes illnesRelations : listIllnes){
-				System.out.println("Id of the illnes: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
+				System.out.println("Id of the illness: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
 			}
-			System.out.println("Introduce the id of the illnes that you have chosen: ");
+			System.out.println("Introduce the id of the illness that you have chosen: ");
 			Integer optionIllRelation = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the name of the cell: ");
