@@ -402,7 +402,7 @@ else if (selection == 3){//patient
 		for(int i=0; ite.hasNext(); i++){
 			System.out.println(i+".-"+ite.next());
 		}
-		System.out.println("Introduce its id");
+		System.out.println("Introduce the patient");
 		int id = Integer.parseInt(bufferedReader.readLine());
 		dbPatient.SQLDelete(list.get(id));
 		System.out.println("The patient has been removed");
@@ -434,7 +434,7 @@ else if (selection == 3){//patient
 		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
-		System.out.println("Introduce its id");
+		System.out.println("Introduce the patient");
 		int id1 = Integer.parseInt(bufferedReader.readLine());
 		
 		
@@ -573,7 +573,7 @@ else if (selection == 3){//patient
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce its id");
+			System.out.println("Introduce the molecule");
 			int idmol = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the patient you want to assign");
 			String namepat= bufferedReader.readLine();
@@ -582,7 +582,7 @@ else if (selection == 3){//patient
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduce its id");
+			System.out.println("Introduce the patient");
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the level");
 			int level = Integer.parseInt(bufferedReader.readLine());
@@ -807,7 +807,7 @@ else if (selection == 6){//Sympthomps
 		for(int i=0; it3.hasNext(); i++){
 			System.out.println(i+".-"+it3.next());
 		}
-		System.out.println("Introduce the id of the illnes: ");
+		System.out.println("Introduce the illnes: ");
 		int idIllnes = Integer.parseInt(bufferedReader.readLine());
 		System.out.println("Introduce the symptom: ");
 		String nameSymptom= bufferedReader.readLine();
@@ -817,7 +817,7 @@ else if (selection == 6){//Sympthomps
 		for(int i=0; it2.hasNext(); i++){
 			System.out.println(i+".-"+it2.next());
 		}
-		System.out.println("Introduce the id of the symptom:");
+		System.out.println("Introduce the symptom:");
 		int idSymp = Integer.parseInt(bufferedReader.readLine());
 		
 		System.out.println("Introduce the place where the desease is produced:");
@@ -898,7 +898,7 @@ else if (selection == 7){//illness
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce the id of the molecule: ");
+			System.out.println("Introduce the molecule: ");
 			int idMolecule = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the illnes name:");
@@ -908,7 +908,7 @@ else if (selection == 7){//illness
 			for(int i=0; it2.hasNext(); i++){
 				System.out.println(i+".-"+it2.next());
 			}
-			System.out.println("Introduce the illnes id: ");
+			System.out.println("Introduce the illnes: ");
 			int idIllnes = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the level of the molecule: ");
@@ -927,7 +927,7 @@ else if (selection == 7){//illness
 				for(int i=0; it3.hasNext(); i++){
 					System.out.println(i+".-"+it3.next());
 				}
-				System.out.println("Introduce the id of the cell: ");
+				System.out.println("Introduce the the cell: ");
 				int idCell = Integer.parseInt(bufferedReader.readLine());
 				System.out.println("Introduce the illnes name:");
 				String nameIllnes= bufferedReader.readLine();
@@ -936,7 +936,7 @@ else if (selection == 7){//illness
 				for(int i=0; it2.hasNext(); i++){
 					System.out.println(i+".-"+it2.next());
 				}
-				System.out.println("Introduce the illnes id: ");
+				System.out.println("Introduce the illnes: ");
 				int idIllnes = Integer.parseInt(bufferedReader.readLine());
 				
 				System.out.println("Introduce the level of the cell: ");
