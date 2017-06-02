@@ -392,30 +392,18 @@ else if (selection == 3){//patient
 
 	case 3: 
 
-	{
-		System.out.println("Introduce the name of the patient that you want to delete");
-		List<Patient> patients2 = dbPatient.SQLSearch(bufferedReader.readLine());
-		Iterator it = patients2.iterator();
-		String patientname = bufferedReader.readLine();
-		List<Patient> list= dbPatient.SQLSearch(patientname);
-		Iterator<Patient> ite = list.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
+		System.out.println("Insert the name of the patient you want to delete");
+		String patientDelete = bufferedReader.readLine();
+		List<Patient> list1 = dbPatient.SQLSearch(patientDelete);
+		Iterator<Patient> ite1 = list1.iterator();
+		for(int i=0; ite1.hasNext(); i++){
+			System.out.println(i+".-"+ite1.next());
 		}
-		System.out.println("Introduce the patient");
-		int id = Integer.parseInt(bufferedReader.readLine());
-		dbPatient.SQLDelete(list.get(id));
+		int option1 = Integer.parseInt(bufferedReader.readLine());
+		dbPatient.SQLDelete(list1.get(option1));
 		System.out.println("The patient has been removed");
-		 
-		for(int i=0; it.hasNext(); i++){
-			System.out.println(i+".-"+it.next());
-		}
-		System.out.println("Introduce the patient you want to select");
-		int op =Integer.parseInt(bufferedReader.readLine());
-		dbPatient.SQLDelete(patients2.get(op));// the hospital we were looking for
-	}
 		break;
-
+	
 	case 4:
 		List<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();

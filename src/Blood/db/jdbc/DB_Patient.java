@@ -378,30 +378,19 @@ public class DB_Patient implements PatientInterface {
 
 	public void SQLDelete(Patient patient) throws IOException, SQLException {
 
-		try {
-
+		try{
 			String sql = "DELETE FROM Patient WHERE id=?";
-
 			PreparedStatement prep = Connect.c.prepareStatement(sql);
-
 			prep.setInt(1, patient.getId());
-
 			prep.executeUpdate();
-
 			prep.close();
 
 		} catch (SQLException ex) {
-
 			ex.printStackTrace();
-
 			System.err.println("ERROR");
 
-
-
 		}
-
-
-
+		System.out.println("Patient with the name:" + patient.getName()+  "  has been deleted");
 	}
 
 
