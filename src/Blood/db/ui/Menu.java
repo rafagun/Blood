@@ -187,7 +187,7 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator<Hospital> it = hospitals.iterator();
 		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+			System.out.println(i+".-"+it.next());
 		}}
 break;
 	case 3: 
@@ -197,7 +197,7 @@ break;
 		Iterator it = hospitalss.iterator();
 		 
 		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+			System.out.println(i+".-"+it.next());
 		}
 		System.out.println("Introduce the hospital you want to select");
 		int op =Integer.parseInt(bufferedReader.readLine());
@@ -220,7 +220,7 @@ break;
 		Iterator it = hospitals.iterator();
 		 
 		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+			System.out.println(i+".-"+it.next());
 		}
 		
 		System.out.println("Introduce the hospital that want to change");
@@ -408,7 +408,7 @@ else if (selection == 3){//patient
 		System.out.println("The patient has been removed");
 		 
 		for(int i=1; it.hasNext(); i++){
-			System.out.println(i+".-"+it.toString());
+			System.out.println(i+".-"+it.next());
 		}
 		System.out.println("Introduce the patient you want to select");
 		int op =Integer.parseInt(bufferedReader.readLine());
@@ -957,6 +957,7 @@ else if (selection == 7){//illness
 }
 else if (selection == 8){//exit
 	Connect.SQLDisconnect();
+	System.exit(0);
 	break;
 }
 
