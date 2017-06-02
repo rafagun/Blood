@@ -50,9 +50,7 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	}
 	
 	public void SQLUpdate(Hospital oldHosp, Hospital newHosp){
-		Hospital hos = JPAHospital.SQLSearch1(oldHosp.getId());
-		System.out.println(hos);
-		
+
 		eManager.em.getTransaction().begin();
 		oldHosp.setId(newHosp.getId());
 		oldHosp.setName(newHosp.getName());

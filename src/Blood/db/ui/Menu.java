@@ -230,18 +230,25 @@ break;
 		
 		System.out.println("Introduce the changes you want to make in the name or press enter");
 		String name1 = bufferedReader.readLine();
-		if (name1.equals("")) newHosp.setName(hospitals.get(op).getName());
+		if (name1.equals(""))
+			{
+			newHosp.setName(hospitals.get(op).getName());
+			}
 		else newHosp.setName(name1);
 		
 		System.out.println("Introduce the changes you want to make in the Location or press enter");
 		
 		String location = bufferedReader.readLine();
-		if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
+		if (location.equals("")){
+			newHosp.setLocation(hospitals.get(op).getLocation());
+		}
 		else newHosp.setLocation(location);
 		
 		System.out.println("Introduce the changes you want to make in the range or press enter");
 		String lineaRange = bufferedReader.readLine();
-		if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
+		if (lineaRange.equals("")){
+			newHosp.setRange(hospitals.get(op).getRange());
+		}
 		else{
 			newHosp.setRange(Integer.parseInt(lineaRange));
 		}
@@ -555,9 +562,11 @@ else if (selection == 3){//patient
 			dbPatient.SQLRelationPC(cells.get(idcells).getId(), pat.get(idpat).getId(), level);
 		} break;
 		
-		case 4 : {
+		case 4 : 
+
+		{
 			FunctionsDB<Molecules> db_molecules = new DB_Molecules();
-			System.out.println("Introduce the molecules to the one who want to assign un patient");
+			System.out.println("Introduce the molecules that you want to assign to a patient");
 			String name= bufferedReader.readLine();
 			List<Molecules> mols=db_molecules.SQLSearch(name);
 			Iterator<Molecules> it3=mols.iterator();
@@ -577,7 +586,7 @@ else if (selection == 3){//patient
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the level");
 			int level = Integer.parseInt(bufferedReader.readLine());
-			dbPatient.SQLRelationPM(idmol, idpat, level);
+			dbPatient.SQLRelationPM (mols.get(idmol).getId(), pat.get(idpat).getId(), level);
 		} break;
 		case 5:
 		{
