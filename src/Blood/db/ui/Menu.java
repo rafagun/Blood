@@ -514,7 +514,7 @@ else if (selection == 3){//patient
 			int idpat = Integer.parseInt(bufferedReader.readLine());
 			dbPatient.SQLRelationNP(nurs.get(idnurse).getId(),pat.get(idpat).getId());
 			
-			;
+			
 		} break;
 		 case 2: {
 			FunctionsDB<Illnes> db_illnes = new DB_Illness();
@@ -797,33 +797,32 @@ else if (selection == 6){//Sympthomps
 			System.out.println(symptom);
 		}
 		break;
+		
 	case 8:
-		System.out.println("Introduce the name of the symptom:");
-		String nameSymptoms = bufferedReader.readLine();
-		List<Symptoms> listSymptom = db_symptoms.SQLSearch(nameSymptoms);
-		for(Symptoms symptomsRelations : listSymptom){
-			System.out.println("Id of the symptom: "+symptomsRelations.getId()+ "name of the symptom: " +symptomsRelations.getType());
+		IllnessInterface dbIllnes = new DB_Illness();
+		System.out.println("Introduce the name of the illnes:");
+		String name= bufferedReader.readLine();
+		List<Illnes> illnes = dbIllnes.SQLSearch(name);
+		Iterator<Illnes> it3= illnes.iterator();
+		for(int i=0; it3.hasNext(); i++){
+			System.out.println(i+".-"+it3.next());
 		}
-		System.out.println("Introduce the id of the symptoms that you have chosen: ");
-		Integer optionSympRelation = Integer.parseInt(bufferedReader.readLine());
-		
-		System.out.println("Introduce the name of the illness: ");
-		String nameIllnes = bufferedReader.readLine();
-		IllnessInterface db_illness = new DB_Illness();
-		List<Illnes> listIllness= db_illness.SQLSearch(nameIllnes);
-		for(Illnes IllnesRelations : listIllness){
-			System.out.println("Id of the illness: "+IllnesRelations.getId()+ "name of the illness: " +IllnesRelations.getType());
+		System.out.println("Introduce the id of the illnes: ");
+		int idIllnes = Integer.parseInt(bufferedReader.readLine());
+		System.out.println("Introduce the symptom: ");
+		String nameSymptom= bufferedReader.readLine();
+		DB_Symptoms dbSymptoms = new DB_Symptoms ();
+		List<Symptoms> symp = dbSymptoms.SQLSearch(nameSymptom);
+		Iterator<Symptoms> it2 = symp.iterator();
+		for(int i=0; it2.hasNext(); i++){
+			System.out.println(i+".-"+it2.next());
 		}
-
-		System.out.println("Introduce the id of the illness that you have chosen: ");
-		int optionIllRelation = Integer.parseInt(bufferedReader.readLine());
+		System.out.println("Introduce the id of the symptom:");
+		int idSymp = Integer.parseInt(bufferedReader.readLine());
 		
-		System.out.println("Introduce the place where the disease is produced: ");
-		String place = bufferedReader.readLine();
-		
-		DB_Symptoms symptom = new DB_Symptoms();
-		db_illness.SQLRelationIS(optionSympRelation, optionIllRelation, place);
-		
+		System.out.println("Introduce the place where the desease is produced:");
+		String place  = bufferedReader.readLine();
+		dbIllnes.SQLRelationIS(illnes.get(idIllnes).getId(),symp.get(idSymp).getId(),place);
 		break;
 
 	case 9:
@@ -884,71 +883,67 @@ else if (selection == 7){//illness
 		break;
 	
 	case 6 :
-		
+		IllnessInterface dbIllnes  = new DB_Illness();
 		System.out.println("Introduce the option you want:");
 		System.out.println("1-.Relation Illnes-Molecules");
 		System.out.println("2-.Relation Illnes-Cells");
 		int optionRelat= Integer.parseInt(bufferedReader.readLine());
 		switch(optionRelat){
 		case 1: {
-			
-			System.out.println("Introduce the name of the illness:");
-			String nameIllnes = bufferedReader.readLine();
-			List<Illnes> listIllnes = db_illness.SQLSearch(nameIllnes);
-			for(Illnes illnesRelations : listIllnes){
-				System.out.println("Id of the illness: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
+			System.out.println("Introduce the name of the molecule:");
+			String name = bufferedReader.readLine();
+			DB_Molecules dbmolecules = new DB_Molecules ();
+			List<Molecules> molecules = dbmolecules.SQLSearch(name);
+			Iterator<Molecules> it3 = molecules.iterator();
+			for(int i=0; it3.hasNext(); i++){
+				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce the id of the illness that you have chosen: ");
-			int optionIllRelation = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduce the id of the molecule: ");
+			int idMolecule = Integer.parseInt(bufferedReader.readLine());
 			
-			System.out.println("Introduce the name of the molecule: ");
-			String nameMolec = bufferedReader.readLine();
-			FunctionsDB<Molecules> db_molecules = new DB_Molecules();
-			List<Molecules> listMolec = db_molecules.SQLSearch(nameMolec);
-			for(Molecules molecsRelations : listMolec){
-				System.out.println("Id of the molecule: "+molecsRelations.getId()+ "name of the molecule: " +molecsRelations.getType());
+			System.out.println("Introduce the illnes name:");
+			String nameIllnes= bufferedReader.readLine();
+			List<Illnes> ill = dbIllnes.SQLSearch(nameIllnes);
+			Iterator<Illnes> it2 = ill.iterator();
+			for(int i=0; it2.hasNext(); i++){
+				System.out.println(i+".-"+it2.next());
 			}
-	
-			System.out.println("Introduce the id of the molecule that you have chosen: ");
-			int optionMolRelation = Integer.parseInt(bufferedReader.readLine());
+			System.out.println("Introduce the illnes id: ");
+			int idIllnes = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the level of the molecule: ");
 			int level = Integer.parseInt(bufferedReader.readLine());
-			
-			System.out.println("Introduce the level of the molecule (low-high): ");
-			String highLow = bufferedReader.readLine();
-			
-			db_illness.SQLRelationIM(optionIllRelation,optionMolRelation, level, highLow);
-		} 
-		break;
+			System.out.println("Introduce the level (low-high) of the molecule: ");
+			String lowHigh = bufferedReader.readLine();
+			dbIllnes.SQLRelationIM(molecules.get(idMolecule).getId(),ill.get(idIllnes).getId(), level, lowHigh);
+			} 
+			break;
 		 case 2: {
-			System.out.println("Introduce the name of the illness:");
-			String nameIllnes = bufferedReader.readLine();
-			List<Illnes> listIllnes = db_illness.SQLSearch(nameIllnes);
-			for(Illnes illnesRelations : listIllnes){
-				System.out.println("Id of the illness: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
-			}
-			System.out.println("Introduce the id of the illness that you have chosen: ");
-			Integer optionIllRelation = Integer.parseInt(bufferedReader.readLine());
-			
-			System.out.println("Introduce the name of the cell: ");
-			String nameCell = bufferedReader.readLine();
-			DB_Cells db_cells = new DB_Cells();
-			List<Cells> listCells = db_cells.SQLSearch(nameCell);
-			for(Cells cellsRelations : listCells){
-				System.out.println("Id of the cell: "+cellsRelations.getId()+ "name of the cell: " +cellsRelations.getType());
-			}
-	
-			System.out.println("Introduce the id of the cell that you have chosen: ");
-			int optionCellRelation = Integer.parseInt(bufferedReader.readLine());
-			
-			System.out.println("Introduce the level of the cell: ");
-			Integer level = Integer.parseInt(bufferedReader.readLine());
-			
-			System.out.println("Introduce the level of the cell(low-high): ");
-			String highLow = bufferedReader.readLine();
-			
-			db_illness.SQLRelationIM(optionIllRelation,optionCellRelation, level, highLow);		
+				System.out.println("Introduce the name of the cell:");
+				String name = bufferedReader.readLine();
+				DB_Cells dbCells = new DB_Cells ();
+				List<Cells> cells = dbCells.SQLSearch(name);
+				Iterator<Cells> it3 = cells.iterator();
+				for(int i=0; it3.hasNext(); i++){
+					System.out.println(i+".-"+it3.next());
+				}
+				System.out.println("Introduce the id of the cell: ");
+				int idCell = Integer.parseInt(bufferedReader.readLine());
+				System.out.println("Introduce the illnes name:");
+				String nameIllnes= bufferedReader.readLine();
+				List<Illnes> ill = dbIllnes.SQLSearch(nameIllnes);
+				Iterator<Illnes> it2 = ill.iterator();
+				for(int i=0; it2.hasNext(); i++){
+					System.out.println(i+".-"+it2.next());
+				}
+				System.out.println("Introduce the illnes id: ");
+				int idIllnes = Integer.parseInt(bufferedReader.readLine());
+				
+				System.out.println("Introduce the level of the cell: ");
+				int level = Integer.parseInt(bufferedReader.readLine());
+				System.out.println("Introduce the level (low-high) of the cell: ");
+				String lowHigh = bufferedReader.readLine();
+				dbIllnes.SQLRelationIC(cells.get(idCell).getId(),ill.get(idIllnes).getId(), level, lowHigh);		
 			}
 		break;
 		
@@ -957,8 +952,8 @@ else if (selection == 7){//illness
 	case 7:	
 	break;
 	
-}
 	}
+}
 }
 else if (selection == 8){//exit
 	Connect.SQLDisconnect();
