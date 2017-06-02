@@ -252,7 +252,9 @@ break;
 		else{
 			newHosp.setRange(Integer.parseInt(lineaRange));
 		}
-		
+		newHosp.setId(hospitals.get(op).getId());
+		System.out.println(newHosp);
+		System.out.println(""+hospitals.get(op));
 		JPAHospital.SQLUpdate(hospitals.get(op), newHosp);
 	} break;
 	case 8:
@@ -844,7 +846,6 @@ else if (selection == 7){//illness
 	String illnessType =bufferedReader.readLine();
 	System.out.println("Introduce if it is chronic or not");
 	String illnessChronic = bufferedReader.readLine();
-	//solo inserta false
 	Boolean chronic = Boolean.parseBoolean(illnessChronic);
 	Illnes illness  = new Illnes(illnessName, illnessType, chronic);
 	db_illness.SQLInsert(illness);
@@ -889,7 +890,7 @@ else if (selection == 7){//illness
 		case 1: {
 			System.out.println("Introduce the name of the molecule:");
 			String name = bufferedReader.readLine();
-			DB_Molecules dbmolecules = new DB_Molecules ();
+			FunctionsDB<Molecules> dbmolecules = new DB_Molecules ();
 			List<Molecules> molecules = dbmolecules.SQLSearch(name);
 			Iterator<Molecules> it3 = molecules.iterator();
 			for(int i=0; it3.hasNext(); i++){
