@@ -230,18 +230,25 @@ break;
 		
 		System.out.println("Introduce the changes you want to make in the name or press enter");
 		String name1 = bufferedReader.readLine();
-		if (name1.equals("")) newHosp.setName(hospitals.get(op).getName());
+		if (name1.equals(""))
+			{
+			newHosp.setName(hospitals.get(op).getName());
+			}
 		else newHosp.setName(name1);
 		
 		System.out.println("Introduce the changes you want to make in the Location or press enter");
 		
 		String location = bufferedReader.readLine();
-		if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
+		if (location.equals("")){
+			newHosp.setLocation(hospitals.get(op).getLocation());
+		}
 		else newHosp.setLocation(location);
 		
 		System.out.println("Introduce the changes you want to make in the range or press enter");
 		String lineaRange = bufferedReader.readLine();
-		if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
+		if (lineaRange.equals("")){
+			newHosp.setRange(hospitals.get(op).getRange());
+		}
 		else{
 			newHosp.setRange(Integer.parseInt(lineaRange));
 		}

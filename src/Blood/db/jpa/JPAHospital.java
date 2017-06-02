@@ -51,9 +51,9 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	
 	public void SQLUpdate(Hospital oldHosp, Hospital newHosp){
 		eManager.em.getTransaction().begin();
-		newHosp.setName(oldHosp.getName());
-		newHosp.setLocation(oldHosp.getLocation());
-		newHosp.setRange(oldHosp.getRange());
+		oldHosp.setName(newHosp.getName());
+		oldHosp.setLocation(newHosp.getLocation());
+		oldHosp.setRange(newHosp.getRange());
 		eManager.em.getTransaction().commit();
 	}
 
