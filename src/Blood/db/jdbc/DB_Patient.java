@@ -212,7 +212,7 @@ public class DB_Patient implements PatientInterface {
 
 	public List<Patient> SQLSelect() {
 
-		ArrayList<Patient> patients = new ArrayList<Patient>();
+		List<Patient> patients = new ArrayList<Patient>();
 
 		try {
 

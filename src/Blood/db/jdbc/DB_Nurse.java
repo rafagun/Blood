@@ -89,7 +89,7 @@ public class DB_Nurse implements NurseInterface {
 	public void SQLInsert(Nurse nurse){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO Nurses (name,photo,hospital_id) " + "VALUES ('" + nurse.getName() +  "');";
+		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() +  "');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {
