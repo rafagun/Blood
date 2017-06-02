@@ -33,16 +33,16 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	}
 	
 	
-	 Hospital SQLSearch1(String name){
-		Query q1 =eManager.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Hospital.class);
-		q1.setParameter(1, "%" + name + "%");
+	 public static Hospital SQLSearch1(int id){
+		Query q1 =eManager.em.createNativeQuery("SELECT * FROM Hospital WHERE id LIKE ?", Hospital.class);
+		q1.setParameter(1, "%" + id + "%");
 		Hospital hospital = (Hospital) q1.getSingleResult();
 		return hospital;
 	}
 	
 	public List<Hospital> SQLSearch(String name){
 		
-		Query q1 = eManager.em.createNativeQuery("SELECT * FROM hospital WHERE name LIKE ?", Hospital.class);
+		Query q1 = eManager.em.createNativeQuery("SELECT * FROM Hospital WHERE name LIKE ?", Hospital.class);
 		q1.setParameter(1, "%" + name + "%");
 		List<Hospital> hospitals = (List<Hospital>) q1.getResultList();
 		return hospitals;
@@ -50,10 +50,14 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	}
 	
 	public void SQLUpdate(Hospital oldHosp, Hospital newHosp){
+		Hospital hos = JPAHospital.SQLSearch1(oldHosp.getId());
+		System.out.println(hos);
+		
 		eManager.em.getTransaction().begin();
-		newHosp.setName(oldHosp.getName());
-		newHosp.setLocation(oldHosp.getLocation());
-		newHosp.setRange(oldHosp.getRange());
+		oldHosp.setId(newHosp.getId());
+		oldHosp.setName(newHosp.getName());
+		oldHosp.setLocation(newHosp.getLocation());
+		oldHosp.setRange(newHosp.getRange());
 		eManager.em.getTransaction().commit();
 	}
 
