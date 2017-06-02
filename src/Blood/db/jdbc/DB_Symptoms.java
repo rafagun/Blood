@@ -27,13 +27,14 @@ try{
 		+ "severity TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+		
 		stmt1 = Connect.c.createStatement();
 		String sql2 = "CREATE TABLE SympsIlls"
 				+ "(symptomsId INTEGER REFERENCES Symptoms(id) ON DELETE CASCADE"
 				+ "illnesId INTEGER REFERENCES Illnes(id) ON DELETE CASCADE"
 				+ "place TEXT"
 				+ "PRIMARY KEY (simptomsID,illnesId)";
-		stmt1.executeUpdate(sql1);
+		stmt1.executeUpdate(sql2);
 		stmt1.close();
 }
 catch(SQLException ex){

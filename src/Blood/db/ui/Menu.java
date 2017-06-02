@@ -18,9 +18,9 @@ import Blood.db.jpa.JPAHospital;
 import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
-
-import Blood.db.xml.XML_Manager;
+import Blood.db.xml.Java2Xml;
 import Blood.db.xml.Xml2Html;
+import Blood.db.xml.Xml2Java;
 
 public class Menu {
 	static void menu1(){
@@ -302,7 +302,9 @@ break;
 		System.out.println("Introduce the hospital");
 		int idhosp = Integer.parseInt(bufferedReader.readLine());
 		db_Nurse.SQLInsert(nurseInsert);
-		db_Nurse.SQLnurseHosp(nurseInsert.getId(), list.get(idhosp).getId());
+		List<Nurse> nurs =db_Nurse.SQLSearch(nurseInsert.getName());
+		
+		db_Nurse.SQLnurseHosp(nurs.get(0).getId(), list.get(idhosp).getId());
 		System.out.println("The information has been added");
 		break;
 
@@ -310,11 +312,11 @@ break;
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		List<Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
-		for (Nurse nurse: nurses){
-			System.out.println(nurse);
+		Iterator<Nurse>it = nurses.iterator();
+		for (int i = 0; it.hasNext();i++){
+			System.out.println(i+".- "+it.next());
 		}
 
-		break;
 	
 
 	
@@ -782,19 +784,17 @@ else if (selection == 6){//Sympthomps
 		break;
 		
 	case 6:
-		List<Symptoms> newList = new ArrayList<Symptoms> ();
-		DB_Symptoms symptomsJava2Xml = new DB_Symptoms();
-		newList = symptomsJava2Xml.SQLSelect();
-		XML_Manager xmlManager = new XML_Manager ();
-		xmlManager.Java2XmlListofSymptoms(newList);
+		
+		List<Symptoms> simt = db_symptoms.SQLSelect();
+		Java2Xml java2xml = new Java2Xml();
+		java2xml.java2XMLSymptoms(simt);
 		break;
 		
 	case 7: 
-		XML_Manager xmlManager1 = new XML_Manager ();
-		ListofSymptoms listSymptoms = xmlManager1.Xml2JavaListofSymptoms();
-		
-		for(Symptoms symptom : listSymptoms.getListofSymptoms()){
-			System.out.println(symptom);
+		Xml2Java xml2java = new Xml2Java();
+		List<Symptoms> s = xml2java.xml2JavaSymptoms();
+		for (Symptoms sim: s){
+			System.out.println(sim);
 		}
 		break;
 	case 8:
@@ -810,7 +810,7 @@ else if (selection == 6){//Sympthomps
 		int idIllnes = Integer.parseInt(bufferedReader.readLine());
 		System.out.println("Introduce the symptom: ");
 		String nameSymptom= bufferedReader.readLine();
-		DB_Symptoms dbSymptoms = new DB_Symptoms ();
+		FunctionsDB<Symptoms> dbSymptoms = new DB_Symptoms ();
 		List<Symptoms> symp = dbSymptoms.SQLSearch(nameSymptom);
 		Iterator<Symptoms> it2 = symp.iterator();
 		for(int i=0; it2.hasNext(); i++){

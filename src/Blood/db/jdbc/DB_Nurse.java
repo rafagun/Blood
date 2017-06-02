@@ -89,7 +89,7 @@ public class DB_Nurse implements NurseInterface {
 	public void SQLInsert(Nurse nurse){
 		try {
 		Statement stmt = Connect.c.createStatement();
-		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() +  "');";
+		String sql = "INSERT INTO Nurses (name,photo) " + "VALUES ('" + nurse.getName() +  "','" + nurse.getPhoto()+"');";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ public class DB_Nurse implements NurseInterface {
 	
 		public void SQLnurseHosp(int nurse, int hosp) throws SQLException{
 			
-			String sql = "UPDATE Nurses SET id_hospital=? WHERE id=?";
+			String sql = "UPDATE Nurses SET hospital_id=? WHERE id=?";
 			PreparedStatement stmt = Connect.c.prepareStatement(sql);
 			stmt.setInt(1,hosp);
 			stmt.setInt(2, nurse);
