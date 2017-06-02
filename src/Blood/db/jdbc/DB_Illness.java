@@ -149,7 +149,7 @@ public class DB_Illness implements IllnessInterface{
 	public void SQLRelationIM(int molId,int illId, int level, String hL ){
 		try{
 			Statement stmt = Connect.c.createStatement();
-			String sql = "INSERT INTO Illnes-Molecules (moleculesID,IllnesId,Level,H-L) " + "VALUES ('"+molId+"', '"+illId+"', '"+level+"','"+hL+"');";
+			String sql = "INSERT INTO IllnesMolecules (moleculesID , IllnesId , Level , HL) " + "VALUES ('"+molId+"', '"+illId+"', '"+level+"','"+hL+"');";
 			stmt.executeQuery(sql);
 			stmt.close();
 		}catch(Exception e){
@@ -159,7 +159,7 @@ public class DB_Illness implements IllnessInterface{
 	public void SQLRelationIC(int IllnesId,int cellId, int level, String hL ){
 		try{
 			Statement stmt = Connect.c.createStatement();
-			String sql = "INSERT INTO Illnes-Cells (cellsID,IllnesId,Level,H-L) " + "VALUES ('"+cellId+"', '"+IllnesId+"', '"+level+"','"+hL+"');";
+			String sql = "INSERT INTO IllnesCells (cellsID , IllnesId , Level , HL) " + "VALUES ('"+cellId+"', '"+IllnesId+"', '"+level+"','"+hL+"');";
 			stmt.executeQuery(sql);
 			stmt.close();
 		}catch(Exception e){
@@ -170,7 +170,7 @@ public class DB_Illness implements IllnessInterface{
 	public void SQLRelationIS(int sympId,int illId, String place){
 		try{
 			Statement stmt = Connect.c.createStatement();
-			String sql = "INSERT INTO SympsIlls (symptomsId,illnesId,place) " + "VALUES ('"+sympId+"', '"+illId+"', '"+place+"');";
+			String sql = "INSERT INTO SympsIlls (symptomsId , illnesId , place) " + "VALUES ('"+sympId+"', '"+illId+"', '"+place+"');";
 			stmt.executeQuery(sql);
 			stmt.close();
 		}catch(Exception e){
