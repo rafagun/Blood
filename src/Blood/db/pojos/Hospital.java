@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.*;
 import Blood.db.pojos.Nurse;
 @Entity
 @Table(name="Hospital")
-@XmlRootElement (name="Hospital")
 @XmlType(propOrder = { "name", "location", "range", "nurses" })
 public class Hospital implements Serializable {
 	private static final long serialVersionUID = -8273180762878531017L;

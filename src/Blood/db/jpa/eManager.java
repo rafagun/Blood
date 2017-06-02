@@ -6,12 +6,12 @@ import javax.persistence.Persistence;
 public abstract class eManager {
 	public static EntityManager em;
 
-	public static EntityManager StartMethod() {
+	public static  StartMethod() {
 	    em = Persistence.createEntityManagerFactory("blood-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		return em;
+	
 	}
 	}
 

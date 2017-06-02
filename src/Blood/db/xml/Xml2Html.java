@@ -8,7 +8,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class Xml2Html {
-	public static void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
+	public static void simpleTransform() {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {
 			Transformer transformer = tFactory.newTransformer(new StreamSource(new File("src\\data\\XSLThospitals.xslt")));

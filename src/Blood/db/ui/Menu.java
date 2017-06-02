@@ -19,6 +19,7 @@ import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
 import Blood.db.xml.Java2Xml;
+import Blood.db.xml.Xml2Html;
 import Blood.db.xml.Xml2Java;
 public class Menu {
 	static void menu1(){
@@ -91,25 +92,46 @@ public class Menu {
 		
 	}
 	static void menu2(){
-	System.out.println("Introduce 1 to create table ");
-	System.out.println("Introduce 2 to insert ");
-	System.out.println("Introduce 3 to show");
-	System.out.println("Introduce 4 to delete");
-	System.out.println("Introduce 5 to select");
-	System.out.println("Introduce 6 to update");
+
+		System.out.println("Introduce 1 to insert ");
+		System.out.println("Introduce 2 to show");
+		System.out.println("Introduce 3 to delete");
+		System.out.println("Introduce 4 to select");
+		System.out.println("Introduce 5 to update");
+		System.out.println("Introduce 6 to exit");
+	}
+	static void menuHosp(){
+		System.out.println("Introduce 1 to insert ");
+		System.out.println("Introduce 2 to show");
+		System.out.println("Introduce 3 to delete");
+		System.out.println("Introduce 4 to select");
+		System.out.println("Introduce 5 to update");
+		System.out.println("Introduce 6 to create a htlm file:");
+		System.out.println("Introduce 7 to exit");
+	}
+	
+	static void menupat(){
+
+	System.out.println("Introduce 1 to insert ");
+	System.out.println("Introduce 2 to show");
+	System.out.println("Introduce 3 to delete");
+	System.out.println("Introduce 4 to select");
+	System.out.println("Introduce 5 to update");
+	System.out.println("Introduce 6 to assign relationships in the classes that correspond:");
 	System.out.println("Introduce 7 to exit");
-	System.out.println("Introduce 8 to assign relationships in the classes that correspond:");
-	System.out.println("Introduce 9 to pass from java to xml:");
-	System.out.println("Introduce 10 to pass from xml to java:");
+
 	}
-	
-	static void menu3(){
-		System.out.println("Introduce the manager you want to work with");
-		System.out.println("1.- JDBC manager");
-		System.out.println("2.-JPA manager");
-		System.out.println("3.-Exit");
+	static void menuSymp(){
+		System.out.println("Introduce 1 to insert ");
+		System.out.println("Introduce 2 to show");
+		System.out.println("Introduce 3 to delete");
+		System.out.println("Introduce 4 to select");
+		System.out.println("Introduce 5 to update");
+		System.out.println("Introduce 6 to pass from java to xml:");
+		System.out.println("Introduce 7 to pass from xml to java:");
+		System.out.println("Introduce 8 to exit");
+
 	}
-	
 public static void main(String[] args) throws SQLException, JAXBException 
 {
 
@@ -124,12 +146,10 @@ bufferedReader = new BufferedReader(inputStreamReader);
 int selection=0;
 int opcion=0;
 	while (true){
-		menu3();
-		int sel= Integer.parseInt(bufferedReader.readLine());
-		if (sel==1){
+		
 		
 	Connect.SQLConnect();
-	
+   eManager.StartMethod();
 	
 while (true){
 
@@ -142,19 +162,14 @@ if (selection==1){
 	
 FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 	
-	while (opcion!=8){
+	while (opcion!=7){
 		System.out.println("Introduce the option you want:");
-		System.out.println("Introduce the option you want:");
-		menu2();
+		menuHosp();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-	JPAHospital.SQLCreate();
-	System.out.println("The table hospital has been created");
-	break;
 
-	case 2: 
+	case 1: 
 		Hospital hospital = new Hospital();
 		System.out.println("Introduce a name");
 		hospital.setName(bufferedReader.readLine());
@@ -177,7 +192,7 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 		JPAHospital.SQLInsert(hospital);
 	break;
 
-	case 3:
+	case 2:
 	{
 		System.out.println("Introduce the name of the hospital that you want to search");
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
@@ -186,7 +201,7 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 			System.out.println(i+".-"+it.toString());
 		}}
 break;
-	case 4: 
+	case 3: 
 	{
 		System.out.println("Introduce the name of the hospital that you want to delete");
 		List<Hospital> hospitalss = JPAHospital.SQLSearch(bufferedReader.readLine());
@@ -199,16 +214,15 @@ break;
 		int op =Integer.parseInt(bufferedReader.readLine());
 		JPAHospital.SQLDelete(hospitalss.get(op));// the hospital we were looking for
 	} break;
-	case 5:
+	case 4:
 		List<Hospital> lista;
 		lista = JPAHospital.SQLSelect();
 		for (Hospital hosp: lista){
 			System.out.println("name:" +hosp.getName()+"          "+"location:"+hosp.getLocation()+"         "+ "range:" +hosp.getRange());
 		}
 		break;
-		// hay que borrar todo, no solo el contenido ya que al mostrarlo una vez borrado, muestra null no un error de que no existe
 
-	case 6: 
+	case 5: 
 	{
 
 		
@@ -244,6 +258,12 @@ break;
 		
 		JPAHospital.SQLUpdate(hospitals.get(op), newHosp);
 	} break;
+	case 8:
+	{
+		Xml2Html xml2html = new Xml2Html();
+		xml2html.simpleTransform();
+		break;
+	}
 	case 7:	//salir del programa
 
 		
@@ -255,18 +275,15 @@ break;
  else if (selection == 2){//nurse
 	NurseInterface db_Nurse = new DB_Nurse();
 	
-	while (opcion!=8){
+	while (opcion!=6){
 		System.out.println("Introduce the option you want");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-		db_Nurse.SQLCreate();
-		System.out.println("The table has been created correctly");
-	break;
 
-	case 2: 
+
+	case 1: 
 		System.out.println("Introduce the name of the nurse");
 		String nurseName = bufferedReader.readLine();
 		System.out.println("Introduce the direction of the photo with its extension");
@@ -290,7 +307,7 @@ break;
 		System.out.println("the information has been added");
 		break;
 
-	case 3: 
+	case 2: 
 		System.out.println("Introduce the name of the nurse you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		List<Nurse> nurses = db_Nurse.SQLSearch(nameSearch);
@@ -302,7 +319,7 @@ break;
 	
 
 	
-	case 4:
+	case 3:
 		System.out.println("Insert the name of the Nurse you want to delete");
 		String nurseDelete = bufferedReader.readLine();
 		List<Nurse> list1 = db_Nurse.SQLSearch(nurseDelete);
@@ -320,7 +337,7 @@ break;
 	 
 	
 
-	case 5: 
+	case 4: 
 		
 		List<Nurse> lista= new ArrayList<>();
 		lista = db_Nurse.SQLSelect();
@@ -330,12 +347,12 @@ break;
 		break;
 	 
 	
-	case 6: 
+	case 5: 
 		System.out.println("nurses cannot change any of these attributes");
 		break;
 
 		
-	case 7: //salir del programa
+	case 6: //salir del programa
 		
 	break;
 	}
@@ -345,17 +362,15 @@ break;
 }
 else if (selection == 3){//patient
 	PatientInterface dbPatient = new DB_Patient();
-	while (opcion!=8){
+	while (opcion!=7){
 		System.out.println("Introduce the option you want: ");
-		menu2();
+		menupat();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-	dbPatient.SQLCreate();
-	break;
 
-	case 2: 
+
+	case 1: 
 		
 		System.out.println("Introduce the name of the patient");
 		String namePatient = bufferedReader.readLine();
@@ -376,7 +391,7 @@ else if (selection == 3){//patient
 
 
 
-	case 3:
+	case 2:
 	
 		System.out.println("Introduce the name of the patient you want to search:");
 		String nameSearch = bufferedReader.readLine();
@@ -386,7 +401,7 @@ else if (selection == 3){//patient
 		}
 		break;
 
-	case 4: 
+	case 3: 
 
 	{
 		System.out.println("Introduce the name of the patient that you want to delete");
@@ -412,7 +427,7 @@ else if (selection == 3){//patient
 	}
 		break;
 
-	case 5:
+	case 4:
 		List<Patient> lista= new ArrayList<>();
 		lista = dbPatient.SQLSelect();
 		for (Patient patient11: lista){
@@ -422,7 +437,7 @@ else if (selection == 3){//patient
 		
 	
 
-	case 6: 
+	case 5: 
 		System.out.println("Insert the name of the patient you want to change");
 		String patNameUpdate = bufferedReader.readLine();
 		List<Patient> patUpdate = dbPatient.SQLSearch(patNameUpdate);
@@ -481,10 +496,8 @@ else if (selection == 3){//patient
 		else {patUpdate.get(id1).setSmoker(Boolean.parseBoolean(newSmoker));}
 		dbPatient.SQLUpdate(patUpdate.get(id1));
 	
-	case 7:	//salir del programa
-	
-	break;
-	case 8 : 
+
+	case 6 : 
 		int op=0;
 		while(op!=6){
 			System.out.println("Introduzca 1 si quiere meter la relacion nurse-patient,"
@@ -619,24 +632,24 @@ else if (selection == 3){//patient
 		}
 		
 		break;
+	case 7:	//salir del programa
+		
+	break;
 	}
 }
 }
 else if (selection == 4){//cells
 	FunctionsDB<Cells> db_cells = new DB_Cells();
 	
-	while (opcion!=8){
+	while (opcion!=6){
 		System.out.println("Introduce the option you want: ");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-	db_cells.SQLCreate();
-	System.out.println("The table cells has been created");
-	break;
+
 	
-	case 2:
+	case 1:
 	System.out.println("Introduce the type of the cell: ");
 	String nameCell = bufferedReader.readLine();
 	System.out.println("Introduce the low level of the cell: ");
@@ -648,7 +661,7 @@ else if (selection == 4){//cells
 	System.out.println("The information has been introduced propertly");
 	break;
 
-	case 3: 
+	case 2: 
 		System.out.println("Introduce the name of the cell you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		List<Cells> cells = db_cells.SQLSearch(nameSearch);
@@ -658,12 +671,12 @@ else if (selection == 4){//cells
 
 		break;
 
-	case 4:
+	case 3:
 	
 		System.out.println("The cell cannot been removed");
 		break;
 
-	case 5: 
+	case 4: 
 		List<Cells> listCells = new ArrayList<>();
 		listCells = db_cells.SQLSelect();
 		for(Cells cell : listCells){
@@ -673,29 +686,24 @@ else if (selection == 4){//cells
 		
 		
 	
-	case 6: 
+	case 5: 
 		System.out.println("Cells cannot be update");
 		break;
-	case 7:
+	case 6:
 		break;
 	}
 	}
 	}
 else if (selection == 5){//molecules
 	FunctionsDB<Molecules> db_molecules = new DB_Molecules();
-	while (opcion!=8){
+	while (opcion!=6){
 		System.out.println("Introduce the option you want: ");
 		menu2();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
-	
-	case 1: 
+
 		
-		db_molecules.SQLCreate();
-		System.out.println("The table molecules has been created");
-		break;
-		
-		case 2:
+		case 1:
 		System.out.println("Introduce the type of the molecule: ");
 		String nameMolecule = bufferedReader.readLine();
 		System.out.println("Introduce the low level of the molecule: ");
@@ -707,7 +715,7 @@ else if (selection == 5){//molecules
 		System.out.println("The information has been introduced propertly");
 		break;
 
-		case 3: 
+		case 2: 
 			System.out.println("Introduce the name of the molecule you want to search:");
 			String nameSearch = bufferedReader.readLine();
 			List<Molecules> molecules = db_molecules.SQLSearch(nameSearch);
@@ -716,12 +724,12 @@ else if (selection == 5){//molecules
 			}
 			break;
 
-		case 4:
+		case 3:
 			
 			System.out.println("The molecule cannot be removed");
 			break;
 
-		case 5: 
+		case 4: 
 			List<Molecules> listMolecules = new ArrayList<>();
 			listMolecules = db_molecules.SQLSelect();
 			for(Molecules molecule : listMolecules){
@@ -730,10 +738,10 @@ else if (selection == 5){//molecules
 			break;
 			
 
-		case 6: 
+		case 5: 
 			System.out.println("molecules cannot be changed");
 			break;
-		case 7:
+		case 6:
 			break;
 	
 	}
@@ -743,21 +751,13 @@ else if (selection == 6){//Sympthomps
 	FunctionsDB<Symptoms> db_symptoms = new DB_Symptoms();
 	while (opcion!=8){
 		System.out.println("Introduce the option you want");
-		menu2();
+		menuSymp();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: try {
-		db_symptoms.SQLCreate();
-	System.out.println("the table has been created correctly");
-	}
-	catch (Exception e) {
-		e.printStackTrace();
-		System.out.println("Esta tabla ya existe");
-		}	
-	break;
 
-	case 2: 
+
+	case 1: 
 	System.out.println("Introduce the type of the symptom");
 	String symptomsType = bufferedReader.readLine();
 	System.out.println("Introduce the severity of the symptom");
@@ -767,7 +767,7 @@ else if (selection == 6){//Sympthomps
 	System.out.println("the information has been insert");
 	break;
 
-	case 3:
+	case 2:
 		System.out.println("Introduce the type of the symptom you want to search:");
 		String typeSearch = bufferedReader.readLine();
 		
@@ -777,11 +777,11 @@ else if (selection == 6){//Sympthomps
 		}
 		break;
 		
-	case 4: 
+	case 3: 
 		System.out.println("Symptoms cannot be deleted");
 		break;
 	 
-	case 5: 
+	case 4: 
 		List<Symptoms> lista= new ArrayList<>();
 		lista = db_symptoms.SQLSelect();
 		for (Symptoms symptoms1: lista){
@@ -790,11 +790,11 @@ else if (selection == 6){//Sympthomps
 		break;
 
 
-	case 6:
+	case 5:
 		System.out.println("Symptoms cannot be modified");
 		break;
 		
-	case 7:
+	case 6:
 		List<Symptoms> newList = new ArrayList<Symptoms> ();
 		FunctionsDB<Symptoms> symptom1 = null;
 		newList = symptom1.SQLSelect();
@@ -802,7 +802,7 @@ else if (selection == 6){//Sympthomps
 		java2xml.java2XMLSymptoms(newList);
 		break;
 		
-	case 8: 
+	case 7: 
 		Xml2Java xml2Java = new Xml2Java ();
 		List<Symptoms> list1 = new ArrayList<Symptoms>();
 		list1 = xml2Java.xml2JavaSymptoms();
@@ -810,8 +810,8 @@ else if (selection == 6){//Sympthomps
 			System.out.println(symptom);
 		}
 		break;
-	
-	case 9:
+
+	case 8:
 		break;
 		
 	}
@@ -819,18 +819,14 @@ else if (selection == 6){//Sympthomps
 }
 else if (selection == 7){//illness
 	FunctionsDB<Illnes> db_illness = new DB_Illness();
-	while (opcion!=8){
+	while (opcion!=7){
 		System.out.println("Introduce the option you want");
-		menu2();
+		menupat();
 	opcion=Integer.parseInt(bufferedReader.readLine());
 	switch (opcion){
 
-	case 1: 
-	db_illness.SQLCreate();
-	System.out.println("tables are created correctly");
-	break;
 
-	case 2: 
+	case 1: 
 	System.out.println("Introduce the name of the illness");
 	String illnessName = bufferedReader.readLine();
 	System.out.println("Introduce the type of the illness");
@@ -844,7 +840,7 @@ else if (selection == 7){//illness
 	System.out.println("the information is already insert");
 	break;
 
-	case 3:
+	case 2:
 		System.out.println("Introduce the name of the illness you want to search:");
 		String nameSearch = bufferedReader.readLine();
 		List<Illnes> illness = db_illness.SQLSearch(nameSearch);
@@ -855,11 +851,11 @@ else if (selection == 7){//illness
 
 		break;
 
-	case 4: 
+	case 3: 
 		System.out.println("Illnesses cannot be deleted");
 		break;
 	 
-	case 5:
+	case 4:
 		List<Illnes> lista= new ArrayList<>();
 		lista = db_illness.SQLSelect();
 		for (Illnes illness1: lista){
@@ -868,9 +864,13 @@ else if (selection == 7){//illness
 		break;
 		
 
-	case 6:
+	case 5:
 		System.out.println("Illnesses cannot be modified");
 		break;
+	case 6 :
+	{
+		
+	}
 		
 	case 7:	//salir del programa
 	break;
@@ -884,138 +884,23 @@ else if (selection == 8){//exitt
 
 }
 		}
-		else if(sel==2){
-			try{
-				int option=0;
-				while(option!=8){
-			eManager.StartMethod();
-			menu1();	
-			System.out.println("Introduce an option:");
+	
 			
-			 option =Integer.parseInt( bufferedReader.readLine());
-			if (option == 1){
-				FunctionsDB<Hospital> jpa_Hospital = new JPAHospital();
-				
-				menu2();
-				System.out.println("Choose an option");
-				int sele = Integer.parseInt(bufferedReader.readLine());
-				while(sele!=8)
-				{
-					if (sele ==1){//Insert
-						Hospital hospital = new Hospital();
-						System.out.println("Introduce a name");
-						hospital.setName(bufferedReader.readLine());
-						System.out.println("Introduce a location");
-						hospital.setLocation(bufferedReader.readLine());
-						System.out.print("Introduce a range");
-						hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
-						jpa_Hospital.SQLInsert(hospital);
-						
-					}
-					else if(sele == 2){//delete
-						System.out.println("Introduce the name of the hospital that you want to delete");
-						List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
-						Iterator it = hospitals.iterator();
-						 
-						for(int i=1; it.hasNext(); i++){
-							System.out.println(i+".-"+it.toString());
-						}
-						System.out.println("Introduzca el hospital que desea seleccionar");
-						int op =Integer.parseInt(bufferedReader.readLine());
-						jpa_Hospital.SQLDelete(hospitals.get(op));// the hospital we were looking for
-						
-							
-					}
-					else if (sele == 3){//read
-						System.out.println("Introduce the name of the hospital that you want to delete");
-						List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
-						Iterator<Hospital> it = hospitals.iterator();
-						for(int i=1; it.hasNext(); i++){
-							System.out.println(i+".-"+it.toString());
-						}
-					}
-					else if (sele == 4){//update
-						System.out.println("Introduce the name of the hospital that you want to delete");
-						List<Hospital> hospitals = jpa_Hospital.SQLSearch(bufferedReader.readLine());
-						Iterator it = hospitals.iterator();
-						 
-						for(int i=1; it.hasNext(); i++){
-							System.out.println(i+".-"+it.toString());
-						}
-						
-						System.out.println("Introduzca el hospital que desea seleccionar");
-						int op =Integer.parseInt(bufferedReader.readLine());
-						Hospital newHosp = new Hospital();
-						
-						System.out.println("Introduce the changes you want to make in the name or press enter");
-						String name = bufferedReader.readLine();
-						if (name.equals("")) newHosp.setName(hospitals.get(op).getName());
-						else newHosp.setName(name);
-						
-						System.out.println("Introduce the changes you want to make in the Location or press enter");
-						
-						String location = bufferedReader.readLine();
-						if (location.equals("")) newHosp.setLocation(hospitals.get(op).getLocation());
-						else newHosp.setLocation(location);
-						
-						System.out.println("Introduce the changes you want to make in the name or press enter");
-						String lineaRange = bufferedReader.readLine();
-						if (lineaRange.equals(""))  newHosp.setRange(hospitals.get(op).getRange());
-						else{
-							newHosp.setRange(Integer.parseInt(lineaRange));
-						}
-						
-						jpa_Hospital.SQLUpdate(hospitals.get(op), newHosp);
-					}
-					
-					else if (sele == 5){//
-						
-						
-					}
-				
-				else if (option==2){//nurse
-					menu2();
-					Nurse nurse = new Nurse();
-					System.out.println("Choose an option");
-					 sele = Integer.parseInt(bufferedReader.readLine());
-					if (sele == 1) {
-						
-						System.out.println("Introduce a name");
-						nurse.setName(bufferedReader.readLine());
-						System.out.println("Introduce the direction of the photo with its extension");
-						nurse.setPhoto(bufferedReader.readLine());
-						System.out.println("Introduce his/her hospital");
-						
-						
-					}
-				}
-				}
-				}
 			
-				}
+				
 			}
 				catch(Exception ex){
 					ex.printStackTrace();
 				}
 			
 			
-		//aqui jpa	
-		}
-		else if (sel==3){
-			System.exit(0);
-		}
 	
 	
-}
 	
+
+
 	
-}
-catch (IOException ex)
-{
-//entrara en el catch y se lanzara una excepcion en el caso de que no se haya leido correctamente
-System.out.println("Se ha producido un error");
-ex.printStackTrace();
-} finally {
+ finally {
 //cerramos todas las variables que contengan algo 
 if (bufferedReader!=null){
 try{ 
@@ -1031,7 +916,7 @@ inputStreamReader.close();
 } catch (IOException ex ){
 ex.printStackTrace();
 }
-}
+}}
 
 }
-}}   	   
+}

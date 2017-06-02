@@ -27,7 +27,6 @@ import Blood.db.pojos.Patient;
 
 @Entity
 @Table(name="Nurses")
-@XmlRootElement(name="Nurse")
 @XmlType(propOrder={"name","photo","hospital","patients"})
 public class Nurse implements Serializable {
 private static final long serialVersionUID = 1857194774423858547L;
