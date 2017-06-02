@@ -3,8 +3,8 @@ import java.io.*;
 
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,9 +18,10 @@ import Blood.db.jpa.JPAHospital;
 import Blood.db.jpa.JPANurse;
 import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
-import Blood.db.xml.Java2Xml;
+
+import Blood.db.xml.XML_Manager;
 import Blood.db.xml.Xml2Html;
-import Blood.db.xml.Xml2Java;
+
 public class Menu {
 	static void menu1(){
 		
@@ -783,21 +784,20 @@ else if (selection == 6){//Sympthomps
 		
 	case 6:
 		List<Symptoms> newList = new ArrayList<Symptoms> ();
-		FunctionsDB<Symptoms> symptom1 = null;
-		newList = symptom1.SQLSelect();
-		Java2Xml java2xml = new Java2Xml();
-		java2xml.java2XMLSymptoms(newList);
+		DB_Symptoms symptomsJava2Xml = new DB_Symptoms();
+		newList = symptomsJava2Xml.SQLSelect();
+		XML_Manager xmlManager = new XML_Manager ();
+		xmlManager.Java2XmlListofSymptoms(newList);
 		break;
 		
 	case 7: 
-		Xml2Java xml2Java = new Xml2Java ();
-		List<Symptoms> list1 = new ArrayList<Symptoms>();
-		list1 = xml2Java.xml2JavaSymptoms();
-		for(Symptoms symptom : list1){
+		XML_Manager xmlManager1 = new XML_Manager ();
+		ListofSymptoms listSymptoms = xmlManager1.Xml2JavaListofSymptoms();
+		
+		for(Symptoms symptom : listSymptoms.getListofSymptoms()){
 			System.out.println(symptom);
 		}
 		break;
-		
 	case 8:
 		IllnessInterface dbIllnes = new DB_Illness();
 		System.out.println("Introduce the name of the illnes:");
