@@ -788,6 +788,7 @@ else if (selection == 6){//Sympthomps
 		List<Symptoms> simt = db_symptoms.SQLSelect();
 		Java2Xml java2xml = new Java2Xml();
 		java2xml.java2XMLSymptoms(simt);
+
 		break;
 		
 	case 7: 
@@ -797,6 +798,8 @@ else if (selection == 6){//Sympthomps
 			System.out.println(sim);
 		}
 		break;
+		
+		
 	case 8:
 		IllnessInterface dbIllnes = new DB_Illness();
 		System.out.println("Introduce the name of the illnes:");
