@@ -494,14 +494,14 @@ else if (selection == 3){//patient
 		switch(op){
 		case 1: {
 			FunctionsDB<Nurse> db_Nurse = new DB_Nurse();
-			System.out.println("Introduce the name of the patient's nurse");
+			System.out.println("Introduce the name of the nurse");
 			String name= bufferedReader.readLine();
 			List<Nurse> nurs=db_Nurse.SQLSearch(name);
 			Iterator<Nurse> it3=nurs.iterator();
 			for(int i=0; it3.hasNext(); i++){
 				System.out.println(i+".-"+it3.next());
 			}
-			System.out.println("Introduce the nurse of the patient");
+			System.out.println("Introduce the nurse");
 			int idnurse = Integer.parseInt(bufferedReader.readLine());
 			System.out.println("Introduce the patient's name");
 			String namepat= bufferedReader.readLine();
