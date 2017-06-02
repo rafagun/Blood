@@ -144,5 +144,26 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		// TODO Auto-generated method stub
 		
 	}
+	public void SQLRelationIM(Integer molId,Integer illId, Integer level, String hL ){
+		try{
+			Statement stmt = Connect.c.createStatement();
+			String sql = "INSERT INTO Illnes-Molecules (moleculesID,IllnesId,Level,H-L) " + "VALUES ('"+molId+"', '"+illId+"', '"+level+"','"+hL+"');";
+			stmt.executeQuery(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public void SQLRelationIC(Integer IllnesId,Integer cellId, Integer level, String hL ){
+		try{
+			Statement stmt = Connect.c.createStatement();
+			String sql = "INSERT INTO Illnes-Cells (cellsID,IllnesId,Level,H-L) " + "VALUES ('"+cellId+"', '"+IllnesId+"', '"+level+"','"+hL+"');";
+			stmt.executeQuery(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 
 }

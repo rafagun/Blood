@@ -119,6 +119,17 @@ catch(SQLException ex){
 		// TODO Auto-generated method stub
 		
 	}
+	public void SQLRelationIS(Integer sympId,Integer illId, String place){
+		try{
+			Statement stmt = Connect.c.createStatement();
+			String sql = "INSERT INTO SympsIlls (symptomsId,illnesId,place) " + "VALUES ('"+sympId+"', '"+illId+"', '"+place+"');";
+			stmt.executeQuery(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 
 
 }
