@@ -20,7 +20,7 @@ import Blood.db.jpa.eManager;
 import Blood.db.pojos.*;
 import Blood.db.xml.Java2Xml;
 import Blood.db.xml.Xml2Java;
-public class Interface {
+public class Menu {
 	static void menu1(){
 		
 	System.out.println("Introduce 1 to Hospital ");
