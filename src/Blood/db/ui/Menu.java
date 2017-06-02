@@ -178,18 +178,6 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 		hospital.setLocation(bufferedReader.readLine());
 		System.out.print("Introduce a range");
 		hospital.setRange(Integer.parseInt(bufferedReader.readLine()));
-		System.out.println("Introduce the name of the nurse you want:");
-		FunctionsDB<Nurse> JPAnurse= new JPANurse();
-		String name= bufferedReader.readLine();
-		List<Nurse> nurses=JPAnurse.SQLSearch(name);
-		Iterator<Nurse> ite = nurses.iterator();
-		for(int i=0; ite.hasNext(); i++){
-			System.out.println(i+".-"+ite.next());
-		}
-		System.out.println("Introduce the id of the nurse");
-		int idnurse = Integer.parseInt(bufferedReader.readLine());
-		Nurse nurse=JPANurse.SQLSearch2(idnurse);
-		hospital.addNurse(nurse);
 		JPAHospital.SQLInsert(hospital);
 	break;
 
@@ -823,7 +811,7 @@ else if (selection == 6){//Sympthomps
 		
 		System.out.println("Introduce the name of the illnes: ");
 		String nameIllnes = bufferedReader.readLine();
-		DB_Illness db_illness = new DB_Illness();
+		IllnessInterface db_illness = new DB_Illness();
 		List<Illnes> listIllness= db_illness.SQLSearch(nameIllnes);
 		for(Illnes IllnesRelations : listIllness){
 			System.out.println("Id of the illnes: "+IllnesRelations.getId()+ "name of the illnes: " +IllnesRelations.getType());
@@ -836,7 +824,7 @@ else if (selection == 6){//Sympthomps
 		String place = bufferedReader.readLine();
 		
 		DB_Symptoms symptom = new DB_Symptoms();
-		symptom.SQLRelationIS(optionSympRelation, optionIllRelation, place);
+		db_illness.SQLRelationIS(optionSympRelation, optionIllRelation, place);
 		
 		break;
 
@@ -847,7 +835,7 @@ else if (selection == 6){//Sympthomps
 	}
 }
 else if (selection == 7){//illness
-	FunctionsDB<Illnes> db_illness = new DB_Illness();
+	IllnessInterface db_illness = new DB_Illness();
 	while (opcion!=7){
 		System.out.println("Introduce the option you want");
 		menupat();
@@ -864,16 +852,16 @@ else if (selection == 7){//illness
 	String illnessChronic = bufferedReader.readLine();
 	//solo inserta false
 	Boolean chronic = Boolean.parseBoolean(illnessChronic);
-	Illnes illnessInterface  = new Illnes(illnessName, illnessType, chronic);
-	db_illness.SQLInsert(illnessInterface);
+	Illnes illness  = new Illnes(illnessName, illnessType, chronic);
+	db_illness.SQLInsert(illness);
 	System.out.println("the information is already insert");
 	break;
 
 	case 2:
 		System.out.println("Introduce the name of the illness you want to search:");
 		String nameSearch = bufferedReader.readLine();
-		List<Illnes> illness = db_illness.SQLSearch(nameSearch);
-		for(Illnes illnes: illness){
+		List<Illnes> illnesses = db_illness.SQLSearch(nameSearch);
+		for(Illnes illnes: illnesses){
 			System.out.println(illnes);
 		}
 		
@@ -898,11 +886,11 @@ else if (selection == 7){//illness
 		break;
 	
 	case 6 :
-		DB_Illness illnes = new DB_Illness();
+		
 		System.out.println("Introduce the option you want:");
 		System.out.println("1-.Relation Illnes-Molecules");
 		System.out.println("2-.Relation Illnes-Cells");
-		Integer optionRelat= Integer.parseInt(bufferedReader.readLine());
+		int optionRelat= Integer.parseInt(bufferedReader.readLine());
 		switch(optionRelat){
 		case 1: {
 			
@@ -913,11 +901,11 @@ else if (selection == 7){//illness
 				System.out.println("Id of the illnes: "+illnesRelations.getId()+ "name of the symptom: " +illnesRelations.getType());
 			}
 			System.out.println("Introduce the id of the illnes that you have chosen: ");
-			Integer optionIllRelation = Integer.parseInt(bufferedReader.readLine());
+			int optionIllRelation = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the name of the molecule: ");
 			String nameMolec = bufferedReader.readLine();
-			DB_Molecules db_molecules = new DB_Molecules();
+			FunctionsDB<Molecules> db_molecules = new DB_Molecules();
 			List<Molecules> listMolec = db_molecules.SQLSearch(nameMolec);
 			for(Molecules molecsRelations : listMolec){
 				System.out.println("Id of the molecule: "+molecsRelations.getId()+ "name of the molecule: " +molecsRelations.getType());
@@ -927,12 +915,12 @@ else if (selection == 7){//illness
 			int optionMolRelation = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the level of the molecule: ");
-			Integer level = Integer.parseInt(bufferedReader.readLine());
+			int level = Integer.parseInt(bufferedReader.readLine());
 			
 			System.out.println("Introduce the level of the molecule (low-high): ");
 			String highLow = bufferedReader.readLine();
 			
-			illnes.SQLRelationIM(optionIllRelation,optionMolRelation, level, highLow);
+			db_illness.SQLRelationIM(optionIllRelation,optionMolRelation, level, highLow);
 		} 
 		break;
 		 case 2: {
@@ -962,7 +950,7 @@ else if (selection == 7){//illness
 			System.out.println("Introduce the level of the cell(low-high): ");
 			String highLow = bufferedReader.readLine();
 			
-			illnes.SQLRelationIM(optionIllRelation,optionCellRelation, level, highLow);		
+			db_illness.SQLRelationIM(optionIllRelation,optionCellRelation, level, highLow);		
 			}
 		break;
 		

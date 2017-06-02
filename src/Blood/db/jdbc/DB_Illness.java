@@ -11,7 +11,7 @@ import java.util.List;
 import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Illnes;
 
-public class DB_Illness implements FunctionsDB<Illnes>{
+public class DB_Illness implements IllnessInterface{
 	
 	public void SQLCreate() throws TableCreationException {
 		try {
@@ -60,6 +60,8 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		throw new TableCreationException(6);
 		}	
 		}
+	
+	
 	public List<Illnes> SQLSelect() {
 		List<Illnes> illness = new ArrayList<Illnes>();
 		try {
@@ -144,7 +146,7 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 		// TODO Auto-generated method stub
 		
 	}
-	public void SQLRelationIM(Integer molId,Integer illId, Integer level, String hL ){
+	public void SQLRelationIM(int molId,int illId, int level, String hL ){
 		try{
 			Statement stmt = Connect.c.createStatement();
 			String sql = "INSERT INTO Illnes-Molecules (moleculesID,IllnesId,Level,H-L) " + "VALUES ('"+molId+"', '"+illId+"', '"+level+"','"+hL+"');";
@@ -154,10 +156,21 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 			e.printStackTrace();
 		}
 	}
-	public void SQLRelationIC(Integer IllnesId,Integer cellId, Integer level, String hL ){
+	public void SQLRelationIC(int IllnesId,int cellId, int level, String hL ){
 		try{
 			Statement stmt = Connect.c.createStatement();
 			String sql = "INSERT INTO Illnes-Cells (cellsID,IllnesId,Level,H-L) " + "VALUES ('"+cellId+"', '"+IllnesId+"', '"+level+"','"+hL+"');";
+			stmt.executeQuery(sql);
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void SQLRelationIS(int sympId,int illId, String place){
+		try{
+			Statement stmt = Connect.c.createStatement();
+			String sql = "INSERT INTO SympsIlls (symptomsId,illnesId,place) " + "VALUES ('"+sympId+"', '"+illId+"', '"+place+"');";
 			stmt.executeQuery(sql);
 			stmt.close();
 		}catch(Exception e){
