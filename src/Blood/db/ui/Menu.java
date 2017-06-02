@@ -186,7 +186,7 @@ FunctionsDB<Hospital> JPAHospital = new JPAHospital();
 		System.out.println("Introduce the name of the hospital that you want to search");
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator<Hospital> it = hospitals.iterator();
-		for(int i=1; it.hasNext(); i++){
+		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}}
 break;
@@ -196,7 +196,7 @@ break;
 		List<Hospital> hospitalss = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitalss.iterator();
 		 
-		for(int i=1; it.hasNext(); i++){
+		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
 		System.out.println("Introduce the hospital you want to select");
@@ -219,7 +219,7 @@ break;
 		List<Hospital> hospitals = JPAHospital.SQLSearch(bufferedReader.readLine());
 		Iterator it = hospitals.iterator();
 		 
-		for(int i=1; it.hasNext(); i++){
+		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
 		
@@ -407,7 +407,7 @@ else if (selection == 3){//patient
 		dbPatient.SQLDelete(list.get(id));
 		System.out.println("The patient has been removed");
 		 
-		for(int i=1; it.hasNext(); i++){
+		for(int i=0; it.hasNext(); i++){
 			System.out.println(i+".-"+it.next());
 		}
 		System.out.println("Introduce the patient you want to select");
