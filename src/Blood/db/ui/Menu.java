@@ -786,14 +786,14 @@ else if (selection == 6){//Sympthomps
 		DB_Symptoms symptomsJava2Xml = new DB_Symptoms();
 		newList = symptomsJava2Xml.SQLSelect();
 		XML_Manager xmlManager = new XML_Manager ();
-		xmlManager.Java2XmlListofSymptoms(newList);
+		xmlManager.Java2XmlSymptoms(newList);
 		break;
 		
 	case 7: 
 		XML_Manager xmlManager1 = new XML_Manager ();
-		ListofSymptoms listSymptoms = xmlManager1.Xml2JavaListofSymptoms();
+		List<Symptoms> listSymptoms = xmlManager1.Xml2JavaSymptoms();
 		
-		for(Symptoms symptom : listSymptoms.getListofSymptoms()){
+		for(Symptoms symptom : listSymptoms){
 			System.out.println(symptom);
 		}
 		break;

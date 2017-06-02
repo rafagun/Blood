@@ -1,7 +1,7 @@
 package Blood.db.xml;
 
 import java.io.File;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -10,36 +10,33 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import Blood.db.pojos.Illnes;
-import Blood.db.pojos.ListofSymptoms;
 import Blood.db.pojos.Patient;
 import Blood.db.pojos.Symptoms;
 
 public class XML_Manager {
 	
-	public void Java2XmlListofSymptoms(List<Symptoms> symptomsList) throws JAXBException{
+	public void Java2XmlSymptoms(List<Symptoms> symptomsList) throws JAXBException{
 		
-		ListofSymptoms listSymptoms = new ListofSymptoms();
-		listSymptoms.setListofSymptoms(symptomsList);
-		
-		JAXBContext jaxbContext = JAXBContext.newInstance(ListofSymptoms.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Symptoms.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 					
-		File file = new File("./xmls/ListofSymptoms.xml");
-		marshaller.marshal(listSymptoms, file);
-		marshaller.marshal(listSymptoms, System.out);
+		File file = new File("./xmls/Symptoms.xml");
+		marshaller.marshal(symptomsList, file);
+		marshaller.marshal(symptomsList, System.out);
 	}
 	
-	public ListofSymptoms Xml2JavaListofSymptoms() throws JAXBException{
+	public List<Symptoms> Xml2JavaSymptoms() throws JAXBException{
 		Unmarshaller unmarshaller;
-		ListofSymptoms symptomsList = new ListofSymptoms();
+		List<Symptoms> symptomsList = new ArrayList<Symptoms>();
 		try{
 			JAXBContext jaxbContext = JAXBContext.newInstance(Symptoms.class);
 			unmarshaller = jaxbContext.createUnmarshaller();
 
 			// Use the Unmarshaller to unmarshal the XML document from a file
-			File file = new File("./xmls/ListofSymptoms.xml");
-			symptomsList.setListofSymptoms((List<Symptoms>) unmarshaller.unmarshal(file));
+			File file = new File("./xmls/Symptoms.xml");
+			symptomsList = ((List<Symptoms>) unmarshaller.unmarshal(file));
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
