@@ -14,7 +14,7 @@ import Blood.db.pojos.Hospital;
 
 public class DB_Hospital implements FunctionsDB<Hospital>{
 
-public void SQLCreate()  {
+public void SQLCreate() throws TableCreationException  {
 try {
 
 // Create tables: begin
@@ -28,8 +28,8 @@ stmt1.executeUpdate(sql1);
 stmt1.close();
 
 }
-catch (Exception e) {
-e.printStackTrace();
+catch (SQLException e) {
+throw new TableCreationException(0);
 }	
 }
 

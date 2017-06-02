@@ -15,7 +15,7 @@ import Blood.db.pojos.Molecules;
 
 public class DB_Molecules implements FunctionsDB<Molecules>{
 
-	public void SQLCreate() throws SQLException{
+	public void SQLCreate() throws TableCreationException{
 		try {
 
 
@@ -29,8 +29,8 @@ public class DB_Molecules implements FunctionsDB<Molecules>{
 			stmt4.close();
 			System.out.println("Tables created.");
 	}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (SQLException e) {
+			throw new TableCreationException(4);
 			}	
 }
 public List<Molecules> SQLSelect(){

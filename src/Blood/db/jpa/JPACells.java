@@ -55,7 +55,7 @@ public class JPACells implements FunctionsDB<Cells> {
 	}
 
 	@Override
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() {
 		// The tables must be created from JDBC	
 		
 	}

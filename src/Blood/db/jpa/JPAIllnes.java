@@ -52,7 +52,7 @@ public class JPAIllnes implements FunctionsDB<Illnes>{
 	}
 
 	@Override
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() {
 		// The tables must be created from JDBC	
 		
 	}

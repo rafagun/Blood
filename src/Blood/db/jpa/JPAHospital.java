@@ -58,7 +58,7 @@ public class JPAHospital implements FunctionsDB<Hospital>{
 	}
 
 	@Override
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() {
 		// The tables must be created from JDBC	
 	}
 

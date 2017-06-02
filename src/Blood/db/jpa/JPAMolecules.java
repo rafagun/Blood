@@ -53,7 +53,7 @@ public class JPAMolecules implements FunctionsDB<Molecules>{
 	}
 
 	@Override
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() {
 		// The tables must be created from JDBC	
 		
 	}

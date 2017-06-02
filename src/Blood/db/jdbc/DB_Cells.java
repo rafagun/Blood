@@ -14,8 +14,8 @@ import Blood.db.jpa.FunctionsDB;
 import Blood.db.pojos.Cells;
 
 public class DB_Cells implements FunctionsDB<Cells>{
-	
-	public void SQLCreate() throws SQLException{
+	@Override
+	public void SQLCreate() throws TableCreationException{
 		try {
 
 			// Create tables: begin
@@ -29,8 +29,8 @@ public class DB_Cells implements FunctionsDB<Cells>{
 			stmt5.close();
 			System.out.println("Tables created.");
 	}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (SQLException e) {
+		throw new TableCreationException(3);
 			}	
 }
 

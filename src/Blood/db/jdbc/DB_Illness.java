@@ -13,7 +13,7 @@ import Blood.db.pojos.Illnes;
 
 public class DB_Illness implements FunctionsDB<Illnes>{
 	
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() throws TableCreationException {
 		try {
 
 		// Create tables: begin
@@ -56,8 +56,8 @@ public class DB_Illness implements FunctionsDB<Illnes>{
 
 
 		}
-		catch (Exception e) {
-		e.printStackTrace();
+		catch (SQLException e) {
+		throw new TableCreationException(6);
 		}	
 		}
 	public List<Illnes> SQLSelect() {

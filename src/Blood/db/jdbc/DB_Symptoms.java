@@ -17,8 +17,8 @@ public class DB_Symptoms implements FunctionsDB <Symptoms> {
 
 
 
-	public void SQLCreate() throws SQLException {
-
+	public void SQLCreate() throws TableCreationException{
+try{
 		// Create tables: begin
 		Statement stmt1 = Connect.c.createStatement();
 		String sql1 = "CREATE TABLE Symptoms "
@@ -35,7 +35,10 @@ public class DB_Symptoms implements FunctionsDB <Symptoms> {
 				+ "PRIMARY KEY (simptomsID,illnesId)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		
+}
+catch(SQLException ex){
+	throw new TableCreationException(5);
+}
 		
 		}
 	public void SQLInsert(Symptoms symptom){

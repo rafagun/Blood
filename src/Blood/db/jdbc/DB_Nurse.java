@@ -23,7 +23,7 @@ import Blood.db.pojos.Patient;
 public class DB_Nurse implements NurseInterface {
 	
 	
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() throws TableCreationException {
 		try {
 		Statement stmt2 = Connect.c.createStatement();
 		String sql2 = "CREATE TABLE Nurses "
@@ -43,7 +43,7 @@ public class DB_Nurse implements NurseInterface {
 		System.out.println("Tables are created");
 		
 		} catch (Exception e){
-			e.printStackTrace();
+			throw new TableCreationException(1);
 		}
 	}
 

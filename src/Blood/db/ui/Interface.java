@@ -36,7 +36,60 @@ public class Interface {
 	}
 	
 	
-	
+	static void inicilizeTables(){
+		try{
+		FunctionsDB<Hospital> hosp = new DB_Hospital();
+		hosp.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			e.tableExists();
+
+		}
+		try{
+		FunctionsDB<Nurse> nur = new DB_Nurse();
+		nur.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			e.tableExists();
+			}
+		try{
+		FunctionsDB<Cells> cells = new DB_Cells();
+		cells.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			e.tableExists();
+			}
+		try{
+		FunctionsDB<Molecules> molecules = new DB_Molecules();
+		molecules.SQLCreate();
+		}		
+		catch(TableCreationException e ){
+			e.tableExists();
+			 			}
+		try{
+		FunctionsDB<Symptoms> syn = new DB_Symptoms();
+		syn.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			 e.tableExists();
+			}
+		try{
+		FunctionsDB<Illnes> ill = new DB_Illness();
+		ill.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			 e.tableExists();
+			}
+		try{
+		FunctionsDB<Patient> pat = new DB_Patient();
+		pat.SQLCreate();
+		}
+		catch(TableCreationException e ){
+			e.tableExists();
+			}
+			
+		
+	}
 	static void menu2(){
 	System.out.println("Introduce 1 to create table ");
 	System.out.println("Introduce 2 to insert ");
@@ -83,6 +136,7 @@ while (true){
 menu1();
 	
 	selection=Integer.parseInt(bufferedReader.readLine());
+	inicilizeTables();
 	opcion=0;
 if (selection==1){
 	

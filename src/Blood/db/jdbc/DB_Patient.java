@@ -31,7 +31,7 @@ public class DB_Patient implements PatientInterface {
 
 
 
-	public void SQLCreate() throws SQLException {
+	public void SQLCreate() throws TableCreationException {
 
 		try {
 
@@ -104,9 +104,9 @@ public class DB_Patient implements PatientInterface {
 
 
 
-		catch (Exception ex) {
+		catch (SQLException ex) {
 
-			ex.printStackTrace();
+			throw new TableCreationException(2);
 
 		}
 
