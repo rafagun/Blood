@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Symtoms[
+<!ELEMENT Symptoms(Severity , Patients , Illness)>
+<!ATTLIST Symptoms id CDATA #REQUIRED
+				   type CDATA #REQUIRED>
+<!ELEMENT Severity (#PCDATA)>
+<!ELEMENT Patients (Patient +)>
+<!ATTLIST Patient id CDATA #REQUIRED
+				  name CDATA #REQUIRED>
+<!ELEMENT Illness (Illnes +)>
+<!ATTLIST Illnes id CDATA #REQUIRED
+				 name CDATA #REQUIRED>
+				
+]>
