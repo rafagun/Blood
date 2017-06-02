@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 @Entity
 @Table(name="Symptoms")
 @XmlRootElement(name="Symptoms")
-@XmlType(propOrder={"type�","severity","patients","illness"})
+@XmlType(propOrder={"type","severity","patients","illness"})
 public class Symptoms implements Serializable{
 private static final long serialVersionUID = 6952444966932416547L;
     @Id
